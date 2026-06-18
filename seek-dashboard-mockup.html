@@ -1,0 +1,1051 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Seek Research — Client Portal</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --ink:           #18160F;
+  --parchment:     #F2ECE0;
+  --parchment-mid: #EDE5D3;
+  --parchment-dark:#D9CEB8;
+  --rust:          #B55A35;
+  --rust-light:    rgba(181,90,53,0.08);
+  --gold:          #C4A05A;
+  --gold-light:    rgba(196,160,90,0.12);
+  --sage:          #6B7C6E;
+  --text-main:     #2C2A22;
+  --text-muted:    #8A8070;
+  --white:         #FFFFFF;
+}
+
+body {
+  font-family: 'Outfit', sans-serif;
+  background: var(--parchment-mid);
+  color: var(--text-main);
+  height: 100vh;
+  display: flex;
+  overflow: hidden;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ── MAIN CONTENT ── */
+.content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 36px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  min-width: 0;
+}
+
+/* ── TOP BAR ── */
+.topbar {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.topbar-left {}
+
+.topbar-eyebrow {
+  font-size: 11px;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  font-weight: 400;
+  margin-bottom: 4px;
+}
+
+.topbar-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 30px;
+  font-weight: 300;
+  color: var(--ink);
+  line-height: 1.1;
+}
+
+.topbar-title em {
+  font-style: italic;
+  color: var(--rust);
+}
+
+.topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.nav-links {
+  display: flex;
+  gap: 4px;
+}
+
+.nav-link {
+  font-size: 12px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-decoration: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  transition: background 0.15s, color 0.15s;
+  font-weight: 400;
+}
+
+.nav-link:hover {
+  background: var(--parchment);
+  color: var(--ink);
+}
+
+/* ── SUMMARY CARDS ROW ── */
+.summary-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.summary-card {
+  background: var(--white);
+  border: 1px solid var(--parchment-dark);
+  border-radius: 12px;
+  padding: 20px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.summary-card.highlight {
+  background: var(--ink);
+  border-color: var(--ink);
+}
+
+.summary-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 6px;
+}
+
+.summary-icon.rust { background: var(--rust-light); }
+.summary-icon.gold { background: var(--gold-light); }
+.summary-icon.sage { background: rgba(107,124,110,0.1); }
+
+.summary-icon svg {
+  width: 16px;
+  height: 16px;
+  fill: none;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.summary-icon.rust svg { stroke: var(--rust); }
+.summary-icon.gold svg { stroke: var(--gold); }
+.summary-icon.sage svg { stroke: var(--sage); }
+
+.summary-label {
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.summary-card.highlight .summary-label {
+  color: rgba(242,236,224,0.5);
+}
+
+.summary-value {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 26px;
+  font-weight: 400;
+  color: var(--ink);
+  line-height: 1;
+}
+
+.summary-card.highlight .summary-value {
+  color: var(--parchment);
+}
+
+.summary-sub {
+  font-size: 12px;
+  font-weight: 300;
+  color: var(--text-muted);
+}
+
+.summary-card.highlight .summary-sub {
+  color: rgba(242,236,224,0.45);
+}
+
+/* ── TABLE CARD ── */
+.table-card {
+  background: var(--white);
+  border: 1px solid var(--parchment-dark);
+  border-radius: 12px;
+  overflow: hidden;
+  flex: 1;
+}
+
+.table-card-header {
+  padding: 20px 24px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--parchment-mid);
+}
+
+.table-card-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px;
+  font-weight: 400;
+  font-style: italic;
+  color: var(--ink);
+}
+
+.table-card-badge {
+  font-size: 11px;
+  letter-spacing: 1px;
+  background: var(--rust-light);
+  color: var(--rust);
+  border-radius: 20px;
+  padding: 4px 12px;
+  font-weight: 500;
+}
+
+.table-wrap { overflow-x: auto; }
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+thead th {
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: var(--text-muted);
+  padding: 14px 24px;
+  text-align: left;
+  border-bottom: 1px solid var(--parchment-mid);
+  white-space: nowrap;
+}
+
+/* ── EMPTY STATE ── */
+.empty-state {
+  padding: 56px 24px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.empty-ornament {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--parchment-mid);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 8px;
+}
+
+.empty-ornament svg {
+  width: 22px;
+  height: 22px;
+  stroke: var(--text-muted);
+  fill: none;
+  stroke-width: 1.3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.empty-headline {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px;
+  font-style: italic;
+  font-weight: 300;
+  color: var(--ink);
+}
+
+.empty-body {
+  font-size: 13px;
+  font-weight: 300;
+  color: var(--text-muted);
+  max-width: 300px;
+  line-height: 1.7;
+}
+
+/* ── DOCUMENTS ROW ── */
+.docs-card {
+  background: var(--white);
+  border: 1px solid var(--parchment-dark);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.docs-card-header {
+  padding: 20px 24px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--parchment-mid);
+}
+
+.docs-card-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px;
+  font-weight: 400;
+  font-style: italic;
+  color: var(--ink);
+}
+
+.upload-btn {
+  font-family: 'Outfit', sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  background: var(--rust);
+  color: var(--parchment);
+  border: none;
+  border-radius: 8px;
+  padding: 10px 20px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  transition: background 0.2s;
+}
+
+.upload-btn:hover { background: #9E4C2B; }
+
+.upload-btn svg {
+  width: 13px;
+  height: 13px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+}
+
+.docs-empty {
+  padding: 36px 24px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.docs-empty p {
+  font-size: 13px;
+  font-weight: 300;
+  color: var(--text-muted);
+}
+
+/* ── RIGHT PANEL ── */
+.panel {
+  width: 260px;
+  flex-shrink: 0;
+  background: var(--white);
+  border-left: 1px solid var(--parchment-dark);
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.panel-hero {
+  background: var(--ink);
+  padding: 32px 24px 28px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--gold) 0%, var(--rust) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--parchment);
+  border: 2px solid rgba(242,236,224,0.2);
+}
+
+.panel-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px;
+  font-weight: 400;
+  color: var(--parchment);
+  text-align: center;
+  line-height: 1.2;
+}
+
+.panel-email {
+  font-size: 11px;
+  color: rgba(242,236,224,0.45);
+  font-weight: 300;
+  text-align: center;
+}
+
+.panel-edit {
+  font-size: 11px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: rgba(242,236,224,0.5);
+  background: rgba(242,236,224,0.08);
+  border: 1px solid rgba(242,236,224,0.12);
+  border-radius: 6px;
+  padding: 6px 14px;
+  cursor: pointer;
+  font-family: 'Outfit', sans-serif;
+  margin-top: 4px;
+  transition: background 0.2s;
+}
+
+.panel-edit:hover { background: rgba(242,236,224,0.14); }
+
+/* PANEL SECTIONS */
+.panel-section {
+  padding: 22px 20px;
+  border-bottom: 1px solid var(--parchment-mid);
+}
+
+.panel-section:last-child { border-bottom: none; }
+
+.panel-section-label {
+  font-size: 9px;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  font-weight: 500;
+  margin-bottom: 14px;
+}
+
+/* FILE INFO */
+.file-info-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.file-info-key {
+  font-size: 11px;
+  font-weight: 300;
+  color: var(--text-muted);
+}
+
+.file-info-val {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--ink);
+}
+
+.file-info-val.gold { color: var(--gold); }
+.file-info-val.rust { color: var(--rust); }
+
+/* PROGRESS STEPS */
+.steps {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.step {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  position: relative;
+}
+
+.step:not(:last-child)::before {
+  content: '';
+  position: absolute;
+  left: 11px;
+  top: 24px;
+  width: 1px;
+  height: calc(100% + 2px);
+  background: var(--parchment-dark);
+}
+
+.step-dot {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1px;
+  z-index: 1;
+}
+
+.step-dot.done {
+  background: var(--rust);
+}
+
+.step-dot.active {
+  background: var(--gold);
+  box-shadow: 0 0 0 3px var(--gold-light);
+}
+
+.step-dot.pending {
+  background: var(--parchment-mid);
+  border: 1px solid var(--parchment-dark);
+}
+
+.step-dot svg {
+  width: 10px;
+  height: 10px;
+  stroke: var(--parchment);
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.step-dot.pending svg { stroke: var(--text-muted); }
+
+.step-body {
+  padding-bottom: 18px;
+}
+
+.step-name {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--ink);
+  line-height: 1.3;
+}
+
+.step-name.muted { color: var(--text-muted); font-weight: 300; }
+
+.step-date {
+  font-size: 10px;
+  color: var(--text-muted);
+  font-weight: 300;
+  margin-top: 2px;
+}
+
+/* NEXT STEP */
+.next-step-box {
+  background: var(--gold-light);
+  border: 1px solid rgba(196,160,90,0.25);
+  border-radius: 8px;
+  padding: 14px 16px;
+}
+
+.next-step-label {
+  font-size: 9px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.next-step-text {
+  font-size: 12px;
+  font-weight: 300;
+  color: var(--ink);
+  line-height: 1.5;
+}
+
+/* RESEARCHER CONTACT */
+.researcher {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.researcher-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--sage) 0%, #4A5C4D 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--parchment);
+  flex-shrink: 0;
+}
+
+.researcher-info {}
+
+.researcher-name {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--ink);
+}
+
+.researcher-role {
+  font-size: 11px;
+  font-weight: 300;
+  color: var(--text-muted);
+}
+
+.contact-btn {
+  width: 100%;
+  font-family: 'Outfit', sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--rust);
+  background: var(--rust-light);
+  border: 1px solid rgba(181,90,53,0.2);
+  border-radius: 8px;
+  padding: 10px;
+  cursor: pointer;
+  transition: background 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.contact-btn:hover { background: rgba(181,90,53,0.14); }
+
+.contact-btn svg {
+  width: 13px;
+  height: 13px;
+  stroke: var(--rust);
+  fill: none;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+}
+
+/* FOOTER NOTE */
+.panel-footer {
+  padding: 16px 20px;
+  margin-top: auto;
+  border-top: 1px solid var(--parchment-mid);
+}
+
+.panel-footer p {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 12px;
+  font-style: italic;
+  font-weight: 300;
+  color: var(--text-muted);
+  line-height: 1.5;
+  text-align: center;
+}
+
+/* ── SHARED SIDEBAR ── */
+:root { --sidebar-w: 220px; }
+.sidebar {
+  width: var(--sidebar-w);
+  background: var(--ink);
+  display: flex;
+  flex-direction: column;
+  padding: 28px 0 24px;
+  flex-shrink: 0;
+  position: fixed;
+  top: 0; left: 0;
+  height: 100vh;
+  z-index: 20;
+  transition: width 0.25s ease;
+  overflow: hidden;
+}
+.sidebar.collapsed { width: 72px; }
+.sidebar-logo { display:flex; align-items:center; gap:12px; padding:0 18px; margin-bottom:32px; cursor:pointer; text-decoration:none; }
+.logo-mark { display:flex; flex-direction:column; align-items:center; gap:3px; flex-shrink:0; }
+.logo-s { font-size:22px; font-weight:600; color:var(--parchment); line-height:1; }
+.logo-text { display:flex; flex-direction:column; overflow:hidden; white-space:nowrap; opacity:1; transition:opacity 0.2s; }
+.sidebar.collapsed .logo-text { opacity:0; width:0; }
+.logo-name { font-family:'Outfit',sans-serif; font-size:15px; font-weight:600; color:var(--parchment); letter-spacing:2px; text-transform:uppercase; }
+.logo-sub  { font-size:9px; letter-spacing:2px; text-transform:uppercase; color:rgba(242,236,224,0.4); font-weight:400; }
+.sidebar-toggle { position:absolute; top:28px; right:-12px; width:24px; height:24px; background:var(--rust); border-radius:50%; display:flex; align-items:center; justify-content:center; cursor:pointer; z-index:30; border:2px solid var(--ink); transition:transform 0.25s; }
+.sidebar.collapsed .sidebar-toggle { transform:rotate(180deg); }
+.sidebar-toggle svg { width:10px; height:10px; stroke:#fff; fill:none; stroke-width:2.5; stroke-linecap:round; stroke-linejoin:round; }
+.sidebar-nav { flex:1; overflow-y:auto; overflow-x:hidden; padding-bottom:16px; }
+.nav-section { margin-bottom:4px; }
+.nav-section-header { display:flex; align-items:center; justify-content:space-between; padding:8px 18px; cursor:pointer; user-select:none; transition:background 0.15s; }
+.nav-section-header:hover { background:rgba(242,236,224,0.05); }
+.nav-section-left { display:flex; align-items:center; gap:10px; overflow:hidden; white-space:nowrap; }
+.nav-section-icon { width:16px; height:16px; stroke:rgba(242,236,224,0.4); fill:none; stroke-width:1.5; stroke-linecap:round; stroke-linejoin:round; flex-shrink:0; }
+.nav-section-label { font-size:10px; letter-spacing:2px; text-transform:uppercase; color:rgba(242,236,224,0.4); font-weight:500; transition:opacity 0.2s; }
+.sidebar.collapsed .nav-section-label { opacity:0; }
+.nav-chevron { width:12px; height:12px; stroke:rgba(242,236,224,0.3); fill:none; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; transition:transform 0.2s, opacity 0.2s; flex-shrink:0; }
+.sidebar.collapsed .nav-chevron { opacity:0; }
+.nav-section.open .nav-chevron { transform:rotate(180deg); }
+.nav-items { overflow:hidden; max-height:0; transition:max-height 0.25s ease; }
+.nav-section.open .nav-items { max-height:300px; }
+.nav-link { display:flex; align-items:center; gap:10px; padding:9px 18px 9px 42px; text-decoration:none; transition:background 0.15s; white-space:nowrap; overflow:hidden; border-left:3px solid transparent; }
+.nav-link:hover { background:rgba(242,236,224,0.07); }
+.nav-link.active { background:rgba(181,90,53,0.15); border-left-color:var(--rust); }
+.sidebar.collapsed .nav-link { padding-left:18px; justify-content:center; }
+.nav-link-icon { width:15px; height:15px; stroke:rgba(242,236,224,0.45); fill:none; stroke-width:1.5; stroke-linecap:round; stroke-linejoin:round; flex-shrink:0; }
+.nav-link.active .nav-link-icon { stroke:var(--rust); }
+.nav-link-label { font-size:13px; color:rgba(242,236,224,0.6); font-weight:300; transition:opacity 0.2s; }
+.nav-link.active .nav-link-label { color:var(--parchment); font-weight:400; }
+.sidebar.collapsed .nav-link-label { opacity:0; width:0; }
+.nav-divider { height:1px; background:rgba(242,236,224,0.07); margin:8px 18px; }
+.sidebar-bottom { padding:0 18px; display:flex; flex-direction:column; gap:8px; overflow:hidden; }
+.sidebar-user { display:flex; align-items:center; gap:10px; white-space:nowrap; }
+.sb-avatar { width:32px; height:32px; border-radius:50%; background:linear-gradient(135deg,var(--gold),var(--rust)); display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:600; color:var(--parchment); flex-shrink:0; }
+.user-info { overflow:hidden; transition:opacity 0.2s; }
+.sidebar.collapsed .user-info { opacity:0; width:0; }
+.user-name { font-size:12px; font-weight:500; color:var(--parchment); }
+.user-email { font-size:10px; color:rgba(242,236,224,0.35); }
+.sb-signout { display:flex; align-items:center; gap:8px; font-size:11px; color:rgba(242,236,224,0.35); cursor:pointer; padding:4px 0; transition:color 0.15s; white-space:nowrap; }
+.sb-signout:hover { color:rgba(242,236,224,0.7); }
+.sb-signout svg { width:14px; height:14px; stroke:currentColor; fill:none; stroke-width:1.5; stroke-linecap:round; flex-shrink:0; }
+.sb-signout-label { transition:opacity 0.2s; }
+.sidebar.collapsed .sb-signout-label { opacity:0; width:0; }
+
+/* sidebar-aware margin */
+.main-wrapper, .main { margin-left: var(--sidebar-w); transition: margin-left 0.25s ease; }
+.main-wrapper.sidebar-collapsed, .main.sidebar-collapsed { margin-left: 72px; }
+
+</style>
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-toggle" onclick="toggleSidebar()">
+    <svg viewBox="0 0 10 10"><polyline points="6 2 2 5 6 8"/></svg>
+  </div>
+  <a class="sidebar-logo" href="index.html">
+    <div class="logo-mark">
+      <span class="logo-s">S</span>
+      <svg width="16" height="9" viewBox="0 0 18 10" fill="none"><polygon points="0,0 10,0 6,5 10,10 0,10 4,5" fill="#B55A35"/></svg>
+    </div>
+    <div class="logo-text">
+      <span class="logo-name">Seek</span>
+      <span class="logo-sub">Research Platform</span>
+    </div>
+  </a>
+  <nav class="sidebar-nav">
+    <div class="nav-section open" id="sec-portals">
+      <div class="nav-section-header" onclick="toggleSection('sec-portals')">
+        <div class="nav-section-left">
+          <svg class="nav-section-icon" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+          <span class="nav-section-label">Portals</span>
+        </div>
+        <svg class="nav-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="nav-items">
+        <a class="nav-link " href="index.html">
+          <svg class="nav-link-icon" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>
+          <span class="nav-link-label">Home</span>
+        </a>
+        <a class="nav-link active" href="seek-dashboard-mockup.html">
+          <svg class="nav-link-icon" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          <span class="nav-link-label">Client Portal</span>
+        </a>
+        <a class="nav-link " href="seek-affiliate-portal.html">
+          <svg class="nav-link-icon" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+          <span class="nav-link-label">Affiliate Portal</span>
+        </a>
+        <a class="nav-link " href="seek-buyer-portal.html">
+          <svg class="nav-link-icon" viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+          <span class="nav-link-label">Buyer Portal</span>
+        </a>
+        <a class="nav-link " href="seek-executive-portal.html">
+          <svg class="nav-link-icon" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <span class="nav-link-label">Executive Portal</span>
+        </a>
+      </div>
+    </div>
+    <div class="nav-divider"></div>
+    <div class="nav-section open" id="sec-ops">
+      <div class="nav-section-header" onclick="toggleSection('sec-ops')">
+        <div class="nav-section-left">
+          <svg class="nav-section-icon" viewBox="0 0 24 24"><path d="M9 12h6M9 8h6M5 4h14a1 1 0 011 1v14a1 1 0 01-1 1H5a1 1 0 01-1-1V5a1 1 0 011-1z"/></svg>
+          <span class="nav-section-label">Operations</span>
+        </div>
+        <svg class="nav-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="nav-items">
+        <a class="nav-link " href="seek-research-forms.html">
+          <svg class="nav-link-icon" viewBox="0 0 24 24"><path d="M9 12h6M9 8h6M5 4h14a1 1 0 011 1v14a1 1 0 01-1 1H5a1 1 0 01-1-1V5a1 1 0 011-1z"/></svg>
+          <span class="nav-link-label">Research Forms</span>
+        </a>
+        <a class="nav-link " href="seek-outreach-specialist.html">
+          <svg class="nav-link-icon" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+          <span class="nav-link-label">Outreach Specialist</span>
+        </a>
+      </div>
+    </div>
+  </nav>
+  <div class="sidebar-bottom">
+    <div class="sidebar-user">
+      <div class="sb-avatar">A</div>
+      <div class="user-info">
+        <div class="user-name">Alessandra S.</div>
+        <div class="user-email">als.s.sanches@gmail.com</div>
+      </div>
+    </div>
+    <div class="sb-signout">
+      <svg viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+      <span class="sb-signout-label">Sign Out</span>
+    </div>
+  </div>
+</aside>
+
+<!-- MAIN CONTENT -->
+<main class="content">
+
+  <!-- TOP BAR -->
+  <div class="topbar">
+    <div class="topbar-left">
+      <div class="topbar-eyebrow">Client Portal</div>
+      <div class="topbar-title">Your <em>inheritance journey</em></div>
+    </div>
+    <div class="topbar-right">
+      <div class="nav-links">
+        <a class="nav-link" href="#">About Us</a>
+        <a class="nav-link" href="#">Contact Us</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- SUMMARY ROW -->
+  <div class="summary-row">
+    <div class="summary-card">
+      <div class="summary-icon rust">
+        <svg viewBox="0 0 24 24"><path d="M9 12h6M9 8h6M5 4h14a1 1 0 011 1v14a1 1 0 01-1 1H5a1 1 0 01-1-1V5a1 1 0 011-1z"/></svg>
+      </div>
+      <div class="summary-label">Active Cases</div>
+      <div class="summary-value">0</div>
+      <div class="summary-sub">No open files yet</div>
+    </div>
+    <div class="summary-card">
+      <div class="summary-icon gold">
+        <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6z"/><path d="M14 2v6h6"/></svg>
+      </div>
+      <div class="summary-label">Documents</div>
+      <div class="summary-value">0</div>
+      <div class="summary-sub">Upload your first file</div>
+    </div>
+    <div class="summary-card highlight">
+      <div class="summary-label">Your Domain</div>
+      <div class="summary-value" style="font-size:18px; margin-top:6px;">lucasvfr<br>@outlook.com</div>
+      <div class="summary-sub" style="margin-top:6px;">Verified account</div>
+    </div>
+  </div>
+
+  <!-- RESEARCH STATUS TABLE -->
+  <div class="table-card">
+    <div class="table-card-header">
+      <span class="table-card-title">Research Status</span>
+      <span class="table-card-badge">No active cases</span>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Contact</th>
+            <th>Created</th>
+            <th>Modified</th>
+            <th>Status</th>
+            <th>Progress</th>
+          </tr>
+        </thead>
+      </table>
+    </div>
+    <div class="empty-state">
+      <div class="empty-ornament">
+        <svg viewBox="0 0 24 24"><path d="M21 21l-4.35-4.35M17 11A6 6 0 115 11a6 6 0 0112 0z"/></svg>
+      </div>
+      <div class="empty-headline">No records found for your domain.</div>
+      <div class="empty-body">Once your research file is opened, every step of the process will be visible here — from first discovery to final resolution.</div>
+    </div>
+  </div>
+
+  <!-- SELLER DOCUMENTS -->
+  <div class="docs-card">
+    <div class="docs-card-header">
+      <span class="docs-card-title">Seller Documents</span>
+      <button class="upload-btn">
+        <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+        Upload Document
+      </button>
+    </div>
+    <div class="docs-empty">
+      <p>No documents uploaded yet. Share deeds, titles, or any files related to your case.</p>
+    </div>
+  </div>
+
+</main>
+
+<!-- RIGHT PANEL -->
+<aside class="panel">
+
+  <!-- PROFILE -->
+  <div class="panel-hero">
+    <div class="avatar">L</div>
+    <div class="panel-name">Lucas V. Ferreira</div>
+    <div class="panel-email">lucasvfr@outlook.com</div>
+    <button class="panel-edit">Edit Profile</button>
+  </div>
+
+  <!-- FILE INFO -->
+  <div class="panel-section">
+    <div class="panel-section-label">Case File</div>
+    <div class="file-info-row">
+      <span class="file-info-key">File Number</span>
+      <span class="file-info-val gold">— Pending</span>
+    </div>
+    <div class="file-info-row">
+      <span class="file-info-key">Opened</span>
+      <span class="file-info-val">—</span>
+    </div>
+    <div class="file-info-row">
+      <span class="file-info-key">Last Update</span>
+      <span class="file-info-val">—</span>
+    </div>
+    <div class="file-info-row" style="margin-bottom:0">
+      <span class="file-info-key">Stage</span>
+      <span class="file-info-val rust">Not started</span>
+    </div>
+  </div>
+
+  <!-- PROGRESS STEPS -->
+  <div class="panel-section">
+    <div class="panel-section-label">Journey Steps</div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-dot pending">
+          <svg viewBox="0 0 12 12"><circle cx="6" cy="6" r="2" fill="currentColor" stroke="none"/></svg>
+        </div>
+        <div class="step-body">
+          <div class="step-name muted">Initial Research</div>
+          <div class="step-date">Awaiting file opening</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-dot pending">
+          <svg viewBox="0 0 12 12"><circle cx="6" cy="6" r="2" fill="currentColor" stroke="none"/></svg>
+        </div>
+        <div class="step-body">
+          <div class="step-name muted">Document Review</div>
+          <div class="step-date">—</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-dot pending">
+          <svg viewBox="0 0 12 12"><circle cx="6" cy="6" r="2" fill="currentColor" stroke="none"/></svg>
+        </div>
+        <div class="step-body">
+          <div class="step-name muted">Title Resolution</div>
+          <div class="step-date">—</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-dot pending">
+          <svg viewBox="0 0 12 12"><circle cx="6" cy="6" r="2" fill="currentColor" stroke="none"/></svg>
+        </div>
+        <div class="step-body" style="padding-bottom:0">
+          <div class="step-name muted">Final Signature</div>
+          <div class="step-date">—</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- NEXT STEP -->
+  <div class="panel-section">
+    <div class="panel-section-label">Next Expected Step</div>
+    <div class="next-step-box">
+      <div class="next-step-label">Awaiting</div>
+      <div class="next-step-text">Your research file hasn't been opened yet. Our team will reach out once a match is identified.</div>
+    </div>
+  </div>
+
+  <!-- RESEARCHER -->
+  <div class="panel-section">
+    <div class="panel-section-label">Your Researcher</div>
+    <div class="researcher">
+      <div class="researcher-avatar">SR</div>
+      <div class="researcher-info">
+        <div class="researcher-name">Seek Research Team</div>
+        <div class="researcher-role">Assigned upon file opening</div>
+      </div>
+    </div>
+    <button class="contact-btn">
+      <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+      Send a Message
+    </button>
+  </div>
+
+  <!-- FOOTER NOTE -->
+  <div class="panel-footer">
+    <p>Impact-Driven. Rooted in Research.<br>Results That Matter.</p>
+  </div>
+
+</aside>
+
+
+<script id="sidebar-shared-js">
+(function() {
+  const sidebar = document.getElementById('sidebar');
+  const mains   = document.querySelectorAll('.main-wrapper, .main');
+  window.toggleSidebar = function() {
+    sidebar.classList.toggle('collapsed');
+    mains.forEach(m => m.classList.toggle('sidebar-collapsed'));
+  };
+  window.toggleSection = function(id) {
+    document.getElementById(id).classList.toggle('open');
+  };
+})();
+</script>
+</body>
+</html>

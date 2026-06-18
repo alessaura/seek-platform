@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Seek Research — Research Forms</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --ink:           #18160F;
+  --parchment:     #F2ECE0;
+  --parchment-mid: #EDE5D3;
+  --parchment-dark:#D9CEB8;
+  --rust:          #B55A35;
+  --rust-light:    rgba(181,90,53,0.08);
+  --gold:          #C4A05A;
+  --gold-light:    rgba(196,160,90,0.12);
+  --sage:          #6B7C6E;
+  --text-main:     #2C2A22;
+  --text-muted:    #8A8070;
+  --white:         #FFFFFF;
+}
+
+body { font-family:'Outfit',sans-serif; background:var(--parchment-mid); color:var(--text-main); min-height:100vh; display:flex; }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.main-wrapper { margin-left:72px; flex:1; display:flex; flex-direction:column; min-height:100vh; }
+
+/* ═══════════════
+   LIST VIEW
+═══════════════ */
+#view-list { display:flex; flex-direction:column; flex:1; }
+#view-detail { display:none; flex-direction:column; min-height:100vh; }
+
+.topbar { padding:32px 32px 0; display:flex; align-items:flex-start; justify-content:space-between; gap:16px; }
+.topbar-eyebrow { font-size:11px; letter-spacing:2.5px; text-transform:uppercase; color:var(--text-muted); margin-bottom:4px; }
+.topbar-title { font-family:'Cormorant Garamond',serif; font-size:28px; font-weight:300; color:var(--ink); }
+.topbar-title em { font-style:italic; color:var(--rust); }
+.view-badge { display:inline-flex; align-items:center; gap:6px; font-size:11px; letter-spacing:1.5px; text-transform:uppercase; font-weight:500; color:var(--rust); background:var(--rust-light); border:1px solid rgba(181,90,53,0.2); border-radius:20px; padding:5px 14px; margin-top:6px; }
+.view-badge-dot { width:6px; height:6px; border-radius:50%; background:var(--rust); }
+.nav-links { display:flex; gap:4px; }
+.nav-link { font-size:12px; letter-spacing:1px; text-transform:uppercase; color:var(--text-muted); text-decoration:none; padding:8px 14px; border-radius:6px; transition:background 0.15s,color 0.15s; }
+.nav-link:hover { background:var(--parchment); color:var(--ink); }
+
+.table-card { margin:24px 32px 32px; background:var(--white); border:1px solid var(--parchment-dark); border-radius:12px; overflow:hidden; flex:1; display:flex; flex-direction:column; }
+.table-card-header { padding:16px 20px; display:flex; align-items:center; justify-content:space-between; border-bottom:1px solid var(--parchment-mid); background:var(--parchment); flex-wrap:wrap; gap:10px; }
+.table-card-title { font-family:'Cormorant Garamond',serif; font-size:20px; font-weight:400; font-style:italic; color:var(--ink); }
+.filter-row { display:flex; align-items:center; gap:8px; flex-wrap:wrap; }
+.filter-search-wrap { position:relative; }
+.filter-search-icon { position:absolute; left:9px; top:50%; transform:translateY(-50%); pointer-events:none; }
+.filter-search-icon svg { width:13px; height:13px; stroke:var(--text-muted); fill:none; stroke-width:1.5; stroke-linecap:round; }
+.filter-search { font-family:'Outfit',sans-serif; font-size:12px; color:var(--ink); background:var(--white); border:1px solid var(--parchment-dark); border-radius:7px; padding:7px 12px 7px 30px; outline:none; width:200px; transition:border-color 0.2s; }
+.filter-search:focus { border-color:var(--rust); }
+.filter-select { font-family:'Outfit',sans-serif; font-size:12px; color:var(--ink); background:var(--white); border:1px solid var(--parchment-dark); border-radius:7px; padding:7px 12px; outline:none; cursor:pointer; }
+.table-wrap { overflow-x:auto; flex:1; }
+table { width:100%; border-collapse:collapse; font-size:12.5px; }
+thead th { font-size:10px; letter-spacing:2px; text-transform:uppercase; font-weight:500; color:var(--text-muted); padding:10px 14px; text-align:left; border-bottom:1px solid var(--parchment-mid); background:var(--parchment); white-space:nowrap; position:sticky; top:0; z-index:1; }
+tbody tr { border-bottom:1px solid var(--parchment-mid); cursor:pointer; transition:background 0.12s; }
+tbody tr:last-child { border-bottom:none; }
+tbody tr:hover { background:rgba(242,236,224,0.5); }
+tbody td { padding:11px 14px; vertical-align:middle; }
+.td-main { font-weight:400; color:var(--ink); }
+.td-muted { color:var(--text-muted); font-weight:300; font-size:12px; }
+.status-cell { display:flex; align-items:center; gap:6px; flex-wrap:wrap; }
+.status-badge { display:inline-flex; align-items:center; font-size:10px; font-weight:700; border-radius:4px; padding:2px 7px; text-transform:uppercase; letter-spacing:0.5px; }
+.status-badge.new { background:#F59E0B; color:#fff; }
+.status-text { font-size:12px; color:var(--text-muted); font-weight:300; }
+.pagination { display:flex; align-items:center; justify-content:space-between; padding:10px 16px; border-top:1px solid var(--parchment-mid); background:var(--parchment); }
+.pagination-info { font-size:11px; color:var(--text-muted); font-weight:300; }
+.pagination-btns { display:flex; gap:4px; }
+.page-btn { font-family:'Outfit',sans-serif; font-size:11px; font-weight:500; color:var(--text-muted); background:var(--white); border:1px solid var(--parchment-dark); border-radius:6px; padding:5px 12px; cursor:pointer; transition:all 0.15s; }
+.page-btn:hover:not(:disabled) { border-color:var(--rust); color:var(--rust); }
+.page-btn:disabled { opacity:0.4; cursor:default; }
+.page-btn.current { background:var(--rust); color:var(--white); border-color:var(--rust); }
+
+/* ═══════════════
+   DETAIL VIEW
+═══════════════ */
+.detail-topbar {
+  padding:16px 32px;
+  background:var(--white);
+  border-bottom:1px solid var(--parchment-dark);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+  position:sticky;
+  top:0;
+  z-index:10;
+}
+
+.detail-back {
+  display:flex; align-items:center; gap:8px;
+  cursor:pointer; font-size:12px; font-weight:500;
+  letter-spacing:1px; text-transform:uppercase;
+  color:var(--text-muted); background:none; border:none;
+  padding:0; font-family:'Outfit',sans-serif; transition:color 0.2s;
+}
+.detail-back:hover { color:var(--rust); }
+.detail-back svg { width:16px; height:16px; stroke:currentColor; fill:none; stroke-width:1.5; stroke-linecap:round; stroke-linejoin:round; }
+
+.detail-title-wrap { display:flex; align-items:center; gap:10px; flex:1; justify-content:center; }
+.detail-heading { font-family:'Cormorant Garamond',serif; font-size:19px; font-weight:400; color:var(--ink); }
+.new-badge-pill { font-size:10px; font-weight:700; background:#F59E0B; color:#fff; border-radius:4px; padding:2px 8px; letter-spacing:0.5px; text-transform:uppercase; }
+
+/* UNSAVED INDICATOR IN TOPBAR */
+.unsaved-indicator {
+  display:none;
+  align-items:center;
+  gap:6px;
+  font-size:11px;
+  font-weight:500;
+  color:var(--rust);
+  background:var(--rust-light);
+  border:1px solid rgba(181,90,53,0.2);
+  border-radius:20px;
+  padding:4px 12px;
+}
+.unsaved-indicator.visible { display:flex; }
+.unsaved-indicator svg { width:12px; height:12px; stroke:var(--rust); fill:none; stroke-width:2; stroke-linecap:round; }
+
+.detail-actions { display:flex; gap:8px; align-items:center; }
+.btn-discard {
+  font-family:'Outfit',sans-serif; font-size:11px; font-weight:500;
+  letter-spacing:1.5px; text-transform:uppercase;
+  color:var(--text-muted); background:none;
+  border:1px solid var(--parchment-dark); border-radius:8px;
+  padding:9px 18px; cursor:pointer; transition:all 0.2s;
+  display:none;
+}
+.btn-discard.visible { display:block; }
+.btn-discard:hover { border-color:var(--rust); color:var(--rust); }
+.btn-save {
+  font-family:'Outfit',sans-serif; font-size:11px; font-weight:600;
+  letter-spacing:1.5px; text-transform:uppercase;
+  background:var(--ink); color:var(--parchment);
+  border:none; border-radius:8px; padding:9px 22px;
+  cursor:pointer; transition:background 0.2s; opacity:0.35;
+  pointer-events:none;
+}
+.btn-save.active { opacity:1; pointer-events:auto; }
+.btn-save.active:hover { background:#2e2b1f; }
+
+/* ACCORDION LAYOUT */
+.detail-layout {
+  display:grid;
+  grid-template-columns:220px 1fr;
+  flex:1;
+  min-height:0;
+}
+
+/* LEFT NAV */
+.accordion-nav {
+  background:var(--parchment);
+  border-right:1px solid var(--parchment-dark);
+  padding:24px 0;
+  display:flex;
+  flex-direction:column;
+  gap:2px;
+  position:sticky;
+  top:57px;
+  height:calc(100vh - 57px);
+  overflow-y:auto;
+}
+
+.acc-nav-item {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:11px 20px;
+  cursor:pointer;
+  transition:background 0.15s, border-left-color 0.15s;
+  border-left:3px solid transparent;
+  gap:8px;
+}
+
+.acc-nav-item:hover { background:var(--parchment-mid); }
+.acc-nav-item.active { background:var(--white); border-left-color:var(--rust); }
+
+.acc-nav-left { display:flex; align-items:center; gap:10px; }
+.acc-nav-icon { width:16px; height:16px; stroke:var(--text-muted); fill:none; stroke-width:1.5; stroke-linecap:round; stroke-linejoin:round; flex-shrink:0; }
+.acc-nav-item.active .acc-nav-icon { stroke:var(--rust); }
+.acc-nav-label { font-size:12px; font-weight:500; color:var(--text-muted); }
+.acc-nav-item.active .acc-nav-label { color:var(--ink); }
+
+.dirty-badge {
+  width:7px; height:7px;
+  border-radius:50%;
+  background:var(--rust);
+  flex-shrink:0;
+  display:none;
+}
+.dirty-badge.visible { display:block; }
+
+/* PANEL AREA */
+.accordion-panels { overflow-y:auto; padding:32px; }
+
+.acc-panel { display:none; }
+.acc-panel.active { display:block; }
+
+.panel-title {
+  font-family:'Cormorant Garamond',serif;
+  font-size:22px;
+  font-weight:300;
+  color:var(--ink);
+  margin-bottom:24px;
+  padding-bottom:14px;
+  border-bottom:1px solid var(--parchment-dark);
+}
+
+.panel-title em { font-style:italic; color:var(--rust); }
+
+/* FORM */
+.form-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+.form-grid.single { grid-template-columns:1fr; }
+.form-grid.triple { grid-template-columns:1fr 1fr 1fr; }
+.form-field { display:flex; flex-direction:column; gap:5px; }
+.form-field.full { grid-column:1/-1; }
+.field-label { font-size:10px; letter-spacing:1.5px; text-transform:uppercase; color:var(--text-muted); font-weight:500; }
+.field-label .req { color:var(--rust); margin-left:2px; }
+.field-input { font-family:'Outfit',sans-serif; font-size:13px; color:var(--ink); background:var(--parchment-mid); border:1px solid var(--parchment-dark); border-radius:7px; padding:9px 12px; outline:none; width:100%; transition:border-color 0.2s, background 0.2s; }
+.field-input:focus { border-color:var(--rust); background:var(--white); }
+.field-select { font-family:'Outfit',sans-serif; font-size:13px; color:var(--ink); background:var(--parchment-mid); border:1px solid var(--parchment-dark); border-radius:7px; padding:9px 12px; outline:none; cursor:pointer; width:100%; transition:border-color 0.2s; }
+.field-select:focus { border-color:var(--rust); }
+.field-textarea { font-family:'Outfit',sans-serif; font-size:13px; font-weight:300; color:var(--ink); background:var(--parchment-mid); border:1px solid var(--parchment-dark); border-radius:7px; padding:9px 12px; outline:none; width:100%; resize:vertical; min-height:90px; transition:border-color 0.2s; }
+.field-textarea:focus { border-color:var(--rust); }
+
+/* RICH TEXT */
+.rich-wrap { border:1px solid var(--parchment-dark); border-radius:7px; overflow:hidden; }
+.rich-toolbar { display:flex; align-items:center; padding:6px 10px; background:var(--parchment); border-bottom:1px solid var(--parchment-dark); gap:4px; }
+.rich-btn { font-family:'Outfit',sans-serif; font-size:12px; font-weight:600; color:var(--text-muted); background:none; border:1px solid var(--parchment-dark); border-radius:4px; padding:3px 8px; cursor:pointer; transition:all 0.15s; }
+.rich-btn:hover { background:var(--white); color:var(--ink); }
+.rich-content { min-height:90px; padding:10px 12px; font-size:13px; color:var(--text-main); outline:none; background:var(--white); }
+
+/* CASE NOTES */
+.notes-feed { background:var(--parchment-mid); border:1px solid var(--parchment-dark); border-radius:7px; padding:12px; font-size:13px; color:var(--text-muted); font-weight:300; font-style:italic; min-height:48px; margin-bottom:14px; }
+
+/* DROPZONE */
+.dropzone { border:2px dashed var(--parchment-dark); border-radius:10px; padding:36px 20px; text-align:center; cursor:pointer; transition:border-color 0.2s,background 0.2s; background:var(--parchment-mid); }
+.dropzone:hover { border-color:var(--rust); background:rgba(181,90,53,0.04); }
+.dropzone-icon svg { width:36px; height:36px; stroke:var(--text-muted); fill:none; stroke-width:1.2; stroke-linecap:round; margin-bottom:10px; }
+.dropzone-text { font-size:13px; color:var(--text-muted); font-weight:300; margin-bottom:4px; }
+.dropzone-sub { font-size:11px; color:var(--text-muted); opacity:0.65; }
+.attachment-empty { font-size:12px; color:var(--text-muted); font-weight:300; margin-top:10px; font-style:italic; }
+
+/* ── SHARED SIDEBAR ── */
+:root { --sidebar-w: 220px; }
+.sidebar {
+  width: var(--sidebar-w);
+  background: var(--ink);
+  display: flex;
+  flex-direction: column;
+  padding: 28px 0 24px;
+  flex-shrink: 0;
+  position: fixed;
+  top: 0; left: 0;
+  height: 100vh;
+  z-index: 20;
+  transition: width 0.25s ease;
+  overflow: hidden;
+}
+.sidebar.collapsed { width: 72px; }
+.sidebar-logo { display:flex; align-items:center; gap:12px; padding:0 18px; margin-bottom:32px; cursor:pointer; text-decoration:none; }
+.logo-mark { display:flex; flex-direction:column; align-items:center; gap:3px; flex-shrink:0; }
+.logo-s { font-size:22px; font-weight:600; color:var(--parchment); line-height:1; }
+.logo-text { display:flex; flex-direction:column; overflow:hidden; white-space:nowrap; opacity:1; transition:opacity 0.2s; }
+.sidebar.collapsed .logo-text { opacity:0; width:0; }
+.logo-name { font-family:'Outfit',sans-serif; font-size:15px; font-weight:600; color:var(--parchment); letter-spacing:2px; text-transform:uppercase; }
+.logo-sub  { font-size:9px; letter-spacing:2px; text-transform:uppercase; color:rgba(242,236,224,0.4); font-weight:400; }
+.sidebar-toggle { position:absolute; top:28px; right:-12px; width:24px; height:24px; background:var(--rust); border-radius:50%; display:flex; align-items:center; justify-content:center; cursor:pointer; z-index:30; border:2px solid var(--ink); transition:transform 0.25s; }
+.sidebar.collapsed .sidebar-toggle { transform:rotate(180deg); }
+.sidebar-toggle svg { width:10px; height:10px; stroke:#fff; fill:none; stroke-width:2.5; stroke-linecap:round; stroke-linejoin:round; }
+.sidebar-nav { flex:1; overflow-y:auto; overflow-x:hidden; padding-bottom:16px; }
+.nav-section { margin-bottom:4px; }
+.nav-section-header { display:flex; align-items:center; justify-content:space-between; padding:8px 18px; cursor:pointer; user-select:none; transition:background 0.15s; }
+.nav-section-header:hover { background:rgba(242,236,224,0.05); }
+.nav-section-left { display:flex; align-items:center; gap:10px; overflow:hidden; white-space:nowrap; }
+.nav-section-icon { width:16px; height:16px; stroke:rgba(242,236,224,0.4); fill:none; stroke-width:1.5; stroke-linecap:round; stroke-linejoin:round; flex-shrink:0; }
+.nav-section-label { font-size:10px; letter-spacing:2px; text-transform:uppercase; color:rgba(242,236,224,0.4); font-weight:500; transition:opacity 0.2s; }
+.sidebar.collapsed .nav-section-label { opacity:0; }
+.nav-chevron { width:12px; height:12px; stroke:rgba(242,236,224,0.3); fill:none; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; transition:transform 0.2s, opacity 0.2s; flex-shrink:0; }
+.sidebar.collapsed .nav-chevron { opacity:0; }
+.nav-section.open .nav-chevron { transform:rotate(180deg); }
+.nav-items { overflow:hidden; max-height:0; transition:max-height 0.25s ease; }
+.nav-section.open .nav-items { max-height:300px; }
+.nav-link { display:flex; align-items:center; gap:10px; padding:9px 18px 9px 42px; text-decoration:none; transition:background 0.15s; white-space:nowrap; overflow:hidden; border-left:3px solid transparent; }
+.nav-link:hover { background:rgba(242,236,224,0.07); }
+.nav-link.active { background:rgba(181,90,53,0.15); border-left-color:var(--rust); }
+.sidebar.collapsed .nav-link { padding-left:18px; justify-content:center; }
+.nav-link-icon { width:15px; height:15px; stroke:rgba(242,236,224,0.45); fill:none; stroke-width:1.5; stroke-linecap:round; stroke-linejoin:round; flex-shrink:0; }
+.nav-link.active .nav-link-icon { stroke:var(--rust); }
+.nav-link-label { font-size:13px; color:rgba(242,236,224,0.6); font-weight:300; transition:opacity 0.2s; }
+.nav-link.active .nav-link-label { color:var(--parchment); font-weight:400; }
+.sidebar.collapsed .nav-link-label { opacity:0; width:0; }
+.nav-divider { height:1px; background:rgba(242,236,224,0.07); margin:8px 18px; }
+.sidebar-bottom { padding:0 18px; display:flex; flex-direction:column; gap:8px; overflow:hidden; }
+.sidebar-user { display:flex; align-items:center; gap:10px; white-space:nowrap; }
+.sb-avatar { width:32px; height:32px; border-radius:50%; background:linear-gradient(135deg,var(--gold),var(--rust)); display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:600; color:var(--parchment); flex-shrink:0; }
+.user-info { overflow:hidden; transition:opacity 0.2s; }
+.sidebar.collapsed .user-info { opacity:0; width:0; }
+.user-name { font-size:12px; font-weight:500; color:var(--parchment); }
+.user-email { font-size:10px; color:rgba(242,236,224,0.35); }
+.sb-signout { display:flex; align-items:center; gap:8px; font-size:11px; color:rgba(242,236,224,0.35); cursor:pointer; padding:4px 0; transition:color 0.15s; white-space:nowrap; }
+.sb-signout:hover { color:rgba(242,236,224,0.7); }
+.sb-signout svg { width:14px; height:14px; stroke:currentColor; fill:none; stroke-width:1.5; stroke-linecap:round; flex-shrink:0; }
+.sb-signout-label { transition:opacity 0.2s; }
+.sidebar.collapsed .sb-signout-label { opacity:0; width:0; }
+
+/* sidebar-aware margin */
+.main-wrapper, .main { margin-left: var(--sidebar-w); transition: margin-left 0.25s ease; }
+.main-wrapper.sidebar-collapsed, .main.sidebar-collapsed { margin-left: 72px; }
+
+</style>
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-toggle" onclick="toggleSidebar()">
+    <svg viewBox="0 0 10 10"><polyline points="6 2 2 5 6 8"/></svg>
+  </div>
+  <a class="sidebar-logo" href="index.html">
+    <div class="logo-mark">
+      <span class="logo-s">S</span>
+      <svg width="16" height="9" viewBox="0 0 18 10" fill="none"><polygon points="0,0 10,0 6,5 10,10 0,10 4,5" fill="#B55A35"/></svg>
+    </div>
+    <div class="logo-text">
+      <span class="logo-name">Seek</span>
+      <span class="logo-sub">Research Platform</span>
+    </div>
+  </a>
+  <nav class="sidebar-nav">
+    <div class="nav-section open" id="sec-portals">
+      <div class="nav-section-header" onclick="toggleSection('sec-portals')">
+        <div class="nav-section-left">
+          <svg class="nav-section-icon" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+          <span class="nav-section-label">Portals</span>
+        </div>
+        <svg class="nav-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="nav-items">
+        <a class="nav-link " href="index.html">
+          <svg class="nav-link-icon" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>
+          <span class="nav-link-label">Home</span>
+        </a>
+        <a class="nav-link " href="seek-dashboard-mockup.html">
+          <svg class="nav-link-icon" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          <span class="nav-link-label">Client Portal</span>
+        </a>
+        <a class="nav-link " href="seek-affiliate-portal.html">
+          <svg class="nav-link-icon" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+          <span class="nav-link-label">Affiliate Portal</span>
+        </a>
+        <a class="nav-link " href="seek-buyer-portal.html">
+          <svg class="nav-link-icon" viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+          <span class="nav-link-label">Buyer Portal</span>
+        </a>
+        <a class="nav-link " href="seek-executive-portal.html">
+          <svg class="nav-link-icon" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <span class="nav-link-label">Executive Portal</span>
+        </a>
+      </div>
+    </div>
+    <div class="nav-divider"></div>
+    <div class="nav-section open" id="sec-ops">
+      <div class="nav-section-header" onclick="toggleSection('sec-ops')">
+        <div class="nav-section-left">
+          <svg class="nav-section-icon" viewBox="0 0 24 24"><path d="M9 12h6M9 8h6M5 4h14a1 1 0 011 1v14a1 1 0 01-1 1H5a1 1 0 01-1-1V5a1 1 0 011-1z"/></svg>
+          <span class="nav-section-label">Operations</span>
+        </div>
+        <svg class="nav-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="nav-items">
+        <a class="nav-link active" href="seek-research-forms.html">
+          <svg class="nav-link-icon" viewBox="0 0 24 24"><path d="M9 12h6M9 8h6M5 4h14a1 1 0 011 1v14a1 1 0 01-1 1H5a1 1 0 01-1-1V5a1 1 0 011-1z"/></svg>
+          <span class="nav-link-label">Research Forms</span>
+        </a>
+        <a class="nav-link " href="seek-outreach-specialist.html">
+          <svg class="nav-link-icon" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+          <span class="nav-link-label">Outreach Specialist</span>
+        </a>
+      </div>
+    </div>
+  </nav>
+  <div class="sidebar-bottom">
+    <div class="sidebar-user">
+      <div class="sb-avatar">A</div>
+      <div class="user-info">
+        <div class="user-name">Alessandra S.</div>
+        <div class="user-email">als.s.sanches@gmail.com</div>
+      </div>
+    </div>
+    <div class="sb-signout">
+      <svg viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+      <span class="sb-signout-label">Sign Out</span>
+    </div>
+  </div>
+</aside>
+
+<!-- ═══════════
+   LIST VIEW
+═══════════ -->
+<div class="main-wrapper" id="view-list">
+  <div class="topbar">
+    <div>
+      <div class="topbar-eyebrow">Research Portal</div>
+      <div class="topbar-title">Research <em>Forms</em></div>
+      <div class="view-badge"><span class="view-badge-dot"></span>Staff View</div>
+    </div>
+    <div class="nav-links">
+      <a class="nav-link" href="#">About Us</a>
+      <a class="nav-link" href="#">Contact Us</a>
+    </div>
+  </div>
+
+  <div class="table-card">
+    <div class="table-card-header">
+      <span class="table-card-title">All Records</span>
+      <div class="filter-row">
+        <div class="filter-search-wrap">
+          <div class="filter-search-icon"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
+          <input class="filter-search" placeholder="Search title or address..." oninput="filterForms(this.value)"/>
+        </div>
+        <select class="filter-select" onchange="filterFormsStatus(this.value)">
+          <option value="">All statuses</option>
+          <option>request</option>
+          <option>Research Complete</option>
+        </select>
+      </div>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Status</th><th>Title</th><th>Decedent Name</th><th>Marital Status</th>
+            <th>Property Address</th><th>Zoning</th><th>Sq Ft</th><th>Title Holder</th><th>Liens</th>
+          </tr>
+        </thead>
+        <tbody id="forms-tbody">
+          <tr onclick="openDetail({id:1,title:'1038 W Dauphin St',status:'request',address:'1038 W Dauphin St',zip:'19133',zoning:'RM1',sqft:'1001',owner:'Bogin & Mary Hudley',liens:'$573.82',taxdebt:'$14,763.33',decedent:'',marital:'',saledate:''})">
+            <td><div class="status-cell"><span class="status-badge new">NEW</span><span class="status-text">request</span></div></td>
+            <td class="td-main">1038 W Dauphin St</td><td class="td-muted">—</td><td class="td-muted">—</td><td class="td-muted">1038 W Dauphin St</td><td class="td-muted">RM1</td><td class="td-muted">1001</td><td class="td-muted">Bogin & Mary Hudley</td><td class="td-muted">$573.82</td>
+          </tr>
+          <tr onclick="openDetail({id:2,title:'2201 N Franklin St',status:'request',address:'2201 N Franklin St',zip:'19122',zoning:'CMX2',sqft:'876',owner:'Sidney Trosclair',liens:'$248.16',taxdebt:'$9,200.00',decedent:'',marital:'',saledate:''})">
+            <td><div class="status-cell"><span class="status-badge new">NEW</span><span class="status-text">request</span></div></td>
+            <td class="td-main">2201 N Franklin St</td><td class="td-muted">—</td><td class="td-muted">—</td><td class="td-muted">2201 N Franklin St</td><td class="td-muted">CMX2</td><td class="td-muted">876</td><td class="td-muted">Sidney Trosclair</td><td class="td-muted">$248.16</td>
+          </tr>
+          <tr onclick="openDetail({id:3,title:'2228 N Reese St',status:'request',address:'2228 N Reese St',zip:'19133',zoning:'RSA5',sqft:'770',owner:'Samuel & Beatrice Relf',liens:'$1,687.12',taxdebt:'$11,500.00',decedent:'',marital:'',saledate:''})">
+            <td><div class="status-cell"><span class="status-badge new">NEW</span><span class="status-text">request</span></div></td>
+            <td class="td-main">2228 N Reese St</td><td class="td-muted">—</td><td class="td-muted">—</td><td class="td-muted">2228 N Reese St</td><td class="td-muted">RSA5</td><td class="td-muted">770</td><td class="td-muted">Samuel & Beatrice Relf</td><td class="td-muted">$1,687.12</td>
+          </tr>
+          <tr onclick="openDetail({id:4,title:'2415 Palethorp St',status:'request',address:'2415 Palethorp St',zip:'19133',zoning:'RSA5',sqft:'623',owner:'John C. Reule',liens:'$0.00',taxdebt:'$5,200.00',decedent:'',marital:'',saledate:''})">
+            <td><div class="status-cell"><span class="status-badge new">NEW</span><span class="status-text">request</span></div></td>
+            <td class="td-main">2415 Palethorp St</td><td class="td-muted">—</td><td class="td-muted">—</td><td class="td-muted">2415 Palethorp St</td><td class="td-muted">RSA5</td><td class="td-muted">623</td><td class="td-muted">John C. Reule</td><td class="td-muted">$0.00</td>
+          </tr>
+          <tr onclick="openDetail({id:5,title:'3264 Kensington Ave',status:'request',address:'3264 Kensington Ave',zip:'19134',zoning:'CMX2',sqft:'1040',owner:'Yolanda Padilla & Joseph Lopes',liens:'$0.00',taxdebt:'$8,100.00',decedent:'',marital:'Unknown',saledate:''})">
+            <td><div class="status-cell"><span class="status-badge new">NEW</span><span class="status-text">request</span></div></td>
+            <td class="td-main">3264 Kensington Ave</td><td class="td-muted">—</td><td class="td-muted">Unknown</td><td class="td-muted">3264 Kensington Ave</td><td class="td-muted">CMX2</td><td class="td-muted">1040</td><td class="td-muted">Yolanda Padilla & Joseph Lopes</td><td class="td-muted">$0.00</td>
+          </tr>
+          <tr onclick="openDetail({id:6,title:'1446 Germantown Ave',status:'Research Complete',address:'1446 Germantown Ave',zip:'19122',zoning:'RM1',sqft:'906',owner:'Tom Tompkins & Roscoe Knight Jr.',liens:'$0.00',taxdebt:'$7,800.00',decedent:'Tom Tompkins',marital:'',saledate:''})">
+            <td><div class="status-cell"><span class="status-badge new">NEW</span><span class="status-text">Research Complete</span></div></td>
+            <td class="td-main">1446 Germantown Ave</td><td class="td-muted">Tom Tompkins</td><td class="td-muted">—</td><td class="td-muted">1446 Germantown Ave</td><td class="td-muted">RM1</td><td class="td-muted">906</td><td class="td-muted">Tom Tompkins & Roscoe Knight Jr.</td><td class="td-muted">$0.00</td>
+          </tr>
+          <tr onclick="openDetail({id:7,title:'147 W. Huntingdon St.',status:'Research Complete',address:'147 W. Huntingdon St.',zip:'19133',zoning:'CMX2',sqft:'960',owner:'Medina Bar, Inc.',liens:'$0.00',taxdebt:'$6,400.00',decedent:'Pablo & Jeanette Medina',marital:'Married',saledate:''})">
+            <td><div class="status-cell"><span class="status-badge new">NEW</span><span class="status-text">Research Complete</span></div></td>
+            <td class="td-main">147 W. Huntingdon St.</td><td class="td-muted">Pablo & Jeanette Medina</td><td class="td-muted">Married</td><td class="td-muted">147 W. Huntingdon St.</td><td class="td-muted">CMX2</td><td class="td-muted">960</td><td class="td-muted">Medina Bar, Inc.</td><td class="td-muted">$0.00</td>
+          </tr>
+          <tr onclick="openDetail({id:8,title:'1950 N Darien St',status:'Research Complete',address:'1950 N Darien St',zip:'19122',zoning:'RM1',sqft:'528',owner:'Rufus and Callia Knox',liens:'$2,559.30',taxdebt:'$12,000.00',decedent:'Rufus Knox',marital:'Married (possibly)',saledate:''})">
+            <td><div class="status-cell"><span class="status-badge new">NEW</span><span class="status-text">Research Complete</span></div></td>
+            <td class="td-main">1950 N Darien St</td><td class="td-muted">Rufus Knox</td><td class="td-muted">Married (possibly)</td><td class="td-muted">1950 N Darien St</td><td class="td-muted">RM1</td><td class="td-muted">528</td><td class="td-muted">Rufus and Callia Knox</td><td class="td-muted">$2,559.30</td>
+          </tr>
+          <tr onclick="openDetail({id:9,title:'2041 N 5th St',status:'Research Complete',address:'2041 N 5th St',zip:'19122',zoning:'RM1',sqft:'1075',owner:'Jack Michael Gussman',liens:'$1,932.15',taxdebt:'$10,800.00',decedent:'Jack Michael Gussman',marital:'Widowed',saledate:''})">
+            <td><div class="status-cell"><span class="status-badge new">NEW</span><span class="status-text">Research Complete</span></div></td>
+            <td class="td-main">2041 N 5th St</td><td class="td-muted">Jack Michael Gussman</td><td class="td-muted">Widowed</td><td class="td-muted">2041 N 5th St</td><td class="td-muted">RM1</td><td class="td-muted">1075</td><td class="td-muted">Jack Michael Gussman</td><td class="td-muted">$1,932.15</td>
+          </tr>
+          <tr onclick="openDetail({id:10,title:'2129 N 9th St',status:'Research Complete',address:'2129 N 9th St',zip:'19122',zoning:'RM1',sqft:'847',owner:'James Washington Lane',liens:'$587.66',taxdebt:'$8,900.00',decedent:'James Washington Lane',marital:'Widowed',saledate:''})">
+            <td><div class="status-cell"><span class="status-badge new">NEW</span><span class="status-text">Research Complete</span></div></td>
+            <td class="td-main">2129 N 9th St</td><td class="td-muted">James Washington Lane</td><td class="td-muted">Widowed</td><td class="td-muted">2129 N 9th St</td><td class="td-muted">RM1</td><td class="td-muted">847</td><td class="td-muted">James Washington Lane</td><td class="td-muted">$587.66</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="pagination">
+      <span class="pagination-info">Page 1 of 4 · 10 records shown</span>
+      <div class="pagination-btns">
+        <button class="page-btn" disabled>← Prev</button>
+        <button class="page-btn current">1</button>
+        <button class="page-btn">2</button>
+        <button class="page-btn">3</button>
+        <button class="page-btn">4</button>
+        <button class="page-btn">Next →</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════
+   DETAIL VIEW
+═══════════ -->
+<div class="main-wrapper" id="view-detail">
+
+  <!-- STICKY HEADER -->
+  <div class="detail-topbar">
+    <button class="detail-back" onclick="closeDetail()">
+      <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+      Research Forms
+    </button>
+
+    <div class="detail-title-wrap">
+      <span class="detail-heading" id="detail-heading">Edit Record</span>
+      <span class="new-badge-pill">NEW</span>
+      <div class="unsaved-indicator" id="unsaved-indicator">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        Unsaved changes
+      </div>
+    </div>
+
+    <div class="detail-actions">
+      <button class="btn-discard" id="btn-discard" onclick="discardChanges()">Discard</button>
+      <button class="btn-save" id="btn-save" onclick="saveChanges()">Save</button>
+    </div>
+  </div>
+
+  <!-- TWO-COL LAYOUT -->
+  <div class="detail-layout">
+
+    <!-- LEFT: SECTION NAV -->
+    <nav class="accordion-nav">
+      <div class="acc-nav-item active" onclick="showPanel('property', this)">
+        <div class="acc-nav-left">
+          <svg class="acc-nav-icon" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          <span class="acc-nav-label">Property Info</span>
+        </div>
+        <div class="dirty-badge" id="dirty-property"></div>
+      </div>
+      <div class="acc-nav-item" onclick="showPanel('financial', this)">
+        <div class="acc-nav-left">
+          <svg class="acc-nav-icon" viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+          <span class="acc-nav-label">Financial Info</span>
+        </div>
+        <div class="dirty-badge" id="dirty-financial"></div>
+      </div>
+      <div class="acc-nav-item" onclick="showPanel('contact', this)">
+        <div class="acc-nav-left">
+          <svg class="acc-nav-icon" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8 19.79 19.79 0 010 1.17 2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.91a16 16 0 006.72 6.72l1.28-1.28a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+          <span class="acc-nav-label">Contact Info</span>
+        </div>
+        <div class="dirty-badge" id="dirty-contact"></div>
+      </div>
+      <div class="acc-nav-item" onclick="showPanel('family', this)">
+        <div class="acc-nav-left">
+          <svg class="acc-nav-icon" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6z"/><path d="M14 2v6h6"/></svg>
+          <span class="acc-nav-label">Family Overview</span>
+        </div>
+        <div class="dirty-badge" id="dirty-family"></div>
+      </div>
+      <div class="acc-nav-item" onclick="showPanel('tracking', this)">
+        <div class="acc-nav-left">
+          <svg class="acc-nav-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          <span class="acc-nav-label">Status & Tracking</span>
+        </div>
+        <div class="dirty-badge" id="dirty-tracking"></div>
+      </div>
+      <div class="acc-nav-item" onclick="showPanel('files', this)">
+        <div class="acc-nav-left">
+          <svg class="acc-nav-icon" viewBox="0 0 24 24"><path d="M21.44 11.05l-9.19 9.19a6 6 0 01-8.49-8.49l9.19-9.19a4 4 0 015.66 5.66l-9.2 9.19a2 2 0 01-2.83-2.83l8.49-8.48"/></svg>
+          <span class="acc-nav-label">File Attachments</span>
+        </div>
+        <div class="dirty-badge" id="dirty-files"></div>
+      </div>
+    </nav>
+
+    <!-- RIGHT: PANELS -->
+    <div class="accordion-panels">
+
+      <!-- PROPERTY INFO -->
+      <div class="acc-panel active" id="panel-property">
+        <div class="panel-title">Property <em>Information</em></div>
+        <div class="form-grid">
+          <div class="form-field">
+            <label class="field-label">Decedent Name</label>
+            <input class="field-input" id="f-decedent" type="text" oninput="markDirty('property')"/>
+          </div>
+          <div class="form-field">
+            <label class="field-label">Marital Status</label>
+            <input class="field-input" id="f-marital" type="text" oninput="markDirty('property')"/>
+          </div>
+          <div class="form-field">
+            <label class="field-label">Property Address</label>
+            <input class="field-input" id="f-address" type="text" oninput="markDirty('property')"/>
+          </div>
+          <div class="form-field">
+            <label class="field-label">ZIP Code</label>
+            <input class="field-input" id="f-zip" type="text" oninput="markDirty('property')"/>
+          </div>
+          <div class="form-field">
+            <label class="field-label">Zoning <span class="req">*</span></label>
+            <input class="field-input" id="f-zoning" type="text" oninput="markDirty('property')"/>
+          </div>
+          <div class="form-field">
+            <label class="field-label">Square Footage</label>
+            <input class="field-input" id="f-sqft" type="text" oninput="markDirty('property')"/>
+          </div>
+          <div class="form-field">
+            <label class="field-label">Property Owner</label>
+            <input class="field-input" id="f-owner" type="text" oninput="markDirty('property')"/>
+          </div>
+          <div class="form-field">
+            <label class="field-label">Listed Sale Date</label>
+            <input class="field-input" id="f-saledate" type="text" placeholder="MM/DD/YYYY" oninput="markDirty('property')"/>
+          </div>
+        </div>
+      </div>
+
+      <!-- FINANCIAL INFO -->
+      <div class="acc-panel" id="panel-financial">
+        <div class="panel-title">Financial <em>Information</em></div>
+        <div class="form-grid">
+          <div class="form-field">
+            <label class="field-label">L&I <span class="req">*</span></label>
+            <input class="field-input" id="f-liens" type="text" placeholder="$0.00" oninput="markDirty('financial')"/>
+          </div>
+          <div class="form-field">
+            <label class="field-label">Tax Debt <span class="req">*</span></label>
+            <input class="field-input" id="f-taxdebt" type="text" placeholder="$0.00" oninput="markDirty('financial')"/>
+          </div>
+          <div class="form-field">
+            <label class="field-label">Total Debt</label>
+            <input class="field-input" type="text" placeholder="$0.00" oninput="markDirty('financial')"/>
+          </div>
+          <div class="form-field">
+            <label class="field-label">Deed</label>
+            <select class="field-select" onchange="markDirty('financial')">
+              <option>-- Select --</option>
+              <option>Fee Simple</option>
+              <option>Joint Tenancy</option>
+              <option>Tenancy in Common</option>
+              <option>Life Estate</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- CONTACT INFO -->
+      <div class="acc-panel" id="panel-contact">
+        <div class="panel-title">Contact <em>Information</em></div>
+        <div class="form-grid">
+          <div class="form-field">
+            <label class="field-label">Seller Contact Email</label>
+            <input class="field-input" type="email" placeholder="email@example.com" oninput="markDirty('contact')"/>
+          </div>
+          <div class="form-field">
+            <label class="field-label">Person to Talk To</label>
+            <input class="field-input" type="text" oninput="markDirty('contact')"/>
+          </div>
+          <div class="form-field">
+            <label class="field-label">Seller Contact Phone #1</label>
+            <input class="field-input" type="tel" oninput="markDirty('contact')"/>
+          </div>
+          <div class="form-field">
+            <label class="field-label">Seller Contact Phone #2</label>
+            <input class="field-input" type="tel" oninput="markDirty('contact')"/>
+          </div>
+          <div class="form-field">
+            <label class="field-label">Seller Contact Phone #3</label>
+            <input class="field-input" type="tel" oninput="markDirty('contact')"/>
+          </div>
+          <div class="form-field">
+            <label class="field-label">Seller Contact Phone #4</label>
+            <input class="field-input" type="tel" oninput="markDirty('contact')"/>
+          </div>
+          <div class="form-field full">
+            <label class="field-label">Seller Contact Phone #5</label>
+            <input class="field-input" type="tel" oninput="markDirty('contact')"/>
+          </div>
+        </div>
+      </div>
+
+      <!-- FAMILY OVERVIEW -->
+      <div class="acc-panel" id="panel-family">
+        <div class="panel-title">Shared Family <em>Overview</em></div>
+        <div class="form-field" style="margin-bottom:24px">
+          <label class="field-label" style="margin-bottom:6px">Family Overview (shared)</label>
+          <div class="rich-wrap">
+            <div class="rich-toolbar">
+              <button class="rich-btn" onclick="execCmd('bold')">B</button>
+              <button class="rich-btn" style="font-style:italic" onclick="execCmd('italic')">I</button>
+              <button class="rich-btn" style="text-decoration:underline" onclick="execCmd('underline')">U</button>
+            </div>
+            <div class="rich-content" contenteditable="true" oninput="markDirty('family')"></div>
+          </div>
+        </div>
+        <div class="form-field">
+          <label class="field-label" style="margin-bottom:6px">Case Notes (shared)</label>
+          <div class="notes-feed">No case notes yet.</div>
+          <label class="field-label" style="margin-bottom:6px">Add Note</label>
+          <textarea class="field-textarea" placeholder="Type a new note..." style="min-height:72px" oninput="markDirty('family')"></textarea>
+        </div>
+      </div>
+
+      <!-- STATUS & TRACKING -->
+      <div class="acc-panel" id="panel-tracking">
+        <div class="panel-title">Status <em>& Tracking</em></div>
+        <div class="form-grid">
+          <div class="form-field">
+            <label class="field-label">Status</label>
+            <input class="field-input" id="f-status" type="text" oninput="markDirty('tracking')"/>
+          </div>
+          <div class="form-field">
+            <label class="field-label">PS ID</label>
+            <input class="field-input" type="text" placeholder="71" oninput="markDirty('tracking')"/>
+          </div>
+          <div class="form-field">
+            <label class="field-label">Buyer Comm ID</label>
+            <input class="field-input" type="text" oninput="markDirty('tracking')"/>
+          </div>
+          <div class="form-field">
+            <label class="field-label">Assigned To</label>
+            <input class="field-input" type="text" oninput="markDirty('tracking')"/>
+          </div>
+        </div>
+      </div>
+
+      <!-- FILE ATTACHMENTS -->
+      <div class="acc-panel" id="panel-files">
+        <div class="panel-title">File <em>Attachments</em></div>
+        <label class="field-label" style="margin-bottom:10px;display:block">Attach Files</label>
+        <div class="dropzone" onclick="document.getElementById('file-input').click()">
+          <div class="dropzone-icon">
+            <svg viewBox="0 0 24 24"><polyline points="16 16 12 12 8 16"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.39 18.39A5 5 0 0018 9h-1.26A8 8 0 103 16.3"/></svg>
+          </div>
+          <div class="dropzone-text">Click to select files or drag and drop</div>
+          <div class="dropzone-sub">PDF, DOC, DOCX, XLS, XLSX, TXT, PNG, JPG, GIF, WEBP</div>
+          <input type="file" id="file-input" style="display:none" multiple onchange="markDirty('files')"/>
+        </div>
+        <div class="attachment-empty">No files attached yet.</div>
+      </div>
+
+    </div><!-- /accordion-panels -->
+  </div><!-- /detail-layout -->
+</div><!-- /view-detail -->
+
+<script>
+// ── NAVIGATION ──
+function openDetail(data) {
+  document.getElementById('view-list').style.display  = 'none';
+  document.getElementById('view-detail').style.display = 'flex';
+  document.getElementById('detail-heading').textContent = data.title;
+  // populate
+  set('f-decedent', data.decedent);
+  set('f-marital',  data.marital);
+  set('f-address',  data.address);
+  set('f-zip',      data.zip);
+  set('f-zoning',   data.zoning);
+  set('f-sqft',     data.sqft);
+  set('f-owner',    data.owner);
+  set('f-saledate', data.saledate);
+  set('f-liens',    data.liens);
+  set('f-taxdebt',  data.taxdebt);
+  set('f-status',   data.status);
+  // reset dirty state
+  clearAllDirty();
+  // open property panel by default
+  showPanel('property', document.querySelector('.acc-nav-item'));
+  window.scrollTo(0,0);
+}
+
+function closeDetail() {
+  document.getElementById('view-detail').style.display = 'none';
+  document.getElementById('view-list').style.display   = 'flex';
+}
+
+function set(id, val) {
+  const el = document.getElementById(id);
+  if (el) el.value = val || '';
+}
+
+// ── PANEL SWITCHING ──
+function showPanel(id, navEl) {
+  document.querySelectorAll('.acc-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.acc-nav-item').forEach(n => n.classList.remove('active'));
+  document.getElementById('panel-' + id).classList.add('active');
+  navEl.classList.add('active');
+}
+
+// ── DIRTY TRACKING ──
+const dirtyPanels = new Set();
+
+function markDirty(panel) {
+  dirtyPanels.add(panel);
+  document.getElementById('dirty-' + panel).classList.add('visible');
+  document.getElementById('unsaved-indicator').classList.add('visible');
+  document.getElementById('btn-discard').classList.add('visible');
+  document.getElementById('btn-save').classList.add('active');
+}
+
+function clearAllDirty() {
+  dirtyPanels.clear();
+  document.querySelectorAll('.dirty-badge').forEach(b => b.classList.remove('visible'));
+  document.getElementById('unsaved-indicator').classList.remove('visible');
+  document.getElementById('btn-discard').classList.remove('visible');
+  document.getElementById('btn-save').classList.remove('active');
+}
+
+function saveChanges() {
+  clearAllDirty();
+  // flash save confirmation
+  const btn = document.getElementById('btn-save');
+  btn.textContent = 'Saved ✓';
+  setTimeout(() => { btn.textContent = 'Save'; }, 1800);
+}
+
+function discardChanges() {
+  clearAllDirty();
+}
+
+// ── RICH TEXT ──
+function execCmd(cmd) {
+  document.execCommand(cmd, false, null);
+}
+
+// ── LIST FILTERS ──
+function filterForms(q) {
+  q = q.toLowerCase();
+  document.querySelectorAll('#forms-tbody tr').forEach(r => {
+    r.style.display = !q || r.textContent.toLowerCase().includes(q) ? '' : 'none';
+  });
+}
+
+function filterFormsStatus(status) {
+  document.querySelectorAll('#forms-tbody tr').forEach(r => {
+    r.style.display = !status || r.textContent.toLowerCase().includes(status.toLowerCase()) ? '' : 'none';
+  });
+}
+</script>
+
+<script id="sidebar-shared-js">
+(function() {
+  const sidebar = document.getElementById('sidebar');
+  const mains   = document.querySelectorAll('.main-wrapper, .main');
+  window.toggleSidebar = function() {
+    sidebar.classList.toggle('collapsed');
+    mains.forEach(m => m.classList.toggle('sidebar-collapsed'));
+  };
+  window.toggleSection = function(id) {
+    document.getElementById(id).classList.toggle('open');
+  };
+})();
+</script>
+</body>
+</html>

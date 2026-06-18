@@ -1,0 +1,985 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Seek Research — Executive Portal</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --ink:           #18160F;
+  --parchment:     #F2ECE0;
+  --parchment-mid: #EDE5D3;
+  --parchment-dark:#D9CEB8;
+  --rust:          #B55A35;
+  --rust-light:    rgba(181,90,53,0.08);
+  --gold:          #C4A05A;
+  --gold-light:    rgba(196,160,90,0.12);
+  --sage:          #6B7C6E;
+  --sage-light:    rgba(107,124,110,0.1);
+  --text-main:     #2C2A22;
+  --text-muted:    #8A8070;
+  --white:         #FFFFFF;
+}
+
+body { font-family:'Outfit',sans-serif; background:var(--parchment-mid); color:var(--text-main); height:100vh; display:flex; overflow:hidden; }
+
+/* SIDEBAR */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* MAIN */
+.content { flex:1; overflow-y:auto; padding:32px 28px; display:flex; flex-direction:column; gap:20px; min-width:0; }
+
+/* TOPBAR */
+.topbar { display:flex; align-items:flex-start; justify-content:space-between; gap:16px; }
+.topbar-eyebrow { font-size:11px; letter-spacing:2.5px; text-transform:uppercase; color:var(--text-muted); margin-bottom:4px; }
+.topbar-title { font-family:'Cormorant Garamond',serif; font-size:28px; font-weight:300; color:var(--ink); line-height:1.1; }
+.topbar-title em { font-style:italic; color:var(--gold); }
+.view-badge { display:inline-flex; align-items:center; gap:6px; font-size:11px; letter-spacing:1.5px; text-transform:uppercase; font-weight:500; color:var(--gold); background:var(--gold-light); border:1px solid rgba(196,160,90,0.25); border-radius:20px; padding:5px 14px; margin-top:6px; }
+.view-badge-dot { width:6px; height:6px; border-radius:50%; background:var(--gold); }
+.nav-links { display:flex; gap:4px; flex-shrink:0; }
+.nav-link { font-size:12px; letter-spacing:1px; text-transform:uppercase; color:var(--text-muted); text-decoration:none; padding:8px 14px; border-radius:6px; transition:background 0.15s,color 0.15s; }
+.nav-link:hover { background:var(--parchment); color:var(--ink); }
+
+/* IMPERSONATION */
+.impersonation-bar { background:var(--gold-light); border:1px solid rgba(196,160,90,0.3); border-radius:10px; padding:12px 18px; display:flex; align-items:center; gap:12px; flex-wrap:wrap; }
+.impersonation-label { display:flex; align-items:center; gap:7px; font-size:12px; font-weight:500; color:#7a5c1a; white-space:nowrap; }
+.impersonation-select { font-family:'Outfit',sans-serif; font-size:13px; color:var(--ink); background:var(--white); border:1px solid var(--parchment-dark); border-radius:7px; padding:7px 12px; outline:none; cursor:pointer; flex:1; min-width:180px; max-width:280px; }
+.impersonation-select:focus { border-color:var(--gold); }
+.impersonate-btn { font-family:'Outfit',sans-serif; font-size:11px; font-weight:500; letter-spacing:1.5px; text-transform:uppercase; background:var(--gold); color:var(--ink); border:none; border-radius:7px; padding:9px 18px; cursor:pointer; transition:background 0.2s; white-space:nowrap; }
+.impersonate-btn:hover { background:#b08d48; }
+
+/* TABS CARD */
+.tabs-card { background:var(--white); border:1px solid var(--parchment-dark); border-radius:12px; overflow:hidden; flex:1; display:flex; flex-direction:column; min-height:0; }
+.tabs-header { display:flex; border-bottom:1px solid var(--parchment-mid); background:var(--parchment); overflow-x:auto; }
+.tab { display:flex; flex-direction:column; align-items:center; padding:12px 16px 0; cursor:pointer; white-space:nowrap; position:relative; transition:background 0.15s; flex:1; }
+.tab:hover { background:var(--parchment-mid); }
+.tab-inner { display:flex; align-items:center; gap:7px; padding-bottom:12px; }
+.tab-label { font-size:11px; font-weight:500; letter-spacing:0.8px; text-transform:uppercase; color:var(--text-muted); transition:color 0.2s; }
+.tab.active .tab-label { color:var(--ink); }
+.tab-count-badge { font-size:10px; font-weight:600; background:var(--parchment-dark); color:var(--text-muted); border-radius:10px; padding:1px 7px; transition:background 0.2s,color 0.2s; }
+.tab.active .tab-count-badge { background:var(--rust); color:var(--white); }
+.tab-indicator { height:2px; width:100%; border-radius:2px 2px 0 0; background:transparent; transition:background 0.2s; }
+.tab.active .tab-indicator { background:var(--rust); }
+
+/* TAB BODY */
+.tabs-body { flex:1; display:flex; overflow:hidden; min-height:0; }
+.tab-panel { display:none; flex:1; overflow:hidden; flex-direction:column; }
+.tab-panel.active { display:flex; }
+
+/* FILTER BAR */
+.filter-bar { display:flex; align-items:center; gap:10px; padding:12px 16px; border-bottom:1px solid var(--parchment-mid); background:var(--parchment); flex-shrink:0; flex-wrap:wrap; }
+.filter-search { font-family:'Outfit',sans-serif; font-size:12px; color:var(--ink); background:var(--white); border:1px solid var(--parchment-dark); border-radius:7px; padding:7px 12px 7px 32px; outline:none; width:200px; transition:border-color 0.2s; }
+.filter-search:focus { border-color:var(--rust); }
+.filter-search-wrap { position:relative; }
+.filter-search-icon { position:absolute; left:9px; top:50%; transform:translateY(-50%); pointer-events:none; }
+.filter-search-icon svg { width:13px; height:13px; stroke:var(--text-muted); fill:none; stroke-width:1.5; stroke-linecap:round; }
+.filter-select { font-family:'Outfit',sans-serif; font-size:12px; color:var(--ink); background:var(--white); border:1px solid var(--parchment-dark); border-radius:7px; padding:7px 12px; outline:none; cursor:pointer; }
+.filter-select:focus { border-color:var(--rust); }
+.filter-count { font-size:11px; color:var(--text-muted); margin-left:auto; font-weight:300; }
+.create-btn { font-family:'Outfit',sans-serif; font-size:11px; font-weight:500; letter-spacing:1px; text-transform:uppercase; background:var(--ink); color:var(--parchment); border:none; border-radius:7px; padding:7px 14px; cursor:pointer; display:inline-flex; align-items:center; gap:6px; transition:background 0.2s; white-space:nowrap; }
+.create-btn:hover { background:#2e2b1f; }
+.create-btn svg { width:12px; height:12px; stroke:currentColor; fill:none; stroke-width:2; stroke-linecap:round; }
+
+/* SPLIT */
+.split { display:flex; flex:1; overflow:hidden; }
+.table-side { flex:1; overflow-y:auto; border-right:1px solid var(--parchment-mid); min-width:0; display:flex; flex-direction:column; }
+
+table { width:100%; border-collapse:collapse; font-size:12.5px; }
+thead th { font-size:10px; letter-spacing:2px; text-transform:uppercase; font-weight:500; color:var(--text-muted); padding:10px 14px; text-align:left; border-bottom:1px solid var(--parchment-mid); background:var(--parchment); white-space:nowrap; position:sticky; top:0; z-index:1; }
+tbody tr { border-bottom:1px solid var(--parchment-mid); cursor:pointer; transition:background 0.12s; }
+tbody tr:last-child { border-bottom:none; }
+tbody tr:hover { background:rgba(242,236,224,0.5); }
+tbody tr.selected { background:var(--rust-light); border-left:3px solid var(--rust); }
+tbody td { padding:10px 14px; vertical-align:middle; }
+tbody tr.selected td:first-child { padding-left:11px; }
+.td-main { font-weight:400; color:var(--ink); }
+.td-muted { color:var(--text-muted); font-weight:300; font-size:12px; }
+.row-id { font-size:10px; letter-spacing:1px; color:var(--text-muted); }
+
+/* STATUS PILLS */
+.status-pill { display:inline-flex; align-items:center; gap:4px; font-size:10px; font-weight:500; border-radius:20px; padding:2px 9px; white-space:nowrap; }
+.status-pill.submitted   { background:rgba(107,124,110,0.1); color:var(--sage); }
+.status-pill.accepted    { background:var(--gold-light); color:#8a6020; }
+.status-pill.greenlit    { background:rgba(107,124,110,0.15); color:#3d5c41; }
+.status-pill.inreview    { background:rgba(196,160,90,0.1); color:#8a7030; }
+.status-pill.rejected    { background:var(--rust-light); color:var(--rust); }
+.status-dot { width:5px; height:5px; border-radius:50%; background:currentColor; }
+
+/* PAGINATION */
+.pagination { display:flex; align-items:center; justify-content:space-between; padding:10px 14px; border-top:1px solid var(--parchment-mid); background:var(--parchment); flex-shrink:0; }
+.pagination-info { font-size:11px; color:var(--text-muted); font-weight:300; }
+.pagination-btns { display:flex; gap:4px; align-items:center; }
+.page-btn { font-family:'Outfit',sans-serif; font-size:11px; font-weight:500; color:var(--text-muted); background:var(--white); border:1px solid var(--parchment-dark); border-radius:6px; padding:5px 12px; cursor:pointer; transition:all 0.15s; }
+.page-btn:hover:not(:disabled) { border-color:var(--rust); color:var(--rust); }
+.page-btn:disabled { opacity:0.4; cursor:default; }
+.page-btn.current { background:var(--rust); color:var(--white); border-color:var(--rust); }
+
+/* DETAIL SIDE */
+.detail-side { width:300px; flex-shrink:0; overflow-y:auto; background:var(--white); display:flex; flex-direction:column; }
+.detail-empty { flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:32px 20px; text-align:center; gap:10px; }
+.detail-empty-icon { width:44px; height:44px; border-radius:50%; background:var(--parchment-mid); display:flex; align-items:center; justify-content:center; margin-bottom:6px; }
+.detail-empty-icon svg { width:18px; height:18px; stroke:var(--text-muted); fill:none; stroke-width:1.3; stroke-linecap:round; }
+.detail-empty-text { font-family:'Cormorant Garamond',serif; font-size:16px; font-style:italic; font-weight:300; color:var(--text-muted); }
+.detail-empty-sub { font-size:12px; font-weight:300; color:var(--text-muted); opacity:0.7; }
+
+.detail-content { display:none; flex-direction:column; }
+.detail-content.visible { display:flex; }
+.detail-header { padding:16px 18px 12px; border-bottom:1px solid var(--parchment-mid); background:var(--parchment); position:relative; }
+.detail-id { font-size:10px; letter-spacing:2px; text-transform:uppercase; color:var(--rust); font-weight:500; margin-bottom:3px; }
+.detail-title { font-family:'Cormorant Garamond',serif; font-size:16px; font-weight:400; color:var(--ink); line-height:1.3; padding-right:18px; }
+.unsaved-dot { position:absolute; top:14px; right:16px; width:8px; height:8px; border-radius:50%; background:var(--rust); display:none; }
+.unsaved-dot.visible { display:block; }
+
+.detail-body { padding:12px 18px; display:flex; flex-direction:column; gap:0; flex:1; }
+.detail-field { display:flex; flex-direction:column; gap:3px; padding:8px 0; border-bottom:1px solid var(--parchment-mid); }
+.detail-field:last-of-type { border-bottom:none; }
+.detail-field-key { font-size:10px; letter-spacing:1.5px; text-transform:uppercase; color:var(--text-muted); font-weight:500; }
+.detail-field-val { font-size:13px; font-weight:400; color:var(--ink); }
+.detail-field-val.muted { font-weight:300; color:var(--text-muted); }
+
+.detail-input { font-family:'Outfit',sans-serif; font-size:12px; color:var(--ink); background:var(--parchment-mid); border:1px solid var(--parchment-dark); border-radius:6px; padding:6px 9px; outline:none; width:100%; transition:border-color 0.2s; }
+.detail-input:focus { border-color:var(--rust); }
+.detail-textarea { font-family:'Outfit',sans-serif; font-size:12px; font-weight:300; color:var(--ink); background:var(--parchment-mid); border:1px solid var(--parchment-dark); border-radius:6px; padding:6px 9px; outline:none; width:100%; resize:vertical; min-height:60px; transition:border-color 0.2s; }
+.detail-textarea:focus { border-color:var(--rust); }
+.status-select { font-family:'Outfit',sans-serif; font-size:12px; color:var(--ink); background:var(--parchment-mid); border:1px solid var(--parchment-dark); border-radius:6px; padding:6px 9px; outline:none; cursor:pointer; width:100%; transition:border-color 0.2s; }
+.status-select:focus { border-color:var(--rust); }
+
+.detail-footer { padding:12px 18px; border-top:1px solid var(--parchment-mid); background:var(--parchment); display:flex; flex-direction:column; gap:7px; }
+.save-btn { font-family:'Outfit',sans-serif; font-size:11px; font-weight:500; letter-spacing:1.5px; text-transform:uppercase; background:var(--rust); color:var(--parchment); border:none; border-radius:7px; padding:10px; cursor:pointer; width:100%; transition:background 0.2s; }
+.save-btn:hover { background:#9E4C2B; }
+.save-btn.secondary { background:var(--ink); font-size:9.5px; padding:9px; }
+.save-btn.secondary:hover { background:#2e2b1f; }
+
+/* TOOLTIP */
+[data-tip] { position:relative; }
+[data-tip]:hover::after { content:attr(data-tip); position:absolute; bottom:calc(100% + 6px); left:50%; transform:translateX(-50%); background:var(--ink); color:var(--parchment); font-size:10px; font-weight:400; letter-spacing:0.3px; white-space:nowrap; padding:4px 9px; border-radius:5px; pointer-events:none; z-index:100; font-family:'Outfit',sans-serif; }
+
+/* RIGHT PANEL */
+.panel { width:232px; flex-shrink:0; background:var(--white); border-left:1px solid var(--parchment-dark); overflow-y:auto; display:flex; flex-direction:column; }
+.panel-hero { background:var(--ink); padding:24px 16px 20px; display:flex; flex-direction:column; align-items:center; gap:8px; }
+.avatar { width:50px; height:50px; border-radius:50%; background:linear-gradient(135deg,var(--gold) 0%,#9e6a1a 100%); display:flex; align-items:center; justify-content:center; font-size:18px; font-weight:600; color:var(--ink); border:2px solid rgba(196,160,90,0.3); }
+.panel-role { font-size:9px; letter-spacing:2px; text-transform:uppercase; color:var(--gold); font-weight:600; background:rgba(196,160,90,0.12); border:1px solid rgba(196,160,90,0.22); border-radius:4px; padding:3px 10px; }
+.panel-name { font-family:'Cormorant Garamond',serif; font-size:16px; font-weight:400; color:var(--parchment); text-align:center; line-height:1.2; }
+.panel-email { font-size:10px; color:rgba(242,236,224,0.38); font-weight:300; text-align:center; }
+.panel-section { padding:16px; border-bottom:1px solid var(--parchment-mid); }
+.panel-section:last-child { border-bottom:none; }
+.panel-section-label { font-size:9px; letter-spacing:2.5px; text-transform:uppercase; color:var(--text-muted); font-weight:500; margin-bottom:11px; }
+.stat-row { display:flex; align-items:center; justify-content:space-between; margin-bottom:8px; }
+.stat-row:last-child { margin-bottom:0; }
+.stat-key { font-size:12px; font-weight:300; color:var(--text-muted); }
+.stat-val { font-family:'Cormorant Garamond',serif; font-size:17px; font-weight:400; color:var(--ink); }
+.stat-val.rust { color:var(--rust); }
+.stat-val.gold { color:var(--gold); }
+.panel-footer { padding:14px 16px; margin-top:auto; border-top:1px solid var(--parchment-mid); }
+.panel-footer p { font-family:'Cormorant Garamond',serif; font-size:11px; font-style:italic; font-weight:300; color:var(--text-muted); line-height:1.5; text-align:center; }
+
+/* EMPTY TAB */
+.tab-empty { flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:10px; padding:48px 24px; text-align:center; }
+.tab-empty-ornament { width:52px; height:52px; border-radius:50%; background:var(--parchment-mid); display:flex; align-items:center; justify-content:center; margin-bottom:6px; }
+.tab-empty-ornament svg { width:20px; height:20px; stroke:var(--text-muted); fill:none; stroke-width:1.3; stroke-linecap:round; stroke-linejoin:round; }
+.tab-empty-headline { font-family:'Cormorant Garamond',serif; font-size:20px; font-style:italic; font-weight:300; color:var(--ink); }
+.tab-empty-body { font-size:13px; font-weight:300; color:var(--text-muted); max-width:280px; line-height:1.7; }
+
+/* ── SHARED SIDEBAR ── */
+:root { --sidebar-w: 220px; }
+.sidebar {
+  width: var(--sidebar-w);
+  background: var(--ink);
+  display: flex;
+  flex-direction: column;
+  padding: 28px 0 24px;
+  flex-shrink: 0;
+  position: fixed;
+  top: 0; left: 0;
+  height: 100vh;
+  z-index: 20;
+  transition: width 0.25s ease;
+  overflow: hidden;
+}
+.sidebar.collapsed { width: 72px; }
+.sidebar-logo { display:flex; align-items:center; gap:12px; padding:0 18px; margin-bottom:32px; cursor:pointer; text-decoration:none; }
+.logo-mark { display:flex; flex-direction:column; align-items:center; gap:3px; flex-shrink:0; }
+.logo-s { font-size:22px; font-weight:600; color:var(--parchment); line-height:1; }
+.logo-text { display:flex; flex-direction:column; overflow:hidden; white-space:nowrap; opacity:1; transition:opacity 0.2s; }
+.sidebar.collapsed .logo-text { opacity:0; width:0; }
+.logo-name { font-family:'Outfit',sans-serif; font-size:15px; font-weight:600; color:var(--parchment); letter-spacing:2px; text-transform:uppercase; }
+.logo-sub  { font-size:9px; letter-spacing:2px; text-transform:uppercase; color:rgba(242,236,224,0.4); font-weight:400; }
+.sidebar-toggle { position:absolute; top:28px; right:-12px; width:24px; height:24px; background:var(--rust); border-radius:50%; display:flex; align-items:center; justify-content:center; cursor:pointer; z-index:30; border:2px solid var(--ink); transition:transform 0.25s; }
+.sidebar.collapsed .sidebar-toggle { transform:rotate(180deg); }
+.sidebar-toggle svg { width:10px; height:10px; stroke:#fff; fill:none; stroke-width:2.5; stroke-linecap:round; stroke-linejoin:round; }
+.sidebar-nav { flex:1; overflow-y:auto; overflow-x:hidden; padding-bottom:16px; }
+.nav-section { margin-bottom:4px; }
+.nav-section-header { display:flex; align-items:center; justify-content:space-between; padding:8px 18px; cursor:pointer; user-select:none; transition:background 0.15s; }
+.nav-section-header:hover { background:rgba(242,236,224,0.05); }
+.nav-section-left { display:flex; align-items:center; gap:10px; overflow:hidden; white-space:nowrap; }
+.nav-section-icon { width:16px; height:16px; stroke:rgba(242,236,224,0.4); fill:none; stroke-width:1.5; stroke-linecap:round; stroke-linejoin:round; flex-shrink:0; }
+.nav-section-label { font-size:10px; letter-spacing:2px; text-transform:uppercase; color:rgba(242,236,224,0.4); font-weight:500; transition:opacity 0.2s; }
+.sidebar.collapsed .nav-section-label { opacity:0; }
+.nav-chevron { width:12px; height:12px; stroke:rgba(242,236,224,0.3); fill:none; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; transition:transform 0.2s, opacity 0.2s; flex-shrink:0; }
+.sidebar.collapsed .nav-chevron { opacity:0; }
+.nav-section.open .nav-chevron { transform:rotate(180deg); }
+.nav-items { overflow:hidden; max-height:0; transition:max-height 0.25s ease; }
+.nav-section.open .nav-items { max-height:300px; }
+.nav-link { display:flex; align-items:center; gap:10px; padding:9px 18px 9px 42px; text-decoration:none; transition:background 0.15s; white-space:nowrap; overflow:hidden; border-left:3px solid transparent; }
+.nav-link:hover { background:rgba(242,236,224,0.07); }
+.nav-link.active { background:rgba(181,90,53,0.15); border-left-color:var(--rust); }
+.sidebar.collapsed .nav-link { padding-left:18px; justify-content:center; }
+.nav-link-icon { width:15px; height:15px; stroke:rgba(242,236,224,0.45); fill:none; stroke-width:1.5; stroke-linecap:round; stroke-linejoin:round; flex-shrink:0; }
+.nav-link.active .nav-link-icon { stroke:var(--rust); }
+.nav-link-label { font-size:13px; color:rgba(242,236,224,0.6); font-weight:300; transition:opacity 0.2s; }
+.nav-link.active .nav-link-label { color:var(--parchment); font-weight:400; }
+.sidebar.collapsed .nav-link-label { opacity:0; width:0; }
+.nav-divider { height:1px; background:rgba(242,236,224,0.07); margin:8px 18px; }
+.sidebar-bottom { padding:0 18px; display:flex; flex-direction:column; gap:8px; overflow:hidden; }
+.sidebar-user { display:flex; align-items:center; gap:10px; white-space:nowrap; }
+.sb-avatar { width:32px; height:32px; border-radius:50%; background:linear-gradient(135deg,var(--gold),var(--rust)); display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:600; color:var(--parchment); flex-shrink:0; }
+.user-info { overflow:hidden; transition:opacity 0.2s; }
+.sidebar.collapsed .user-info { opacity:0; width:0; }
+.user-name { font-size:12px; font-weight:500; color:var(--parchment); }
+.user-email { font-size:10px; color:rgba(242,236,224,0.35); }
+.sb-signout { display:flex; align-items:center; gap:8px; font-size:11px; color:rgba(242,236,224,0.35); cursor:pointer; padding:4px 0; transition:color 0.15s; white-space:nowrap; }
+.sb-signout:hover { color:rgba(242,236,224,0.7); }
+.sb-signout svg { width:14px; height:14px; stroke:currentColor; fill:none; stroke-width:1.5; stroke-linecap:round; flex-shrink:0; }
+.sb-signout-label { transition:opacity 0.2s; }
+.sidebar.collapsed .sb-signout-label { opacity:0; width:0; }
+
+/* sidebar-aware margin */
+.main-wrapper, .main { margin-left: var(--sidebar-w); transition: margin-left 0.25s ease; }
+.main-wrapper.sidebar-collapsed, .main.sidebar-collapsed { margin-left: 72px; }
+
+</style>
+</head>
+<body>
+
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-toggle" onclick="toggleSidebar()">
+    <svg viewBox="0 0 10 10"><polyline points="6 2 2 5 6 8"/></svg>
+  </div>
+  <a class="sidebar-logo" href="index.html">
+    <div class="logo-mark">
+      <span class="logo-s">S</span>
+      <svg width="16" height="9" viewBox="0 0 18 10" fill="none"><polygon points="0,0 10,0 6,5 10,10 0,10 4,5" fill="#B55A35"/></svg>
+    </div>
+    <div class="logo-text">
+      <span class="logo-name">Seek</span>
+      <span class="logo-sub">Research Platform</span>
+    </div>
+  </a>
+  <nav class="sidebar-nav">
+    <div class="nav-section open" id="sec-portals">
+      <div class="nav-section-header" onclick="toggleSection('sec-portals')">
+        <div class="nav-section-left">
+          <svg class="nav-section-icon" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+          <span class="nav-section-label">Portals</span>
+        </div>
+        <svg class="nav-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="nav-items">
+        <a class="nav-link " href="index.html">
+          <svg class="nav-link-icon" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>
+          <span class="nav-link-label">Home</span>
+        </a>
+        <a class="nav-link " href="seek-dashboard-mockup.html">
+          <svg class="nav-link-icon" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          <span class="nav-link-label">Client Portal</span>
+        </a>
+        <a class="nav-link " href="seek-affiliate-portal.html">
+          <svg class="nav-link-icon" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+          <span class="nav-link-label">Affiliate Portal</span>
+        </a>
+        <a class="nav-link " href="seek-buyer-portal.html">
+          <svg class="nav-link-icon" viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+          <span class="nav-link-label">Buyer Portal</span>
+        </a>
+        <a class="nav-link active" href="seek-executive-portal.html">
+          <svg class="nav-link-icon" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <span class="nav-link-label">Executive Portal</span>
+        </a>
+      </div>
+    </div>
+    <div class="nav-divider"></div>
+    <div class="nav-section open" id="sec-ops">
+      <div class="nav-section-header" onclick="toggleSection('sec-ops')">
+        <div class="nav-section-left">
+          <svg class="nav-section-icon" viewBox="0 0 24 24"><path d="M9 12h6M9 8h6M5 4h14a1 1 0 011 1v14a1 1 0 01-1 1H5a1 1 0 01-1-1V5a1 1 0 011-1z"/></svg>
+          <span class="nav-section-label">Operations</span>
+        </div>
+        <svg class="nav-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="nav-items">
+        <a class="nav-link " href="seek-research-forms.html">
+          <svg class="nav-link-icon" viewBox="0 0 24 24"><path d="M9 12h6M9 8h6M5 4h14a1 1 0 011 1v14a1 1 0 01-1 1H5a1 1 0 01-1-1V5a1 1 0 011-1z"/></svg>
+          <span class="nav-link-label">Research Forms</span>
+        </a>
+        <a class="nav-link " href="seek-outreach-specialist.html">
+          <svg class="nav-link-icon" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+          <span class="nav-link-label">Outreach Specialist</span>
+        </a>
+      </div>
+    </div>
+  </nav>
+  <div class="sidebar-bottom">
+    <div class="sidebar-user">
+      <div class="sb-avatar">A</div>
+      <div class="user-info">
+        <div class="user-name">Alessandra S.</div>
+        <div class="user-email">als.s.sanches@gmail.com</div>
+      </div>
+    </div>
+    <div class="sb-signout">
+      <svg viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+      <span class="sb-signout-label">Sign Out</span>
+    </div>
+  </div>
+</aside>
+
+<main class="content">
+  <div class="topbar">
+    <div>
+      <div class="topbar-eyebrow">Executive Portal</div>
+      <div class="topbar-title">Full <em>command view.</em></div>
+      <div class="view-badge"><span class="view-badge-dot"></span>Executive · als.s.sanches@gmail.com</div>
+    </div>
+    <div class="nav-links">
+      <a class="nav-link" href="#">About Us</a>
+      <a class="nav-link" href="#">Contact Us</a>
+    </div>
+  </div>
+
+  <div class="impersonation-bar">
+    <div class="impersonation-label"><span>👑</span> Executive Impersonation</div>
+    <select class="impersonation-select">
+      <option value="">Select user to impersonate...</option>
+      <option>byron@scrivnr.com</option>
+      <option>andreas@scrivnr.com</option>
+      <option>lucasvfr@outlook.com</option>
+      <option>alfabot@gmail.com</option>
+    </select>
+    <button class="impersonate-btn">Impersonate</button>
+  </div>
+
+  <div class="tabs-card">
+    <div class="tabs-header">
+      <div class="tab active" onclick="switchTab('buyer')">
+        <div class="tab-inner"><span class="tab-label">Buyer Submission</span><span class="tab-count-badge" id="badge-buyer">14</span></div>
+        <div class="tab-indicator"></div>
+      </div>
+      <div class="tab" onclick="switchTab('contact')">
+        <div class="tab-inner"><span class="tab-label">Contact Log</span><span class="tab-count-badge" id="badge-contact">48</span></div>
+        <div class="tab-indicator"></div>
+      </div>
+      <div class="tab" onclick="switchTab('criteria')">
+        <div class="tab-inner"><span class="tab-label">Buyer Criteria</span><span class="tab-count-badge" id="badge-criteria">59</span></div>
+        <div class="tab-indicator"></div>
+      </div>
+      <div class="tab" onclick="switchTab('internal')">
+        <div class="tab-inner"><span class="tab-label">Internal Property</span><span class="tab-count-badge" id="badge-internal">54</span></div>
+        <div class="tab-indicator"></div>
+      </div>
+    </div>
+
+    <div class="tabs-body">
+
+      <!-- ── BUYER SUBMISSION ── -->
+      <div class="tab-panel active" id="panel-buyer">
+        <div class="filter-bar">
+          <div class="filter-search-wrap">
+            <div class="filter-search-icon"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
+            <input class="filter-search" placeholder="Search address..." oninput="filterTable('buyer-tbody', this.value, 'buyer-status-filter')" id="buyer-search"/>
+          </div>
+          <select class="filter-select" id="buyer-status-filter" onchange="filterTable('buyer-tbody', document.getElementById('buyer-search').value, 'buyer-status-filter')">
+            <option value="">All statuses</option>
+            <option>Submitted</option><option>In Review</option><option>Approved</option><option>Rejected</option>
+          </select>
+          <span class="filter-count" id="buyer-count">Showing 10 of 14</span>
+        </div>
+        <div class="split">
+          <div class="table-side">
+            <table>
+              <thead><tr><th>Address</th><th>Neighborhood</th><th>Max Pay</th><th>Status</th><th>ID</th></tr></thead>
+              <tbody id="buyer-tbody">
+                <tr onclick="selectBuyer(this)" data-id="1" data-address="some street 42" data-neighborhood="northside" data-maxpay="$70,000" data-sentby="alfabot@gmail.com" data-attachments="false" data-author="6" data-editor="6" data-status="Submitted">
+                  <td class="td-main">some street 42</td><td class="td-muted">northside</td><td class="td-muted">$70,000</td>
+                  <td><span class="status-pill submitted" data-tip="Submitted"><span class="status-dot"></span>Submitted</span></td><td class="row-id">#1</td>
+                </tr>
+                <tr onclick="selectBuyer(this)" data-id="2" data-address="rua monte prano 111" data-neighborhood="—" data-maxpay="—" data-sentby="byron@scrivnr.com" data-attachments="false" data-author="6" data-editor="6" data-status="Submitted">
+                  <td class="td-main">rua monte prano 111</td><td class="td-muted">—</td><td class="td-muted">—</td>
+                  <td><span class="status-pill submitted" data-tip="Submitted"><span class="status-dot"></span>Submitted</span></td><td class="row-id">#2</td>
+                </tr>
+                <tr onclick="selectBuyer(this)" data-id="3" data-address="rua joao batista signori 34 apto 72" data-neighborhood="CEP 13073-065" data-maxpay="—" data-sentby="byron@scrivnr.com" data-attachments="false" data-author="6" data-editor="6" data-status="In Review">
+                  <td class="td-main">rua joao batista signori 34</td><td class="td-muted">CEP 13073-065</td><td class="td-muted">—</td>
+                  <td><span class="status-pill inreview" data-tip="In Review"><span class="status-dot"></span>In Review</span></td><td class="row-id">#3</td>
+                </tr>
+                <tr onclick="selectBuyer(this)" data-id="4" data-address="Campinas, Brazil, 13061-252" data-neighborhood="Campinas" data-maxpay="—" data-sentby="andreas@scrivnr.com" data-attachments="false" data-author="6" data-editor="6" data-status="Submitted">
+                  <td class="td-main">Campinas, Brazil, 13061-252</td><td class="td-muted">Campinas</td><td class="td-muted">—</td>
+                  <td><span class="status-pill submitted" data-tip="Submitted"><span class="status-dot"></span>Submitted</span></td><td class="row-id">#4</td>
+                </tr>
+                <tr onclick="selectBuyer(this)" data-id="5" data-address="Rua Monte Prano 111" data-neighborhood="—" data-maxpay="—" data-sentby="byron@scrivnr.com" data-attachments="false" data-author="6" data-editor="6" data-status="Submitted">
+                  <td class="td-main">Rua Monte Prano 111</td><td class="td-muted">—</td><td class="td-muted">—</td>
+                  <td><span class="status-pill submitted"><span class="status-dot"></span>Submitted</span></td><td class="row-id">#5</td>
+                </tr>
+                <tr onclick="selectBuyer(this)" data-id="6" data-address="924 N 2nd st" data-neighborhood="—" data-maxpay="—" data-sentby="alfabot@gmail.com" data-attachments="false" data-author="6" data-editor="6" data-status="Submitted">
+                  <td class="td-main">924 N 2nd st</td><td class="td-muted">—</td><td class="td-muted">—</td>
+                  <td><span class="status-pill submitted"><span class="status-dot"></span>Submitted</span></td><td class="row-id">#6</td>
+                </tr>
+                <tr onclick="selectBuyer(this)" data-id="7" data-address="rua monte prano 111 (b)" data-neighborhood="—" data-maxpay="—" data-sentby="byron@scrivnr.com" data-attachments="false" data-author="6" data-editor="6" data-status="Submitted">
+                  <td class="td-main">rua monte prano 111 (b)</td><td class="td-muted">—</td><td class="td-muted">—</td>
+                  <td><span class="status-pill submitted"><span class="status-dot"></span>Submitted</span></td><td class="row-id">#7</td>
+                </tr>
+                <tr onclick="selectBuyer(this)" data-id="8" data-address="rock" data-neighborhood="—" data-maxpay="—" data-sentby="alfabot@gmail.com" data-attachments="false" data-author="6" data-editor="6" data-status="Submitted">
+                  <td class="td-main">rock</td><td class="td-muted">—</td><td class="td-muted">—</td>
+                  <td><span class="status-pill submitted"><span class="status-dot"></span>Submitted</span></td><td class="row-id">#8</td>
+                </tr>
+                <tr onclick="selectBuyer(this)" data-id="9" data-address="rack" data-neighborhood="—" data-maxpay="—" data-sentby="andreas@scrivnr.com" data-attachments="false" data-author="6" data-editor="6" data-status="Rejected">
+                  <td class="td-main">rack</td><td class="td-muted">—</td><td class="td-muted">—</td>
+                  <td><span class="status-pill rejected" data-tip="Rejected"><span class="status-dot"></span>Rejected</span></td><td class="row-id">#9</td>
+                </tr>
+                <tr onclick="selectBuyer(this)" data-id="10" data-address="nth street road" data-neighborhood="—" data-maxpay="—" data-sentby="alfabot@gmail.com" data-attachments="false" data-author="6" data-editor="6" data-status="Submitted">
+                  <td class="td-main">nth street road</td><td class="td-muted">—</td><td class="td-muted">—</td>
+                  <td><span class="status-pill submitted"><span class="status-dot"></span>Submitted</span></td><td class="row-id">#10</td>
+                </tr>
+                <tr onclick="selectBuyer(this)" data-id="11" data-address="mystyreet" data-neighborhood="—" data-maxpay="—" data-sentby="lucasvfr@outlook.com" data-attachments="false" data-author="6" data-editor="6" data-status="Submitted" style="display:none">
+                  <td class="td-main">mystyreet</td><td class="td-muted">—</td><td class="td-muted">—</td>
+                  <td><span class="status-pill submitted"><span class="status-dot"></span>Submitted</span></td><td class="row-id">#11</td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="pagination">
+              <span class="pagination-info" id="buyer-page-info">Page 1 of 2</span>
+              <div class="pagination-btns">
+                <button class="page-btn" disabled id="buyer-prev" onclick="changePage('buyer',-1)">← Prev</button>
+                <button class="page-btn current" id="buyer-p1" onclick="goPage('buyer',1)">1</button>
+                <button class="page-btn" id="buyer-p2" onclick="goPage('buyer',2)">2</button>
+                <button class="page-btn" id="buyer-next" onclick="changePage('buyer',1)">Next →</button>
+              </div>
+            </div>
+          </div>
+          <div class="detail-side">
+            <div class="detail-empty" id="buyer-detail-empty">
+              <div class="detail-empty-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6z"/><path d="M14 2v6h6"/></svg></div>
+              <div class="detail-empty-text">Select a record</div>
+              <div class="detail-empty-sub">Click any row to view details</div>
+            </div>
+            <div class="detail-content" id="buyer-detail-content">
+              <div class="detail-header">
+                <div class="detail-id" id="b-id-label">ID #1</div>
+                <div class="detail-title" id="b-title-label">some street 42</div>
+                <div class="unsaved-dot" id="b-unsaved"></div>
+              </div>
+              <div class="detail-body">
+                <div class="detail-field"><span class="detail-field-key">Address</span><span class="detail-field-val" id="b-address">—</span></div>
+                <div class="detail-field"><span class="detail-field-key">Neighborhood</span><span class="detail-field-val" id="b-neighborhood">—</span></div>
+                <div class="detail-field"><span class="detail-field-key">Max Pay</span><span class="detail-field-val" id="b-maxpay">—</span></div>
+                <div class="detail-field"><span class="detail-field-key">Sent By</span><span class="detail-field-val muted" id="b-sentby">—</span></div>
+                <div class="detail-field"><span class="detail-field-key">Attachments</span><span class="detail-field-val muted" id="b-attachments">—</span></div>
+                <div class="detail-field"><span class="detail-field-key">Author Lookup ID</span><span class="detail-field-val muted" id="b-author">—</span></div>
+                <div class="detail-field"><span class="detail-field-key">Editor Lookup ID</span><span class="detail-field-val muted" id="b-editor">—</span></div>
+                <div class="detail-field"><span class="detail-field-key">Status</span>
+                  <select class="status-select" id="b-status" onchange="markUnsaved('b-unsaved')">
+                    <option>Submitted</option><option>In Review</option><option>Approved</option><option>Rejected</option>
+                  </select>
+                </div>
+              </div>
+              <div class="detail-footer">
+                <button class="save-btn" onclick="clearUnsaved('b-unsaved')">Save Status</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── CONTACT LOG ── -->
+      <div class="tab-panel" id="panel-contact">
+        <div class="filter-bar">
+          <div class="filter-search-wrap">
+            <div class="filter-search-icon"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
+            <input class="filter-search" placeholder="Search title or LLC..." oninput="filterTable('contact-tbody', this.value, 'contact-status-filter')" id="contact-search"/>
+          </div>
+          <select class="filter-select" id="contact-status-filter" onchange="filterTable('contact-tbody', document.getElementById('contact-search').value, 'contact-status-filter')">
+            <option value="">All statuses</option>
+            <option>Got buyer criteria</option><option>Submitted</option><option>In Review</option><option>Closed</option>
+          </select>
+          <span class="filter-count" id="contact-count">Showing 4 of 48</span>
+          <button class="create-btn" onclick="alert('Create new contact log form coming soon.')">
+            <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            New
+          </button>
+        </div>
+        <div class="split">
+          <div class="table-side">
+            <table>
+              <thead><tr><th>Title</th><th>Buyer / LLC</th><th>Method</th><th>Status</th><th>ID</th></tr></thead>
+              <tbody id="contact-tbody">
+                <tr onclick="selectContact(this)" data-id="32" data-title="Rafi Balk" data-llc="4 Castle LLC" data-method="Phone" data-contactname="Rafi" data-email="test@gmail.com" data-phone="555-555-1212" data-notes="Buying RM1" data-nextsteps="Log Criteria" data-status="Got buyer criteria">
+                  <td class="td-main">Rafi Balk</td><td class="td-muted">4 Castle LLC</td><td class="td-muted">Phone</td>
+                  <td><span class="status-pill accepted" data-tip="Got buyer criteria"><span class="status-dot"></span>Got buyer criteria</span></td><td class="row-id">#32</td>
+                </tr>
+                <tr onclick="selectContact(this)" data-id="33" data-title="Shift/Scrivnr" data-llc="Shift Capital" data-method="Email" data-contactname="—" data-email="—" data-phone="—" data-notes="—" data-nextsteps="Follow Up" data-status="Submitted">
+                  <td class="td-main">Shift/Scrivnr</td><td class="td-muted">Shift Capital</td><td class="td-muted">Email</td>
+                  <td><span class="status-pill submitted"><span class="status-dot"></span>Submitted</span></td><td class="row-id">#33</td>
+                </tr>
+                <tr onclick="selectContact(this)" data-id="34" data-title="Darbaz INC" data-llc="Darbaz INC" data-method="Phone" data-contactname="—" data-email="—" data-phone="—" data-notes="—" data-nextsteps="Follow Up" data-status="Submitted">
+                  <td class="td-main">Darbaz INC</td><td class="td-muted">Darbaz INC</td><td class="td-muted">Phone</td>
+                  <td><span class="status-pill submitted"><span class="status-dot"></span>Submitted</span></td><td class="row-id">#34</td>
+                </tr>
+                <tr onclick="selectContact(this)" data-id="35" data-title="2417 W Montgomery Ave" data-llc="other" data-method="In Person" data-contactname="—" data-email="—" data-phone="—" data-notes="—" data-nextsteps="Log Criteria" data-status="In Review">
+                  <td class="td-main">2417 W Montgomery Ave</td><td class="td-muted">other</td><td class="td-muted">In Person</td>
+                  <td><span class="status-pill inreview" data-tip="In Review"><span class="status-dot"></span>In Review</span></td><td class="row-id">#35</td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="pagination">
+              <span class="pagination-info">Page 1 of 12</span>
+              <div class="pagination-btns">
+                <button class="page-btn" disabled>← Prev</button>
+                <button class="page-btn current">1</button>
+                <button class="page-btn">2</button>
+                <button class="page-btn">3</button>
+                <button class="page-btn">Next →</button>
+              </div>
+            </div>
+          </div>
+          <div class="detail-side">
+            <div class="detail-empty" id="contact-detail-empty">
+              <div class="detail-empty-icon"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></div>
+              <div class="detail-empty-text">Select a record</div>
+              <div class="detail-empty-sub">Click any row to view details</div>
+            </div>
+            <div class="detail-content" id="contact-detail-content">
+              <div class="detail-header">
+                <div class="detail-id" id="c-id-label">ID #32</div>
+                <div class="detail-title" id="c-title-label">Rafi Balk · 4 Castle LLC</div>
+                <div class="unsaved-dot" id="c-unsaved"></div>
+              </div>
+              <div class="detail-body">
+                <div class="detail-field"><span class="detail-field-key">Title</span><input class="detail-input" id="c-title" type="text" oninput="markUnsaved('c-unsaved')"/></div>
+                <div class="detail-field"><span class="detail-field-key">Buyer / LLC Name</span><input class="detail-input" id="c-llc" type="text" oninput="markUnsaved('c-unsaved')"/></div>
+                <div class="detail-field"><span class="detail-field-key">Contact Method</span>
+                  <select class="status-select" id="c-method" onchange="markUnsaved('c-unsaved')">
+                    <option>Phone</option><option>Email</option><option>In Person</option><option>Other</option>
+                  </select>
+                </div>
+                <div class="detail-field"><span class="detail-field-key">Contact Name</span><input class="detail-input" id="c-contactname" type="text" oninput="markUnsaved('c-unsaved')"/></div>
+                <div class="detail-field"><span class="detail-field-key">Contact Email</span><input class="detail-input" id="c-email" type="text" oninput="markUnsaved('c-unsaved')"/></div>
+                <div class="detail-field"><span class="detail-field-key">Phone Number</span><input class="detail-input" id="c-phone" type="text" oninput="markUnsaved('c-unsaved')"/></div>
+                <div class="detail-field"><span class="detail-field-key">Buyer Intent Notes</span><textarea class="detail-textarea" id="c-notes" rows="3" oninput="markUnsaved('c-unsaved')"></textarea></div>
+                <div class="detail-field"><span class="detail-field-key">Suggested Next Steps</span>
+                  <select class="status-select" id="c-nextsteps" onchange="markUnsaved('c-unsaved')">
+                    <option>Log Criteria</option><option>Follow Up</option><option>Send Contract</option><option>Close</option>
+                  </select>
+                </div>
+                <div class="detail-field"><span class="detail-field-key">Status</span>
+                  <select class="status-select" id="c-status" onchange="markUnsaved('c-unsaved')">
+                    <option>Got buyer criteria</option><option>Submitted</option><option>In Review</option><option>Closed</option>
+                  </select>
+                </div>
+              </div>
+              <div class="detail-footer">
+                <button class="save-btn" onclick="clearUnsaved('c-unsaved')">Save Changes</button>
+                <button class="save-btn secondary">Create Buyer Criteria Submission from this Contact Log</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── BUYER CRITERIA ── -->
+      <div class="tab-panel" id="panel-criteria">
+        <div class="filter-bar">
+          <div class="filter-search-wrap">
+            <div class="filter-search-icon"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
+            <input class="filter-search" placeholder="Search title or LLC..." oninput="filterTable('criteria-tbody', this.value, 'criteria-status-filter')" id="criteria-search"/>
+          </div>
+          <select class="filter-select" id="criteria-status-filter" onchange="filterTable('criteria-tbody', document.getElementById('criteria-search').value, 'criteria-status-filter')">
+            <option value="">All statuses</option>
+            <option>Accepted</option><option>Submitted</option><option>In Review</option><option>Rejected</option>
+          </select>
+          <span class="filter-count" id="criteria-count">Showing 2 of 59</span>
+        </div>
+        <div class="split">
+          <div class="table-side">
+            <table>
+              <thead><tr><th>Title</th><th>Buyer / LLC</th><th>Property Type</th><th>Price Range</th><th>Status</th><th>ID</th></tr></thead>
+              <tbody id="criteria-tbody">
+                <tr onclick="selectCriteria(this)" data-id="67" data-title="Rafi Balk" data-llc="4 Castle LLC" data-date="29/09/2025" data-contactname="Rafi" data-phone="555-555-1212" data-email="1218ezst@gmail.com" data-proptype="Vacant Lot" data-neighborhood="Temple Hospital" data-lotsize="1080" data-pricerange="50000-150000" data-exclusions="No RSA5" data-notes="" data-status="Accepted">
+                  <td class="td-main">Rafi Balk</td><td class="td-muted">4 Castle LLC</td><td class="td-muted">Vacant Lot</td><td class="td-muted">$50k–$150k</td>
+                  <td><span class="status-pill accepted" data-tip="Accepted"><span class="status-dot"></span>Accepted</span></td><td class="row-id">#67</td>
+                </tr>
+                <tr onclick="selectCriteria(this)" data-id="68" data-title="Shift/Scrivnr" data-llc="Shift Capital" data-date="—" data-contactname="—" data-phone="—" data-email="—" data-proptype="Residential" data-neighborhood="—" data-lotsize="—" data-pricerange="—" data-exclusions="—" data-notes="—" data-status="Submitted">
+                  <td class="td-main">Shift/Scrivnr</td><td class="td-muted">Shift Capital</td><td class="td-muted">Residential</td><td class="td-muted">—</td>
+                  <td><span class="status-pill submitted"><span class="status-dot"></span>Submitted</span></td><td class="row-id">#68</td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="pagination">
+              <span class="pagination-info">Page 1 of 15</span>
+              <div class="pagination-btns">
+                <button class="page-btn" disabled>← Prev</button>
+                <button class="page-btn current">1</button>
+                <button class="page-btn">2</button>
+                <button class="page-btn">3</button>
+                <button class="page-btn">Next →</button>
+              </div>
+            </div>
+          </div>
+          <div class="detail-side">
+            <div class="detail-empty" id="criteria-detail-empty">
+              <div class="detail-empty-icon"><svg viewBox="0 0 24 24"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg></div>
+              <div class="detail-empty-text">Select a record</div>
+              <div class="detail-empty-sub">Click any row to view details</div>
+            </div>
+            <div class="detail-content" id="criteria-detail-content">
+              <div class="detail-header">
+                <div class="detail-id" id="bc-id-label">ID #67</div>
+                <div class="detail-title" id="bc-title-label">Rafi Balk · Accepted</div>
+                <div class="unsaved-dot" id="bc-unsaved"></div>
+              </div>
+              <div class="detail-body">
+                <div class="detail-field"><span class="detail-field-key">Title</span><input class="detail-input" id="bc-title" type="text" oninput="markUnsaved('bc-unsaved')"/></div>
+                <div class="detail-field"><span class="detail-field-key">Date of Submission</span><input class="detail-input" id="bc-date" type="text" oninput="markUnsaved('bc-unsaved')"/></div>
+                <div class="detail-field"><span class="detail-field-key">Buyer / LLC Name</span><input class="detail-input" id="bc-llc" type="text" oninput="markUnsaved('bc-unsaved')"/></div>
+                <div class="detail-field"><span class="detail-field-key">Contact Name</span><input class="detail-input" id="bc-contactname" type="text" oninput="markUnsaved('bc-unsaved')"/></div>
+                <div class="detail-field"><span class="detail-field-key">Contact Phone</span><input class="detail-input" id="bc-phone" type="text" oninput="markUnsaved('bc-unsaved')"/></div>
+                <div class="detail-field"><span class="detail-field-key">Contact Email</span><input class="detail-input" id="bc-email" type="text" oninput="markUnsaved('bc-unsaved')"/></div>
+                <div class="detail-field"><span class="detail-field-key">Property Type</span>
+                  <select class="status-select" id="bc-proptype" onchange="markUnsaved('bc-unsaved')">
+                    <option>Vacant Lot</option><option>Residential</option><option>Commercial</option><option>Mixed Use</option><option>Other</option>
+                  </select>
+                </div>
+                <div class="detail-field"><span class="detail-field-key">Target Neighborhood</span><textarea class="detail-textarea" id="bc-neighborhood" rows="2" oninput="markUnsaved('bc-unsaved')"></textarea></div>
+                <div class="detail-field"><span class="detail-field-key">Lot Size Preference</span><input class="detail-input" id="bc-lotsize" type="text" oninput="markUnsaved('bc-unsaved')"/></div>
+                <div class="detail-field"><span class="detail-field-key">Price Range</span><input class="detail-input" id="bc-pricerange" type="text" oninput="markUnsaved('bc-unsaved')"/></div>
+                <div class="detail-field"><span class="detail-field-key">Exclusions</span><textarea class="detail-textarea" id="bc-exclusions" rows="2" oninput="markUnsaved('bc-unsaved')"></textarea></div>
+                <div class="detail-field"><span class="detail-field-key">Notes</span><textarea class="detail-textarea" id="bc-notes" rows="2" oninput="markUnsaved('bc-unsaved')"></textarea></div>
+                <div class="detail-field"><span class="detail-field-key">Status</span>
+                  <select class="status-select" id="bc-status" onchange="markUnsaved('bc-unsaved')">
+                    <option>Accepted</option><option>Submitted</option><option>In Review</option><option>Rejected</option>
+                  </select>
+                </div>
+              </div>
+              <div class="detail-footer">
+                <button class="save-btn" onclick="clearUnsaved('bc-unsaved')">Save Changes</button>
+                <button class="save-btn secondary">Create new Internal buyer submission from this criteria</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── INTERNAL PROPERTY ── -->
+      <div class="tab-panel" id="panel-internal">
+        <div class="filter-bar">
+          <div class="filter-search-wrap">
+            <div class="filter-search-icon"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
+            <input class="filter-search" placeholder="Search title or address..." oninput="filterTable('internal-tbody', this.value, 'internal-status-filter')" id="internal-search"/>
+          </div>
+          <select class="filter-select" id="internal-status-filter" onchange="filterTable('internal-tbody', document.getElementById('internal-search').value, 'internal-status-filter')">
+            <option value="">All statuses</option>
+            <option>Greenlit by Seek</option><option>Submitted</option><option>In Review</option><option>Rejected</option>
+          </select>
+          <span class="filter-count" id="internal-count">Showing 3 of 54</span>
+        </div>
+        <div class="split">
+          <div class="table-side">
+            <table>
+              <thead><tr><th>Title</th><th>Address</th><th>ZIP</th><th>Zoning</th><th>Max Offer</th><th>Status</th><th>ID</th></tr></thead>
+              <tbody id="internal-tbody">
+                <tr onclick="selectInternal(this)" data-id="45" data-title="Rafi Balk" data-date="29/09/2025" data-address="3916 Brown St" data-zip="19104" data-zoning="RSA5" data-sqft="16" data-frontage="16" data-taxstatus="16232.37" data-liens="0" data-redflags="" data-buyermatch="Rafi" data-notes="" data-status="Greenlit by Seek" data-maxoffer="100000">
+                  <td class="td-main">Rafi Balk</td><td class="td-muted">3916 Brown St</td><td class="td-muted">19104</td><td class="td-muted">RSA5</td><td class="td-muted">$100k</td>
+                  <td><span class="status-pill greenlit" data-tip="Greenlit by Seek"><span class="status-dot"></span>Greenlit by Seek</span></td><td class="row-id">#45</td>
+                </tr>
+                <tr onclick="selectInternal(this)" data-id="46" data-title="Rafi Balk" data-date="29/09/2025" data-address="3918 Brown St" data-zip="19104" data-zoning="RSA5" data-sqft="18" data-frontage="18" data-taxstatus="12000.00" data-liens="0" data-redflags="" data-buyermatch="Rafi" data-notes="" data-status="Greenlit by Seek" data-maxoffer="95000">
+                  <td class="td-main">Rafi Balk</td><td class="td-muted">3918 Brown St</td><td class="td-muted">19104</td><td class="td-muted">RSA5</td><td class="td-muted">$95k</td>
+                  <td><span class="status-pill greenlit"><span class="status-dot"></span>Greenlit by Seek</span></td><td class="row-id">#46</td>
+                </tr>
+                <tr onclick="selectInternal(this)" data-id="47" data-title="Rafi Balk" data-date="29/09/2025" data-address="3920 Brown St" data-zip="19104" data-zoning="CMX2" data-sqft="20" data-frontage="20" data-taxstatus="18500.00" data-liens="1" data-redflags="Tax lien active" data-buyermatch="—" data-notes="" data-status="In Review" data-maxoffer="80000">
+                  <td class="td-main">Rafi Balk</td><td class="td-muted">3920 Brown St</td><td class="td-muted">19104</td><td class="td-muted">CMX2</td><td class="td-muted">$80k</td>
+                  <td><span class="status-pill inreview" data-tip="In Review"><span class="status-dot"></span>In Review</span></td><td class="row-id">#47</td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="pagination">
+              <span class="pagination-info">Page 1 of 14</span>
+              <div class="pagination-btns">
+                <button class="page-btn" disabled>← Prev</button>
+                <button class="page-btn current">1</button>
+                <button class="page-btn">2</button>
+                <button class="page-btn">3</button>
+                <button class="page-btn">Next →</button>
+              </div>
+            </div>
+          </div>
+          <div class="detail-side">
+            <div class="detail-empty" id="internal-detail-empty">
+              <div class="detail-empty-icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
+              <div class="detail-empty-text">Select a record</div>
+              <div class="detail-empty-sub">Click any row to view details</div>
+            </div>
+            <div class="detail-content" id="internal-detail-content">
+              <div class="detail-header">
+                <div class="detail-id" id="ip-id-label">ID #45</div>
+                <div class="detail-title" id="ip-title-label">Rafi Balk · Greenlit by Seek</div>
+                <div class="unsaved-dot" id="ip-unsaved"></div>
+              </div>
+              <div class="detail-body">
+                <div class="detail-field"><span class="detail-field-key">Title</span><input class="detail-input" id="ip-title" type="text" oninput="markUnsaved('ip-unsaved')"/></div>
+                <div class="detail-field"><span class="detail-field-key">Date of Submission</span><input class="detail-input" id="ip-date" type="text" oninput="markUnsaved('ip-unsaved')"/></div>
+                <div class="detail-field"><span class="detail-field-key">Property Address</span><input class="detail-input" id="ip-address" type="text" oninput="markUnsaved('ip-unsaved')"/></div>
+                <div class="detail-field"><span class="detail-field-key">ZIP Code</span><input class="detail-input" id="ip-zip" type="text" oninput="markUnsaved('ip-unsaved')"/></div>
+                <div class="detail-field"><span class="detail-field-key">Zoning</span>
+                  <select class="status-select" id="ip-zoning" onchange="markUnsaved('ip-unsaved')">
+                    <option>RSA5</option><option>CMX2</option><option>CMX3</option><option>RM1</option><option>RSD3</option><option>Other</option>
+                  </select>
+                </div>
+                <div class="detail-field"><span class="detail-field-key">Square Footage</span><input class="detail-input" id="ip-sqft" type="text" oninput="markUnsaved('ip-unsaved')"/></div>
+                <div class="detail-field"><span class="detail-field-key">Frontage</span><input class="detail-input" id="ip-frontage" type="text" oninput="markUnsaved('ip-unsaved')"/></div>
+                <div class="detail-field"><span class="detail-field-key">Tax Status</span><input class="detail-input" id="ip-taxstatus" type="text" oninput="markUnsaved('ip-unsaved')"/></div>
+                <div class="detail-field"><span class="detail-field-key">Liens</span><input class="detail-input" id="ip-liens" type="text" oninput="markUnsaved('ip-unsaved')"/></div>
+                <div class="detail-field"><span class="detail-field-key">Red Flags</span><textarea class="detail-textarea" id="ip-redflags" rows="2" oninput="markUnsaved('ip-unsaved')"></textarea></div>
+                <div class="detail-field"><span class="detail-field-key">Buyer Match</span><input class="detail-input" id="ip-buyermatch" type="text" oninput="markUnsaved('ip-unsaved')"/></div>
+                <div class="detail-field"><span class="detail-field-key">Notes</span><textarea class="detail-textarea" id="ip-notes" rows="2" oninput="markUnsaved('ip-unsaved')"></textarea></div>
+                <div class="detail-field"><span class="detail-field-key">Status</span>
+                  <select class="status-select" id="ip-status" onchange="markUnsaved('ip-unsaved')">
+                    <option>Greenlit by Seek</option><option>Submitted</option><option>In Review</option><option>Rejected</option>
+                  </select>
+                </div>
+                <div class="detail-field"><span class="detail-field-key">Max Offer</span><input class="detail-input" id="ip-maxoffer" type="text" oninput="markUnsaved('ip-unsaved')"/></div>
+              </div>
+              <div class="detail-footer">
+                <button class="save-btn" onclick="clearUnsaved('ip-unsaved')">Save Changes</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</main>
+
+<aside class="panel">
+  <div class="panel-hero">
+    <div class="avatar">A</div>
+    <div class="panel-role">Executive</div>
+    <div class="panel-name">Alessandra Sanches</div>
+    <div class="panel-email">als.s.sanches@gmail.com</div>
+  </div>
+  <div class="panel-section">
+    <div class="panel-section-label">Platform Overview</div>
+    <div class="stat-row"><span class="stat-key">Buyer Submissions</span><span class="stat-val">14</span></div>
+    <div class="stat-row"><span class="stat-key">Contact Logs</span><span class="stat-val gold">48</span></div>
+    <div class="stat-row"><span class="stat-key">Buyer Criteria</span><span class="stat-val">59</span></div>
+    <div class="stat-row"><span class="stat-key">Internal Properties</span><span class="stat-val">54</span></div>
+  </div>
+  <div class="panel-section">
+    <div class="panel-section-label">Active Tab</div>
+    <div class="stat-row">
+      <span class="stat-key" id="active-tab-label">Buyer Submission</span>
+      <span class="stat-val rust" id="active-tab-count">14</span>
+    </div>
+  </div>
+  <div class="panel-footer">
+    <p>Impact-Driven. Rooted in Research.<br>Results That Matter.</p>
+  </div>
+</aside>
+
+<script>
+const tabMap = {
+  buyer:    { label:'Buyer Submission',          count:'14' },
+  contact:  { label:'Contact Log',               count:'48' },
+  criteria: { label:'Buyer Criteria Submission', count:'59' },
+  internal: { label:'Internal Property',         count:'54' },
+};
+
+function switchTab(id) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  const keys = Object.keys(tabMap);
+  document.querySelectorAll('.tab')[keys.indexOf(id)].classList.add('active');
+  document.getElementById('panel-' + id).classList.add('active');
+  document.getElementById('active-tab-label').textContent = tabMap[id].label;
+  document.getElementById('active-tab-count').textContent = tabMap[id].count;
+}
+
+function markUnsaved(dotId) {
+  document.getElementById(dotId).classList.add('visible');
+}
+
+function clearUnsaved(dotId) {
+  document.getElementById(dotId).classList.remove('visible');
+}
+
+function filterTable(tbodyId, search, selectId) {
+  const rows = document.querySelectorAll('#' + tbodyId + ' tr');
+  const status = document.getElementById(selectId).value.toLowerCase();
+  const q = search.toLowerCase();
+  rows.forEach(r => {
+    const text = r.textContent.toLowerCase();
+    const rowStatus = (r.dataset.status || '').toLowerCase();
+    const matchSearch = !q || text.includes(q);
+    const matchStatus = !status || rowStatus.includes(status);
+    r.style.display = matchSearch && matchStatus ? '' : 'none';
+  });
+}
+
+// page state for buyer tab (demo)
+let buyerPage = 1;
+const buyerPerPage = 10;
+const buyerTotal = 11;
+
+function changePage(tab, dir) {
+  if (tab === 'buyer') {
+    buyerPage = Math.max(1, Math.min(2, buyerPage + dir));
+    renderBuyerPage();
+  }
+}
+
+function goPage(tab, pg) {
+  if (tab === 'buyer') { buyerPage = pg; renderBuyerPage(); }
+}
+
+function renderBuyerPage() {
+  const rows = Array.from(document.querySelectorAll('#buyer-tbody tr'));
+  rows.forEach((r, i) => {
+    const start = (buyerPage - 1) * buyerPerPage;
+    r.style.display = (i >= start && i < start + buyerPerPage) ? '' : 'none';
+  });
+  document.getElementById('buyer-page-info').textContent = 'Page ' + buyerPage + ' of 2';
+  document.getElementById('buyer-prev').disabled = buyerPage === 1;
+  document.getElementById('buyer-next').disabled = buyerPage === 2;
+  document.getElementById('buyer-p1').classList.toggle('current', buyerPage === 1);
+  document.getElementById('buyer-p2').classList.toggle('current', buyerPage === 2);
+  const showing = buyerPage === 1 ? Math.min(buyerPerPage, buyerTotal) : buyerTotal - buyerPerPage;
+  document.getElementById('buyer-count').textContent = 'Showing ' + showing + ' of ' + buyerTotal;
+}
+
+function selectBuyer(row) {
+  document.querySelectorAll('#buyer-tbody tr').forEach(r => r.classList.remove('selected'));
+  row.classList.add('selected');
+  const d = row.dataset;
+  document.getElementById('b-id-label').textContent   = 'ID #' + d.id;
+  document.getElementById('b-title-label').textContent = d.address;
+  document.getElementById('b-address').textContent     = d.address;
+  document.getElementById('b-neighborhood').textContent = d.neighborhood;
+  document.getElementById('b-maxpay').textContent      = d.maxpay;
+  document.getElementById('b-sentby').textContent      = d.sentby;
+  document.getElementById('b-attachments').textContent = d.attachments;
+  document.getElementById('b-author').textContent      = d.author;
+  document.getElementById('b-editor').textContent      = d.editor;
+  const st = document.getElementById('b-status');
+  Array.from(st.options).forEach(o => { o.selected = o.value === d.status; });
+  clearUnsaved('b-unsaved');
+  document.getElementById('buyer-detail-empty').style.display = 'none';
+  document.getElementById('buyer-detail-content').classList.add('visible');
+}
+
+function selectContact(row) {
+  document.querySelectorAll('#contact-tbody tr').forEach(r => r.classList.remove('selected'));
+  row.classList.add('selected');
+  const d = row.dataset;
+  document.getElementById('c-id-label').textContent    = 'ID #' + d.id;
+  document.getElementById('c-title-label').textContent = d.title + ' · ' + d.llc;
+  document.getElementById('c-title').value             = d.title;
+  document.getElementById('c-llc').value               = d.llc;
+  document.getElementById('c-contactname').value       = d.contactname !== '—' ? d.contactname : '';
+  document.getElementById('c-email').value             = d.email !== '—' ? d.email : '';
+  document.getElementById('c-phone').value             = d.phone !== '—' ? d.phone : '';
+  document.getElementById('c-notes').value             = d.notes !== '—' ? d.notes : '';
+  ['c-method','c-nextsteps','c-status'].forEach(id => {
+    const el = document.getElementById(id);
+    const key = id.split('-')[1];
+    Array.from(el.options).forEach(o => { o.selected = o.value === d[key]; });
+  });
+  clearUnsaved('c-unsaved');
+  document.getElementById('contact-detail-empty').style.display = 'none';
+  document.getElementById('contact-detail-content').classList.add('visible');
+}
+
+function selectCriteria(row) {
+  document.querySelectorAll('#criteria-tbody tr').forEach(r => r.classList.remove('selected'));
+  row.classList.add('selected');
+  const d = row.dataset;
+  document.getElementById('bc-id-label').textContent    = 'ID #' + d.id;
+  document.getElementById('bc-title-label').textContent = d.title + ' · ' + d.status;
+  document.getElementById('bc-title').value             = d.title;
+  document.getElementById('bc-date').value              = d.date !== '—' ? d.date : '';
+  document.getElementById('bc-llc').value               = d.llc;
+  document.getElementById('bc-contactname').value       = d.contactname !== '—' ? d.contactname : '';
+  document.getElementById('bc-phone').value             = d.phone !== '—' ? d.phone : '';
+  document.getElementById('bc-email').value             = d.email !== '—' ? d.email : '';
+  document.getElementById('bc-neighborhood').value      = d.neighborhood !== '—' ? d.neighborhood : '';
+  document.getElementById('bc-lotsize').value           = d.lotsize !== '—' ? d.lotsize : '';
+  document.getElementById('bc-pricerange').value        = d.pricerange !== '—' ? d.pricerange : '';
+  document.getElementById('bc-exclusions').value        = d.exclusions !== '—' ? d.exclusions : '';
+  document.getElementById('bc-notes').value             = d.notes !== '—' ? d.notes : '';
+  const pt = document.getElementById('bc-proptype');
+  Array.from(pt.options).forEach(o => { o.selected = o.value === d.proptype; });
+  const st = document.getElementById('bc-status');
+  Array.from(st.options).forEach(o => { o.selected = o.value === d.status; });
+  clearUnsaved('bc-unsaved');
+  document.getElementById('criteria-detail-empty').style.display = 'none';
+  document.getElementById('criteria-detail-content').classList.add('visible');
+}
+
+function selectInternal(row) {
+  document.querySelectorAll('#internal-tbody tr').forEach(r => r.classList.remove('selected'));
+  row.classList.add('selected');
+  const d = row.dataset;
+  document.getElementById('ip-id-label').textContent    = 'ID #' + d.id;
+  document.getElementById('ip-title-label').textContent = d.title + ' · ' + d.status;
+  document.getElementById('ip-title').value      = d.title;
+  document.getElementById('ip-date').value       = d.date !== '—' ? d.date : '';
+  document.getElementById('ip-address').value    = d.address;
+  document.getElementById('ip-zip').value        = d.zip;
+  document.getElementById('ip-sqft').value       = d.sqft;
+  document.getElementById('ip-frontage').value   = d.frontage;
+  document.getElementById('ip-taxstatus').value  = d.taxstatus;
+  document.getElementById('ip-liens').value      = d.liens;
+  document.getElementById('ip-redflags').value   = d.redflags;
+  document.getElementById('ip-buyermatch').value = d.buyermatch !== '—' ? d.buyermatch : '';
+  document.getElementById('ip-notes').value      = d.notes;
+  document.getElementById('ip-maxoffer').value   = d.maxoffer;
+  const zn = document.getElementById('ip-zoning');
+  Array.from(zn.options).forEach(o => { o.selected = o.value === d.zoning; });
+  const st = document.getElementById('ip-status');
+  Array.from(st.options).forEach(o => { o.selected = o.value === d.status; });
+  clearUnsaved('ip-unsaved');
+  document.getElementById('internal-detail-empty').style.display = 'none';
+  document.getElementById('internal-detail-content').classList.add('visible');
+}
+
+renderBuyerPage();
+</script>
+
+<script id="sidebar-shared-js">
+(function() {
+  const sidebar = document.getElementById('sidebar');
+  const mains   = document.querySelectorAll('.main-wrapper, .main');
+  window.toggleSidebar = function() {
+    sidebar.classList.toggle('collapsed');
+    mains.forEach(m => m.classList.toggle('sidebar-collapsed'));
+  };
+  window.toggleSection = function(id) {
+    document.getElementById(id).classList.toggle('open');
+  };
+})();
+</script>
+</body>
+</html>

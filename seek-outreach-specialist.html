@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Seek Research — Outreach Specialist Files</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --ink:#18160F; --parchment:#F2ECE0; --parchment-mid:#EDE5D3; --parchment-dark:#D9CEB8;
+  --rust:#B55A35; --rust-light:rgba(181,90,53,0.08);
+  --gold:#C4A05A; --gold-light:rgba(196,160,90,0.12);
+  --sage:#6B7C6E; --sage-light:rgba(107,124,110,0.1);
+  --text-main:#2C2A22; --text-muted:#8A8070; --white:#FFFFFF;
+}
+body { font-family:'Outfit',sans-serif; background:var(--parchment-mid); color:var(--text-main); min-height:100vh; display:flex; }
+
+/* SIDEBAR */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.main-wrapper { margin-left:72px; flex:1; display:flex; flex-direction:column; min-height:100vh; }
+#view-list { display:flex; flex-direction:column; flex:1; }
+#view-detail { display:none; flex-direction:column; min-height:100vh; }
+
+/* ── LIST ── */
+.topbar { padding:32px 32px 0; display:flex; align-items:flex-start; justify-content:space-between; gap:16px; }
+.topbar-eyebrow { font-size:11px; letter-spacing:2.5px; text-transform:uppercase; color:var(--text-muted); margin-bottom:4px; }
+.topbar-title { font-family:'Cormorant Garamond',serif; font-size:28px; font-weight:300; color:var(--ink); }
+.topbar-title em { font-style:italic; color:var(--rust); }
+.view-badge { display:inline-flex; align-items:center; gap:6px; font-size:11px; letter-spacing:1.5px; text-transform:uppercase; font-weight:500; color:var(--rust); background:var(--rust-light); border:1px solid rgba(181,90,53,0.2); border-radius:20px; padding:5px 14px; margin-top:6px; }
+.view-badge-dot { width:6px; height:6px; border-radius:50%; background:var(--rust); }
+.nav-links { display:flex; gap:4px; }
+.nav-link { font-size:12px; letter-spacing:1px; text-transform:uppercase; color:var(--text-muted); text-decoration:none; padding:8px 14px; border-radius:6px; transition:background 0.15s,color 0.15s; }
+.nav-link:hover { background:var(--parchment); color:var(--ink); }
+
+.table-card { margin:24px 32px 32px; background:var(--white); border:1px solid var(--parchment-dark); border-radius:12px; overflow:hidden; flex:1; display:flex; flex-direction:column; }
+.table-card-header { padding:16px 20px; display:flex; align-items:center; justify-content:space-between; border-bottom:1px solid var(--parchment-mid); background:var(--parchment); flex-wrap:wrap; gap:10px; }
+.table-card-title { font-family:'Cormorant Garamond',serif; font-size:20px; font-weight:400; font-style:italic; color:var(--ink); }
+.filter-row { display:flex; align-items:center; gap:8px; }
+.fsw { position:relative; }
+.fsw svg { position:absolute; left:9px; top:50%; transform:translateY(-50%); width:13px; height:13px; stroke:var(--text-muted); fill:none; stroke-width:1.5; stroke-linecap:round; pointer-events:none; }
+.filter-search { font-family:'Outfit',sans-serif; font-size:12px; color:var(--ink); background:var(--white); border:1px solid var(--parchment-dark); border-radius:7px; padding:7px 12px 7px 30px; outline:none; width:200px; }
+.filter-search:focus { border-color:var(--rust); }
+.filter-select { font-family:'Outfit',sans-serif; font-size:12px; color:var(--ink); background:var(--white); border:1px solid var(--parchment-dark); border-radius:7px; padding:7px 12px; outline:none; cursor:pointer; }
+
+/* GROUP ROW */
+.group-row { display:flex; align-items:center; gap:8px; padding:10px 16px; background:var(--parchment-mid); border-bottom:1px solid var(--parchment-dark); cursor:pointer; user-select:none; }
+.group-toggle { font-size:14px; font-weight:600; color:var(--text-muted); width:14px; }
+.group-label { font-size:11px; font-weight:600; letter-spacing:1px; text-transform:uppercase; color:var(--text-muted); }
+.group-count { font-size:11px; color:var(--text-muted); font-weight:300; }
+.group-body { }
+.group-body.collapsed { display:none; }
+
+table { width:100%; border-collapse:collapse; font-size:12.5px; }
+thead th { font-size:10px; letter-spacing:2px; text-transform:uppercase; font-weight:500; color:var(--text-muted); padding:9px 14px; text-align:left; border-bottom:1px solid var(--parchment-mid); background:var(--parchment); white-space:nowrap; }
+tbody tr { border-bottom:1px solid var(--parchment-mid); cursor:pointer; transition:background 0.12s; }
+tbody tr:last-child { border-bottom:none; }
+tbody tr:hover { background:rgba(242,236,224,0.5); }
+tbody td { padding:10px 14px; vertical-align:middle; }
+.td-main { font-weight:400; color:var(--ink); max-width:160px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.td-muted { color:var(--text-muted); font-weight:300; font-size:12px; max-width:140px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.status-badge { display:inline-flex; align-items:center; font-size:10px; font-weight:700; border-radius:4px; padding:2px 7px; text-transform:uppercase; letter-spacing:0.5px; }
+.status-badge.new { background:#F59E0B; color:#fff; }
+.status-badge.outreach { background:var(--rust); color:#fff; }
+.status-badge.verbal { background:var(--gold); color:var(--ink); }
+
+/* ── DETAIL ── */
+.detail-topbar { padding:14px 32px; background:var(--white); border-bottom:1px solid var(--parchment-dark); display:flex; align-items:center; justify-content:space-between; gap:16px; position:sticky; top:0; z-index:10; }
+.detail-back { display:flex; align-items:center; gap:8px; cursor:pointer; font-size:12px; font-weight:500; letter-spacing:1px; text-transform:uppercase; color:var(--text-muted); background:none; border:none; padding:0; font-family:'Outfit',sans-serif; transition:color 0.2s; }
+.detail-back:hover { color:var(--rust); }
+.detail-back svg { width:16px; height:16px; stroke:currentColor; fill:none; stroke-width:1.5; stroke-linecap:round; stroke-linejoin:round; }
+.detail-title-wrap { display:flex; align-items:center; gap:10px; flex:1; justify-content:center; }
+.detail-heading { font-family:'Cormorant Garamond',serif; font-size:19px; font-weight:400; color:var(--ink); }
+.new-pill { font-size:10px; font-weight:700; background:#F59E0B; color:#fff; border-radius:4px; padding:2px 8px; text-transform:uppercase; }
+.unsaved-ind { display:none; align-items:center; gap:6px; font-size:11px; font-weight:500; color:var(--rust); background:var(--rust-light); border:1px solid rgba(181,90,53,0.2); border-radius:20px; padding:4px 12px; }
+.unsaved-ind.on { display:flex; }
+.unsaved-ind svg { width:12px; height:12px; stroke:var(--rust); fill:none; stroke-width:2; stroke-linecap:round; }
+.detail-actions { display:flex; gap:8px; }
+.btn-discard { font-family:'Outfit',sans-serif; font-size:11px; font-weight:500; letter-spacing:1px; text-transform:uppercase; color:var(--text-muted); background:none; border:1px solid var(--parchment-dark); border-radius:8px; padding:8px 16px; cursor:pointer; transition:all 0.2s; display:none; }
+.btn-discard.on { display:block; }
+.btn-discard:hover { border-color:var(--rust); color:var(--rust); }
+.btn-save { font-family:'Outfit',sans-serif; font-size:11px; font-weight:600; letter-spacing:1px; text-transform:uppercase; background:var(--ink); color:var(--parchment); border:none; border-radius:8px; padding:8px 20px; cursor:pointer; opacity:0.3; pointer-events:none; transition:all 0.2s; }
+.btn-save.on { opacity:1; pointer-events:auto; }
+.btn-save.on:hover { background:#2e2b1f; }
+
+/* DETAIL BODY */
+.detail-body { padding:28px 32px; display:flex; flex-direction:column; gap:20px; }
+
+/* TWO-COL CARDS */
+.two-col { display:grid; grid-template-columns:1fr 1fr; gap:20px; align-items:start; }
+
+/* SECTION CARD */
+.sec-card { background:var(--white); border:1px solid var(--parchment-dark); border-radius:10px; overflow:hidden; }
+.sec-header { display:flex; align-items:center; justify-content:space-between; padding:12px 16px; cursor:pointer; user-select:none; transition:background 0.15s; border-left:3px solid transparent; }
+.sec-header:hover { background:var(--parchment); }
+.sec-header.open { border-left-color:var(--rust); background:var(--parchment); }
+.sec-header.open-gold { border-left-color:var(--gold); background:var(--parchment); }
+.sec-header.open-sage { border-left-color:var(--sage); background:var(--parchment); }
+.sec-left { display:flex; align-items:center; gap:9px; }
+.sec-icon { width:16px; height:16px; fill:none; stroke-width:1.5; stroke-linecap:round; stroke-linejoin:round; }
+.sec-icon.rust { stroke:var(--rust); }
+.sec-icon.gold { stroke:var(--gold); }
+.sec-icon.sage { stroke:var(--sage); }
+.sec-label { font-size:12px; font-weight:600; color:var(--ink); letter-spacing:0.2px; }
+.sec-chevron { width:15px; height:15px; stroke:var(--text-muted); fill:none; stroke-width:1.5; stroke-linecap:round; stroke-linejoin:round; transition:transform 0.2s; }
+.sec-header.open .sec-chevron,
+.sec-header.open-gold .sec-chevron,
+.sec-header.open-sage .sec-chevron { transform:rotate(180deg); }
+.sec-body { display:none; padding:16px; border-top:1px solid var(--parchment-mid); }
+.sec-body.open { display:block; }
+
+/* FORM FIELDS */
+.form-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+.form-grid.single { grid-template-columns:1fr; }
+.ff { display:flex; flex-direction:column; gap:4px; }
+.ff.full { grid-column:1/-1; }
+.fl { font-size:10px; letter-spacing:1.5px; text-transform:uppercase; color:var(--text-muted); font-weight:500; }
+.fl .req { color:var(--rust); }
+.fi { font-family:'Outfit',sans-serif; font-size:13px; color:var(--ink); background:var(--parchment-mid); border:1px solid var(--parchment-dark); border-radius:6px; padding:8px 10px; outline:none; width:100%; transition:border-color 0.2s,background 0.2s; }
+.fi:focus { border-color:var(--rust); background:var(--white); }
+.fs { font-family:'Outfit',sans-serif; font-size:13px; color:var(--ink); background:var(--parchment-mid); border:1px solid var(--parchment-dark); border-radius:6px; padding:8px 10px; outline:none; cursor:pointer; width:100%; }
+.fs:focus { border-color:var(--rust); }
+.fta { font-family:'Outfit',sans-serif; font-size:13px; color:var(--ink); background:var(--parchment-mid); border:1px solid var(--parchment-dark); border-radius:6px; padding:8px 10px; outline:none; width:100%; resize:vertical; min-height:72px; }
+.fta:focus { border-color:var(--rust); }
+.min-max { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+
+/* FULL-WIDTH SECTION */
+.full-sec { background:var(--white); border:1px solid var(--parchment-dark); border-radius:10px; overflow:hidden; }
+
+/* RICH TEXT */
+.rich-wrap { border:1px solid var(--parchment-dark); border-radius:6px; overflow:hidden; }
+.rich-toolbar { display:flex; align-items:center; padding:5px 8px; background:var(--parchment); border-bottom:1px solid var(--parchment-dark); gap:4px; }
+.rb { font-family:'Outfit',sans-serif; font-size:12px; font-weight:600; color:var(--text-muted); background:none; border:1px solid var(--parchment-dark); border-radius:4px; padding:2px 7px; cursor:pointer; }
+.rb:hover { background:var(--white); color:var(--ink); }
+.rich-content { min-height:220px; max-height:380px; overflow-y:auto; padding:12px; font-size:13px; color:var(--text-main); outline:none; background:var(--white); line-height:1.7; }
+
+/* CASE NOTES */
+.notes-feed { background:var(--parchment-mid); border:1px solid var(--parchment-dark); border-radius:6px; padding:12px; font-size:13px; color:var(--text-muted); font-style:italic; min-height:52px; margin-bottom:12px; }
+.note-entry { background:var(--white); border:1px solid var(--parchment-dark); border-radius:6px; padding:10px 12px; margin-bottom:8px; font-size:13px; line-height:1.5; }
+.note-entry .note-meta { font-size:10px; color:var(--text-muted); margin-bottom:4px; letter-spacing:0.5px; }
+
+/* DROPZONE */
+.dropzone { border:2px dashed var(--parchment-dark); border-radius:8px; padding:28px 20px; text-align:center; cursor:pointer; transition:border-color 0.2s,background 0.2s; background:var(--parchment-mid); }
+.dropzone:hover { border-color:var(--rust); background:var(--rust-light); }
+.dropzone svg { width:32px; height:32px; stroke:var(--text-muted); fill:none; stroke-width:1.2; stroke-linecap:round; margin-bottom:8px; }
+.dropzone p { font-size:12px; color:var(--text-muted); font-weight:300; }
+.dropzone small { font-size:10px; color:var(--text-muted); opacity:0.65; }
+.att-empty { font-size:12px; color:var(--text-muted); font-style:italic; margin-top:8px; }
+
+/* ── SHARED SIDEBAR ── */
+:root { --sidebar-w: 220px; }
+.sidebar {
+  width: var(--sidebar-w);
+  background: var(--ink);
+  display: flex;
+  flex-direction: column;
+  padding: 28px 0 24px;
+  flex-shrink: 0;
+  position: fixed;
+  top: 0; left: 0;
+  height: 100vh;
+  z-index: 20;
+  transition: width 0.25s ease;
+  overflow: hidden;
+}
+.sidebar.collapsed { width: 72px; }
+.sidebar-logo { display:flex; align-items:center; gap:12px; padding:0 18px; margin-bottom:32px; cursor:pointer; text-decoration:none; }
+.logo-mark { display:flex; flex-direction:column; align-items:center; gap:3px; flex-shrink:0; }
+.logo-s { font-size:22px; font-weight:600; color:var(--parchment); line-height:1; }
+.logo-text { display:flex; flex-direction:column; overflow:hidden; white-space:nowrap; opacity:1; transition:opacity 0.2s; }
+.sidebar.collapsed .logo-text { opacity:0; width:0; }
+.logo-name { font-family:'Outfit',sans-serif; font-size:15px; font-weight:600; color:var(--parchment); letter-spacing:2px; text-transform:uppercase; }
+.logo-sub  { font-size:9px; letter-spacing:2px; text-transform:uppercase; color:rgba(242,236,224,0.4); font-weight:400; }
+.sidebar-toggle { position:absolute; top:28px; right:-12px; width:24px; height:24px; background:var(--rust); border-radius:50%; display:flex; align-items:center; justify-content:center; cursor:pointer; z-index:30; border:2px solid var(--ink); transition:transform 0.25s; }
+.sidebar.collapsed .sidebar-toggle { transform:rotate(180deg); }
+.sidebar-toggle svg { width:10px; height:10px; stroke:#fff; fill:none; stroke-width:2.5; stroke-linecap:round; stroke-linejoin:round; }
+.sidebar-nav { flex:1; overflow-y:auto; overflow-x:hidden; padding-bottom:16px; }
+.nav-section { margin-bottom:4px; }
+.nav-section-header { display:flex; align-items:center; justify-content:space-between; padding:8px 18px; cursor:pointer; user-select:none; transition:background 0.15s; }
+.nav-section-header:hover { background:rgba(242,236,224,0.05); }
+.nav-section-left { display:flex; align-items:center; gap:10px; overflow:hidden; white-space:nowrap; }
+.nav-section-icon { width:16px; height:16px; stroke:rgba(242,236,224,0.4); fill:none; stroke-width:1.5; stroke-linecap:round; stroke-linejoin:round; flex-shrink:0; }
+.nav-section-label { font-size:10px; letter-spacing:2px; text-transform:uppercase; color:rgba(242,236,224,0.4); font-weight:500; transition:opacity 0.2s; }
+.sidebar.collapsed .nav-section-label { opacity:0; }
+.nav-chevron { width:12px; height:12px; stroke:rgba(242,236,224,0.3); fill:none; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; transition:transform 0.2s, opacity 0.2s; flex-shrink:0; }
+.sidebar.collapsed .nav-chevron { opacity:0; }
+.nav-section.open .nav-chevron { transform:rotate(180deg); }
+.nav-items { overflow:hidden; max-height:0; transition:max-height 0.25s ease; }
+.nav-section.open .nav-items { max-height:300px; }
+.nav-link { display:flex; align-items:center; gap:10px; padding:9px 18px 9px 42px; text-decoration:none; transition:background 0.15s; white-space:nowrap; overflow:hidden; border-left:3px solid transparent; }
+.nav-link:hover { background:rgba(242,236,224,0.07); }
+.nav-link.active { background:rgba(181,90,53,0.15); border-left-color:var(--rust); }
+.sidebar.collapsed .nav-link { padding-left:18px; justify-content:center; }
+.nav-link-icon { width:15px; height:15px; stroke:rgba(242,236,224,0.45); fill:none; stroke-width:1.5; stroke-linecap:round; stroke-linejoin:round; flex-shrink:0; }
+.nav-link.active .nav-link-icon { stroke:var(--rust); }
+.nav-link-label { font-size:13px; color:rgba(242,236,224,0.6); font-weight:300; transition:opacity 0.2s; }
+.nav-link.active .nav-link-label { color:var(--parchment); font-weight:400; }
+.sidebar.collapsed .nav-link-label { opacity:0; width:0; }
+.nav-divider { height:1px; background:rgba(242,236,224,0.07); margin:8px 18px; }
+.sidebar-bottom { padding:0 18px; display:flex; flex-direction:column; gap:8px; overflow:hidden; }
+.sidebar-user { display:flex; align-items:center; gap:10px; white-space:nowrap; }
+.sb-avatar { width:32px; height:32px; border-radius:50%; background:linear-gradient(135deg,var(--gold),var(--rust)); display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:600; color:var(--parchment); flex-shrink:0; }
+.user-info { overflow:hidden; transition:opacity 0.2s; }
+.sidebar.collapsed .user-info { opacity:0; width:0; }
+.user-name { font-size:12px; font-weight:500; color:var(--parchment); }
+.user-email { font-size:10px; color:rgba(242,236,224,0.35); }
+.sb-signout { display:flex; align-items:center; gap:8px; font-size:11px; color:rgba(242,236,224,0.35); cursor:pointer; padding:4px 0; transition:color 0.15s; white-space:nowrap; }
+.sb-signout:hover { color:rgba(242,236,224,0.7); }
+.sb-signout svg { width:14px; height:14px; stroke:currentColor; fill:none; stroke-width:1.5; stroke-linecap:round; flex-shrink:0; }
+.sb-signout-label { transition:opacity 0.2s; }
+.sidebar.collapsed .sb-signout-label { opacity:0; width:0; }
+
+/* sidebar-aware margin */
+.main-wrapper, .main { margin-left: var(--sidebar-w); transition: margin-left 0.25s ease; }
+.main-wrapper.sidebar-collapsed, .main.sidebar-collapsed { margin-left: 72px; }
+
+</style>
+</head>
+<body>
+
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-toggle" onclick="toggleSidebar()">
+    <svg viewBox="0 0 10 10"><polyline points="6 2 2 5 6 8"/></svg>
+  </div>
+  <a class="sidebar-logo" href="index.html">
+    <div class="logo-mark">
+      <span class="logo-s">S</span>
+      <svg width="16" height="9" viewBox="0 0 18 10" fill="none"><polygon points="0,0 10,0 6,5 10,10 0,10 4,5" fill="#B55A35"/></svg>
+    </div>
+    <div class="logo-text">
+      <span class="logo-name">Seek</span>
+      <span class="logo-sub">Research Platform</span>
+    </div>
+  </a>
+  <nav class="sidebar-nav">
+    <div class="nav-section open" id="sec-portals">
+      <div class="nav-section-header" onclick="toggleSection('sec-portals')">
+        <div class="nav-section-left">
+          <svg class="nav-section-icon" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+          <span class="nav-section-label">Portals</span>
+        </div>
+        <svg class="nav-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="nav-items">
+        <a class="nav-link " href="index.html">
+          <svg class="nav-link-icon" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>
+          <span class="nav-link-label">Home</span>
+        </a>
+        <a class="nav-link " href="seek-dashboard-mockup.html">
+          <svg class="nav-link-icon" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          <span class="nav-link-label">Client Portal</span>
+        </a>
+        <a class="nav-link " href="seek-affiliate-portal.html">
+          <svg class="nav-link-icon" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+          <span class="nav-link-label">Affiliate Portal</span>
+        </a>
+        <a class="nav-link " href="seek-buyer-portal.html">
+          <svg class="nav-link-icon" viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+          <span class="nav-link-label">Buyer Portal</span>
+        </a>
+        <a class="nav-link " href="seek-executive-portal.html">
+          <svg class="nav-link-icon" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <span class="nav-link-label">Executive Portal</span>
+        </a>
+      </div>
+    </div>
+    <div class="nav-divider"></div>
+    <div class="nav-section open" id="sec-ops">
+      <div class="nav-section-header" onclick="toggleSection('sec-ops')">
+        <div class="nav-section-left">
+          <svg class="nav-section-icon" viewBox="0 0 24 24"><path d="M9 12h6M9 8h6M5 4h14a1 1 0 011 1v14a1 1 0 01-1 1H5a1 1 0 01-1-1V5a1 1 0 011-1z"/></svg>
+          <span class="nav-section-label">Operations</span>
+        </div>
+        <svg class="nav-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="nav-items">
+        <a class="nav-link " href="seek-research-forms.html">
+          <svg class="nav-link-icon" viewBox="0 0 24 24"><path d="M9 12h6M9 8h6M5 4h14a1 1 0 011 1v14a1 1 0 01-1 1H5a1 1 0 01-1-1V5a1 1 0 011-1z"/></svg>
+          <span class="nav-link-label">Research Forms</span>
+        </a>
+        <a class="nav-link active" href="seek-outreach-specialist.html">
+          <svg class="nav-link-icon" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+          <span class="nav-link-label">Outreach Specialist</span>
+        </a>
+      </div>
+    </div>
+  </nav>
+  <div class="sidebar-bottom">
+    <div class="sidebar-user">
+      <div class="sb-avatar">A</div>
+      <div class="user-info">
+        <div class="user-name">Alessandra S.</div>
+        <div class="user-email">als.s.sanches@gmail.com</div>
+      </div>
+    </div>
+    <div class="sb-signout">
+      <svg viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+      <span class="sb-signout-label">Sign Out</span>
+    </div>
+  </div>
+</aside>
+
+<!-- ═══════ LIST ═══════ -->
+<div class="main-wrapper" id="view-list">
+  <div class="topbar">
+    <div>
+      <div class="topbar-eyebrow">Outreach Portal</div>
+      <div class="topbar-title">Outreach Specialist <em>Files</em></div>
+      <div class="view-badge"><span class="view-badge-dot"></span>Specialist View</div>
+    </div>
+    <div class="nav-links">
+      <a class="nav-link" href="#">About Us</a>
+      <a class="nav-link" href="#">Contact Us</a>
+    </div>
+  </div>
+
+  <div class="table-card">
+    <div class="table-card-header">
+      <span class="table-card-title">All Files</span>
+      <div class="filter-row">
+        <div class="fsw">
+          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input class="filter-search" placeholder="Search owner or address..." oninput="filterList(this.value)"/>
+        </div>
+        <select class="filter-select" onchange="filterListStatus(this.value)">
+          <option value="">All statuses</option>
+          <option>Unassigned</option>
+          <option>Created</option>
+          <option>Outreach Started</option>
+          <option>Verbal Agreement Obtained</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- GROUP: UNASSIGNED -->
+    <div class="group-row" onclick="toggleGroup('g-unassigned', this)">
+      <span class="group-toggle">−</span>
+      <span class="group-label">Assigned to: Unassigned</span>
+      <span class="group-count">— 3 records</span>
+    </div>
+    <div class="group-body" id="g-unassigned">
+      <table>
+        <thead><tr><th>Status</th><th>Property Owner</th><th>Marital Status</th><th>Deed Type</th><th>Year Purchased</th><th>Property Address</th><th>Zoning</th><th>Sq Ft</th><th>Total Debt</th></tr></thead>
+        <tbody>
+          <tr onclick="openDetail({title:'3916 Brown St',status:'NEW',owner:'David P. Smith',marital:'Unknown',deed:'Other',year:'1972',address:'3916 Brown St',zip:'19104',zoning:'RSAS',sqft:'1422',liens:'$0.00',taxes:'$16,232.37',totaldebt:'$1,632.37',contracttype:'Assignment of Interest (30%)',estmin:'$40,000',estmax:'$60,000',cashoffer:'',sysstatus:'Verbal Agreement Obtained-S',assignedto:'morgan.taylor@seekresearchgroup.com'})">
+            <td><span class="status-badge new">NEW</span></td>
+            <td class="td-main">David P. Smith</td><td class="td-muted">Unknown</td><td class="td-muted">Other</td><td class="td-muted">1972</td><td class="td-muted">3916 Brown St</td><td class="td-muted">RSAS</td><td class="td-muted">1422</td><td class="td-muted">$1,632.37</td>
+          </tr>
+          <tr onclick="openDetail({title:'2048 N Orkney St',status:'NEW',owner:'John & Rose Bachowski',marital:'Married',deed:'Tenants by the Ent.',year:'1946',address:'2048 N Orkney St',zip:'19122',zoning:'RM1',sqft:'411',liens:'$475.38',taxes:'$12,186.00',totaldebt:'$12,661.38',contracttype:'',estmin:'',estmax:'',cashoffer:'',sysstatus:'Created',assignedto:''})">
+            <td><span class="status-badge new">NEW</span></td>
+            <td class="td-main">John & Rose Bachowski</td><td class="td-muted">Married</td><td class="td-muted">Tenants by the Ent.</td><td class="td-muted">1946</td><td class="td-muted">2048 N Orkney St</td><td class="td-muted">RM1</td><td class="td-muted">411</td><td class="td-muted">$12,661.38</td>
+          </tr>
+          <tr onclick="openDetail({title:'3817 Aspen St',status:'NEW',owner:'Elaine & Joseph B.',marital:'Married',deed:'Tenants by the Ent.',year:'1947',address:'3817 Aspen St',zip:'19140',zoning:'RSAS',sqft:'1200',liens:'$0.00',taxes:'$11,482.00',totaldebt:'$11,482.00',contracttype:'',estmin:'',estmax:'',cashoffer:'',sysstatus:'Created',assignedto:''})">
+            <td><span class="status-badge new">NEW</span></td>
+            <td class="td-main">Elaine & Joseph B.</td><td class="td-muted">Married</td><td class="td-muted">Tenants by the Ent.</td><td class="td-muted">1947</td><td class="td-muted">3817 Aspen St</td><td class="td-muted">RSAS</td><td class="td-muted">1200</td><td class="td-muted">$11,482.00</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- GROUP: OUTREACH STARTED -->
+    <div class="group-row" onclick="toggleGroup('g-outreach', this)">
+      <span class="group-toggle">+</span>
+      <span class="group-label">Status: Outreach Started</span>
+      <span class="group-count">— 10 records</span>
+    </div>
+    <div class="group-body collapsed" id="g-outreach">
+      <table>
+        <thead><tr><th>Status</th><th>Property Owner</th><th>Marital Status</th><th>Deed Type</th><th>Year Purchased</th><th>Property Address</th><th>Zoning</th><th>Sq Ft</th><th>Total Debt</th></tr></thead>
+        <tbody>
+          <tr onclick="openDetail({title:'2325 N. 6th St.',status:'OUTREACH',owner:'Sidney Johnson',marital:'Single',deed:'Other',year:'1960',address:'2325 N. 6th St.',zip:'19133',zoning:'RM1',sqft:'1287',liens:'$0.00',taxes:'$12,817.00',totaldebt:'$12,817.00',contracttype:'',estmin:'',estmax:'',cashoffer:'',sysstatus:'Outreach Started',assignedto:''})">
+            <td><span class="status-badge outreach">OUT</span></td>
+            <td class="td-main">Sidney Johnson &...</td><td class="td-muted">Single</td><td class="td-muted">Other</td><td class="td-muted">1960</td><td class="td-muted">2325 N. 6th St.</td><td class="td-muted">RM1</td><td class="td-muted">1287</td><td class="td-muted">$12,817</td>
+          </tr>
+          <tr onclick="openDetail({title:'2417 W Montgomery Ave',status:'OUTREACH',owner:'Lawrence Madison',marital:'Widowed & Divorced',deed:'',year:'1985',address:'2417 W Montgomery Ave',zip:'19121',zoning:'RSA5',sqft:'1169',liens:'$0.00',taxes:'$3,368.00',totaldebt:'$3,368.00',contracttype:'',estmin:'',estmax:'',cashoffer:'',sysstatus:'Outreach Started',assignedto:''})">
+            <td><span class="status-badge outreach">OUT</span></td>
+            <td class="td-main">Lawrence Madison...</td><td class="td-muted">Widowed & Divor...</td><td class="td-muted">—</td><td class="td-muted">1985</td><td class="td-muted">2417 W Montgom...</td><td class="td-muted">RSA5</td><td class="td-muted">1169</td><td class="td-muted">$3,368</td>
+          </tr>
+          <tr onclick="openDetail({title:'2041 N 5th St',status:'OUTREACH',owner:'Jack Michael Gussman',marital:'Widowed',deed:'Other',year:'1955',address:'2041 N 5th St',zip:'19122',zoning:'RM1',sqft:'1075',liens:'$1,932.15',taxes:'$21,727.00',totaldebt:'$23,659.15',contracttype:'',estmin:'',estmax:'',cashoffer:'',sysstatus:'Outreach Started',assignedto:''})">
+            <td><span class="status-badge outreach">OUT</span></td>
+            <td class="td-main">Jack Michael Guss...</td><td class="td-muted">Widowed</td><td class="td-muted">Other</td><td class="td-muted">1955</td><td class="td-muted">2041 N 5th St</td><td class="td-muted">RM1</td><td class="td-muted">1075</td><td class="td-muted">$23,659</td>
+          </tr>
+          <tr onclick="openDetail({title:'1953 N Orianna St',status:'VERBAL',owner:'Ramon DeJesus',marital:'Married',deed:'Other',year:'1989',address:'1953 N Orianna St',zip:'19122',zoning:'RM1',sqft:'528',liens:'$0.00',taxes:'$14,778.00',totaldebt:'$14,778.00',contracttype:'Assignment of Interest (30%)',estmin:'$35,000',estmax:'$55,000',cashoffer:'',sysstatus:'Verbal Agreement Obtained',assignedto:'morgan.taylor@seekresearchgroup.com'})">
+            <td><span class="status-badge verbal">VERBAL</span></td>
+            <td class="td-main">Ramon DeJesus &...</td><td class="td-muted">Married</td><td class="td-muted">Other</td><td class="td-muted">1989</td><td class="td-muted">1953 N Orianna St</td><td class="td-muted">RM1</td><td class="td-muted">528</td><td class="td-muted">$14,778</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══════ DETAIL ═══════ -->
+<div class="main-wrapper" id="view-detail">
+  <div class="detail-topbar">
+    <button class="detail-back" onclick="closeDetail()">
+      <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+      Outreach Files
+    </button>
+    <div class="detail-title-wrap">
+      <span class="detail-heading" id="d-heading">3916 Brown St</span>
+      <span class="new-pill" id="d-status-pill">NEW</span>
+      <div class="unsaved-ind" id="unsaved-ind">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        Unsaved changes
+      </div>
+    </div>
+    <div class="detail-actions">
+      <button class="btn-discard" id="btn-discard" onclick="discard()">Discard</button>
+      <button class="btn-save" id="btn-save" onclick="save()">Save</button>
+    </div>
+  </div>
+
+  <div class="detail-body">
+
+    <!-- TWO-COL: LEFT + RIGHT -->
+    <div class="two-col">
+
+      <!-- LEFT COL -->
+      <div style="display:flex;flex-direction:column;gap:14px;">
+
+        <!-- PROPERTY INFO -->
+        <div class="sec-card">
+          <div class="sec-header open" onclick="toggleSec(this)">
+            <div class="sec-left">
+              <svg class="sec-icon rust" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+              <span class="sec-label">Property Information</span>
+            </div>
+            <svg class="sec-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+          <div class="sec-body open">
+            <div class="form-grid single">
+              <div class="ff"><label class="fl">Title</label><input class="fi" id="d-title" oninput="dirty()"/></div>
+              <div class="ff"><label class="fl">Decedent Name</label><input class="fi" id="d-decedent" oninput="dirty()"/></div>
+              <div class="ff"><label class="fl">Title Holder</label><input class="fi" id="d-owner" oninput="dirty()"/></div>
+            </div>
+            <div class="form-grid" style="margin-top:10px">
+              <div class="ff"><label class="fl">Marital Status</label><input class="fi" id="d-marital" oninput="dirty()"/></div>
+              <div class="ff"><label class="fl">Property Address</label><input class="fi" id="d-address" oninput="dirty()"/></div>
+              <div class="ff"><label class="fl">ZIP Code</label><input class="fi" id="d-zip" oninput="dirty()"/></div>
+              <div class="ff"><label class="fl">Zoning</label><input class="fi" id="d-zoning" oninput="dirty()"/></div>
+              <div class="ff"><label class="fl">Square Footage</label><input class="fi" id="d-sqft" oninput="dirty()"/></div>
+              <div class="ff"><label class="fl">Year Purchased</label><input class="fi" id="d-year" oninput="dirty()"/></div>
+              <div class="ff"><label class="fl">Deed</label><input class="fi" id="d-deed" oninput="dirty()"/></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- FINANCIAL -->
+        <div class="sec-card">
+          <div class="sec-header" onclick="toggleSec(this)">
+            <div class="sec-left">
+              <svg class="sec-icon gold" viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+              <span class="sec-label">Financial Details</span>
+            </div>
+            <svg class="sec-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+          <div class="sec-body">
+            <div class="form-grid single">
+              <div class="ff"><label class="fl">Liens (L&I)</label><input class="fi" id="d-liens" oninput="dirty()"/></div>
+              <div class="ff"><label class="fl">Taxes</label><input class="fi" id="d-taxes" oninput="dirty()"/></div>
+              <div class="ff"><label class="fl">Total Debt</label><input class="fi" id="d-totaldebt" oninput="dirty()"/></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- CONTACT -->
+        <div class="sec-card">
+          <div class="sec-header" onclick="toggleSec(this)">
+            <div class="sec-left">
+              <svg class="sec-icon sage" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8 19.79 19.79 0 010 1.17 2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.91a16 16 0 006.72 6.72l1.28-1.28a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+              <span class="sec-label">Contact Information</span>
+            </div>
+            <svg class="sec-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+          <div class="sec-body">
+            <div class="form-grid single">
+              <div class="ff"><label class="fl">Contact Email</label><input class="fi" type="email" oninput="dirty()"/></div>
+              <div class="ff"><label class="fl">Contact (Person)</label><input class="fi" oninput="dirty()"/></div>
+              <div class="ff"><label class="fl">Seller Phone 1</label><input class="fi" oninput="dirty()"/></div>
+              <div class="ff"><label class="fl">Seller Phone 2</label><input class="fi" oninput="dirty()"/></div>
+              <div class="ff"><label class="fl">Seller Phone 3</label><input class="fi" oninput="dirty()"/></div>
+              <div class="ff"><label class="fl">Seller Phone 4</label><input class="fi" oninput="dirty()"/></div>
+              <div class="ff"><label class="fl">Seller Phone 5</label><input class="fi" oninput="dirty()"/></div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /left col -->
+
+      <!-- RIGHT COL -->
+      <div style="display:flex;flex-direction:column;gap:14px;">
+
+        <!-- CONTRACT -->
+        <div class="sec-card">
+          <div class="sec-header open-gold" onclick="toggleSec(this)">
+            <div class="sec-left">
+              <svg class="sec-icon gold" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg>
+              <span class="sec-label">Contract & Deal Structure</span>
+            </div>
+            <svg class="sec-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+          <div class="sec-body open">
+            <div class="form-grid single">
+              <div class="ff">
+                <label class="fl">Contract Type</label>
+                <select class="fs" id="d-contracttype" onchange="dirty()">
+                  <option>-- Select --</option>
+                  <option>Assignment of Interest (30%)</option>
+                  <option>Cash Purchase</option>
+                  <option>Subject To</option>
+                  <option>Lease Option</option>
+                </select>
+              </div>
+              <div class="ff">
+                <label class="fl">Estimated Property Value</label>
+                <div class="min-max">
+                  <input class="fi" id="d-estmin" placeholder="Min" oninput="dirty()"/>
+                  <input class="fi" id="d-estmax" placeholder="Max" oninput="dirty()"/>
+                </div>
+              </div>
+              <div class="ff"><label class="fl">Cash Offer Value</label><input class="fi" id="d-cashoffer" oninput="dirty()"/></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- FILE ATTACHMENTS -->
+        <div class="sec-card">
+          <div class="sec-header open-gold" onclick="toggleSec(this)">
+            <div class="sec-left">
+              <svg class="sec-icon gold" viewBox="0 0 24 24"><path d="M21.44 11.05l-9.19 9.19a6 6 0 01-8.49-8.49l9.19-9.19a4 4 0 015.66 5.66l-9.2 9.19a2 2 0 01-2.83-2.83l8.49-8.48"/></svg>
+              <span class="sec-label">File Attachments</span>
+            </div>
+            <svg class="sec-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+          <div class="sec-body open">
+            <div class="dropzone" onclick="document.getElementById('fu').click()">
+              <svg viewBox="0 0 24 24"><polyline points="16 16 12 12 8 16"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.39 18.39A5 5 0 0018 9h-1.26A8 8 0 103 16.3"/></svg>
+              <p>Click to select files or drag and drop</p>
+              <small>PDF, DOC, DOCX, XLS, XLSX, TXT, PNG, JPG, GIF, WEBP</small>
+              <input type="file" id="fu" style="display:none" multiple onchange="dirty()"/>
+            </div>
+            <div class="att-empty">No files attached yet.</div>
+          </div>
+        </div>
+
+        <!-- SYSTEM INFO -->
+        <div class="sec-card">
+          <div class="sec-header open-sage" onclick="toggleSec(this)">
+            <div class="sec-left">
+              <svg class="sec-icon sage" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+              <span class="sec-label">System Information</span>
+            </div>
+            <svg class="sec-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+          <div class="sec-body open">
+            <div class="form-grid single">
+              <div class="ff"><label class="fl">Status</label><input class="fi" id="d-sysstatus" oninput="dirty()"/></div>
+              <div class="ff"><label class="fl">Assigned To</label><input class="fi" id="d-assignedto" oninput="dirty()"/></div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /right col -->
+    </div><!-- /two-col -->
+
+    <!-- FULL WIDTH: FAMILY OVERVIEW -->
+    <div class="full-sec">
+      <div class="sec-header open-sage" onclick="toggleSec(this)">
+        <div class="sec-left">
+          <svg class="sec-icon sage" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+          <span class="sec-label">Shared Family Overview</span>
+        </div>
+        <svg class="sec-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="sec-body open">
+        <div class="rich-wrap">
+          <div class="rich-toolbar">
+            <button class="rb" onclick="document.execCommand('bold')">B</button>
+            <button class="rb" style="font-style:italic" onclick="document.execCommand('italic')">I</button>
+            <button class="rb" style="text-decoration:underline" onclick="document.execCommand('underline')">U</button>
+          </div>
+          <div class="rich-content" contenteditable="true" id="rich-family" oninput="dirty()"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FULL WIDTH: CASE NOTES -->
+    <div class="full-sec">
+      <div class="sec-header open-sage" onclick="toggleSec(this)">
+        <div class="sec-left">
+          <svg class="sec-icon sage" viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+          <span class="sec-label">Case Notes (shared)</span>
+        </div>
+        <svg class="sec-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="sec-body open">
+        <div id="notes-feed" class="notes-feed">No case notes yet. Add the first note below.</div>
+        <label class="fl" style="display:block;margin-bottom:6px">Add Note</label>
+        <textarea class="fta" id="note-input" placeholder="Type a new note..." style="min-height:72px"></textarea>
+        <button onclick="addNote()" style="margin-top:10px;font-family:'Outfit',sans-serif;font-size:11px;font-weight:500;letter-spacing:1px;text-transform:uppercase;background:var(--ink);color:var(--parchment);border:none;border-radius:7px;padding:9px 18px;cursor:pointer;display:inline-flex;align-items:center;gap:6px;">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          Add Note
+        </button>
+      </div>
+    </div>
+
+  </div><!-- /detail-body -->
+</div><!-- /view-detail -->
+
+<script>
+const FAMILY_TEMPLATE = `<p><strong>3916 Brown St</strong></p>
+<p><br></p>
+<p><strong>Property Owner:</strong> David P. Smith<br>
+<strong>Listed Sale Date:</strong> 1972<br>
+<strong>Zoning:</strong> RSA5<br>
+<strong>Tax Debt:</strong> $16,232.37<br>
+<strong>L&I:</strong> N/A<br>
+<strong>Total Debt:</strong> $16,232.37<br>
+<strong>Deed:</strong> On File (Heirs, successors, and assigns forever)</p>
+<p><br></p>
+<p><strong>Estimated Property Value:</strong> $40,000 – $60,000</p>
+<p><br></p>
+<p><strong>Subject:</strong> David P. Smith</p>
+<ul>
+<li>Date of Death: David died before his mother. (Date unknown)</li>
+<li>Mother: Lucy Mae Avant (nee Moss)</li>
+<li>Children: 1</li>
+</ul>
+<p><strong>Children of David P. Smith</strong><br>
+Katrese Davida Collier (nee Smith)</p>
+<ul>
+<li>Age: 53</li>
+<li>Date of Birth: 1972</li>
+<li>Birthplace: Philadelphia, PA</li>
+<li>Spouse: Eugene Collier</li>
+</ul>
+<p>Notes: Katrese is a registered nurse in Philadelphia.</p>
+<p><br></p>
+<p><strong>Summary</strong><br>
+Ms. Lucy Mae Avant (nee Moss) (October 11, 1930 – February 22, 2006) purchased this property with Harvey Sparkman Jr. in 1971. They were both recorded as "single" at that time. She had one son, David Paul Smith. David had a daughter named Katrese Davida Smith in 1972. Ms. Avant named David as trustee for Katrese's property until she turned 21. Tax payments were made until 1997. Katrese has since married Eugene Collier and works as a registered nurse in Philadelphia.</p>
+<p><br></p>
+<p><strong>Option #1:</strong> Contact Katrese Collier regarding her property.</p>
+<p><br></p>
+<p><strong>Katrese D. Collier (nee Smith)</strong><br>
+Age: 53 · Spouse: Eugene Collier<br>
+Address: 415 65TH AVE, PHILADELPHIA, PA, 19126<br>
+Phone: 215-290-0602 · 215-301-5183 · 215-264-4988 · 215-548-1420 · 215-387-3247 · 215-588-1983</p>
+<p><em>Katrese Collier – (215) 290-0602</em><br>
+<em>10/30/25 – Agreed to be administrator</em></p>`;
+
+function openDetail(d) {
+  document.getElementById('view-list').style.display  = 'none';
+  document.getElementById('view-detail').style.display = 'flex';
+  document.getElementById('d-heading').textContent    = d.title;
+
+  const pill = document.getElementById('d-status-pill');
+  const pillMap = { NEW:'NEW', OUTREACH:'OUTREACH', VERBAL:'VERBAL' };
+  pill.textContent = pillMap[d.status] || d.status;
+  pill.style.background = d.status === 'VERBAL' ? 'var(--gold)' : d.status === 'OUTREACH' ? 'var(--rust)' : '#F59E0B';
+  pill.style.color = d.status === 'VERBAL' ? 'var(--ink)' : '#fff';
+
+  setv('d-title',        d.title);
+  setv('d-decedent',     d.owner);
+  setv('d-owner',        d.owner);
+  setv('d-marital',      d.marital);
+  setv('d-address',      d.address);
+  setv('d-zip',          d.zip);
+  setv('d-zoning',       d.zoning);
+  setv('d-sqft',         d.sqft);
+  setv('d-year',         d.year);
+  setv('d-deed',         d.deed);
+  setv('d-liens',        d.liens);
+  setv('d-taxes',        d.taxes);
+  setv('d-totaldebt',    d.totaldebt);
+  setv('d-estmin',       d.estmin);
+  setv('d-estmax',       d.estmax);
+  setv('d-cashoffer',    d.cashoffer);
+  setv('d-sysstatus',    d.sysstatus);
+  setv('d-assignedto',   d.assignedto);
+
+  const ct = document.getElementById('d-contracttype');
+  Array.from(ct.options).forEach(o => { o.selected = o.value === d.contracttype; });
+
+  // populate family overview for the main demo record
+  const rf = document.getElementById('rich-family');
+  rf.innerHTML = d.title === '3916 Brown St' ? FAMILY_TEMPLATE : '';
+
+  // reset notes
+  document.getElementById('notes-feed').innerHTML = 'No case notes yet. Add the first note below.';
+  document.getElementById('note-input').value = '';
+
+  clearDirty();
+  window.scrollTo(0, 0);
+}
+
+function closeDetail() {
+  document.getElementById('view-detail').style.display = 'none';
+  document.getElementById('view-list').style.display   = 'flex';
+}
+
+function setv(id, val) { const el = document.getElementById(id); if (el) el.value = val || ''; }
+
+function dirty() {
+  document.getElementById('unsaved-ind').classList.add('on');
+  document.getElementById('btn-discard').classList.add('on');
+  document.getElementById('btn-save').classList.add('on');
+}
+
+function clearDirty() {
+  document.getElementById('unsaved-ind').classList.remove('on');
+  document.getElementById('btn-discard').classList.remove('on');
+  document.getElementById('btn-save').classList.remove('on');
+}
+
+function save() {
+  clearDirty();
+  const btn = document.getElementById('btn-save');
+  btn.textContent = 'Saved ✓';
+  setTimeout(() => { btn.textContent = 'Save'; }, 1800);
+}
+
+function discard() { clearDirty(); }
+
+function toggleSec(header) {
+  const body = header.nextElementSibling;
+  const isOpen = header.classList.contains('open') || header.classList.contains('open-gold') || header.classList.contains('open-sage');
+  const colorClass = header.classList.contains('open-gold') ? 'open-gold' : header.classList.contains('open-sage') ? 'open-sage' : 'open';
+  if (isOpen) {
+    header.classList.remove('open','open-gold','open-sage');
+    body.classList.remove('open');
+  } else {
+    header.classList.add(colorClass);
+    body.classList.add('open');
+  }
+}
+
+function toggleGroup(id, row) {
+  const body = document.getElementById(id);
+  const toggle = row.querySelector('.group-toggle');
+  const collapsed = body.classList.toggle('collapsed');
+  toggle.textContent = collapsed ? '+' : '−';
+}
+
+function addNote() {
+  const input = document.getElementById('note-input');
+  const text  = input.value.trim();
+  if (!text) return;
+  const feed  = document.getElementById('notes-feed');
+  if (feed.style.fontStyle === 'italic' || feed.textContent.includes('No case notes')) {
+    feed.innerHTML = '';
+    feed.style.fontStyle = 'normal';
+    feed.style.color = 'var(--text-main)';
+  }
+  const now = new Date().toLocaleDateString('en-US', { month:'short', day:'numeric', year:'numeric' });
+  const entry = document.createElement('div');
+  entry.className = 'note-entry';
+  entry.innerHTML = `<div class="note-meta">${now}</div>${text}`;
+  feed.appendChild(entry);
+  input.value = '';
+  dirty();
+}
+
+function filterList(q) {
+  q = q.toLowerCase();
+  document.querySelectorAll('.group-body tbody tr').forEach(r => {
+    r.style.display = !q || r.textContent.toLowerCase().includes(q) ? '' : 'none';
+  });
+}
+
+function filterListStatus(s) {
+  document.querySelectorAll('.group-body tbody tr').forEach(r => {
+    r.style.display = !s || r.textContent.toLowerCase().includes(s.toLowerCase()) ? '' : 'none';
+  });
+}
+</script>
+
+<script id="sidebar-shared-js">
+(function() {
+  const sidebar = document.getElementById('sidebar');
+  const mains   = document.querySelectorAll('.main-wrapper, .main');
+  window.toggleSidebar = function() {
+    sidebar.classList.toggle('collapsed');
+    mains.forEach(m => m.classList.toggle('sidebar-collapsed'));
+  };
+  window.toggleSection = function(id) {
+    document.getElementById(id).classList.toggle('open');
+  };
+})();
+</script>
+</body>
+</html>
