@@ -5,268 +5,21 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Seek Research — Executive Portal</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
-<style>
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-:root {
-  --ink:           #18160F;
-  --parchment:     #F2ECE0;
-  --parchment-mid: #EDE5D3;
-  --parchment-dark:#D9CEB8;
-  --rust:          #B55A35;
-  --rust-light:    rgba(181,90,53,0.08);
-  --gold:          #C4A05A;
-  --gold-light:    rgba(196,160,90,0.12);
-  --sage:          #6B7C6E;
-  --sage-light:    rgba(107,124,110,0.1);
-  --text-main:     #2C2A22;
-  --text-muted:    #8A8070;
-  --white:         #FFFFFF;
-}
-
-body { font-family:'Outfit',sans-serif; background:var(--parchment-mid); color:var(--text-main); height:100vh; display:flex; overflow:hidden; }
-
-/* SIDEBAR */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* MAIN */
-.content { flex:1; overflow-y:auto; padding:32px 28px; display:flex; flex-direction:column; gap:20px; min-width:0; }
-
-/* TOPBAR */
-.topbar { display:flex; align-items:flex-start; justify-content:space-between; gap:16px; }
-.topbar-eyebrow { font-size:11px; letter-spacing:2.5px; text-transform:uppercase; color:var(--text-muted); margin-bottom:4px; }
-.topbar-title { font-family:'Cormorant Garamond',serif; font-size:28px; font-weight:300; color:var(--ink); line-height:1.1; }
-.topbar-title em { font-style:italic; color:var(--gold); }
-.view-badge { display:inline-flex; align-items:center; gap:6px; font-size:11px; letter-spacing:1.5px; text-transform:uppercase; font-weight:500; color:var(--gold); background:var(--gold-light); border:1px solid rgba(196,160,90,0.25); border-radius:20px; padding:5px 14px; margin-top:6px; }
-.view-badge-dot { width:6px; height:6px; border-radius:50%; background:var(--gold); }
-.nav-links { display:flex; gap:4px; flex-shrink:0; }
-.nav-link { font-size:12px; letter-spacing:1px; text-transform:uppercase; color:var(--text-muted); text-decoration:none; padding:8px 14px; border-radius:6px; transition:background 0.15s,color 0.15s; }
-.nav-link:hover { background:var(--parchment); color:var(--ink); }
-
-/* IMPERSONATION */
-.impersonation-bar { background:var(--gold-light); border:1px solid rgba(196,160,90,0.3); border-radius:10px; padding:12px 18px; display:flex; align-items:center; gap:12px; flex-wrap:wrap; }
-.impersonation-label { display:flex; align-items:center; gap:7px; font-size:12px; font-weight:500; color:#7a5c1a; white-space:nowrap; }
-.impersonation-select { font-family:'Outfit',sans-serif; font-size:13px; color:var(--ink); background:var(--white); border:1px solid var(--parchment-dark); border-radius:7px; padding:7px 12px; outline:none; cursor:pointer; flex:1; min-width:180px; max-width:280px; }
-.impersonation-select:focus { border-color:var(--gold); }
-.impersonate-btn { font-family:'Outfit',sans-serif; font-size:11px; font-weight:500; letter-spacing:1.5px; text-transform:uppercase; background:var(--gold); color:var(--ink); border:none; border-radius:7px; padding:9px 18px; cursor:pointer; transition:background 0.2s; white-space:nowrap; }
-.impersonate-btn:hover { background:#b08d48; }
-
-/* TABS CARD */
-.tabs-card { background:var(--white); border:1px solid var(--parchment-dark); border-radius:12px; overflow:hidden; flex:1; display:flex; flex-direction:column; min-height:0; }
-.tabs-header { display:flex; border-bottom:1px solid var(--parchment-mid); background:var(--parchment); overflow-x:auto; }
-.tab { display:flex; flex-direction:column; align-items:center; padding:12px 16px 0; cursor:pointer; white-space:nowrap; position:relative; transition:background 0.15s; flex:1; }
-.tab:hover { background:var(--parchment-mid); }
-.tab-inner { display:flex; align-items:center; gap:7px; padding-bottom:12px; }
-.tab-label { font-size:11px; font-weight:500; letter-spacing:0.8px; text-transform:uppercase; color:var(--text-muted); transition:color 0.2s; }
-.tab.active .tab-label { color:var(--ink); }
-.tab-count-badge { font-size:10px; font-weight:600; background:var(--parchment-dark); color:var(--text-muted); border-radius:10px; padding:1px 7px; transition:background 0.2s,color 0.2s; }
-.tab.active .tab-count-badge { background:var(--rust); color:var(--white); }
-.tab-indicator { height:2px; width:100%; border-radius:2px 2px 0 0; background:transparent; transition:background 0.2s; }
-.tab.active .tab-indicator { background:var(--rust); }
-
-/* TAB BODY */
-.tabs-body { flex:1; display:flex; overflow:hidden; min-height:0; }
-.tab-panel { display:none; flex:1; overflow:hidden; flex-direction:column; }
-.tab-panel.active { display:flex; }
-
-/* FILTER BAR */
-.filter-bar { display:flex; align-items:center; gap:10px; padding:12px 16px; border-bottom:1px solid var(--parchment-mid); background:var(--parchment); flex-shrink:0; flex-wrap:wrap; }
-.filter-search { font-family:'Outfit',sans-serif; font-size:12px; color:var(--ink); background:var(--white); border:1px solid var(--parchment-dark); border-radius:7px; padding:7px 12px 7px 32px; outline:none; width:200px; transition:border-color 0.2s; }
-.filter-search:focus { border-color:var(--rust); }
-.filter-search-wrap { position:relative; }
-.filter-search-icon { position:absolute; left:9px; top:50%; transform:translateY(-50%); pointer-events:none; }
-.filter-search-icon svg { width:13px; height:13px; stroke:var(--text-muted); fill:none; stroke-width:1.5; stroke-linecap:round; }
-.filter-select { font-family:'Outfit',sans-serif; font-size:12px; color:var(--ink); background:var(--white); border:1px solid var(--parchment-dark); border-radius:7px; padding:7px 12px; outline:none; cursor:pointer; }
-.filter-select:focus { border-color:var(--rust); }
-.filter-count { font-size:11px; color:var(--text-muted); margin-left:auto; font-weight:300; }
-.create-btn { font-family:'Outfit',sans-serif; font-size:11px; font-weight:500; letter-spacing:1px; text-transform:uppercase; background:var(--ink); color:var(--parchment); border:none; border-radius:7px; padding:7px 14px; cursor:pointer; display:inline-flex; align-items:center; gap:6px; transition:background 0.2s; white-space:nowrap; }
-.create-btn:hover { background:#2e2b1f; }
-.create-btn svg { width:12px; height:12px; stroke:currentColor; fill:none; stroke-width:2; stroke-linecap:round; }
-
-/* SPLIT */
-.split { display:flex; flex:1; overflow:hidden; }
-.table-side { flex:1; overflow-y:auto; border-right:1px solid var(--parchment-mid); min-width:0; display:flex; flex-direction:column; }
-
-table { width:100%; border-collapse:collapse; font-size:12.5px; }
-thead th { font-size:10px; letter-spacing:2px; text-transform:uppercase; font-weight:500; color:var(--text-muted); padding:10px 14px; text-align:left; border-bottom:1px solid var(--parchment-mid); background:var(--parchment); white-space:nowrap; position:sticky; top:0; z-index:1; }
-tbody tr { border-bottom:1px solid var(--parchment-mid); cursor:pointer; transition:background 0.12s; }
-tbody tr:last-child { border-bottom:none; }
-tbody tr:hover { background:rgba(242,236,224,0.5); }
-tbody tr.selected { background:var(--rust-light); border-left:3px solid var(--rust); }
-tbody td { padding:10px 14px; vertical-align:middle; }
-tbody tr.selected td:first-child { padding-left:11px; }
-.td-main { font-weight:400; color:var(--ink); }
-.td-muted { color:var(--text-muted); font-weight:300; font-size:12px; }
-.row-id { font-size:10px; letter-spacing:1px; color:var(--text-muted); }
-
-/* STATUS PILLS */
-.status-pill { display:inline-flex; align-items:center; gap:4px; font-size:10px; font-weight:500; border-radius:20px; padding:2px 9px; white-space:nowrap; }
-.status-pill.submitted   { background:rgba(107,124,110,0.1); color:var(--sage); }
-.status-pill.accepted    { background:var(--gold-light); color:#8a6020; }
-.status-pill.greenlit    { background:rgba(107,124,110,0.15); color:#3d5c41; }
-.status-pill.inreview    { background:rgba(196,160,90,0.1); color:#8a7030; }
-.status-pill.rejected    { background:var(--rust-light); color:var(--rust); }
-.status-dot { width:5px; height:5px; border-radius:50%; background:currentColor; }
-
-/* PAGINATION */
-.pagination { display:flex; align-items:center; justify-content:space-between; padding:10px 14px; border-top:1px solid var(--parchment-mid); background:var(--parchment); flex-shrink:0; }
-.pagination-info { font-size:11px; color:var(--text-muted); font-weight:300; }
-.pagination-btns { display:flex; gap:4px; align-items:center; }
-.page-btn { font-family:'Outfit',sans-serif; font-size:11px; font-weight:500; color:var(--text-muted); background:var(--white); border:1px solid var(--parchment-dark); border-radius:6px; padding:5px 12px; cursor:pointer; transition:all 0.15s; }
-.page-btn:hover:not(:disabled) { border-color:var(--rust); color:var(--rust); }
-.page-btn:disabled { opacity:0.4; cursor:default; }
-.page-btn.current { background:var(--rust); color:var(--white); border-color:var(--rust); }
-
-/* DETAIL SIDE */
-.detail-side { width:300px; flex-shrink:0; overflow-y:auto; background:var(--white); display:flex; flex-direction:column; }
-.detail-empty { flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:32px 20px; text-align:center; gap:10px; }
-.detail-empty-icon { width:44px; height:44px; border-radius:50%; background:var(--parchment-mid); display:flex; align-items:center; justify-content:center; margin-bottom:6px; }
-.detail-empty-icon svg { width:18px; height:18px; stroke:var(--text-muted); fill:none; stroke-width:1.3; stroke-linecap:round; }
-.detail-empty-text { font-family:'Cormorant Garamond',serif; font-size:16px; font-style:italic; font-weight:300; color:var(--text-muted); }
-.detail-empty-sub { font-size:12px; font-weight:300; color:var(--text-muted); opacity:0.7; }
-
-.detail-content { display:none; flex-direction:column; }
-.detail-content.visible { display:flex; }
-.detail-header { padding:16px 18px 12px; border-bottom:1px solid var(--parchment-mid); background:var(--parchment); position:relative; }
-.detail-id { font-size:10px; letter-spacing:2px; text-transform:uppercase; color:var(--rust); font-weight:500; margin-bottom:3px; }
-.detail-title { font-family:'Cormorant Garamond',serif; font-size:16px; font-weight:400; color:var(--ink); line-height:1.3; padding-right:18px; }
-.unsaved-dot { position:absolute; top:14px; right:16px; width:8px; height:8px; border-radius:50%; background:var(--rust); display:none; }
-.unsaved-dot.visible { display:block; }
-
-.detail-body { padding:12px 18px; display:flex; flex-direction:column; gap:0; flex:1; }
-.detail-field { display:flex; flex-direction:column; gap:3px; padding:8px 0; border-bottom:1px solid var(--parchment-mid); }
-.detail-field:last-of-type { border-bottom:none; }
-.detail-field-key { font-size:10px; letter-spacing:1.5px; text-transform:uppercase; color:var(--text-muted); font-weight:500; }
-.detail-field-val { font-size:13px; font-weight:400; color:var(--ink); }
-.detail-field-val.muted { font-weight:300; color:var(--text-muted); }
-
-.detail-input { font-family:'Outfit',sans-serif; font-size:12px; color:var(--ink); background:var(--parchment-mid); border:1px solid var(--parchment-dark); border-radius:6px; padding:6px 9px; outline:none; width:100%; transition:border-color 0.2s; }
-.detail-input:focus { border-color:var(--rust); }
-.detail-textarea { font-family:'Outfit',sans-serif; font-size:12px; font-weight:300; color:var(--ink); background:var(--parchment-mid); border:1px solid var(--parchment-dark); border-radius:6px; padding:6px 9px; outline:none; width:100%; resize:vertical; min-height:60px; transition:border-color 0.2s; }
-.detail-textarea:focus { border-color:var(--rust); }
-.status-select { font-family:'Outfit',sans-serif; font-size:12px; color:var(--ink); background:var(--parchment-mid); border:1px solid var(--parchment-dark); border-radius:6px; padding:6px 9px; outline:none; cursor:pointer; width:100%; transition:border-color 0.2s; }
-.status-select:focus { border-color:var(--rust); }
-
-.detail-footer { padding:12px 18px; border-top:1px solid var(--parchment-mid); background:var(--parchment); display:flex; flex-direction:column; gap:7px; }
-.save-btn { font-family:'Outfit',sans-serif; font-size:11px; font-weight:500; letter-spacing:1.5px; text-transform:uppercase; background:var(--rust); color:var(--parchment); border:none; border-radius:7px; padding:10px; cursor:pointer; width:100%; transition:background 0.2s; }
-.save-btn:hover { background:#9E4C2B; }
-.save-btn.secondary { background:var(--ink); font-size:9.5px; padding:9px; }
-.save-btn.secondary:hover { background:#2e2b1f; }
-
-/* TOOLTIP */
-[data-tip] { position:relative; }
-[data-tip]:hover::after { content:attr(data-tip); position:absolute; bottom:calc(100% + 6px); left:50%; transform:translateX(-50%); background:var(--ink); color:var(--parchment); font-size:10px; font-weight:400; letter-spacing:0.3px; white-space:nowrap; padding:4px 9px; border-radius:5px; pointer-events:none; z-index:100; font-family:'Outfit',sans-serif; }
-
-/* RIGHT PANEL */
-.panel { width:232px; flex-shrink:0; background:var(--white); border-left:1px solid var(--parchment-dark); overflow-y:auto; display:flex; flex-direction:column; }
-.panel-hero { background:var(--ink); padding:24px 16px 20px; display:flex; flex-direction:column; align-items:center; gap:8px; }
-.avatar { width:50px; height:50px; border-radius:50%; background:linear-gradient(135deg,var(--gold) 0%,#9e6a1a 100%); display:flex; align-items:center; justify-content:center; font-size:18px; font-weight:600; color:var(--ink); border:2px solid rgba(196,160,90,0.3); }
-.panel-role { font-size:9px; letter-spacing:2px; text-transform:uppercase; color:var(--gold); font-weight:600; background:rgba(196,160,90,0.12); border:1px solid rgba(196,160,90,0.22); border-radius:4px; padding:3px 10px; }
-.panel-name { font-family:'Cormorant Garamond',serif; font-size:16px; font-weight:400; color:var(--parchment); text-align:center; line-height:1.2; }
-.panel-email { font-size:10px; color:rgba(242,236,224,0.38); font-weight:300; text-align:center; }
-.panel-section { padding:16px; border-bottom:1px solid var(--parchment-mid); }
-.panel-section:last-child { border-bottom:none; }
-.panel-section-label { font-size:9px; letter-spacing:2.5px; text-transform:uppercase; color:var(--text-muted); font-weight:500; margin-bottom:11px; }
-.stat-row { display:flex; align-items:center; justify-content:space-between; margin-bottom:8px; }
-.stat-row:last-child { margin-bottom:0; }
-.stat-key { font-size:12px; font-weight:300; color:var(--text-muted); }
-.stat-val { font-family:'Cormorant Garamond',serif; font-size:17px; font-weight:400; color:var(--ink); }
-.stat-val.rust { color:var(--rust); }
-.stat-val.gold { color:var(--gold); }
-.panel-footer { padding:14px 16px; margin-top:auto; border-top:1px solid var(--parchment-mid); }
-.panel-footer p { font-family:'Cormorant Garamond',serif; font-size:11px; font-style:italic; font-weight:300; color:var(--text-muted); line-height:1.5; text-align:center; }
-
-/* EMPTY TAB */
-.tab-empty { flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:10px; padding:48px 24px; text-align:center; }
-.tab-empty-ornament { width:52px; height:52px; border-radius:50%; background:var(--parchment-mid); display:flex; align-items:center; justify-content:center; margin-bottom:6px; }
-.tab-empty-ornament svg { width:20px; height:20px; stroke:var(--text-muted); fill:none; stroke-width:1.3; stroke-linecap:round; stroke-linejoin:round; }
-.tab-empty-headline { font-family:'Cormorant Garamond',serif; font-size:20px; font-style:italic; font-weight:300; color:var(--ink); }
-.tab-empty-body { font-size:13px; font-weight:300; color:var(--text-muted); max-width:280px; line-height:1.7; }
-
-/* ── SHARED SIDEBAR ── */
-:root { --sidebar-w: 220px; }
-.sidebar {
-  width: var(--sidebar-w);
-  background: var(--ink);
-  display: flex;
-  flex-direction: column;
-  padding: 28px 0 24px;
-  flex-shrink: 0;
-  position: fixed;
-  top: 0; left: 0;
-  height: 100vh;
-  z-index: 20;
-  transition: width 0.25s ease;
-  overflow: hidden;
-}
-.sidebar.collapsed { width: 72px; }
-.sidebar-logo { display:flex; align-items:center; gap:12px; padding:0 18px; margin-bottom:32px; cursor:pointer; text-decoration:none; }
-.logo-mark { display:flex; flex-direction:column; align-items:center; gap:3px; flex-shrink:0; }
-.logo-s { font-size:22px; font-weight:600; color:var(--parchment); line-height:1; }
-.logo-text { display:flex; flex-direction:column; overflow:hidden; white-space:nowrap; opacity:1; transition:opacity 0.2s; }
-.sidebar.collapsed .logo-text { opacity:0; width:0; }
-.logo-name { font-family:'Outfit',sans-serif; font-size:15px; font-weight:600; color:var(--parchment); letter-spacing:2px; text-transform:uppercase; }
-.logo-sub  { font-size:9px; letter-spacing:2px; text-transform:uppercase; color:rgba(242,236,224,0.4); font-weight:400; }
-.sidebar-toggle { position:absolute; top:28px; right:-12px; width:24px; height:24px; background:var(--rust); border-radius:50%; display:flex; align-items:center; justify-content:center; cursor:pointer; z-index:30; border:2px solid var(--ink); transition:transform 0.25s; }
-.sidebar.collapsed .sidebar-toggle { transform:rotate(180deg); }
-.sidebar-toggle svg { width:10px; height:10px; stroke:#fff; fill:none; stroke-width:2.5; stroke-linecap:round; stroke-linejoin:round; }
-.sidebar-nav { flex:1; overflow-y:auto; overflow-x:hidden; padding-bottom:16px; }
-.nav-section { margin-bottom:4px; }
-.nav-section-header { display:flex; align-items:center; justify-content:space-between; padding:8px 18px; cursor:pointer; user-select:none; transition:background 0.15s; }
-.nav-section-header:hover { background:rgba(242,236,224,0.05); }
-.nav-section-left { display:flex; align-items:center; gap:10px; overflow:hidden; white-space:nowrap; }
-.nav-section-icon { width:16px; height:16px; stroke:rgba(242,236,224,0.4); fill:none; stroke-width:1.5; stroke-linecap:round; stroke-linejoin:round; flex-shrink:0; }
-.nav-section-label { font-size:10px; letter-spacing:2px; text-transform:uppercase; color:rgba(242,236,224,0.4); font-weight:500; transition:opacity 0.2s; }
-.sidebar.collapsed .nav-section-label { opacity:0; }
-.nav-chevron { width:12px; height:12px; stroke:rgba(242,236,224,0.3); fill:none; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; transition:transform 0.2s, opacity 0.2s; flex-shrink:0; }
-.sidebar.collapsed .nav-chevron { opacity:0; }
-.nav-section.open .nav-chevron { transform:rotate(180deg); }
-.nav-items { overflow:hidden; max-height:0; transition:max-height 0.25s ease; }
-.nav-section.open .nav-items { max-height:300px; }
-.nav-link { display:flex; align-items:center; gap:10px; padding:9px 18px 9px 42px; text-decoration:none; transition:background 0.15s; white-space:nowrap; overflow:hidden; border-left:3px solid transparent; }
-.nav-link:hover { background:rgba(242,236,224,0.07); }
-.nav-link.active { background:rgba(181,90,53,0.15); border-left-color:var(--rust); }
-.sidebar.collapsed .nav-link { padding-left:18px; justify-content:center; }
-.nav-link-icon { width:15px; height:15px; stroke:rgba(242,236,224,0.45); fill:none; stroke-width:1.5; stroke-linecap:round; stroke-linejoin:round; flex-shrink:0; }
-.nav-link.active .nav-link-icon { stroke:var(--rust); }
-.nav-link-label { font-size:13px; color:rgba(242,236,224,0.6); font-weight:300; transition:opacity 0.2s; }
-.nav-link.active .nav-link-label { color:var(--parchment); font-weight:400; }
-.sidebar.collapsed .nav-link-label { opacity:0; width:0; }
-.nav-divider { height:1px; background:rgba(242,236,224,0.07); margin:8px 18px; }
-.sidebar-bottom { padding:0 18px; display:flex; flex-direction:column; gap:8px; overflow:hidden; }
-.sidebar-user { display:flex; align-items:center; gap:10px; white-space:nowrap; }
-.sb-avatar { width:32px; height:32px; border-radius:50%; background:linear-gradient(135deg,var(--gold),var(--rust)); display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:600; color:var(--parchment); flex-shrink:0; }
-.user-info { overflow:hidden; transition:opacity 0.2s; }
-.sidebar.collapsed .user-info { opacity:0; width:0; }
-.user-name { font-size:12px; font-weight:500; color:var(--parchment); }
-.user-email { font-size:10px; color:rgba(242,236,224,0.35); }
-.sb-signout { display:flex; align-items:center; gap:8px; font-size:11px; color:rgba(242,236,224,0.35); cursor:pointer; padding:4px 0; transition:color 0.15s; white-space:nowrap; }
-.sb-signout:hover { color:rgba(242,236,224,0.7); }
-.sb-signout svg { width:14px; height:14px; stroke:currentColor; fill:none; stroke-width:1.5; stroke-linecap:round; flex-shrink:0; }
-.sb-signout-label { transition:opacity 0.2s; }
-.sidebar.collapsed .sb-signout-label { opacity:0; width:0; }
-
-/* sidebar-aware margin */
-.main-wrapper, .main { margin-left: var(--sidebar-w); transition: margin-left 0.25s ease; }
-.main-wrapper.sidebar-collapsed, .main.sidebar-collapsed { margin-left: 72px; }
-
-</style>
+<link rel="stylesheet" href="styles.css">
 </head>
-<body>
+<body class="fixed-layout">
+
+<!-- MOBILE HEADER -->
+<div class="mobile-header">
+  <button class="hamburger" onclick="openMobileSidebar()" aria-label="Open menu">
+    <span></span><span></span><span></span>
+  </button>
+  <a class="mobile-logo" href="index.html">
+    <span class="mobile-logo-s">S</span>
+    <span class="mobile-logo-name">Seek</span>
+  </a>
+</div>
+<div class="sidebar-overlay" id="sidebar-overlay"></div>
 
 <aside class="sidebar" id="sidebar">
   <div class="sidebar-toggle" onclick="toggleSidebar()">
@@ -355,11 +108,11 @@ tbody tr.selected td:first-child { padding-left:11px; }
     <div>
       <div class="topbar-eyebrow">Executive Portal</div>
       <div class="topbar-title">Full <em>command view.</em></div>
-      <div class="view-badge"><span class="view-badge-dot"></span>Executive · als.s.sanches@gmail.com</div>
+      <div class="view-badge gold"><span class="view-badge-dot"></span>Executive · als.s.sanches@gmail.com</div>
     </div>
     <div class="nav-links">
-      <a class="nav-link" href="#">About Us</a>
-      <a class="nav-link" href="#">Contact Us</a>
+      <a class="topbar-nav-link" href="#">About Us</a>
+      <a class="topbar-nav-link" href="#">Contact Us</a>
     </div>
   </div>
 
@@ -413,7 +166,7 @@ tbody tr.selected td:first-child { padding-left:11px; }
         <div class="split">
           <div class="table-side">
             <table>
-              <thead><tr><th>Address</th><th>Neighborhood</th><th>Max Pay</th><th>Status</th><th>ID</th></tr></thead>
+              <thead><tr><th class="sticky">Address</th><th class="sticky">Neighborhood</th><th class="sticky">Max Pay</th><th class="sticky">Status</th><th class="sticky">ID</th></tr></thead>
               <tbody id="buyer-tbody">
                 <tr onclick="selectBuyer(this)" data-id="1" data-address="some street 42" data-neighborhood="northside" data-maxpay="$70,000" data-sentby="alfabot@gmail.com" data-attachments="false" data-author="6" data-editor="6" data-status="Submitted">
                   <td class="td-main">some street 42</td><td class="td-muted">northside</td><td class="td-muted">$70,000</td>
@@ -461,6 +214,10 @@ tbody tr.selected td:first-child { padding-left:11px; }
                 </tr>
               </tbody>
             </table>
+            <div class="empty-filter-state" id="empty-buyer">
+              <div class="empty-filter-icon">🔍</div>
+              <div class="empty-filter-msg">No results for <strong><span class="empty-filter-query"></span></strong></div>
+            </div>
             <div class="pagination">
               <span class="pagination-info" id="buyer-page-info">Page 1 of 2</span>
               <div class="pagination-btns">
@@ -498,7 +255,7 @@ tbody tr.selected td:first-child { padding-left:11px; }
                 </div>
               </div>
               <div class="detail-footer">
-                <button class="save-btn" onclick="clearUnsaved('b-unsaved')">Save Status</button>
+                <button class="save-btn" onclick="saveStatus('b-unsaved')">Save Status</button>
               </div>
             </div>
           </div>
@@ -525,7 +282,7 @@ tbody tr.selected td:first-child { padding-left:11px; }
         <div class="split">
           <div class="table-side">
             <table>
-              <thead><tr><th>Title</th><th>Buyer / LLC</th><th>Method</th><th>Status</th><th>ID</th></tr></thead>
+              <thead><tr><th class="sticky">Title</th><th class="sticky">Buyer / LLC</th><th class="sticky">Method</th><th class="sticky">Status</th><th class="sticky">ID</th></tr></thead>
               <tbody id="contact-tbody">
                 <tr onclick="selectContact(this)" data-id="32" data-title="Rafi Balk" data-llc="4 Castle LLC" data-method="Phone" data-contactname="Rafi" data-email="test@gmail.com" data-phone="555-555-1212" data-notes="Buying RM1" data-nextsteps="Log Criteria" data-status="Got buyer criteria">
                   <td class="td-main">Rafi Balk</td><td class="td-muted">4 Castle LLC</td><td class="td-muted">Phone</td>
@@ -545,6 +302,10 @@ tbody tr.selected td:first-child { padding-left:11px; }
                 </tr>
               </tbody>
             </table>
+            <div class="empty-filter-state" id="empty-contact">
+              <div class="empty-filter-icon">🔍</div>
+              <div class="empty-filter-msg">No results for <strong><span class="empty-filter-query"></span></strong></div>
+            </div>
             <div class="pagination">
               <span class="pagination-info">Page 1 of 12</span>
               <div class="pagination-btns">
@@ -592,7 +353,7 @@ tbody tr.selected td:first-child { padding-left:11px; }
                 </div>
               </div>
               <div class="detail-footer">
-                <button class="save-btn" onclick="clearUnsaved('c-unsaved')">Save Changes</button>
+                <button class="save-btn" onclick="saveStatus('c-unsaved')">Save Changes</button>
                 <button class="save-btn secondary">Create Buyer Criteria Submission from this Contact Log</button>
               </div>
             </div>
@@ -616,7 +377,7 @@ tbody tr.selected td:first-child { padding-left:11px; }
         <div class="split">
           <div class="table-side">
             <table>
-              <thead><tr><th>Title</th><th>Buyer / LLC</th><th>Property Type</th><th>Price Range</th><th>Status</th><th>ID</th></tr></thead>
+              <thead><tr><th class="sticky">Title</th><th class="sticky">Buyer / LLC</th><th class="sticky">Property Type</th><th class="sticky">Price Range</th><th class="sticky">Status</th><th class="sticky">ID</th></tr></thead>
               <tbody id="criteria-tbody">
                 <tr onclick="selectCriteria(this)" data-id="67" data-title="Rafi Balk" data-llc="4 Castle LLC" data-date="29/09/2025" data-contactname="Rafi" data-phone="555-555-1212" data-email="1218ezst@gmail.com" data-proptype="Vacant Lot" data-neighborhood="Temple Hospital" data-lotsize="1080" data-pricerange="50000-150000" data-exclusions="No RSA5" data-notes="" data-status="Accepted">
                   <td class="td-main">Rafi Balk</td><td class="td-muted">4 Castle LLC</td><td class="td-muted">Vacant Lot</td><td class="td-muted">$50k–$150k</td>
@@ -628,6 +389,10 @@ tbody tr.selected td:first-child { padding-left:11px; }
                 </tr>
               </tbody>
             </table>
+            <div class="empty-filter-state" id="empty-criteria">
+              <div class="empty-filter-icon">🔍</div>
+              <div class="empty-filter-msg">No results for <strong><span class="empty-filter-query"></span></strong></div>
+            </div>
             <div class="pagination">
               <span class="pagination-info">Page 1 of 15</span>
               <div class="pagination-btns">
@@ -675,7 +440,7 @@ tbody tr.selected td:first-child { padding-left:11px; }
                 </div>
               </div>
               <div class="detail-footer">
-                <button class="save-btn" onclick="clearUnsaved('bc-unsaved')">Save Changes</button>
+                <button class="save-btn" onclick="saveStatus('bc-unsaved')">Save Changes</button>
                 <button class="save-btn secondary">Create new Internal buyer submission from this criteria</button>
               </div>
             </div>
@@ -699,7 +464,7 @@ tbody tr.selected td:first-child { padding-left:11px; }
         <div class="split">
           <div class="table-side">
             <table>
-              <thead><tr><th>Title</th><th>Address</th><th>ZIP</th><th>Zoning</th><th>Max Offer</th><th>Status</th><th>ID</th></tr></thead>
+              <thead><tr><th class="sticky">Title</th><th class="sticky">Address</th><th class="sticky">ZIP</th><th class="sticky">Zoning</th><th class="sticky">Max Offer</th><th class="sticky">Status</th><th class="sticky">ID</th></tr></thead>
               <tbody id="internal-tbody">
                 <tr onclick="selectInternal(this)" data-id="45" data-title="Rafi Balk" data-date="29/09/2025" data-address="3916 Brown St" data-zip="19104" data-zoning="RSA5" data-sqft="16" data-frontage="16" data-taxstatus="16232.37" data-liens="0" data-redflags="" data-buyermatch="Rafi" data-notes="" data-status="Greenlit by Seek" data-maxoffer="100000">
                   <td class="td-main">Rafi Balk</td><td class="td-muted">3916 Brown St</td><td class="td-muted">19104</td><td class="td-muted">RSA5</td><td class="td-muted">$100k</td>
@@ -715,6 +480,10 @@ tbody tr.selected td:first-child { padding-left:11px; }
                 </tr>
               </tbody>
             </table>
+            <div class="empty-filter-state" id="empty-internal">
+              <div class="empty-filter-icon">🔍</div>
+              <div class="empty-filter-msg">No results for <strong><span class="empty-filter-query"></span></strong></div>
+            </div>
             <div class="pagination">
               <span class="pagination-info">Page 1 of 14</span>
               <div class="pagination-btns">
@@ -763,7 +532,7 @@ tbody tr.selected td:first-child { padding-left:11px; }
                 <div class="detail-field"><span class="detail-field-key">Max Offer</span><input class="detail-input" id="ip-maxoffer" type="text" oninput="markUnsaved('ip-unsaved')"/></div>
               </div>
               <div class="detail-footer">
-                <button class="save-btn" onclick="clearUnsaved('ip-unsaved')">Save Changes</button>
+                <button class="save-btn" onclick="saveStatus('ip-unsaved')">Save Changes</button>
               </div>
             </div>
           </div>
@@ -837,6 +606,19 @@ function filterTable(tbodyId, search, selectId) {
     const matchStatus = !status || rowStatus.includes(status);
     r.style.display = matchSearch && matchStatus ? '' : 'none';
   });
+  const emptyMap = {
+    'buyer-tbody':    'empty-buyer',
+    'contact-tbody':  'empty-contact',
+    'criteria-tbody': 'empty-criteria',
+    'internal-tbody': 'empty-internal',
+  };
+  const emptyEl = document.getElementById(emptyMap[tbodyId]);
+  if (emptyEl) checkEmpty(rows, emptyEl, q || status);
+}
+
+function saveStatus(dotId) {
+  clearUnsaved(dotId);
+  showToast('Status updated', 'success');
 }
 
 // page state for buyer tab (demo)
@@ -968,18 +750,7 @@ function selectInternal(row) {
 renderBuyerPage();
 </script>
 
-<script id="sidebar-shared-js">
-(function() {
-  const sidebar = document.getElementById('sidebar');
-  const mains   = document.querySelectorAll('.main-wrapper, .main');
-  window.toggleSidebar = function() {
-    sidebar.classList.toggle('collapsed');
-    mains.forEach(m => m.classList.toggle('sidebar-collapsed'));
-  };
-  window.toggleSection = function(id) {
-    document.getElementById(id).classList.toggle('open');
-  };
-})();
-</script>
+<script src="sidebar.js" defer></script>
+<script src="ui.js" defer></script>
 </body>
 </html>
