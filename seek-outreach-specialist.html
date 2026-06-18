@@ -135,6 +135,13 @@
       </div>
     </div>
 
+    <!-- EMPTY FILTER STATE -->
+    <div class="empty-filter-state" id="empty-outreach">
+      <div class="empty-filter-icon">🔍</div>
+      <div class="empty-filter-msg">No results for <strong><span class="empty-filter-query"></span></strong></div>
+      <button class="empty-filter-clear" onclick="clearOutreachFilters()">Clear filters</button>
+    </div>
+
     <!-- GROUP: UNASSIGNED -->
     <div class="group-row" onclick="toggleGroup('g-unassigned', this)">
       <span class="group-toggle">−</span>
@@ -210,7 +217,7 @@
       </div>
     </div>
     <div class="detail-actions">
-      <button class="btn-discard" id="btn-discard" onclick="discard()">Discard</button>
+      <button class="btn-discard" id="btn-discard" onclick="confirmDiscard()">Discard</button>
       <button class="btn-save" id="btn-save" onclick="save()">Save</button>
     </div>
   </div>
@@ -338,13 +345,14 @@
             <svg class="sec-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
           </div>
           <div class="sec-body open">
-            <div class="dropzone" onclick="document.getElementById('fu').click()">
+            <div class="dropzone" id="dz-outreach" onclick="document.getElementById('fu').click()">
               <svg viewBox="0 0 24 24"><polyline points="16 16 12 12 8 16"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.39 18.39A5 5 0 0018 9h-1.26A8 8 0 103 16.3"/></svg>
               <p>Click to select files or drag and drop</p>
               <small>PDF, DOC, DOCX, XLS, XLSX, TXT, PNG, JPG, GIF, WEBP</small>
-              <input type="file" id="fu" style="display:none" multiple onchange="dirty()"/>
+              <input type="file" id="fu" style="display:none" multiple/>
             </div>
-            <div class="att-empty">No files attached yet.</div>
+            <div class="file-list" id="fl-outreach"></div>
+            <div class="att-empty" id="att-empty-outreach">No files attached yet.</div>
           </div>
         </div>
 
@@ -379,10 +387,10 @@
       </div>
       <div class="sec-body open">
         <div class="rich-wrap">
-          <div class="rich-toolbar">
-            <button class="rb" onclick="document.execCommand('bold')">B</button>
-            <button class="rb rb-italic" onclick="document.execCommand('italic')">I</button>
-            <button class="rb rb-underline" onclick="document.execCommand('underline')">U</button>
+          <div class="rich-toolbar" id="rt-family">
+            <button class="rb" data-cmd="bold"><b>B</b></button>
+            <button class="rb rb-italic" data-cmd="italic"><em>I</em></button>
+            <button class="rb rb-underline" data-cmd="underline"><u>U</u></button>
           </div>
           <div class="rich-content" contenteditable="true" id="rich-family" oninput="dirty()"></div>
         </div>
@@ -519,12 +527,18 @@ function clearDirty() {
 
 function save() {
   clearDirty();
+  showToast('Changes saved successfully', 'success');
   const btn = document.getElementById('btn-save');
   btn.textContent = 'Saved ✓';
   setTimeout(() => { btn.textContent = 'Save'; }, 1800);
 }
 
 function discard() { clearDirty(); }
+
+function confirmDiscard() {
+  if (!document.getElementById('unsaved-ind').classList.contains('on')) { discard(); return; }
+  showConfirm('Discard all unsaved changes?', discard, { danger: true, okLabel: 'Discard' });
+}
 
 function toggleSec(header) {
   const body = header.nextElementSibling;
@@ -570,15 +584,43 @@ function filterList(q) {
   document.querySelectorAll('.group-body tbody tr').forEach(r => {
     r.style.display = !q || r.textContent.toLowerCase().includes(q) ? '' : 'none';
   });
+  checkEmpty(document.querySelectorAll('.group-body tbody tr'), document.getElementById('empty-outreach'), q);
 }
 
 function filterListStatus(s) {
   document.querySelectorAll('.group-body tbody tr').forEach(r => {
     r.style.display = !s || r.textContent.toLowerCase().includes(s.toLowerCase()) ? '' : 'none';
   });
+  checkEmpty(document.querySelectorAll('.group-body tbody tr'), document.getElementById('empty-outreach'), s);
+}
+
+function clearOutreachFilters() {
+  document.querySelector('.filter-search').value = '';
+  document.querySelector('.filter-select').value = '';
+  document.querySelectorAll('.group-body tbody tr').forEach(r => { r.style.display = ''; });
+  document.getElementById('empty-outreach').style.display = 'none';
 }
 </script>
 
 <script src="sidebar.js" defer></script>
+<script src="ui.js" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  // Drag-drop file upload
+  const dz = document.getElementById('dz-outreach');
+  const inp = document.getElementById('fu');
+  const fl = document.getElementById('fl-outreach');
+  const attEmpty = document.getElementById('att-empty-outreach');
+  initDropzone(dz, inp, fl, function (files) {
+    attEmpty.style.display = files.size > 0 ? 'none' : '';
+    dirty();
+  });
+
+  // Rich text active state
+  const toolbar = document.getElementById('rt-family');
+  const editor  = document.getElementById('rich-family');
+  if (toolbar && editor) initRichBtns(toolbar, editor);
+});
+</script>
 </body>
 </html>

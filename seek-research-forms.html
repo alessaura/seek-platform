@@ -135,6 +135,11 @@
         </select>
       </div>
     </div>
+    <div class="empty-filter-state" id="empty-forms">
+      <div class="empty-filter-icon">🔍</div>
+      <div class="empty-filter-msg">No results for <strong><span class="empty-filter-query"></span></strong></div>
+      <button class="empty-filter-clear" onclick="clearFormsFilters()">Clear filters</button>
+    </div>
     <div class="table-wrap">
       <table>
         <thead>
@@ -223,7 +228,7 @@
     </div>
 
     <div class="detail-actions">
-      <button class="btn-discard" id="btn-discard" onclick="discardChanges()">Discard</button>
+      <button class="btn-discard" id="btn-discard" onclick="confirmDiscardChanges()">Discard</button>
       <button class="btn-save" id="btn-save" onclick="saveChanges()">Save</button>
     </div>
   </div>
@@ -389,12 +394,12 @@
         <div class="form-field form-field-mb">
           <label class="field-label field-label-mb">Family Overview (shared)</label>
           <div class="rich-wrap">
-            <div class="rich-toolbar">
-              <button class="rich-btn" onclick="execCmd('bold')">B</button>
-              <button class="rich-btn rich-btn-italic" onclick="execCmd('italic')">I</button>
-              <button class="rich-btn rich-btn-underline" onclick="execCmd('underline')">U</button>
+            <div class="rich-toolbar" id="rt-forms-family">
+              <button class="rich-btn" data-cmd="bold"><b>B</b></button>
+              <button class="rich-btn rich-btn-italic" data-cmd="italic"><em>I</em></button>
+              <button class="rich-btn rich-btn-underline" data-cmd="underline"><u>U</u></button>
             </div>
-            <div class="rich-content" contenteditable="true" oninput="markDirty('family')"></div>
+            <div class="rich-content" contenteditable="true" id="rich-forms-family" oninput="markDirty('family')"></div>
           </div>
         </div>
         <div class="form-field">
@@ -432,15 +437,16 @@
       <div class="acc-panel" id="panel-files">
         <div class="panel-title">File <em>Attachments</em></div>
         <label class="field-label field-label-block-mb">Attach Files</label>
-        <div class="dropzone" onclick="document.getElementById('file-input').click()">
+        <div class="dropzone" id="dz-forms" onclick="document.getElementById('file-input').click()">
           <div class="dropzone-icon">
             <svg viewBox="0 0 24 24"><polyline points="16 16 12 12 8 16"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.39 18.39A5 5 0 0018 9h-1.26A8 8 0 103 16.3"/></svg>
           </div>
           <div class="dropzone-text">Click to select files or drag and drop</div>
           <div class="dropzone-sub">PDF, DOC, DOCX, XLS, XLSX, TXT, PNG, JPG, GIF, WEBP</div>
-          <input type="file" id="file-input" style="display:none" multiple onchange="markDirty('files')"/>
+          <input type="file" id="file-input" style="display:none" multiple/>
         </div>
-        <div class="attachment-empty">No files attached yet.</div>
+        <div class="file-list" id="fl-forms"></div>
+        <div class="attachment-empty" id="att-empty-forms">No files attached yet.</div>
       </div>
 
     </div><!-- /accordion-panels -->
@@ -510,8 +516,28 @@ function clearAllDirty() {
 }
 
 function saveChanges() {
+  // validate required fields
+  const required = [
+    { id: 'f-zoning',  label: 'Zoning' },
+    { id: 'f-liens',   label: 'L&I' },
+    { id: 'f-taxdebt', label: 'Tax Debt' },
+  ];
+  let invalid = [];
+  required.forEach(function (r) {
+    const el = document.getElementById(r.id);
+    if (el && !el.value.trim()) {
+      el.classList.add('invalid');
+      invalid.push(r.label);
+    } else if (el) {
+      el.classList.remove('invalid');
+    }
+  });
+  if (invalid.length) {
+    showToast('Required: ' + invalid.join(', '), 'error');
+    return;
+  }
   clearAllDirty();
-  // flash save confirmation
+  showToast('Changes saved successfully', 'success');
   const btn = document.getElementById('btn-save');
   btn.textContent = 'Saved ✓';
   setTimeout(() => { btn.textContent = 'Save'; }, 1800);
@@ -519,6 +545,14 @@ function saveChanges() {
 
 function discardChanges() {
   clearAllDirty();
+  // clear validation
+  document.querySelectorAll('.field-input.invalid').forEach(el => el.classList.remove('invalid'));
+}
+
+function confirmDiscardChanges() {
+  const hasUnsaved = document.getElementById('unsaved-indicator').classList.contains('visible');
+  if (!hasUnsaved) { discardChanges(); return; }
+  showConfirm('Discard all unsaved changes?', discardChanges, { danger: true, okLabel: 'Discard' });
 }
 
 // ── RICH TEXT ──
@@ -532,15 +566,48 @@ function filterForms(q) {
   document.querySelectorAll('#forms-tbody tr').forEach(r => {
     r.style.display = !q || r.textContent.toLowerCase().includes(q) ? '' : 'none';
   });
+  checkEmpty(document.querySelectorAll('#forms-tbody tr'), document.getElementById('empty-forms'), q);
 }
 
 function filterFormsStatus(status) {
   document.querySelectorAll('#forms-tbody tr').forEach(r => {
     r.style.display = !status || r.textContent.toLowerCase().includes(status.toLowerCase()) ? '' : 'none';
   });
+  checkEmpty(document.querySelectorAll('#forms-tbody tr'), document.getElementById('empty-forms'), status);
+}
+
+function clearFormsFilters() {
+  document.querySelector('.filter-search').value = '';
+  document.querySelector('.filter-select').value = '';
+  document.querySelectorAll('#forms-tbody tr').forEach(r => { r.style.display = ''; });
+  document.getElementById('empty-forms').style.display = 'none';
 }
 </script>
 
 <script src="sidebar.js" defer></script>
+<script src="ui.js" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  // Drag-drop file upload
+  const dz = document.getElementById('dz-forms');
+  const inp = document.getElementById('file-input');
+  const fl = document.getElementById('fl-forms');
+  const attEmpty = document.getElementById('att-empty-forms');
+  initDropzone(dz, inp, fl, function (files) {
+    attEmpty.style.display = files.size > 0 ? 'none' : '';
+    markDirty('files');
+  });
+
+  // Rich text active state
+  const toolbar = document.getElementById('rt-forms-family');
+  const editor  = document.getElementById('rich-forms-family');
+  if (toolbar && editor) initRichBtns(toolbar, editor);
+
+  // Clear invalid highlight on input
+  document.querySelectorAll('.field-input').forEach(function (el) {
+    el.addEventListener('input', function () { el.classList.remove('invalid'); });
+  });
+});
+</script>
 </body>
 </html>

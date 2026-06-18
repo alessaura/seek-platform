@@ -214,6 +214,10 @@
                 </tr>
               </tbody>
             </table>
+            <div class="empty-filter-state" id="empty-buyer">
+              <div class="empty-filter-icon">🔍</div>
+              <div class="empty-filter-msg">No results for <strong><span class="empty-filter-query"></span></strong></div>
+            </div>
             <div class="pagination">
               <span class="pagination-info" id="buyer-page-info">Page 1 of 2</span>
               <div class="pagination-btns">
@@ -251,7 +255,7 @@
                 </div>
               </div>
               <div class="detail-footer">
-                <button class="save-btn" onclick="clearUnsaved('b-unsaved')">Save Status</button>
+                <button class="save-btn" onclick="saveStatus('b-unsaved')">Save Status</button>
               </div>
             </div>
           </div>
@@ -298,6 +302,10 @@
                 </tr>
               </tbody>
             </table>
+            <div class="empty-filter-state" id="empty-contact">
+              <div class="empty-filter-icon">🔍</div>
+              <div class="empty-filter-msg">No results for <strong><span class="empty-filter-query"></span></strong></div>
+            </div>
             <div class="pagination">
               <span class="pagination-info">Page 1 of 12</span>
               <div class="pagination-btns">
@@ -345,7 +353,7 @@
                 </div>
               </div>
               <div class="detail-footer">
-                <button class="save-btn" onclick="clearUnsaved('c-unsaved')">Save Changes</button>
+                <button class="save-btn" onclick="saveStatus('c-unsaved')">Save Changes</button>
                 <button class="save-btn secondary">Create Buyer Criteria Submission from this Contact Log</button>
               </div>
             </div>
@@ -381,6 +389,10 @@
                 </tr>
               </tbody>
             </table>
+            <div class="empty-filter-state" id="empty-criteria">
+              <div class="empty-filter-icon">🔍</div>
+              <div class="empty-filter-msg">No results for <strong><span class="empty-filter-query"></span></strong></div>
+            </div>
             <div class="pagination">
               <span class="pagination-info">Page 1 of 15</span>
               <div class="pagination-btns">
@@ -428,7 +440,7 @@
                 </div>
               </div>
               <div class="detail-footer">
-                <button class="save-btn" onclick="clearUnsaved('bc-unsaved')">Save Changes</button>
+                <button class="save-btn" onclick="saveStatus('bc-unsaved')">Save Changes</button>
                 <button class="save-btn secondary">Create new Internal buyer submission from this criteria</button>
               </div>
             </div>
@@ -468,6 +480,10 @@
                 </tr>
               </tbody>
             </table>
+            <div class="empty-filter-state" id="empty-internal">
+              <div class="empty-filter-icon">🔍</div>
+              <div class="empty-filter-msg">No results for <strong><span class="empty-filter-query"></span></strong></div>
+            </div>
             <div class="pagination">
               <span class="pagination-info">Page 1 of 14</span>
               <div class="pagination-btns">
@@ -516,7 +532,7 @@
                 <div class="detail-field"><span class="detail-field-key">Max Offer</span><input class="detail-input" id="ip-maxoffer" type="text" oninput="markUnsaved('ip-unsaved')"/></div>
               </div>
               <div class="detail-footer">
-                <button class="save-btn" onclick="clearUnsaved('ip-unsaved')">Save Changes</button>
+                <button class="save-btn" onclick="saveStatus('ip-unsaved')">Save Changes</button>
               </div>
             </div>
           </div>
@@ -590,6 +606,19 @@ function filterTable(tbodyId, search, selectId) {
     const matchStatus = !status || rowStatus.includes(status);
     r.style.display = matchSearch && matchStatus ? '' : 'none';
   });
+  const emptyMap = {
+    'buyer-tbody':    'empty-buyer',
+    'contact-tbody':  'empty-contact',
+    'criteria-tbody': 'empty-criteria',
+    'internal-tbody': 'empty-internal',
+  };
+  const emptyEl = document.getElementById(emptyMap[tbodyId]);
+  if (emptyEl) checkEmpty(rows, emptyEl, q || status);
+}
+
+function saveStatus(dotId) {
+  clearUnsaved(dotId);
+  showToast('Status updated', 'success');
 }
 
 // page state for buyer tab (demo)
@@ -722,5 +751,6 @@ renderBuyerPage();
 </script>
 
 <script src="sidebar.js" defer></script>
+<script src="ui.js" defer></script>
 </body>
 </html>
