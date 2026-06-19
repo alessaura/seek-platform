@@ -152,138 +152,261 @@
     </div>
   </div>
 
-  <!-- RESEARCH STATUS -->
-  <div class="table-card">
-    <div class="table-card-header compact">
-      <span class="table-card-title">Research Status</span>
-      <span class="count-badge">No active cases</span>
-    </div>
-    <div class="table-wrap">
-      <table>
-        <thead>
-          <tr>
-            <th class="compact">Title</th>
-            <th class="compact">User Email</th>
-            <th class="compact">Created</th>
-            <th class="compact">Modified</th>
-            <th class="compact">Summary</th>
-            <th class="compact">Progress</th>
-          </tr>
-        </thead>
-      </table>
-    </div>
-    <div class="empty-state">
-      <div class="empty-ornament sm">
-        <svg viewBox="0 0 24 24"><path d="M21 21l-4.35-4.35M17 11A6 6 0 115 11a6 6 0 0112 0z"/></svg>
+  <!-- TABS -->
+  <div class="tabs-card">
+    <div class="tabs-header">
+      <div class="tab active" onclick="switchTab('status')">
+        <div class="tab-inner">
+          <span class="tab-label">Research Status</span>
+          <span class="tab-count-badge" id="badge-status">0</span>
+        </div>
+        <div class="tab-indicator"></div>
       </div>
-      <div class="empty-headline">No records found for your domain.</div>
-      <div class="empty-body">Once a property match is identified, your research file will appear here — updated at every stage of the process.</div>
+      <div class="tab" onclick="switchTab('submissions')">
+        <div class="tab-inner">
+          <span class="tab-label">My Submissions</span>
+          <span class="tab-count-badge" id="badge-submissions">1</span>
+        </div>
+        <div class="tab-indicator"></div>
+      </div>
     </div>
-  </div>
 
-  <!-- MY RESEARCH SUBMISSIONS -->
-  <div class="table-card">
-    <div class="table-card-header compact">
-      <span class="table-card-title">My Research Submissions</span>
-      <span class="count-badge rust">1 pending</span>
-    </div>
-    <div class="table-wrap">
-      <table>
-        <thead>
-          <tr>
-            <th class="compact">Sent By</th>
-            <th class="compact">Desired Property Address</th>
-            <th class="compact">Neighborhood</th>
-            <th class="compact">Maximum Price Point</th>
-            <th class="compact">Status</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td class="td-muted">lucasvfr@outlook.com</td>
-            <td class="td-title">mystreet</td>
-            <td class="td-muted">N/A</td>
-            <td class="td-muted">$70,000</td>
-            <td><span class="status-pill submitted"><span class="status-dot"></span>Submitted</span></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="table-footer">
-      <button class="add-btn">
-        <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-        Add Research Submission
-      </button>
+    <div class="tabs-body">
+
+      <!-- ── RESEARCH STATUS ── -->
+      <div class="tab-panel active" id="panel-status">
+        <div class="filter-bar">
+          <div class="filter-search-wrap">
+            <div class="filter-search-icon"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
+            <input class="filter-search" placeholder="Search title or address..." id="status-search" oninput="filterTable('status-tbody', this.value, 'status-filter')"/>
+          </div>
+          <select class="filter-select" id="status-filter" onchange="filterTable('status-tbody', document.getElementById('status-search').value, 'status-filter')">
+            <option value="">All statuses</option>
+            <option>In Research</option>
+            <option>Complete</option>
+            <option>On Hold</option>
+          </select>
+          <span class="filter-count">0 records</span>
+        </div>
+        <div class="split">
+          <div class="table-side">
+            <table>
+              <thead>
+                <tr>
+                  <th class="sticky">Title</th>
+                  <th class="sticky">User Email</th>
+                  <th class="sticky">Created</th>
+                  <th class="sticky">Progress</th>
+                  <th class="sticky">Status</th>
+                </tr>
+              </thead>
+              <tbody id="status-tbody"></tbody>
+            </table>
+            <div class="tab-empty">
+              <div class="tab-empty-ornament">
+                <svg viewBox="0 0 24 24"><path d="M21 21l-4.35-4.35M17 11A6 6 0 115 11a6 6 0 0112 0z"/></svg>
+              </div>
+              <div class="tab-empty-headline">No research files yet.</div>
+              <div class="tab-empty-body">Once a property match is identified for your domain, your research file will appear here — updated at every stage.</div>
+            </div>
+          </div>
+          <div class="detail-side">
+            <div class="detail-empty" id="status-detail-empty">
+              <div class="detail-empty-icon">
+                <svg viewBox="0 0 24 24"><path d="M9 12h6M9 8h6M5 4h14a1 1 0 011 1v14a1 1 0 01-1 1H5a1 1 0 01-1-1V5a1 1 0 011-1z"/></svg>
+              </div>
+              <div class="detail-empty-text">Select a record</div>
+              <div class="detail-empty-sub">Click any row to view details</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── MY SUBMISSIONS ── -->
+      <div class="tab-panel" id="panel-submissions">
+        <div class="filter-bar">
+          <div class="filter-search-wrap">
+            <div class="filter-search-icon"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
+            <input class="filter-search" placeholder="Search address or neighborhood..." id="sub-search" oninput="filterTable('sub-tbody', this.value, 'sub-filter')"/>
+          </div>
+          <select class="filter-select" id="sub-filter" onchange="filterTable('sub-tbody', document.getElementById('sub-search').value, 'sub-filter')">
+            <option value="">All statuses</option>
+            <option>Submitted</option>
+            <option>In Review</option>
+            <option>Approved</option>
+            <option>Rejected</option>
+          </select>
+          <span class="filter-count" id="sub-count">1 record</span>
+          <button class="create-btn" onclick="showToast('Submission form coming soon.', 'success')">
+            <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            New
+          </button>
+        </div>
+        <div class="split">
+          <div class="table-side">
+            <table>
+              <thead>
+                <tr>
+                  <th class="sticky">Desired Address</th>
+                  <th class="sticky">Neighborhood</th>
+                  <th class="sticky">Max Price</th>
+                  <th class="sticky">Status</th>
+                  <th class="sticky">ID</th>
+                </tr>
+              </thead>
+              <tbody id="sub-tbody">
+                <tr onclick="selectSubmission(this)"
+                    data-id="1"
+                    data-address="mystreet"
+                    data-neighborhood="N/A"
+                    data-maxpay="$70,000"
+                    data-sentby="lucasvfr@outlook.com"
+                    data-notes=""
+                    data-status="Submitted">
+                  <td class="td-main">mystreet</td>
+                  <td class="td-muted">N/A</td>
+                  <td class="td-muted">$70,000</td>
+                  <td><span class="status-pill submitted"><span class="status-dot"></span>Submitted</span></td>
+                  <td class="row-id">#1</td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="empty-filter-state" id="empty-sub">
+              <div class="empty-filter-icon">🔍</div>
+              <div class="empty-filter-msg">No results for <strong><span class="empty-filter-query"></span></strong></div>
+            </div>
+          </div>
+          <div class="detail-side">
+            <div class="detail-empty" id="sub-detail-empty">
+              <div class="detail-empty-icon">
+                <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+              </div>
+              <div class="detail-empty-text">Select a record</div>
+              <div class="detail-empty-sub">Click any row to view details</div>
+            </div>
+            <div class="detail-content" id="sub-detail-content">
+              <div class="detail-header">
+                <div class="detail-id" id="s-id-label">ID #1</div>
+                <div class="detail-title" id="s-title-label">mystreet</div>
+                <div class="unsaved-dot" id="s-unsaved"></div>
+              </div>
+              <div class="detail-body">
+                <div class="detail-field"><span class="detail-field-key">Desired Address</span><input class="detail-input" id="s-address" type="text" oninput="markUnsaved('s-unsaved')"/></div>
+                <div class="detail-field"><span class="detail-field-key">Neighborhood</span><input class="detail-input" id="s-neighborhood" type="text" oninput="markUnsaved('s-unsaved')"/></div>
+                <div class="detail-field"><span class="detail-field-key">Maximum Price Point</span><input class="detail-input" id="s-maxpay" type="text" oninput="markUnsaved('s-unsaved')"/></div>
+                <div class="detail-field"><span class="detail-field-key">Sent By</span><span class="detail-field-val muted" id="s-sentby">—</span></div>
+                <div class="detail-field"><span class="detail-field-key">Notes</span><textarea class="detail-textarea" id="s-notes" rows="3" oninput="markUnsaved('s-unsaved')"></textarea></div>
+                <div class="detail-field">
+                  <span class="detail-field-key">Status</span>
+                  <select class="status-select" id="s-status" onchange="markUnsaved('s-unsaved')">
+                    <option>Submitted</option>
+                    <option>In Review</option>
+                    <option>Approved</option>
+                    <option>Rejected</option>
+                  </select>
+                </div>
+              </div>
+              <div class="detail-footer">
+                <button class="save-btn" onclick="saveRecord('s-unsaved')">Save Changes</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 
 </main>
 
 <!-- RIGHT PANEL -->
-<aside class="panel narrow">
-
-  <!-- PROFILE -->
-  <div class="panel-hero compact">
-    <div class="avatar md">L</div>
-    <div class="panel-role rust">Buyer</div>
-    <div class="panel-name md">Lucas V. Ferreira</div>
-    <div class="panel-email lg">lucasvfr@outlook.com</div>
-    <button class="panel-edit sm">Edit Profile</button>
+<aside class="panel">
+  <div class="panel-hero">
+    <div class="avatar">L</div>
+    <div class="panel-role">Buyer</div>
+    <div class="panel-name">Lucas V. Ferreira</div>
+    <div class="panel-email">lucasvfr@outlook.com</div>
   </div>
-
-  <!-- ACTIVITY SUMMARY -->
-  <div class="panel-section compact">
+  <div class="panel-section">
     <div class="panel-section-label">My Activity</div>
+    <div class="stat-row"><span class="stat-key">Active Cases</span><span class="stat-val">0</span></div>
+    <div class="stat-row"><span class="stat-key">Submissions</span><span class="stat-val gold">1</span></div>
+    <div class="stat-row"><span class="stat-key">Pending Review</span><span class="stat-val rust">1</span></div>
+    <div class="stat-row"><span class="stat-key">Max Price Point</span><span class="stat-val">$70k</span></div>
+  </div>
+  <div class="panel-section">
+    <div class="panel-section-label">Active Tab</div>
     <div class="stat-row">
-      <span class="stat-key">Submissions</span>
-      <span class="stat-val">1</span>
-    </div>
-    <div class="stat-row">
-      <span class="stat-key">Pending Review</span>
-      <span class="stat-val rust">1</span>
-    </div>
-    <div class="stat-row">
-      <span class="stat-key">Active Cases</span>
-      <span class="stat-val">0</span>
-    </div>
-    <div class="stat-row">
-      <span class="stat-key">Max Price Point</span>
-      <span class="stat-val gold">$70k</span>
+      <span class="stat-key" id="active-tab-label">Research Status</span>
+      <span class="stat-val rust" id="active-tab-count">0</span>
     </div>
   </div>
-
-  <!-- NEXT STEP -->
-  <div class="panel-section compact">
-    <div class="panel-section-label">Next Expected Step</div>
-    <div class="next-step-box">
-      <div class="next-step-label">Awaiting</div>
-      <div class="next-step-text">Your submission is under review. Our team will reach out once a matching property is identified.</div>
-    </div>
-  </div>
-
-  <!-- QUICK ACTIONS -->
-  <div class="panel-section compact">
-    <div class="panel-section-label">Quick Actions</div>
-    <a class="quick-link" href="#">
-      <div class="quick-link-icon rust">
-        <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-      </div>
-      <span class="quick-link-text">Add Research Submission</span>
-    </a>
-    <a class="quick-link" href="#">
-      <div class="quick-link-icon gold">
-        <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
-      </div>
-      <span class="quick-link-text">Contact Research Team</span>
-    </a>
-  </div>
-
-  <!-- FOOTER -->
   <div class="panel-footer">
     <p>Transparency in transformation.<br>Watch opportunities come to life.</p>
   </div>
-
 </aside>
+
+<script>
+const tabMap = {
+  status:      { label: 'Research Status', count: '0' },
+  submissions: { label: 'My Submissions',  count: '1' },
+};
+
+function switchTab(id) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  const keys = Object.keys(tabMap);
+  document.querySelectorAll('.tab')[keys.indexOf(id)].classList.add('active');
+  document.getElementById('panel-' + id).classList.add('active');
+  document.getElementById('active-tab-label').textContent = tabMap[id].label;
+  document.getElementById('active-tab-count').textContent = tabMap[id].count;
+}
+
+function filterTable(tbodyId, search, selectId) {
+  const rows = document.querySelectorAll('#' + tbodyId + ' tr');
+  const status = document.getElementById(selectId).value.toLowerCase();
+  const q = search.toLowerCase();
+  rows.forEach(r => {
+    const text      = r.textContent.toLowerCase();
+    const rowStatus = (r.dataset.status || '').toLowerCase();
+    r.style.display = (!q || text.includes(q)) && (!status || rowStatus.includes(status)) ? '' : 'none';
+  });
+  const emptyMap = { 'sub-tbody': 'empty-sub' };
+  const emptyEl = document.getElementById(emptyMap[tbodyId]);
+  if (emptyEl) checkEmpty(rows, emptyEl, q || status);
+}
+
+function markUnsaved(dotId) {
+  document.getElementById(dotId).classList.add('visible');
+}
+
+function clearUnsaved(dotId) {
+  document.getElementById(dotId).classList.remove('visible');
+}
+
+function saveRecord(dotId) {
+  clearUnsaved(dotId);
+  showToast('Changes saved', 'success');
+}
+
+function selectSubmission(row) {
+  document.querySelectorAll('#sub-tbody tr').forEach(r => r.classList.remove('selected'));
+  row.classList.add('selected');
+  const d = row.dataset;
+  document.getElementById('s-id-label').textContent    = 'ID #' + d.id;
+  document.getElementById('s-title-label').textContent = d.address;
+  document.getElementById('s-address').value           = d.address;
+  document.getElementById('s-neighborhood').value      = d.neighborhood !== 'N/A' ? d.neighborhood : '';
+  document.getElementById('s-maxpay').value            = d.maxpay;
+  document.getElementById('s-sentby').textContent      = d.sentby;
+  document.getElementById('s-notes').value             = d.notes || '';
+  const st = document.getElementById('s-status');
+  Array.from(st.options).forEach(o => { o.selected = o.value === d.status; });
+  clearUnsaved('s-unsaved');
+  document.getElementById('sub-detail-empty').style.display = 'none';
+  document.getElementById('sub-detail-content').classList.add('visible');
+}
+</script>
 
 <script src="sidebar.js" defer></script>
 <script src="ui.js" defer></script>
