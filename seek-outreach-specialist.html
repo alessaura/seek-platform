@@ -107,9 +107,9 @@
   </div>
 </aside>
 
-<!-- ═══════ LIST ═══════ -->
+<!-- ═══════ LIST VIEW ═══════ -->
 <div class="main-wrapper" id="view-list">
-  <div class="topbar">
+  <div class="topbar list-topbar">
     <div>
       <div class="topbar-eyebrow">Outreach Portal</div>
       <div class="topbar-title">Outreach Specialist <em>Files</em></div>
@@ -121,92 +121,123 @@
     </div>
   </div>
 
-  <div class="table-card">
-    <div class="table-card-header">
-      <span class="table-card-title">All Files</span>
-      <div class="filter-row">
-        <div class="fsw">
-          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-          <input class="filter-search" placeholder="Search owner or address..." oninput="filterList(this.value)"/>
+  <div class="table-card list-card">
+
+    <!-- TABS -->
+    <div class="tabs-header">
+      <button class="tab active" onclick="switchTab('un')">
+        <div class="tab-inner">
+          <span class="tab-label">Unassigned</span>
+          <span class="tab-count-badge" id="badge-un">3</span>
         </div>
-        <select class="filter-select" onchange="filterListStatus(this.value)">
-          <option value="">All statuses</option>
-          <option>Unassigned</option>
-          <option>Created</option>
-          <option>Outreach Started</option>
-          <option>Verbal Agreement Obtained</option>
-        </select>
+        <div class="tab-indicator"></div>
+      </button>
+      <button class="tab" onclick="switchTab('out')">
+        <div class="tab-inner">
+          <span class="tab-label">Active Outreach</span>
+          <span class="tab-count-badge" id="badge-out">4</span>
+        </div>
+        <div class="tab-indicator"></div>
+      </button>
+    </div>
+
+    <!-- PANEL: UNASSIGNED -->
+    <div id="panel-un">
+      <div class="table-card-header compact">
+        <span class="table-card-title">Unassigned Files</span>
+        <div class="filter-row">
+          <div class="fsw">
+            <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <input class="filter-search" id="search-un" placeholder="Search owner or address..." oninput="filterPanel('un',this.value)"/>
+          </div>
+          <select class="filter-select" id="status-un" onchange="filterPanel('un',document.getElementById('search-un').value)">
+            <option value="">All statuses</option>
+            <option>Created</option>
+            <option>Verbal Agreement Obtained</option>
+          </select>
+        </div>
       </div>
-    </div>
+      <div class="empty-filter-state" id="empty-un" style="display:none">
+        <div class="empty-filter-icon">🔍</div>
+        <div class="empty-filter-msg">No results for <strong><span id="empty-un-q"></span></strong></div>
+        <button class="empty-filter-clear" onclick="clearFilter('un')">Clear filters</button>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Status</th><th>Property Owner</th><th>Marital Status</th><th>Deed Type</th><th>Year</th><th>Property Address</th><th>Zoning</th><th>Sq Ft</th><th>Total Debt</th></tr>
+          </thead>
+          <tbody id="tbody-un">
+            <tr onclick="openDetail({title:'3916 Brown St',status:'NEW',owner:'David P. Smith',marital:'Unknown',deed:'Other',year:'1972',address:'3916 Brown St',zip:'19104',zoning:'RSAS',sqft:'1422',liens:'$0.00',taxes:'$16,232.37',totaldebt:'$1,632.37',contracttype:'Assignment of Interest (30%)',estmin:'$40,000',estmax:'$60,000',cashoffer:'',sysstatus:'Verbal Agreement Obtained-S',assignedto:'morgan.taylor@seekresearchgroup.com'})">
+              <td><span class="status-badge new">NEW</span></td>
+              <td class="td-main">David P. Smith</td><td class="td-muted">Unknown</td><td class="td-muted">Other</td><td class="td-muted">1972</td><td class="td-muted">3916 Brown St</td><td class="td-muted">RSAS</td><td class="td-muted">1422</td><td class="td-muted">$1,632.37</td>
+            </tr>
+            <tr onclick="openDetail({title:'2048 N Orkney St',status:'NEW',owner:'John & Rose Bachowski',marital:'Married',deed:'Tenants by the Ent.',year:'1946',address:'2048 N Orkney St',zip:'19122',zoning:'RM1',sqft:'411',liens:'$475.38',taxes:'$12,186.00',totaldebt:'$12,661.38',contracttype:'',estmin:'',estmax:'',cashoffer:'',sysstatus:'Created',assignedto:''})">
+              <td><span class="status-badge new">NEW</span></td>
+              <td class="td-main">John &amp; Rose Bachowski</td><td class="td-muted">Married</td><td class="td-muted">Tenants by the Ent.</td><td class="td-muted">1946</td><td class="td-muted">2048 N Orkney St</td><td class="td-muted">RM1</td><td class="td-muted">411</td><td class="td-muted">$12,661.38</td>
+            </tr>
+            <tr onclick="openDetail({title:'3817 Aspen St',status:'NEW',owner:'Elaine & Joseph B.',marital:'Married',deed:'Tenants by the Ent.',year:'1947',address:'3817 Aspen St',zip:'19140',zoning:'RSAS',sqft:'1200',liens:'$0.00',taxes:'$11,482.00',totaldebt:'$11,482.00',contracttype:'',estmin:'',estmax:'',cashoffer:'',sysstatus:'Created',assignedto:''})">
+              <td><span class="status-badge new">NEW</span></td>
+              <td class="td-main">Elaine &amp; Joseph B.</td><td class="td-muted">Married</td><td class="td-muted">Tenants by the Ent.</td><td class="td-muted">1947</td><td class="td-muted">3817 Aspen St</td><td class="td-muted">RSAS</td><td class="td-muted">1200</td><td class="td-muted">$11,482.00</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div><!-- /panel-un -->
 
-    <!-- EMPTY FILTER STATE -->
-    <div class="empty-filter-state" id="empty-outreach">
-      <div class="empty-filter-icon">🔍</div>
-      <div class="empty-filter-msg">No results for <strong><span class="empty-filter-query"></span></strong></div>
-      <button class="empty-filter-clear" onclick="clearOutreachFilters()">Clear filters</button>
-    </div>
+    <!-- PANEL: ACTIVE OUTREACH -->
+    <div id="panel-out" style="display:none">
+      <div class="table-card-header compact">
+        <span class="table-card-title">Active Outreach</span>
+        <div class="filter-row">
+          <div class="fsw">
+            <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <input class="filter-search" id="search-out" placeholder="Search owner or address..." oninput="filterPanel('out',this.value)"/>
+          </div>
+          <select class="filter-select" id="status-out" onchange="filterPanel('out',document.getElementById('search-out').value)">
+            <option value="">All statuses</option>
+            <option>Outreach Started</option>
+            <option>Verbal Agreement Obtained</option>
+          </select>
+        </div>
+      </div>
+      <div class="empty-filter-state" id="empty-out" style="display:none">
+        <div class="empty-filter-icon">🔍</div>
+        <div class="empty-filter-msg">No results for <strong><span id="empty-out-q"></span></strong></div>
+        <button class="empty-filter-clear" onclick="clearFilter('out')">Clear filters</button>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Status</th><th>Property Owner</th><th>Marital Status</th><th>Deed Type</th><th>Year</th><th>Property Address</th><th>Zoning</th><th>Sq Ft</th><th>Total Debt</th></tr>
+          </thead>
+          <tbody id="tbody-out">
+            <tr onclick="openDetail({title:'2325 N. 6th St.',status:'OUTREACH',owner:'Sidney Johnson',marital:'Single',deed:'Other',year:'1960',address:'2325 N. 6th St.',zip:'19133',zoning:'RM1',sqft:'1287',liens:'$0.00',taxes:'$12,817.00',totaldebt:'$12,817.00',contracttype:'',estmin:'',estmax:'',cashoffer:'',sysstatus:'Outreach Started',assignedto:''})">
+              <td><span class="status-badge outreach">OUT</span></td>
+              <td class="td-main">Sidney Johnson</td><td class="td-muted">Single</td><td class="td-muted">Other</td><td class="td-muted">1960</td><td class="td-muted">2325 N. 6th St.</td><td class="td-muted">RM1</td><td class="td-muted">1287</td><td class="td-muted">$12,817</td>
+            </tr>
+            <tr onclick="openDetail({title:'2417 W Montgomery Ave',status:'OUTREACH',owner:'Lawrence Madison',marital:'Widowed & Divorced',deed:'',year:'1985',address:'2417 W Montgomery Ave',zip:'19121',zoning:'RSA5',sqft:'1169',liens:'$0.00',taxes:'$3,368.00',totaldebt:'$3,368.00',contracttype:'',estmin:'',estmax:'',cashoffer:'',sysstatus:'Outreach Started',assignedto:''})">
+              <td><span class="status-badge outreach">OUT</span></td>
+              <td class="td-main">Lawrence Madison</td><td class="td-muted">Widowed &amp; Divorced</td><td class="td-muted">—</td><td class="td-muted">1985</td><td class="td-muted">2417 W Montgomery Ave</td><td class="td-muted">RSA5</td><td class="td-muted">1169</td><td class="td-muted">$3,368</td>
+            </tr>
+            <tr onclick="openDetail({title:'2041 N 5th St',status:'OUTREACH',owner:'Jack Michael Gussman',marital:'Widowed',deed:'Other',year:'1955',address:'2041 N 5th St',zip:'19122',zoning:'RM1',sqft:'1075',liens:'$1,932.15',taxes:'$21,727.00',totaldebt:'$23,659.15',contracttype:'',estmin:'',estmax:'',cashoffer:'',sysstatus:'Outreach Started',assignedto:''})">
+              <td><span class="status-badge outreach">OUT</span></td>
+              <td class="td-main">Jack Michael Gussman</td><td class="td-muted">Widowed</td><td class="td-muted">Other</td><td class="td-muted">1955</td><td class="td-muted">2041 N 5th St</td><td class="td-muted">RM1</td><td class="td-muted">1075</td><td class="td-muted">$23,659</td>
+            </tr>
+            <tr onclick="openDetail({title:'1953 N Orianna St',status:'VERBAL',owner:'Ramon DeJesus',marital:'Married',deed:'Other',year:'1989',address:'1953 N Orianna St',zip:'19122',zoning:'RM1',sqft:'528',liens:'$0.00',taxes:'$14,778.00',totaldebt:'$14,778.00',contracttype:'Assignment of Interest (30%)',estmin:'$35,000',estmax:'$55,000',cashoffer:'',sysstatus:'Verbal Agreement Obtained',assignedto:'morgan.taylor@seekresearchgroup.com'})">
+              <td><span class="status-badge verbal">VERBAL</span></td>
+              <td class="td-main">Ramon DeJesus</td><td class="td-muted">Married</td><td class="td-muted">Other</td><td class="td-muted">1989</td><td class="td-muted">1953 N Orianna St</td><td class="td-muted">RM1</td><td class="td-muted">528</td><td class="td-muted">$14,778</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div><!-- /panel-out -->
 
-    <!-- GROUP: UNASSIGNED -->
-    <div class="group-row" onclick="toggleGroup('g-unassigned', this)">
-      <span class="group-toggle">−</span>
-      <span class="group-label">Assigned to: Unassigned</span>
-      <span class="group-count">— 3 records</span>
-    </div>
-    <div class="group-body" id="g-unassigned">
-      <table>
-        <thead><tr><th>Status</th><th>Property Owner</th><th>Marital Status</th><th>Deed Type</th><th>Year Purchased</th><th>Property Address</th><th>Zoning</th><th>Sq Ft</th><th>Total Debt</th></tr></thead>
-        <tbody>
-          <tr onclick="openDetail({title:'3916 Brown St',status:'NEW',owner:'David P. Smith',marital:'Unknown',deed:'Other',year:'1972',address:'3916 Brown St',zip:'19104',zoning:'RSAS',sqft:'1422',liens:'$0.00',taxes:'$16,232.37',totaldebt:'$1,632.37',contracttype:'Assignment of Interest (30%)',estmin:'$40,000',estmax:'$60,000',cashoffer:'',sysstatus:'Verbal Agreement Obtained-S',assignedto:'morgan.taylor@seekresearchgroup.com'})">
-            <td><span class="status-badge new">NEW</span></td>
-            <td class="td-main">David P. Smith</td><td class="td-muted">Unknown</td><td class="td-muted">Other</td><td class="td-muted">1972</td><td class="td-muted">3916 Brown St</td><td class="td-muted">RSAS</td><td class="td-muted">1422</td><td class="td-muted">$1,632.37</td>
-          </tr>
-          <tr onclick="openDetail({title:'2048 N Orkney St',status:'NEW',owner:'John & Rose Bachowski',marital:'Married',deed:'Tenants by the Ent.',year:'1946',address:'2048 N Orkney St',zip:'19122',zoning:'RM1',sqft:'411',liens:'$475.38',taxes:'$12,186.00',totaldebt:'$12,661.38',contracttype:'',estmin:'',estmax:'',cashoffer:'',sysstatus:'Created',assignedto:''})">
-            <td><span class="status-badge new">NEW</span></td>
-            <td class="td-main">John & Rose Bachowski</td><td class="td-muted">Married</td><td class="td-muted">Tenants by the Ent.</td><td class="td-muted">1946</td><td class="td-muted">2048 N Orkney St</td><td class="td-muted">RM1</td><td class="td-muted">411</td><td class="td-muted">$12,661.38</td>
-          </tr>
-          <tr onclick="openDetail({title:'3817 Aspen St',status:'NEW',owner:'Elaine & Joseph B.',marital:'Married',deed:'Tenants by the Ent.',year:'1947',address:'3817 Aspen St',zip:'19140',zoning:'RSAS',sqft:'1200',liens:'$0.00',taxes:'$11,482.00',totaldebt:'$11,482.00',contracttype:'',estmin:'',estmax:'',cashoffer:'',sysstatus:'Created',assignedto:''})">
-            <td><span class="status-badge new">NEW</span></td>
-            <td class="td-main">Elaine & Joseph B.</td><td class="td-muted">Married</td><td class="td-muted">Tenants by the Ent.</td><td class="td-muted">1947</td><td class="td-muted">3817 Aspen St</td><td class="td-muted">RSAS</td><td class="td-muted">1200</td><td class="td-muted">$11,482.00</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+  </div><!-- /table-card list-card -->
+</div><!-- /view-list -->
 
-    <!-- GROUP: OUTREACH STARTED -->
-    <div class="group-row" onclick="toggleGroup('g-outreach', this)">
-      <span class="group-toggle">+</span>
-      <span class="group-label">Status: Outreach Started</span>
-      <span class="group-count">— 10 records</span>
-    </div>
-    <div class="group-body collapsed" id="g-outreach">
-      <table>
-        <thead><tr><th>Status</th><th>Property Owner</th><th>Marital Status</th><th>Deed Type</th><th>Year Purchased</th><th>Property Address</th><th>Zoning</th><th>Sq Ft</th><th>Total Debt</th></tr></thead>
-        <tbody>
-          <tr onclick="openDetail({title:'2325 N. 6th St.',status:'OUTREACH',owner:'Sidney Johnson',marital:'Single',deed:'Other',year:'1960',address:'2325 N. 6th St.',zip:'19133',zoning:'RM1',sqft:'1287',liens:'$0.00',taxes:'$12,817.00',totaldebt:'$12,817.00',contracttype:'',estmin:'',estmax:'',cashoffer:'',sysstatus:'Outreach Started',assignedto:''})">
-            <td><span class="status-badge outreach">OUT</span></td>
-            <td class="td-main">Sidney Johnson &...</td><td class="td-muted">Single</td><td class="td-muted">Other</td><td class="td-muted">1960</td><td class="td-muted">2325 N. 6th St.</td><td class="td-muted">RM1</td><td class="td-muted">1287</td><td class="td-muted">$12,817</td>
-          </tr>
-          <tr onclick="openDetail({title:'2417 W Montgomery Ave',status:'OUTREACH',owner:'Lawrence Madison',marital:'Widowed & Divorced',deed:'',year:'1985',address:'2417 W Montgomery Ave',zip:'19121',zoning:'RSA5',sqft:'1169',liens:'$0.00',taxes:'$3,368.00',totaldebt:'$3,368.00',contracttype:'',estmin:'',estmax:'',cashoffer:'',sysstatus:'Outreach Started',assignedto:''})">
-            <td><span class="status-badge outreach">OUT</span></td>
-            <td class="td-main">Lawrence Madison...</td><td class="td-muted">Widowed & Divor...</td><td class="td-muted">—</td><td class="td-muted">1985</td><td class="td-muted">2417 W Montgom...</td><td class="td-muted">RSA5</td><td class="td-muted">1169</td><td class="td-muted">$3,368</td>
-          </tr>
-          <tr onclick="openDetail({title:'2041 N 5th St',status:'OUTREACH',owner:'Jack Michael Gussman',marital:'Widowed',deed:'Other',year:'1955',address:'2041 N 5th St',zip:'19122',zoning:'RM1',sqft:'1075',liens:'$1,932.15',taxes:'$21,727.00',totaldebt:'$23,659.15',contracttype:'',estmin:'',estmax:'',cashoffer:'',sysstatus:'Outreach Started',assignedto:''})">
-            <td><span class="status-badge outreach">OUT</span></td>
-            <td class="td-main">Jack Michael Guss...</td><td class="td-muted">Widowed</td><td class="td-muted">Other</td><td class="td-muted">1955</td><td class="td-muted">2041 N 5th St</td><td class="td-muted">RM1</td><td class="td-muted">1075</td><td class="td-muted">$23,659</td>
-          </tr>
-          <tr onclick="openDetail({title:'1953 N Orianna St',status:'VERBAL',owner:'Ramon DeJesus',marital:'Married',deed:'Other',year:'1989',address:'1953 N Orianna St',zip:'19122',zoning:'RM1',sqft:'528',liens:'$0.00',taxes:'$14,778.00',totaldebt:'$14,778.00',contracttype:'Assignment of Interest (30%)',estmin:'$35,000',estmax:'$55,000',cashoffer:'',sysstatus:'Verbal Agreement Obtained',assignedto:'morgan.taylor@seekresearchgroup.com'})">
-            <td><span class="status-badge verbal">VERBAL</span></td>
-            <td class="td-main">Ramon DeJesus &...</td><td class="td-muted">Married</td><td class="td-muted">Other</td><td class="td-muted">1989</td><td class="td-muted">1953 N Orianna St</td><td class="td-muted">RM1</td><td class="td-muted">528</td><td class="td-muted">$14,778</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
-  </div>
-</div>
-
-<!-- ═══════ DETAIL ═══════ -->
-<div class="main-wrapper" id="view-detail">
+<!-- ═══════ DETAIL VIEW ═══════ -->
+<div class="main-wrapper" id="view-detail" style="display:none">
   <div class="detail-topbar">
     <button class="detail-back" onclick="closeDetail()">
       <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
@@ -226,7 +257,7 @@
     </div>
   </div>
 
-  <div class="detail-body">
+  <div class="detail-body outreach">
 
     <!-- TWO-COL: LEFT + RIGHT -->
     <div class="two-col">
@@ -272,7 +303,7 @@
           </div>
           <div class="sec-body">
             <div class="form-grid single">
-              <div class="ff"><label class="fl">Liens (L&I)</label><input class="fi" id="d-liens" oninput="dirty()"/></div>
+              <div class="ff"><label class="fl">Liens (L&amp;I)</label><input class="fi" id="d-liens" oninput="dirty()"/></div>
               <div class="ff"><label class="fl">Taxes</label><input class="fi" id="d-taxes" oninput="dirty()"/></div>
               <div class="ff"><label class="fl">Total Debt</label><input class="fi" id="d-totaldebt" oninput="dirty()"/></div>
             </div>
@@ -311,7 +342,7 @@
           <div class="sec-header open-gold" onclick="toggleSec(this)">
             <div class="sec-left">
               <svg class="sec-icon gold" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg>
-              <span class="sec-label">Contract & Deal Structure</span>
+              <span class="sec-label">Contract &amp; Deal Structure</span>
             </div>
             <svg class="sec-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
           </div>
@@ -349,11 +380,11 @@
             <svg class="sec-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
           </div>
           <div class="sec-body open">
-            <div class="dropzone" id="dz-outreach" onclick="document.getElementById('fu').click()">
-              <svg viewBox="0 0 24 24"><polyline points="16 16 12 12 8 16"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.39 18.39A5 5 0 0018 9h-1.26A8 8 0 103 16.3"/></svg>
-              <p>Click to select files or drag and drop</p>
-              <small>PDF, DOC, DOCX, XLS, XLSX, TXT, PNG, JPG, GIF, WEBP</small>
-              <input type="file" id="fu" style="display:none" multiple/>
+            <div class="dropzone sm" id="dz-outreach" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="event.preventDefault();this.classList.remove('drag-over');addFiles(event.dataTransfer.files)">
+              <svg viewBox="0 0 24 24" style="width:28px;height:28px;stroke:var(--text-muted);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;display:block;margin:0 auto 8px"><polyline points="16 16 12 12 8 16"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.39 18.39A5 5 0 0018 9h-1.26A8 8 0 103 16.3"/></svg>
+              <p>Click to select or drag &amp; drop files</p>
+              <small>PDF, DOC, DOCX, XLS, XLSX, PNG, JPG</small>
+              <input type="file" id="fu" style="display:none" multiple onchange="handleFileSelect(this)"/>
             </div>
             <div class="file-list" id="fl-outreach"></div>
             <div class="att-empty" id="att-empty-outreach">No files attached yet.</div>
@@ -413,7 +444,7 @@
       <div class="sec-body open">
         <div id="notes-feed" class="notes-feed">No case notes yet. Add the first note below.</div>
         <label class="fl field-label-block-mb">Add Note</label>
-        <textarea class="fta" id="note-input" placeholder="Type a new note..."></textarea>
+        <textarea class="fta" id="note-input" placeholder="Type a new note..." oninput="dirty()"></textarea>
         <button class="btn-add-note" onclick="addNote()">
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
           Add Note
@@ -431,7 +462,7 @@ const FAMILY_TEMPLATE = `<p><strong>3916 Brown St</strong></p>
 <strong>Listed Sale Date:</strong> 1972<br>
 <strong>Zoning:</strong> RSA5<br>
 <strong>Tax Debt:</strong> $16,232.37<br>
-<strong>L&I:</strong> N/A<br>
+<strong>L&amp;I:</strong> N/A<br>
 <strong>Total Debt:</strong> $16,232.37<br>
 <strong>Deed:</strong> On File (Heirs, successors, and assigns forever)</p>
 <p><br></p>
@@ -465,10 +496,44 @@ Phone: 215-290-0602 · 215-301-5183 · 215-264-4988 · 215-548-1420 · 215-387-3
 <p><em>Katrese Collier – (215) 290-0602</em><br>
 <em>10/30/25 – Agreed to be administrator</em></p>`;
 
+// ── TAB SWITCHING ──
+function switchTab(tab) {
+  const tabs = document.querySelectorAll('.tabs-header .tab');
+  tabs[0].classList.toggle('active', tab === 'un');
+  tabs[1].classList.toggle('active', tab === 'out');
+  document.getElementById('panel-un').style.display  = tab === 'un'  ? '' : 'none';
+  document.getElementById('panel-out').style.display = tab === 'out' ? '' : 'none';
+}
+
+// ── FILTERING ──
+function filterPanel(panel, q) {
+  q = (q || '').toLowerCase();
+  const status = (document.getElementById('status-' + panel).value || '').toLowerCase();
+  const rows   = document.querySelectorAll('#tbody-' + panel + ' tr');
+  let vis = 0;
+  rows.forEach(r => {
+    const show = (!q || r.textContent.toLowerCase().includes(q)) &&
+                 (!status || r.textContent.toLowerCase().includes(status));
+    r.style.display = show ? '' : 'none';
+    if (show) vis++;
+  });
+  const empty = document.getElementById('empty-' + panel);
+  empty.style.display = vis === 0 ? '' : 'none';
+  const qEl = document.getElementById('empty-' + panel + '-q');
+  if (qEl) qEl.textContent = q || status;
+}
+
+function clearFilter(panel) {
+  document.getElementById('search-' + panel).value = '';
+  document.getElementById('status-' + panel).value = '';
+  filterPanel(panel, '');
+}
+
+// ── DETAIL: OPEN / CLOSE ──
 function openDetail(d) {
-  document.getElementById('view-list').style.display  = 'none';
+  document.getElementById('view-list').style.display   = 'none';
   document.getElementById('view-detail').style.display = 'flex';
-  document.getElementById('d-heading').textContent    = d.title;
+  document.getElementById('d-heading').textContent     = d.title;
 
   const pill = document.getElementById('d-status-pill');
   const pillMap = { NEW:'NEW', OUTREACH:'OUTREACH', VERBAL:'VERBAL' };
@@ -498,13 +563,13 @@ function openDetail(d) {
   const ct = document.getElementById('d-contracttype');
   Array.from(ct.options).forEach(o => { o.selected = o.value === d.contracttype; });
 
-  // populate family overview for the main demo record
-  const rf = document.getElementById('rich-family');
-  rf.innerHTML = d.title === '3916 Brown St' ? FAMILY_TEMPLATE : '';
-
-  // reset notes
+  document.getElementById('rich-family').innerHTML = d.title === '3916 Brown St' ? FAMILY_TEMPLATE : '';
   document.getElementById('notes-feed').innerHTML = 'No case notes yet. Add the first note below.';
   document.getElementById('note-input').value = '';
+
+  // reset file list
+  document.getElementById('fl-outreach').innerHTML = '';
+  document.getElementById('att-empty-outreach').style.display = '';
 
   clearDirty();
   window.scrollTo(0, 0);
@@ -517,6 +582,7 @@ function closeDetail() {
 
 function setv(id, val) { const el = document.getElementById(id); if (el) el.value = val || ''; }
 
+// ── DIRTY TRACKING ──
 function dirty() {
   document.getElementById('unsaved-ind').classList.add('on');
   document.getElementById('btn-discard').classList.add('on');
@@ -544,12 +610,13 @@ function confirmDiscard() {
   showConfirm('Discard all unsaved changes?', discard, { danger: true, okLabel: 'Discard' });
 }
 
+// ── SECTION TOGGLE ──
 function toggleSec(header) {
   const body = header.nextElementSibling;
   const isOpen = header.classList.contains('open') || header.classList.contains('open-gold') || header.classList.contains('open-sage');
   const colorClass = header.classList.contains('open-gold') ? 'open-gold' : header.classList.contains('open-sage') ? 'open-sage' : 'open';
   if (isOpen) {
-    header.classList.remove('open','open-gold','open-sage');
+    header.classList.remove('open', 'open-gold', 'open-sage');
     body.classList.remove('open');
   } else {
     header.classList.add(colorClass);
@@ -557,24 +624,52 @@ function toggleSec(header) {
   }
 }
 
-function toggleGroup(id, row) {
-  const body = document.getElementById(id);
-  const toggle = row.querySelector('.group-toggle');
-  const collapsed = body.classList.toggle('collapsed');
-  toggle.textContent = collapsed ? '+' : '−';
+// ── FILE HANDLING ──
+const attachedFiles = new Map();
+
+function handleFileSelect(input) {
+  addFiles(input.files);
+  input.value = '';
 }
 
+function addFiles(fileList) {
+  Array.from(fileList).forEach(f => {
+    if (!attachedFiles.has(f.name)) {
+      attachedFiles.set(f.name, f);
+    }
+  });
+  renderFileList();
+  dirty();
+}
+
+function renderFileList() {
+  const fl = document.getElementById('fl-outreach');
+  const empty = document.getElementById('att-empty-outreach');
+  fl.innerHTML = '';
+  attachedFiles.forEach((f, name) => {
+    const item = document.createElement('div');
+    item.className = 'file-item';
+    item.innerHTML = `<span class="file-item-name">${name}</span><button class="file-item-remove" onclick="removeFile('${name}')" title="Remove">✕</button>`;
+    fl.appendChild(item);
+  });
+  empty.style.display = attachedFiles.size > 0 ? 'none' : '';
+}
+
+function removeFile(name) {
+  attachedFiles.delete(name);
+  renderFileList();
+}
+
+// ── NOTES ──
 function addNote() {
   const input = document.getElementById('note-input');
   const text  = input.value.trim();
   if (!text) return;
   const feed  = document.getElementById('notes-feed');
-  if (feed.style.fontStyle === 'italic' || feed.textContent.includes('No case notes')) {
+  if (feed.textContent.includes('No case notes')) {
     feed.innerHTML = '';
-    feed.style.fontStyle = 'normal';
-    feed.style.color = 'var(--text-main)';
   }
-  const now = new Date().toLocaleDateString('en-US', { month:'short', day:'numeric', year:'numeric' });
+  const now   = new Date().toLocaleDateString('en-US', { month:'short', day:'numeric', year:'numeric' });
   const entry = document.createElement('div');
   entry.className = 'note-entry';
   entry.innerHTML = `<div class="note-meta">${now}</div>${text}`;
@@ -582,48 +677,23 @@ function addNote() {
   input.value = '';
   dirty();
 }
-
-function filterList(q) {
-  q = q.toLowerCase();
-  document.querySelectorAll('.group-body tbody tr').forEach(r => {
-    r.style.display = !q || r.textContent.toLowerCase().includes(q) ? '' : 'none';
-  });
-  checkEmpty(document.querySelectorAll('.group-body tbody tr'), document.getElementById('empty-outreach'), q);
-}
-
-function filterListStatus(s) {
-  document.querySelectorAll('.group-body tbody tr').forEach(r => {
-    r.style.display = !s || r.textContent.toLowerCase().includes(s.toLowerCase()) ? '' : 'none';
-  });
-  checkEmpty(document.querySelectorAll('.group-body tbody tr'), document.getElementById('empty-outreach'), s);
-}
-
-function clearOutreachFilters() {
-  document.querySelector('.filter-search').value = '';
-  document.querySelector('.filter-select').value = '';
-  document.querySelectorAll('.group-body tbody tr').forEach(r => { r.style.display = ''; });
-  document.getElementById('empty-outreach').style.display = 'none';
-}
 </script>
 
 <script src="sidebar.js" defer></script>
 <script src="ui.js" defer></script>
 <script>
 document.addEventListener('DOMContentLoaded', function () {
-  // Drag-drop file upload
-  const dz = document.getElementById('dz-outreach');
-  const inp = document.getElementById('fu');
-  const fl = document.getElementById('fl-outreach');
-  const attEmpty = document.getElementById('att-empty-outreach');
-  initDropzone(dz, inp, fl, function (files) {
-    attEmpty.style.display = files.size > 0 ? 'none' : '';
-    dirty();
-  });
-
-  // Rich text active state
+  // Wire rich text buttons
   const toolbar = document.getElementById('rt-family');
   const editor  = document.getElementById('rich-family');
   if (toolbar && editor) initRichBtns(toolbar, editor);
+
+  // Click on dropzone triggers file input
+  document.getElementById('dz-outreach').addEventListener('click', function(e) {
+    if (e.target.tagName !== 'INPUT') {
+      document.getElementById('fu').click();
+    }
+  });
 });
 </script>
 </body>
