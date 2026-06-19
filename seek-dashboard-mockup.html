@@ -113,83 +113,169 @@
 
   <!-- TOP BAR -->
   <div class="topbar">
-    <div class="topbar-left">
+    <div>
       <div class="topbar-eyebrow">Client Portal</div>
-      <div class="topbar-title">Your <em>inheritance journey</em></div>
-    </div>
-    <div class="topbar-right">
-      <div class="nav-links">
-        <a class="topbar-nav-link" href="#">About Us</a>
-        <a class="topbar-nav-link" href="#">Contact Us</a>
+      <div class="topbar-title">Your <em>inheritance journey.</em></div>
+      <div class="view-badge rust">
+        <span class="view-badge-dot"></span>
+        Client View · lucasvfr@outlook.com
       </div>
+    </div>
+    <div class="nav-links">
+      <a class="topbar-nav-link" href="#">About Us</a>
+      <a class="topbar-nav-link" href="#">Contact Us</a>
     </div>
   </div>
 
   <!-- SUMMARY ROW -->
   <div class="summary-row cols-3">
     <div class="summary-card">
-      <div class="summary-icon rust">
+      <div class="summary-icon sm rust">
         <svg viewBox="0 0 24 24"><path d="M9 12h6M9 8h6M5 4h14a1 1 0 011 1v14a1 1 0 01-1 1H5a1 1 0 01-1-1V5a1 1 0 011-1z"/></svg>
       </div>
       <div class="summary-label">Active Cases</div>
-      <div class="summary-value">0</div>
-      <div class="summary-sub">No open files yet</div>
+      <div class="summary-value lg">0</div>
+      <div class="summary-sub sm">No open files yet</div>
     </div>
     <div class="summary-card">
-      <div class="summary-icon gold">
+      <div class="summary-icon sm gold">
         <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6z"/><path d="M14 2v6h6"/></svg>
       </div>
       <div class="summary-label">Documents</div>
-      <div class="summary-value">0</div>
-      <div class="summary-sub">Upload your first file</div>
+      <div class="summary-value lg">0</div>
+      <div class="summary-sub sm">Upload your first file</div>
     </div>
-    <div class="summary-card highlight">
+    <div class="summary-card dark">
       <div class="summary-label">Your Domain</div>
-      <div class="summary-value sm">lucasvfr<br>@outlook.com</div>
+      <div class="summary-value md">lucasvfr<br>@outlook.com</div>
       <div class="summary-sub mt-6">Verified account</div>
     </div>
   </div>
 
-  <!-- RESEARCH STATUS TABLE -->
-  <div class="table-card">
-    <div class="table-card-header">
-      <span class="table-card-title">Research Status</span>
-      <span class="table-card-badge">No active cases</span>
-    </div>
-    <div class="table-wrap">
-      <table>
-        <thead>
-          <tr>
-            <th>Title</th>
-            <th>Contact</th>
-            <th>Created</th>
-            <th>Modified</th>
-            <th>Status</th>
-            <th>Progress</th>
-          </tr>
-        </thead>
-      </table>
-    </div>
-    <div class="empty-state">
-      <div class="empty-ornament">
-        <svg viewBox="0 0 24 24"><path d="M21 21l-4.35-4.35M17 11A6 6 0 115 11a6 6 0 0112 0z"/></svg>
+  <!-- TABS -->
+  <div class="tabs-card">
+    <div class="tabs-header">
+      <div class="tab active" onclick="switchTab('status')">
+        <div class="tab-inner">
+          <span class="tab-label">Research Status</span>
+          <span class="tab-count-badge" id="badge-status">0</span>
+        </div>
+        <div class="tab-indicator"></div>
       </div>
-      <div class="empty-headline">No records found for your domain.</div>
-      <div class="empty-body">Once your research file is opened, every step of the process will be visible here — from first discovery to final resolution.</div>
+      <div class="tab" onclick="switchTab('documents')">
+        <div class="tab-inner">
+          <span class="tab-label">Seller Documents</span>
+          <span class="tab-count-badge" id="badge-documents">0</span>
+        </div>
+        <div class="tab-indicator"></div>
+      </div>
     </div>
-  </div>
 
-  <!-- SELLER DOCUMENTS -->
-  <div class="docs-card">
-    <div class="docs-card-header">
-      <span class="docs-card-title">Seller Documents</span>
-      <button class="upload-btn">
-        <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
-        Upload Document
-      </button>
-    </div>
-    <div class="docs-empty">
-      <p>No documents uploaded yet. Share deeds, titles, or any files related to your case.</p>
+    <div class="tabs-body">
+
+      <!-- ── RESEARCH STATUS ── -->
+      <div class="tab-panel active" id="panel-status">
+        <div class="filter-bar">
+          <div class="filter-search-wrap">
+            <div class="filter-search-icon"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
+            <input class="filter-search" placeholder="Search title or address..." id="rs-search" oninput="filterTable('rs-tbody', this.value, 'rs-filter')"/>
+          </div>
+          <select class="filter-select" id="rs-filter" onchange="filterTable('rs-tbody', document.getElementById('rs-search').value, 'rs-filter')">
+            <option value="">All statuses</option>
+            <option>In Research</option>
+            <option>Complete</option>
+            <option>On Hold</option>
+          </select>
+          <span class="filter-count">0 records</span>
+        </div>
+        <div class="split">
+          <div class="table-side">
+            <table>
+              <thead>
+                <tr>
+                  <th class="sticky">Title</th>
+                  <th class="sticky">Contact</th>
+                  <th class="sticky">Created</th>
+                  <th class="sticky">Modified</th>
+                  <th class="sticky">Progress</th>
+                  <th class="sticky">Status</th>
+                </tr>
+              </thead>
+              <tbody id="rs-tbody"></tbody>
+            </table>
+            <div class="tab-empty">
+              <div class="tab-empty-ornament">
+                <svg viewBox="0 0 24 24"><path d="M21 21l-4.35-4.35M17 11A6 6 0 115 11a6 6 0 0112 0z"/></svg>
+              </div>
+              <div class="tab-empty-headline">No research files yet.</div>
+              <div class="tab-empty-body">Once a property match is identified for your domain, your research file will appear here — updated at every stage.</div>
+            </div>
+          </div>
+          <div class="detail-side">
+            <div class="detail-empty" id="rs-detail-empty">
+              <div class="detail-empty-icon">
+                <svg viewBox="0 0 24 24"><path d="M9 12h6M9 8h6M5 4h14a1 1 0 011 1v14a1 1 0 01-1 1H5a1 1 0 01-1-1V5a1 1 0 011-1z"/></svg>
+              </div>
+              <div class="detail-empty-text">Select a record</div>
+              <div class="detail-empty-sub">Click any row to view details</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── SELLER DOCUMENTS ── -->
+      <div class="tab-panel" id="panel-documents">
+        <div class="filter-bar">
+          <div class="filter-search-wrap">
+            <div class="filter-search-icon"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
+            <input class="filter-search" placeholder="Search documents..." id="doc-search" oninput="filterTable('doc-tbody', this.value, 'doc-filter')"/>
+          </div>
+          <select class="filter-select" id="doc-filter" onchange="filterTable('doc-tbody', document.getElementById('doc-search').value, 'doc-filter')">
+            <option value="">All types</option>
+            <option>Deed</option>
+            <option>Title</option>
+            <option>Contract</option>
+            <option>Other</option>
+          </select>
+          <span class="filter-count" id="doc-count">0 documents</span>
+          <button class="create-btn" onclick="showToast('Upload feature coming soon.', 'success')">
+            <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+            Upload
+          </button>
+        </div>
+        <div class="split">
+          <div class="table-side">
+            <table>
+              <thead>
+                <tr>
+                  <th class="sticky">Document Name</th>
+                  <th class="sticky">Type</th>
+                  <th class="sticky">Uploaded</th>
+                  <th class="sticky">Size</th>
+                </tr>
+              </thead>
+              <tbody id="doc-tbody"></tbody>
+            </table>
+            <div class="tab-empty">
+              <div class="tab-empty-ornament">
+                <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6z"/><path d="M14 2v6h6"/></svg>
+              </div>
+              <div class="tab-empty-headline">No documents uploaded.</div>
+              <div class="tab-empty-body">Share deeds, titles, or any files related to your case. Your research team will have instant access.</div>
+            </div>
+          </div>
+          <div class="detail-side">
+            <div class="detail-empty" id="doc-detail-empty">
+              <div class="detail-empty-icon">
+                <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6z"/><path d="M14 2v6h6"/></svg>
+              </div>
+              <div class="detail-empty-text">Select a document</div>
+              <div class="detail-empty-sub">Click any row to preview</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 
@@ -200,30 +286,30 @@
 
   <!-- PROFILE -->
   <div class="panel-hero">
-    <div class="avatar lg">L</div>
-    <div class="panel-name lg">Lucas V. Ferreira</div>
-    <div class="panel-email lg">lucasvfr@outlook.com</div>
-    <button class="panel-edit">Edit Profile</button>
+    <div class="avatar">L</div>
+    <div class="panel-role">Client</div>
+    <div class="panel-name">Lucas V. Ferreira</div>
+    <div class="panel-email">lucasvfr@outlook.com</div>
   </div>
 
   <!-- FILE INFO -->
   <div class="panel-section">
     <div class="panel-section-label">Case File</div>
-    <div class="file-info-row">
-      <span class="file-info-key">File Number</span>
-      <span class="file-info-val gold">— Pending</span>
+    <div class="stat-row">
+      <span class="stat-key">File Number</span>
+      <span class="stat-val gold">— Pending</span>
     </div>
-    <div class="file-info-row">
-      <span class="file-info-key">Opened</span>
-      <span class="file-info-val">—</span>
+    <div class="stat-row">
+      <span class="stat-key">Opened</span>
+      <span class="stat-val">—</span>
     </div>
-    <div class="file-info-row">
-      <span class="file-info-key">Last Update</span>
-      <span class="file-info-val">—</span>
+    <div class="stat-row">
+      <span class="stat-key">Last Update</span>
+      <span class="stat-val">—</span>
     </div>
-    <div class="file-info-row last">
-      <span class="file-info-key">Stage</span>
-      <span class="file-info-val rust">Not started</span>
+    <div class="stat-row">
+      <span class="stat-key">Stage</span>
+      <span class="stat-val rust">Not started</span>
     </div>
   </div>
 
@@ -270,12 +356,12 @@
     </div>
   </div>
 
-  <!-- NEXT STEP -->
+  <!-- ACTIVE TAB -->
   <div class="panel-section">
-    <div class="panel-section-label">Next Expected Step</div>
-    <div class="next-step-box">
-      <div class="next-step-label">Awaiting</div>
-      <div class="next-step-text">Your research file hasn't been opened yet. Our team will reach out once a match is identified.</div>
+    <div class="panel-section-label">Active Tab</div>
+    <div class="stat-row">
+      <span class="stat-key" id="active-tab-label">Research Status</span>
+      <span class="stat-val rust" id="active-tab-count">0</span>
     </div>
   </div>
 
@@ -295,12 +381,40 @@
     </button>
   </div>
 
-  <!-- FOOTER NOTE -->
+  <!-- FOOTER -->
   <div class="panel-footer">
     <p>Impact-Driven. Rooted in Research.<br>Results That Matter.</p>
   </div>
 
 </aside>
+
+<script>
+const tabMap = {
+  status:    { label: 'Research Status',  count: '0' },
+  documents: { label: 'Seller Documents', count: '0' },
+};
+
+function switchTab(id) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  const keys = Object.keys(tabMap);
+  document.querySelectorAll('.tab')[keys.indexOf(id)].classList.add('active');
+  document.getElementById('panel-' + id).classList.add('active');
+  document.getElementById('active-tab-label').textContent = tabMap[id].label;
+  document.getElementById('active-tab-count').textContent = tabMap[id].count;
+}
+
+function filterTable(tbodyId, search, selectId) {
+  const rows = document.querySelectorAll('#' + tbodyId + ' tr');
+  const status = document.getElementById(selectId).value.toLowerCase();
+  const q = search.toLowerCase();
+  rows.forEach(r => {
+    const text      = r.textContent.toLowerCase();
+    const rowStatus = (r.dataset.status || '').toLowerCase();
+    r.style.display = (!q || text.includes(q)) && (!status || rowStatus.includes(status)) ? '' : 'none';
+  });
+}
+</script>
 
 <script src="sidebar.js" defer></script>
 <script src="ui.js" defer></script>
