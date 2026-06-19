@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Seek Research — Specialist File Detail</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body class="scroll-layout">
+
+<!-- MOBILE HEADER -->
+<div class="mobile-header">
+  <button class="hamburger" onclick="openMobileSidebar()" aria-label="Open menu">
+    <span></span><span></span><span></span>
+  </button>
+  <a class="mobile-logo" href="index.html">
+    <span class="mobile-logo-s">S</span>
+    <span class="mobile-logo-name">Seek</span>
+  </a>
+</div>
+<div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-toggle" onclick="toggleSidebar()">
+    <svg viewBox="0 0 10 10"><polyline points="6 2 2 5 6 8"/></svg>
+  </div>
+  <a class="sidebar-logo" href="index.html">
+    <div class="logo-mark">
+      <span class="logo-s">S</span>
+      <svg width="16" height="9" viewBox="0 0 18 10" fill="none"><polygon points="0,0 10,0 6,5 10,10 0,10 4,5" fill="#B55A35"/></svg>
+    </div>
+    <div class="logo-text">
+      <span class="logo-name">Seek</span>
+      <span class="logo-sub">Research Platform</span>
+    </div>
+  </a>
+  <nav class="sidebar-nav">
+    <div class="nav-section open" id="sec-portals">
+      <div class="nav-section-header" onclick="toggleSection('sec-portals')">
+        <div class="nav-section-left">
+          <svg class="nav-section-icon" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+          <span class="nav-section-label">Portals</span>
+        </div>
+        <svg class="nav-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="nav-items">
+        <a class="nav-link" href="index.html">
+          <svg class="nav-link-icon" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>
+          <span class="nav-link-label">Home</span>
+        </a>
+        <a class="nav-link" href="seek-dashboard-mockup.html">
+          <svg class="nav-link-icon" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          <span class="nav-link-label">Client Portal</span>
+        </a>
+        <a class="nav-link" href="seek-affiliate-portal.html">
+          <svg class="nav-link-icon" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+          <span class="nav-link-label">Affiliate Portal</span>
+        </a>
+        <a class="nav-link" href="seek-buyer-portal.html">
+          <svg class="nav-link-icon" viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+          <span class="nav-link-label">Buyer Portal</span>
+        </a>
+        <a class="nav-link" href="seek-executive-portal.html">
+          <svg class="nav-link-icon" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <span class="nav-link-label">Executive Portal</span>
+        </a>
+      </div>
+    </div>
+    <div class="nav-divider"></div>
+    <div class="nav-section open" id="sec-ops">
+      <div class="nav-section-header" onclick="toggleSection('sec-ops')">
+        <div class="nav-section-left">
+          <svg class="nav-section-icon" viewBox="0 0 24 24"><path d="M9 12h6M9 8h6M5 4h14a1 1 0 011 1v14a1 1 0 01-1 1H5a1 1 0 01-1-1V5a1 1 0 011-1z"/></svg>
+          <span class="nav-section-label">Operations</span>
+        </div>
+        <svg class="nav-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="nav-items">
+        <a class="nav-link" href="seek-research-forms.html">
+          <svg class="nav-link-icon" viewBox="0 0 24 24"><path d="M9 12h6M9 8h6M5 4h14a1 1 0 011 1v14a1 1 0 01-1 1H5a1 1 0 01-1-1V5a1 1 0 011-1z"/></svg>
+          <span class="nav-link-label">Research Forms</span>
+        </a>
+        <a class="nav-link" href="seek-outreach-specialist.html">
+          <svg class="nav-link-icon" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+          <span class="nav-link-label">Outreach Specialist</span>
+        </a>
+        <a class="nav-link active" href="seek-coordinator.html">
+          <svg class="nav-link-icon" viewBox="0 0 24 24"><path d="M9 17H7a4 4 0 01-4-4V7a4 4 0 014-4h10a4 4 0 014 4v6a4 4 0 01-4 4h-2l-4 4-2-4z"/></svg>
+          <span class="nav-link-label">Coordinator</span>
+        </a>
+      </div>
+    </div>
+  </nav>
+  <div class="sidebar-bottom">
+    <div class="sidebar-user">
+      <div class="sb-avatar">A</div>
+      <div class="user-info">
+        <div class="user-name">Alessandra S.</div>
+        <div class="user-email">als.s.sanches@gmail.com</div>
+      </div>
+    </div>
+    <div class="sb-signout">
+      <svg viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+      <span class="sb-signout-label">Sign Out</span>
+    </div>
+  </div>
+</aside>
+
+<main class="content">
+  <div class="topbar">
+    <div>
+      <a class="back-link" href="seek-coordinator.html">
+        <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+        Specialist Files
+      </a>
+      <div class="topbar-title">Edit <em>Record.</em></div>
+      <div class="view-badge rust"><span class="view-badge-dot"></span>Coordinator · als.s.sanches@gmail.com</div>
+    </div>
+  </div>
+
+  <!-- ── CASE INFORMATION ── -->
+  <div class="coord-card" id="card-case">
+    <div class="coord-card-hd" onclick="toggleCard('card-case')">
+      <div class="coord-card-title">
+        <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6z"/><polyline points="14 2 14 8 20 8"/></svg>
+        Case Information
+      </div>
+      <svg class="coord-card-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+    </div>
+    <div class="coord-card-body">
+      <div class="detail-field">
+        <span class="detail-field-key">Title</span>
+        <input class="detail-input" id="ci-title" type="text" value="3964 Wallace St" oninput="markDirty()"/>
+      </div>
+      <div class="detail-field">
+        <span class="detail-field-key">Status</span>
+        <select class="status-select" id="ci-status" onchange="markDirty()">
+          <option selected>Active</option>
+          <option>In Progress</option>
+          <option>Closed</option>
+          <option>On Hold</option>
+        </select>
+      </div>
+      <div class="detail-field">
+        <span class="detail-field-key">Scheduled Court Date</span>
+        <input class="detail-input" id="ci-courtdate" type="text" value="TBD" oninput="markDirty()"/>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── MILESTONES ── -->
+  <div class="coord-card" id="card-milestones">
+    <div class="coord-card-hd" onclick="toggleCard('card-milestones')">
+      <div class="coord-card-title">
+        <svg viewBox="0 0 24 24"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
+        Milestones
+      </div>
+      <svg class="coord-card-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+    </div>
+    <div class="coord-card-body">
+      <div class="milestone-row">
+        <span class="milestone-label">Send Title Documents</span>
+        <input class="detail-input milestone-ctrl" id="ms-title-docs" type="text" value="Sent" oninput="markDirty()"/>
+      </div>
+      <div class="milestone-row">
+        <span class="milestone-label">Contract Signed</span>
+        <select class="status-select milestone-ctrl" id="ms-contract" onchange="markDirty()">
+          <option>Waiting Action</option><option>In Progress</option><option>Complete</option><option>N/A</option>
+        </select>
+      </div>
+      <div class="milestone-row">
+        <span class="milestone-label">Renunciations Complete</span>
+        <select class="status-select milestone-ctrl" id="ms-renun" onchange="markDirty()">
+          <option>Waiting Action</option><option>In Progress</option><option>Complete</option><option>N/A</option>
+        </select>
+      </div>
+      <div class="milestone-row">
+        <span class="milestone-label">Full Package Sent to Attorney</span>
+        <select class="status-select milestone-ctrl" id="ms-package" onchange="markDirty()">
+          <option>Waiting Action</option><option>In Progress</option><option>Complete</option><option>N/A</option>
+        </select>
+      </div>
+      <div class="milestone-row">
+        <span class="milestone-label">Petition Signed by Family</span>
+        <select class="status-select milestone-ctrl" id="ms-petition-fam" onchange="markDirty()">
+          <option>Waiting Action</option><option>In Progress</option><option>Complete</option><option>N/A</option>
+        </select>
+      </div>
+      <div class="milestone-row">
+        <span class="milestone-label">Petition Granted</span>
+        <select class="status-select milestone-ctrl" id="ms-petition-grant" onchange="markDirty()">
+          <option>Waiting Action</option><option>In Progress</option><option>Complete</option><option>N/A</option>
+        </select>
+      </div>
+      <div class="milestone-row">
+        <span class="milestone-label">Hearing Set</span>
+        <select class="status-select milestone-ctrl" id="ms-hearing" onchange="markDirty()">
+          <option>Waiting Action</option><option>In Progress</option><option>Complete</option><option>N/A</option>
+        </select>
+      </div>
+      <div class="milestone-row">
+        <span class="milestone-label">Inheritance Tax Form Filed by Attorney</span>
+        <select class="status-select milestone-ctrl" id="ms-tax" onchange="markDirty()">
+          <option>Waiting Action</option><option>In Progress</option><option>Complete</option><option>N/A</option>
+        </select>
+      </div>
+      <div class="milestone-row">
+        <span class="milestone-label">Certified Letters Sent to Register of Wills</span>
+        <select class="status-select milestone-ctrl" id="ms-letters" onchange="markDirty()">
+          <option>Waiting Action</option><option>In Progress</option><option>Complete</option><option>N/A</option>
+        </select>
+      </div>
+      <div class="milestone-row">
+        <span class="milestone-label">Estate Opened — Can Proceed with Closing</span>
+        <select class="status-select milestone-ctrl" id="ms-estate" onchange="markDirty()">
+          <option>Waiting Action</option><option>In Progress</option><option>Complete</option><option>N/A</option>
+        </select>
+      </div>
+      <div class="milestone-row">
+        <span class="milestone-label">Closing with Title Company</span>
+        <select class="status-select milestone-ctrl" id="ms-closing" onchange="markDirty()">
+          <option>Waiting Action</option><option>In Progress</option><option>Complete</option><option>N/A</option>
+        </select>
+      </div>
+      <div class="milestone-row">
+        <span class="milestone-label">Complete</span>
+        <select class="status-select milestone-ctrl" id="ms-complete" onchange="markDirty()">
+          <option>No</option><option>Yes</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── FILE ATTACHMENTS ── -->
+  <div class="coord-card" id="card-files">
+    <div class="coord-card-hd" onclick="toggleCard('card-files')">
+      <div class="coord-card-title">
+        <svg viewBox="0 0 24 24"><path d="M21.44 11.05l-9.19 9.19a6 6 0 01-8.49-8.49l9.19-9.19a4 4 0 015.66 5.66l-9.2 9.19a2 2 0 01-2.83-2.83l8.49-8.48"/></svg>
+        File Attachments
+      </div>
+      <svg class="coord-card-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+    </div>
+    <div class="coord-card-body">
+      <div class="dropzone" id="dz-coord" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="handleDrop(event)">
+        <svg viewBox="0 0 24 24" style="width:28px;height:28px;stroke:var(--text-muted);stroke-width:1.5;fill:none;stroke-linecap:round;stroke-linejoin:round;margin-bottom:8px"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+        <div class="dropzone-label">Drag &amp; drop files here</div>
+        <div class="dropzone-hint">or <label style="color:var(--rust);cursor:pointer;text-decoration:underline">browse<input type="file" id="fi-coord" multiple style="display:none" onchange="handleFileInput(this)"/></label></div>
+      </div>
+      <div class="file-list" id="fl-coord"></div>
+      <div style="display:flex;gap:10px;margin-top:10px">
+        <button class="save-btn" onclick="showToast('Files uploaded','success')">Upload Files</button>
+        <button class="save-btn secondary" onclick="clearFiles()">Clear All</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── ASSIGNMENT ── -->
+  <div class="coord-card" id="card-assign">
+    <div class="coord-card-hd" onclick="toggleCard('card-assign')">
+      <div class="coord-card-title">
+        <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        Assignment
+      </div>
+      <svg class="coord-card-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+    </div>
+    <div class="coord-card-body">
+      <div class="detail-field">
+        <span class="detail-field-key">Assigned To</span>
+        <input class="detail-input" id="assign-email" type="email" placeholder="Enter email address..." oninput="markDirty()"/>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── CONTACT & IDs ── -->
+  <div class="coord-card" id="card-contact">
+    <div class="coord-card-hd" onclick="toggleCard('card-contact')">
+      <div class="coord-card-title">
+        <svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M16 2v4M8 2v4M2 10h20"/></svg>
+        Contact &amp; IDs
+      </div>
+      <svg class="coord-card-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+    </div>
+    <div class="coord-card-body">
+      <div class="detail-field">
+        <span class="detail-field-key">seller_contact_email</span>
+        <input class="detail-input" id="ct-seller" type="email" placeholder="Enter email..." oninput="markDirty()"/>
+      </div>
+      <div class="detail-field">
+        <span class="detail-field-key">buyer_comm_email</span>
+        <input class="detail-input" id="ct-buyer" type="email" value="test@gmail.com" oninput="markDirty()"/>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── SHARED FAMILY OVERVIEW ── -->
+  <div class="coord-card" id="card-family">
+    <div class="coord-card-hd" onclick="toggleCard('card-family')">
+      <div class="coord-card-title">
+        <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+        Shared Family Overview
+      </div>
+      <svg class="coord-card-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+    </div>
+    <div class="coord-card-body">
+      <div class="detail-field" style="flex-direction:column;gap:8px;">
+        <span class="detail-field-key">Family Overview (shared)</span>
+        <div class="fam-wrap">
+          <div class="fam-toolbar">
+            <div class="fam-toolbar-btns" id="fam-toolbar">
+              <button class="rb" data-cmd="bold" title="Bold"><b>B</b></button>
+              <button class="rb" data-cmd="italic" title="Italic"><i>I</i></button>
+              <button class="rb" data-cmd="underline" title="Underline"><u>U</u></button>
+            </div>
+            <button class="save-btn" onclick="saveFamilyOverview()" style="padding:5px 14px;font-size:12px;">Save</button>
+          </div>
+          <div class="fam-editor" id="fam-editor" contenteditable="true" oninput="markDirty()"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── CASE NOTES ── -->
+  <div class="coord-card" id="card-notes">
+    <div class="coord-card-hd" onclick="toggleCard('card-notes')">
+      <div class="coord-card-title">
+        <svg viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+        Case Notes (shared)
+      </div>
+      <svg class="coord-card-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+    </div>
+    <div class="coord-card-body">
+      <div class="case-notes-display" id="notes-display"></div>
+      <div class="detail-field" style="flex-direction:column;gap:6px;">
+        <span class="detail-field-key">Add note:</span>
+        <div class="add-note-row">
+          <textarea class="detail-textarea" id="new-note" placeholder="Type a new note..." rows="3"></textarea>
+        </div>
+        <div style="text-align:right">
+          <button class="save-btn add-note-btn" onclick="addNote()">+ Add Note</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── FOOTER ACTIONS ── -->
+  <div class="detail-form-footer">
+    <button class="save-btn" onclick="saveChanges()">Save Changes</button>
+    <button class="save-btn secondary" onclick="cancelChanges()">Cancel</button>
+  </div>
+</main>
+
+<aside class="panel">
+  <div class="panel-hero">
+    <div class="avatar">A</div>
+    <div class="panel-role">Coordinator</div>
+    <div class="panel-name">Alessandra Sanches</div>
+    <div class="panel-email">als.s.sanches@gmail.com</div>
+  </div>
+  <div class="panel-section">
+    <div class="panel-section-label">Case</div>
+    <div class="stat-row"><span class="stat-key">Title</span><span class="stat-val" id="panel-title">3964 Wallace St</span></div>
+    <div class="stat-row"><span class="stat-key">Status</span><span class="stat-val rust" id="panel-status">Active</span></div>
+    <div class="stat-row"><span class="stat-key">Court Date</span><span class="stat-val" id="panel-court">TBD</span></div>
+  </div>
+  <div class="panel-section">
+    <div class="panel-section-label">Milestones</div>
+    <div class="stat-row"><span class="stat-key">Completed</span><span class="stat-val">0 / 12</span></div>
+    <div class="stat-row"><span class="stat-key">Pending</span><span class="stat-val rust">12</span></div>
+  </div>
+  <div class="panel-footer">
+    <p>Coordinating cases with precision and care.</p>
+  </div>
+</aside>
+
+<script>
+// ── Data store (demo: record #1 = 3964 Wallace St) ──
+const famOverviewHTML = `<div style="text-align:center"><strong>3964 Wallace St</strong></div>
+<br>
+<strong>Property Owner:</strong> Carrie Chuning<br>
+<strong>Listed Sale Date:</strong> 1947<br>
+<strong>Zoning:</strong> RSA5<br>
+<strong>Tax Debt:</strong> $13,747.23<br>
+<strong>L&amp;I:</strong> $170.93<br>
+<strong>Total Debt:</strong> $13,918.16<br>
+<strong>Deed:</strong> On File (heirs and assigns forever)<br>
+<br>
+<u><strong>Estimated Property Value:</strong></u> $40,000 – $60,000<br>
+<br>
+<span style="color:#B55A35"><strong>Subject: Carrie Chuning</strong></span><br>
+<ul style="margin:6px 0 6px 18px;padding:0">
+  <li><strong>Date of Birth:</strong> March 10th, 1903</li>
+  <li><strong>Birthplace:</strong> Virginia, USA</li>
+  <li><strong>Date of Death:</strong> September 25th, 1993</li>
+  <li><strong>Spouse:</strong> John Rhone</li>
+  <li><strong>Children:</strong> 1</li>
+</ul>
+<strong>Spouse: John Rhone</strong><br>
+<ul style="margin:6px 0 6px 18px;padding:0">
+  <li><strong>Birthplace:</strong> Virginia, USA</li>
+</ul>
+<br>
+<strong>Children of Carrie Chuning</strong><br>
+<br>
+<strong><u>Edith King (née Rhone)</u></strong><br>
+<ul style="margin:6px 0 6px 18px;padding:0">
+  <li><strong>Date of Birth:</strong> March 20th, 1921</li>
+  <li><strong>Birthplace:</strong> Virginia</li>
+  <li><strong>Date of Death:</strong> 2010</li>
+  <li><strong>Deathplace:</strong> Williamstown, NJ</li>
+  <li><strong>Spouse:</strong> Lucious King</li>
+</ul>
+<br>
+<strong>Summary</strong><br>
+Carrie Chuning was born in Virginia on March 10th, 1903. She married John Rhone around 1920 and the couple had one daughter named Edith Rhone on March 20th, 1921. John passed away shortly before 1930, so Carrie and Edith were rooming with another family on Aspen St. for a few years. Edith lived with her mother until 1947 when she married a man named Lucious King. They had one daughter, Linda Veronica King. Lucious died in 2006 and Edith died a few years later, in 2010.<br>
+<br>
+Carrie passed away on September 25th, 1993.<br>
+<br>
+Linda King is 75 yrs old and currently living in Sicklerville, NJ. She has one daughter, named Michelle Rollins. She is 56 years old and lives in Sicklerville as well.<br>
+<br>
+<em>Option #1:</em> Contact Linda King regarding her grandmother's property.<br>
+<em>Option #2:</em> Contact Michelle Rollins regarding her great-grandmother's property.<br>
+<br>
+<strong><u>Linda King</u></strong><br>
+<strong>Age:</strong> 75<br>
+<strong>Address:</strong> 5 Logan Ct., Sicklerville, NJ, 08081<br>
+<strong>Phone:</strong> 609-707-4054 · 856-875-5001 · 609-629-2949<br>
+<br>
+<strong><u>Michelle Rollins</u></strong><br>
+<strong>Age:</strong> 56<br>
+<strong>Address:</strong> 90 Hopewell Ln., Unit 90, Sicklerville, NJ, 08081<br>
+<strong>Phone:</strong> 856-262-8535 · 856-262-8483 · 609-430-3075`;
+
+const caseNotes = [
+  { date: '4/1/26 · 11:15am', text: 'Research found that Edith recorded a will. I called Linda to let her know we are all set for now.' },
+  { date: '3/30/26 · 10:00am', text: 'Questions from research — Good morning Team! Would it be possible to ask our contact for 3964 Wallace St., if they know where/when Carrie Chuning died? Also, was her last name Chuning at that time? I\'m finding conflicting information.' },
+  { date: '3/26/26 · 1:30pm', text: 'Linda called and I spoke with her and her daughter. Linda agreed to move forward and be responsive with us. She gave me her DOB, SS#, address, and sent a copy of her DL. I emailed all that info to Richelle.' },
+  { date: '3/25/26 · 9:45am', text: 'Called Linda and she sent a text asking me to call back later.' },
+  { date: '3/23/26 · 10:00am', text: 'Left Linda a voicemail.\n\nNext call — realtor thinks home will sell between $60–70k. She could take home $25k low end and $32k high end. Lisa needs her DOB, SS#, copy of DL, address, phone number.\n\nWe want to ensure you\'re fully committed to moving forward and able to remain responsive throughout the process. We\'ve invested significant time and resources over the past four months, so it\'s important that we have alignment before proceeding.' },
+  { date: '3/20/26', text: 'Message from Parisa: Chris stated that he thinks it can go between $60K–$70K. He will make that final determination when we are done with probate and he is ready to list it — based on the market but that is the range.' },
+  { date: '3/17/26 · 2:30pm', text: 'Linda said she\'s looking for a clearer picture of the property\'s value. She understands that we provide a conservative range, but wants to know why we would go as low as $40k if the assessed value is $69,500. She mentioned that once she has that information, she will be ready to move forward. I did explain that the $69,500 reflects the city\'s tax-assessed value. In some cases, the city may increase that amount based on surrounding property values. However, I clarified that we don\'t rely on the tax assessment to determine the actual market value of the property, and it does not necessarily reflect what the property would sell for. Linda said she would like to know what Chris thinks he could sell the property for before she moves forward.' },
+  { date: '3/16/26 · 12:45pm', text: 'Left Linda a voicemail.' },
+  { date: '3/9/26 · 3:00pm', text: 'I spoke to Linda. She is staying with her daughter while she recovers from surgery. She asked for one more week so she can get home and get herself together. I will call her on 3/16. I sent her an email with my contact information. ladylinda0615@gmail.com. Linda said she didn\'t sign a contract but I confirmed with Richelle that she did sign on 11/3/25.' },
+  { date: '11/5/25', text: 'Linda King — Agreed to be administrator.' },
+];
+
+// ── Collapsible cards ──
+function toggleCard(id) {
+  document.getElementById(id).classList.toggle('collapsed');
+}
+
+// ── Dirty tracking ──
+let dirty = false;
+function markDirty() { dirty = true; }
+
+// ── File handling ──
+const fileMap = new Map();
+
+function handleDrop(e) {
+  e.preventDefault();
+  document.getElementById('dz-coord').classList.remove('drag-over');
+  addFiles(e.dataTransfer.files);
+}
+
+function handleFileInput(input) {
+  addFiles(input.files);
+  input.value = '';
+}
+
+function addFiles(files) {
+  Array.from(files).forEach(f => {
+    if (!fileMap.has(f.name)) fileMap.set(f.name, f);
+  });
+  renderFileList();
+}
+
+function renderFileList() {
+  const list = document.getElementById('fl-coord');
+  if (fileMap.size === 0) { list.innerHTML = ''; return; }
+  list.innerHTML = Array.from(fileMap.values()).map(f =>
+    `<div class="file-item">
+      <span class="file-item-icon">📄</span>
+      <span class="file-item-name">${f.name}</span>
+      <span class="file-item-size">${(f.size/1024).toFixed(1)} KB</span>
+      <button class="file-item-remove" onclick="removeFile('${f.name}')">✕</button>
+    </div>`
+  ).join('');
+}
+
+function removeFile(name) { fileMap.delete(name); renderFileList(); }
+function clearFiles() { fileMap.clear(); renderFileList(); }
+
+// ── Case notes ──
+function renderNotes() {
+  const display = document.getElementById('notes-display');
+  if (caseNotes.length === 0) {
+    display.innerHTML = '<div class="case-notes-empty">No case notes yet.</div>';
+    return;
+  }
+  display.innerHTML = caseNotes.map(n =>
+    `<div class="case-note-item">
+      <div class="case-note-date">${n.date}</div>
+      <div class="case-note-body">${n.text.replace(/\n/g, '<br>')}</div>
+    </div>`
+  ).join('');
+}
+
+function addNote() {
+  const ta = document.getElementById('new-note');
+  const text = ta.value.trim();
+  if (!text) { showToast('Please enter a note', 'error'); return; }
+  const now = new Date();
+  const d = `${now.getMonth()+1}/${now.getDate()}/${String(now.getFullYear()).slice(-2)} · ${now.toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'})}`;
+  caseNotes.unshift({ date: d, text });
+  renderNotes();
+  ta.value = '';
+  showToast('Note added', 'success');
+}
+
+// ── Family overview ──
+function saveFamilyOverview() {
+  showToast('Family overview saved', 'success');
+}
+
+// ── Save / Cancel ──
+function saveChanges() {
+  dirty = false;
+  showToast('Changes saved successfully', 'success');
+  document.getElementById('panel-title').textContent  = document.getElementById('ci-title').value;
+  document.getElementById('panel-status').textContent = document.getElementById('ci-status').value;
+  document.getElementById('panel-court').textContent  = document.getElementById('ci-courtdate').value;
+}
+
+function cancelChanges() {
+  if (dirty) {
+    showConfirm('Discard unsaved changes and return to Specialist Files?', () => {
+      window.location.href = 'seek-coordinator.html';
+    });
+  } else {
+    window.location.href = 'seek-coordinator.html';
+  }
+}
+
+// ── Init ──
+document.addEventListener('DOMContentLoaded', () => {
+  document.getElementById('fam-editor').innerHTML = famOverviewHTML;
+  renderNotes();
+
+  // Wire up rich text buttons
+  const toolbar = document.getElementById('fam-toolbar');
+  const editor  = document.getElementById('fam-editor');
+  initRichBtns(toolbar, editor);
+});
+</script>
+
+<script src="sidebar.js" defer></script>
+<script src="ui.js" defer></script>
+</body>
+</html>

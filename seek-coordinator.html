@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Seek Research — Coordinator</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body class="fixed-layout">
+
+<!-- MOBILE HEADER -->
+<div class="mobile-header">
+  <button class="hamburger" onclick="openMobileSidebar()" aria-label="Open menu">
+    <span></span><span></span><span></span>
+  </button>
+  <a class="mobile-logo" href="index.html">
+    <span class="mobile-logo-s">S</span>
+    <span class="mobile-logo-name">Seek</span>
+  </a>
+</div>
+<div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-toggle" onclick="toggleSidebar()">
+    <svg viewBox="0 0 10 10"><polyline points="6 2 2 5 6 8"/></svg>
+  </div>
+  <a class="sidebar-logo" href="index.html">
+    <div class="logo-mark">
+      <span class="logo-s">S</span>
+      <svg width="16" height="9" viewBox="0 0 18 10" fill="none"><polygon points="0,0 10,0 6,5 10,10 0,10 4,5" fill="#B55A35"/></svg>
+    </div>
+    <div class="logo-text">
+      <span class="logo-name">Seek</span>
+      <span class="logo-sub">Research Platform</span>
+    </div>
+  </a>
+  <nav class="sidebar-nav">
+    <div class="nav-section open" id="sec-portals">
+      <div class="nav-section-header" onclick="toggleSection('sec-portals')">
+        <div class="nav-section-left">
+          <svg class="nav-section-icon" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+          <span class="nav-section-label">Portals</span>
+        </div>
+        <svg class="nav-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="nav-items">
+        <a class="nav-link" href="index.html">
+          <svg class="nav-link-icon" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>
+          <span class="nav-link-label">Home</span>
+        </a>
+        <a class="nav-link" href="seek-dashboard-mockup.html">
+          <svg class="nav-link-icon" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          <span class="nav-link-label">Client Portal</span>
+        </a>
+        <a class="nav-link" href="seek-affiliate-portal.html">
+          <svg class="nav-link-icon" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+          <span class="nav-link-label">Affiliate Portal</span>
+        </a>
+        <a class="nav-link" href="seek-buyer-portal.html">
+          <svg class="nav-link-icon" viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+          <span class="nav-link-label">Buyer Portal</span>
+        </a>
+        <a class="nav-link" href="seek-executive-portal.html">
+          <svg class="nav-link-icon" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <span class="nav-link-label">Executive Portal</span>
+        </a>
+      </div>
+    </div>
+    <div class="nav-divider"></div>
+    <div class="nav-section open" id="sec-ops">
+      <div class="nav-section-header" onclick="toggleSection('sec-ops')">
+        <div class="nav-section-left">
+          <svg class="nav-section-icon" viewBox="0 0 24 24"><path d="M9 12h6M9 8h6M5 4h14a1 1 0 011 1v14a1 1 0 01-1 1H5a1 1 0 01-1-1V5a1 1 0 011-1z"/></svg>
+          <span class="nav-section-label">Operations</span>
+        </div>
+        <svg class="nav-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="nav-items">
+        <a class="nav-link" href="seek-research-forms.html">
+          <svg class="nav-link-icon" viewBox="0 0 24 24"><path d="M9 12h6M9 8h6M5 4h14a1 1 0 011 1v14a1 1 0 01-1 1H5a1 1 0 01-1-1V5a1 1 0 011-1z"/></svg>
+          <span class="nav-link-label">Research Forms</span>
+        </a>
+        <a class="nav-link" href="seek-outreach-specialist.html">
+          <svg class="nav-link-icon" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+          <span class="nav-link-label">Outreach Specialist</span>
+        </a>
+        <a class="nav-link active" href="seek-coordinator.html">
+          <svg class="nav-link-icon" viewBox="0 0 24 24"><path d="M9 17H7a4 4 0 01-4-4V7a4 4 0 014-4h10a4 4 0 014 4v6a4 4 0 01-4 4h-2l-4 4-2-4z"/></svg>
+          <span class="nav-link-label">Coordinator</span>
+        </a>
+      </div>
+    </div>
+  </nav>
+  <div class="sidebar-bottom">
+    <div class="sidebar-user">
+      <div class="sb-avatar">A</div>
+      <div class="user-info">
+        <div class="user-name">Alessandra S.</div>
+        <div class="user-email">als.s.sanches@gmail.com</div>
+      </div>
+    </div>
+    <div class="sb-signout">
+      <svg viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+      <span class="sb-signout-label">Sign Out</span>
+    </div>
+  </div>
+</aside>
+
+<main class="content">
+  <div class="topbar">
+    <div>
+      <div class="topbar-eyebrow">Coordinator</div>
+      <div class="topbar-title">Case <em>coordination hub.</em></div>
+      <div class="view-badge rust"><span class="view-badge-dot"></span>Coordinator · als.s.sanches@gmail.com</div>
+    </div>
+    <div class="nav-links">
+      <a class="topbar-nav-link" href="#">About Us</a>
+      <a class="topbar-nav-link" href="#">Contact Us</a>
+    </div>
+  </div>
+
+  <div class="tabs-card">
+    <div class="tabs-header">
+      <div class="tab active" onclick="switchTab('published')">
+        <div class="tab-inner"><span class="tab-label">Published Records</span><span class="tab-count-badge" id="badge-published">3</span></div>
+        <div class="tab-indicator"></div>
+      </div>
+      <div class="tab" onclick="switchTab('specialist')">
+        <div class="tab-inner"><span class="tab-label">Specialist Files</span><span class="tab-count-badge" id="badge-specialist">4</span></div>
+        <div class="tab-indicator"></div>
+      </div>
+    </div>
+
+    <div class="tabs-body">
+
+      <!-- ── PUBLISHED RECORDS TO AFFILIATE / BUYERS ── -->
+      <div class="tab-panel active" id="panel-published">
+        <div class="filter-bar">
+          <div class="filter-search-wrap">
+            <div class="filter-search-icon"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
+            <input class="filter-search" placeholder="Search property, developer, or email..." oninput="filterPub(this.value)" id="pub-search"/>
+          </div>
+          <span class="filter-count" id="pub-count">Showing 3 of 3</span>
+        </div>
+        <div class="split">
+          <div class="table-side">
+            <table>
+              <thead>
+                <tr>
+                  <th class="sticky">Property</th>
+                  <th class="sticky">Developer</th>
+                  <th class="sticky">Summary</th>
+                  <th class="sticky">User Email</th>
+                  <th class="sticky">Communication</th>
+                </tr>
+              </thead>
+              <tbody id="pub-tbody">
+                <tr id="pub-row-1" data-id="1" data-property="3964 Wallace St" data-developer="Seek Research" data-summary="Probate — Carrie Chuning" data-email="alfabot@gmail.com">
+                  <td class="td-main">3964 Wallace St</td>
+                  <td class="td-muted">Seek Research</td>
+                  <td class="td-muted">Probate — Carrie Chuning</td>
+                  <td class="td-muted">alfabot@gmail.com</td>
+                  <td><button class="comm-btn" id="cb-1" onclick="openComm(event,1)">Communication</button></td>
+                </tr>
+                <tr id="pub-row-2" data-id="2" data-property="512 Broad Ave" data-developer="Seek Research" data-summary="Vacant lot — Wilson Estate" data-email="lucasvfr@outlook.com">
+                  <td class="td-main">512 Broad Ave</td>
+                  <td class="td-muted">Seek Research</td>
+                  <td class="td-muted">Vacant lot — Wilson Estate</td>
+                  <td class="td-muted">lucasvfr@outlook.com</td>
+                  <td><button class="comm-btn" id="cb-2" onclick="openComm(event,2)">Communication</button></td>
+                </tr>
+                <tr id="pub-row-3" data-id="3" data-property="2201 Lehigh Ave" data-developer="Seek Research" data-summary="Commercial probate — Martinez" data-email="andreas@scrivnr.com">
+                  <td class="td-main">2201 Lehigh Ave</td>
+                  <td class="td-muted">Seek Research</td>
+                  <td class="td-muted">Commercial probate — Martinez</td>
+                  <td class="td-muted">andreas@scrivnr.com</td>
+                  <td><button class="comm-btn" id="cb-3" onclick="openComm(event,3)">Communication</button></td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="empty-filter-state" id="empty-pub">
+              <div class="empty-filter-icon">🔍</div>
+              <div class="empty-filter-msg">No results for <strong><span class="empty-filter-query"></span></strong></div>
+              <button class="empty-filter-clear" onclick="clearPubFilter()">Clear filter</button>
+            </div>
+            <div class="pagination">
+              <span class="pagination-info">Page 1 of 1</span>
+              <div class="pagination-btns">
+                <button class="page-btn" disabled>← Prev</button>
+                <button class="page-btn current">1</button>
+                <button class="page-btn" disabled>Next →</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Communication side card -->
+          <div class="detail-side">
+            <div class="detail-empty" id="pub-detail-empty">
+              <div class="detail-empty-icon">
+                <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+              </div>
+              <div class="detail-empty-text">Select a record</div>
+              <div class="detail-empty-sub">Click Communication to view notes</div>
+            </div>
+            <div class="detail-content" id="pub-detail-content">
+              <div class="detail-header">
+                <div class="detail-id" id="comm-id-label">—</div>
+                <div class="detail-title" id="comm-title-label">Communication</div>
+              </div>
+              <div class="comm-thread" id="comm-thread"></div>
+              <div class="detail-body" style="padding-top:10px;border-top:1px solid var(--parchment-dark);flex-shrink:0;">
+                <div class="detail-field" style="flex-direction:column;gap:6px;">
+                  <span class="detail-field-key">Add a note</span>
+                  <textarea class="detail-textarea" id="comm-note-input" placeholder="Type a note..." rows="4"></textarea>
+                </div>
+              </div>
+              <div class="detail-footer">
+                <button class="save-btn" onclick="saveCommNote()">Save Note</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── CLIENT COORDINATOR SPECIALIST FILES ── -->
+      <div class="tab-panel" id="panel-specialist">
+        <div class="filter-bar">
+          <div class="filter-search-wrap">
+            <div class="filter-search-icon"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
+            <input class="filter-search" placeholder="Search title or contact..." oninput="filterSpec(this.value,'spec-status-filter')" id="spec-search"/>
+          </div>
+          <select class="filter-select" id="spec-status-filter" onchange="filterSpec(document.getElementById('spec-search').value,'spec-status-filter')">
+            <option value="">All statuses</option>
+            <option>Active</option>
+            <option>In Progress</option>
+            <option>Closed</option>
+          </select>
+          <span class="filter-count" id="spec-count">Showing 4 of 4</span>
+        </div>
+        <div class="table-scroll-wrap">
+          <table class="wide-table">
+            <thead>
+              <tr>
+                <th class="sticky">Status</th>
+                <th class="sticky">Title</th>
+                <th class="sticky">Scheduled Court Date</th>
+                <th class="sticky">Send Title Docs</th>
+                <th class="sticky">Contract Signed</th>
+                <th class="sticky">Renunciations</th>
+                <th class="sticky">Full Package Sent</th>
+                <th class="sticky">Seller Contact</th>
+              </tr>
+            </thead>
+            <tbody id="spec-tbody">
+              <tr class="clickable-row" onclick="goDetail(1)" data-status="Active">
+                <td><span class="status-pill sactive"><span class="status-dot"></span>Active</span></td>
+                <td class="td-main">3964 Wallace St</td>
+                <td class="td-muted">TBD</td>
+                <td class="td-muted">Sent</td>
+                <td class="td-muted">Waiting Action</td>
+                <td class="td-muted">Waiting Action</td>
+                <td class="td-muted">Waiting Action</td>
+                <td class="td-muted">Linda King</td>
+              </tr>
+              <tr class="clickable-row" onclick="goDetail(2)" data-status="In Progress">
+                <td><span class="status-pill inreview"><span class="status-dot"></span>In Progress</span></td>
+                <td class="td-main">512 Broad Ave</td>
+                <td class="td-muted">05/15/26</td>
+                <td class="td-muted">—</td>
+                <td class="td-muted">Complete</td>
+                <td class="td-muted">Waiting Action</td>
+                <td class="td-muted">Waiting Action</td>
+                <td class="td-muted">james.wilson@email.com</td>
+              </tr>
+              <tr class="clickable-row" onclick="goDetail(3)" data-status="Active">
+                <td><span class="status-pill sactive"><span class="status-dot"></span>Active</span></td>
+                <td class="td-main">2201 Lehigh Ave</td>
+                <td class="td-muted">06/30/26</td>
+                <td class="td-muted">Sent</td>
+                <td class="td-muted">Waiting Action</td>
+                <td class="td-muted">Waiting Action</td>
+                <td class="td-muted">Waiting Action</td>
+                <td class="td-muted">maria.martinez@email.com</td>
+              </tr>
+              <tr class="clickable-row" onclick="goDetail(4)" data-status="Closed">
+                <td><span class="status-pill submitted"><span class="status-dot"></span>Closed</span></td>
+                <td class="td-main">1847 Girard Ave</td>
+                <td class="td-muted">—</td>
+                <td class="td-muted">Sent</td>
+                <td class="td-muted">Complete</td>
+                <td class="td-muted">Complete</td>
+                <td class="td-muted">Complete</td>
+                <td class="td-muted">tom.baker@email.com</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="empty-filter-state" id="empty-spec">
+          <div class="empty-filter-icon">🔍</div>
+          <div class="empty-filter-msg">No results for <strong><span class="empty-filter-query"></span></strong></div>
+          <button class="empty-filter-clear" onclick="clearSpecFilter()">Clear filter</button>
+        </div>
+        <div class="pagination">
+          <span class="pagination-info">Page 1 of 1</span>
+          <div class="pagination-btns">
+            <button class="page-btn" disabled>← Prev</button>
+            <button class="page-btn current">1</button>
+            <button class="page-btn" disabled>Next →</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</main>
+
+<aside class="panel">
+  <div class="panel-hero">
+    <div class="avatar">A</div>
+    <div class="panel-role">Coordinator</div>
+    <div class="panel-name">Alessandra Sanches</div>
+    <div class="panel-email">als.s.sanches@gmail.com</div>
+  </div>
+  <div class="panel-section">
+    <div class="panel-section-label">Overview</div>
+    <div class="stat-row"><span class="stat-key">Published Records</span><span class="stat-val">3</span></div>
+    <div class="stat-row"><span class="stat-key">Specialist Files</span><span class="stat-val gold">4</span></div>
+    <div class="stat-row"><span class="stat-key">Active Cases</span><span class="stat-val rust">2</span></div>
+    <div class="stat-row"><span class="stat-key">Closed</span><span class="stat-val">1</span></div>
+  </div>
+  <div class="panel-section">
+    <div class="panel-section-label">Active Tab</div>
+    <div class="stat-row">
+      <span class="stat-key" id="active-tab-label">Published Records</span>
+      <span class="stat-val rust" id="active-tab-count">3</span>
+    </div>
+  </div>
+  <div class="panel-footer">
+    <p>Coordinating cases with precision and care.</p>
+  </div>
+</aside>
+
+<script>
+const tabMap = {
+  published: { label: 'Published Records', count: '3' },
+  specialist: { label: 'Specialist Files', count: '4' },
+};
+
+function switchTab(id) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  const keys = Object.keys(tabMap);
+  document.querySelectorAll('.tab')[keys.indexOf(id)].classList.add('active');
+  document.getElementById('panel-' + id).classList.add('active');
+  document.getElementById('active-tab-label').textContent = tabMap[id].label;
+  document.getElementById('active-tab-count').textContent = tabMap[id].count;
+}
+
+// Communication notes store
+const commNotes = {
+  1: [
+    { date: '4/1/26 · 11:15am', text: 'Research found that Edith recorded a will. Called Linda to let her know we are all set for now.' },
+    { date: '3/30/26 · 10:00am', text: 'Questions from research — Would it be possible to ask our contact if they know where/when Carrie Chuning died? Also, was her last name Chuning at that time? Finding conflicting information.' },
+    { date: '3/26/26 · 1:30pm', text: 'Linda called. Spoke with her and her daughter. Linda agreed to move forward and be responsive. She gave me her DOB, SS#, address, and sent a copy of her DL. I emailed all that info to Richelle.' },
+    { date: '3/25/26 · 9:45am', text: 'Called Linda — she sent a text asking me to call back later.' },
+    { date: '3/23/26 · 10:00am', text: 'Left Linda a voicemail.\n\nNext call — realtor thinks home will sell between $60–$70k. She could take home $25k low end and $32k high end. Lisa needs her DOB, SS#, copy of DL, address, phone number.' },
+    { date: '3/20/26', text: 'Message from Parisa: Chris stated that he thinks it can go between $60K–$70K. He will make that final determination when we are done with probate and he is ready to list it — based on the market, but that is the range.' },
+    { date: '3/17/26 · 2:30pm', text: 'Linda said she\'s looking for a clearer picture of the property\'s value. She understands that we provide a conservative range, but wants to know why we would go as low as $40k if the assessed value is $69,500. I explained that the $69,500 reflects the city\'s tax-assessed value and does not necessarily reflect what the property would sell for. Linda said she would like to know what Chris thinks he could sell the property for before she moves forward.' },
+    { date: '3/16/26 · 12:45pm', text: 'Left Linda a voicemail.' },
+    { date: '3/9/26 · 3:00pm', text: 'Spoke to Linda. She is staying with her daughter while she recovers from surgery. She asked for one more week so she can get home and get herself together. I will call her on 3/16. Sent her an email with my contact information: ladylinda0615@gmail.com.\n\nLinda said she didn\'t sign a contract but I confirmed with Richelle that she did sign on 11/3/25.' },
+    { date: '11/5/25', text: 'Linda King agreed to be administrator.' },
+  ],
+  2: [],
+  3: [],
+  4: [],
+};
+
+let activeCommId = null;
+
+function openComm(e, id) {
+  e.stopPropagation();
+
+  // Toggle off if same button clicked twice
+  if (activeCommId === id) {
+    activeCommId = null;
+    document.querySelectorAll('.comm-btn').forEach(b => b.classList.remove('active-comm'));
+    document.querySelectorAll('#pub-tbody tr').forEach(r => r.classList.remove('selected'));
+    document.getElementById('pub-detail-empty').style.display = '';
+    document.getElementById('pub-detail-content').classList.remove('visible');
+    return;
+  }
+
+  activeCommId = id;
+
+  document.querySelectorAll('.comm-btn').forEach(b => b.classList.remove('active-comm'));
+  document.getElementById('cb-' + id).classList.add('active-comm');
+  document.querySelectorAll('#pub-tbody tr').forEach(r => r.classList.remove('selected'));
+  document.getElementById('pub-row-' + id).classList.add('selected');
+
+  const row = document.getElementById('pub-row-' + id);
+  document.getElementById('comm-id-label').textContent = 'Record #' + id;
+  document.getElementById('comm-title-label').textContent = row.dataset.property;
+  document.getElementById('comm-note-input').value = '';
+
+  renderCommThread(id);
+
+  document.getElementById('pub-detail-empty').style.display = 'none';
+  document.getElementById('pub-detail-content').classList.add('visible');
+}
+
+function renderCommThread(id) {
+  const thread = document.getElementById('comm-thread');
+  const notes = commNotes[id] || [];
+  if (notes.length === 0) {
+    thread.innerHTML = '<div class="comm-empty">No notes yet.</div>';
+    return;
+  }
+  thread.innerHTML = notes.map(n =>
+    `<div class="comm-note-item">
+      <div class="comm-note-meta">${n.date}</div>
+      <div class="comm-note-text">${n.text.replace(/\n/g, '<br>')}</div>
+    </div>`
+  ).join('');
+}
+
+function saveCommNote() {
+  if (!activeCommId) return;
+  const input = document.getElementById('comm-note-input');
+  const text = input.value.trim();
+  if (!text) { showToast('Please enter a note', 'error'); return; }
+
+  const now = new Date();
+  const d = `${now.getMonth()+1}/${now.getDate()}/${String(now.getFullYear()).slice(-2)} · ${now.toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'})}`;
+  commNotes[activeCommId].unshift({ date: d, text });
+  renderCommThread(activeCommId);
+  input.value = '';
+  showToast('Note saved', 'success');
+}
+
+// Filter: published records
+function filterPub(q) {
+  const rows = document.querySelectorAll('#pub-tbody tr');
+  const lq = q.toLowerCase();
+  rows.forEach(r => {
+    r.style.display = !lq || r.textContent.toLowerCase().includes(lq) ? '' : 'none';
+  });
+  checkEmpty(rows, document.getElementById('empty-pub'), lq);
+  const vis = Array.from(rows).filter(r => r.style.display !== 'none').length;
+  document.getElementById('pub-count').textContent = 'Showing ' + vis + ' of 3';
+}
+
+function clearPubFilter() {
+  document.getElementById('pub-search').value = '';
+  filterPub('');
+}
+
+// Filter: specialist files
+function filterSpec(q, selectId) {
+  const rows = document.querySelectorAll('#spec-tbody tr');
+  const lq = q.toLowerCase();
+  const status = document.getElementById(selectId).value.toLowerCase();
+  rows.forEach(r => {
+    const matchSearch = !lq || r.textContent.toLowerCase().includes(lq);
+    const matchStatus = !status || (r.dataset.status || '').toLowerCase().includes(status);
+    r.style.display = matchSearch && matchStatus ? '' : 'none';
+  });
+  checkEmpty(rows, document.getElementById('empty-spec'), lq || status);
+  const vis = Array.from(rows).filter(r => r.style.display !== 'none').length;
+  document.getElementById('spec-count').textContent = 'Showing ' + vis + ' of 4';
+}
+
+function clearSpecFilter() {
+  document.getElementById('spec-search').value = '';
+  document.getElementById('spec-status-filter').value = '';
+  filterSpec('', 'spec-status-filter');
+}
+
+function goDetail(id) {
+  window.location.href = 'seek-coordinator-detail.html?id=' + id;
+}
+</script>
+
+<script src="sidebar.js" defer></script>
+<script src="ui.js" defer></script>
+</body>
+</html>
