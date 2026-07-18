@@ -406,6 +406,12 @@ function selectSubmission(row) {
   document.getElementById('sub-detail-empty').style.display = 'none';
   document.getElementById('sub-detail-content').classList.add('visible');
 }
+
+// Auto-select da primeira linha: o painel de detalhe nunca abre vazio
+document.addEventListener('DOMContentLoaded', () => {
+  const row = document.querySelector('.tab-panel.active .table-side tbody tr[onclick]');
+  if (row) row.click();
+});
 </script>
 
 <script src="sidebar.js" defer></script>

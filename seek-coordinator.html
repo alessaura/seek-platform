@@ -196,8 +196,8 @@
               <div class="detail-empty-icon">
                 <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
               </div>
-              <div class="detail-empty-text">Select a record</div>
-              <div class="detail-empty-sub">Click Communication to view notes</div>
+              <div class="detail-empty-text">No record selected</div>
+              <div class="detail-empty-sub">Click Notes on a row to see its conversation</div>
             </div>
             <div class="detail-content" id="pub-detail-content">
               <div class="detail-header">
@@ -475,6 +475,12 @@ function clearSpecFilter() {
 function goDetail(id) {
   window.location.href = 'seek-coordinator-detail.html?id=' + id;
 }
+
+// Auto-abre as notas do primeiro registro
+document.addEventListener('DOMContentLoaded', () => {
+  const btn = document.querySelector('#pub-tbody .comm-btn');
+  if (btn) btn.click();
+});
 </script>
 
 <script src="sidebar.js" defer></script>
