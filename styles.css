@@ -83,20 +83,6 @@ body.fixed-layout  { height: 100vh; display: flex; overflow: hidden; }
   text-decoration: none;
 }
 
-.mobile-logo-s {
-  font-size: 18px;
-  font-weight: 600;
-  color: var(--paper);
-  line-height: 1;
-}
-
-.mobile-logo-name {
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--paper);
-  letter-spacing: 2px;
-  text-transform: uppercase;
-}
 
 /* ── SIDEBAR OVERLAY ── */
 .sidebar-overlay {
@@ -137,18 +123,24 @@ body.fixed-layout  { height: 100vh; display: flex; overflow: hidden; }
   text-decoration: none;
 }
 
-.logo-mark { display: flex; flex-direction: column; align-items: center; gap: 3px; flex-shrink: 0; }
-.logo-s { font-size: 22px; font-weight: 600; color: var(--paper); line-height: 1; }
-
-.logo-text {
-  display: flex; flex-direction: column;
-  overflow: hidden; white-space: nowrap;
-  opacity: 1; transition: opacity 0.2s;
+/* ── BRAND LOCKUP: SEE‹ / RESEARCH ── */
+.brand-lockup { display: flex; flex-direction: column; overflow: hidden; white-space: nowrap; transition: opacity 0.2s; }
+.brand-word {
+  font-family: 'Outfit', sans-serif; font-size: 25px; font-weight: 800;
+  letter-spacing: 0.5px; color: var(--paper); line-height: 1;
+  display: inline-flex; align-items: center;
 }
-.sidebar.collapsed .logo-text { opacity: 0; width: 0; }
-
-.logo-name { font-family: 'Outfit', sans-serif; font-size: 15px; font-weight: 600; color: var(--paper); letter-spacing: 2px; text-transform: uppercase; }
-.logo-sub  { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: rgba(247,249,250,0.4); font-weight: 400; }
+.brand-word .brand-chev { width: 22px; height: 22px; margin-left: 2px; flex-shrink: 0; }
+.brand-sub {
+  font-family: 'Outfit', sans-serif; font-size: 9.5px; font-weight: 500;
+  letter-spacing: 4.6px; text-transform: uppercase;
+  color: rgba(247,249,250,0.55); margin-top: 4px;
+}
+.brand-chev-solo { display: none; width: 24px; height: 24px; flex-shrink: 0; }
+.sidebar.collapsed .brand-lockup { display: none; }
+.sidebar.collapsed .brand-chev-solo { display: block; margin: 0 auto; }
+.mobile-logo .brand-word.sm { font-size: 18px; }
+.mobile-logo .brand-chev { width: 16px; height: 16px; margin-left: 1px; }
 
 .sidebar-toggle {
   position: absolute; top: 28px; right: -12px;

@@ -4,7 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Seek Research — Platform</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="icon" type="image/svg+xml" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120"><polygon fill="%234DA6A7" points="62,0 100,0 40,60 100,120 62,120 2,60"/><polygon fill="%234DA6A7" points="108,26 116,26 82,60 116,94 108,94 74,60"/></svg>'>
 <link rel="stylesheet" href="styles.css">
 </head>
 <body class="scroll-layout">
@@ -14,9 +15,8 @@
   <button class="hamburger" onclick="openMobileSidebar()" aria-label="Open menu">
     <span></span><span></span><span></span>
   </button>
-  <a class="mobile-logo" href="index.html">
-    <span class="mobile-logo-s">S</span>
-    <span class="mobile-logo-name">Seek</span>
+  <a class="mobile-logo" href="index.html" aria-label="Seek Research">
+    <span class="brand-word sm">SEE<svg class="brand-chev" viewBox="0 0 120 120" aria-hidden="true"><polygon fill="#4DA6A7" points="62,0 100,0 40,60 100,120 62,120 2,60"/><polygon fill="#4DA6A7" points="108,26 116,26 82,60 116,94 108,94 74,60"/></svg></span>
   </a>
 </div>
 <div class="sidebar-overlay" id="sidebar-overlay"></div>
@@ -27,15 +27,12 @@
     <svg viewBox="0 0 10 10"><polyline points="6 2 2 5 6 8"/></svg>
   </div>
 
-  <a class="sidebar-logo" href="index.html">
-    <div class="logo-mark">
-      <span class="logo-s">S</span>
-      <svg width="16" height="9" viewBox="0 0 18 10" fill="none"><polygon points="0,0 10,0 6,5 10,10 0,10 4,5" fill="#4DA6A7"/></svg>
+  <a class="sidebar-logo" href="index.html" aria-label="Seek Research">
+    <div class="brand-lockup">
+      <div class="brand-word">SEE<svg class="brand-chev" viewBox="0 0 120 120" aria-hidden="true"><polygon fill="#4DA6A7" points="62,0 100,0 40,60 100,120 62,120 2,60"/><polygon fill="#4DA6A7" points="108,26 116,26 82,60 116,94 108,94 74,60"/></svg></div>
+      <div class="brand-sub">Research</div>
     </div>
-    <div class="logo-text">
-      <span class="logo-name">Seek</span>
-      <span class="logo-sub">Research Platform</span>
-    </div>
+    <svg class="brand-chev-solo" viewBox="0 0 120 120" aria-hidden="true"><polygon fill="#4DA6A7" points="62,0 100,0 40,60 100,120 62,120 2,60"/><polygon fill="#4DA6A7" points="108,26 116,26 82,60 116,94 108,94 74,60"/></svg>
   </a>
 
   <nav class="sidebar-nav">
