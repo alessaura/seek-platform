@@ -422,6 +422,7 @@ tbody tr.selected { background: var(--teal-light); border-left: 3px solid var(--
 tbody td { padding: 13px 16px; color: var(--text-main); vertical-align: middle; }
 .td-main, .td-title { font-weight: 400; color: var(--ink); }
 .td-muted { color: var(--text-muted); font-weight: 400; font-size: 12px; }
+.td-zero { opacity: 0.45; } /* valores nulos recuam; o olho acha o que importa */
 .row-id { font-size: 10px; letter-spacing: 1px; color: var(--text-muted); }
 
 /* ── STATUS PILLS / BADGES ── */
