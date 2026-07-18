@@ -34,6 +34,13 @@ body {
 
 ::selection { background: rgba(77,166,167,0.25); }
 
+/* Foco visível para navegação por teclado — anel teal suave */
+input:focus-visible, select:focus-visible, textarea:focus-visible,
+button:focus-visible, a:focus-visible, [contenteditable]:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(77,166,167,0.35);
+}
+
 body.scroll-layout { min-height: 100vh; display: flex; }
 body.fixed-layout  { height: 100vh; display: flex; overflow: hidden; }
 
