@@ -162,20 +162,20 @@ body.fixed-layout  { height: 100vh; display: flex; overflow: hidden; }
 .nav-section-header:hover { background: rgba(247,249,250,0.05); }
 
 .nav-section-left { display: flex; align-items: center; gap: 10px; overflow: hidden; white-space: nowrap; }
-.nav-section-icon { width: 16px; height: 16px; stroke: rgba(247,249,250,0.4); fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }
+.nav-section-icon { width: 17px; height: 17px; stroke: rgba(247,249,250,0.5); fill: none; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }
 .nav-section-label { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: rgba(247,249,250,0.4); font-weight: 500; transition: opacity 0.2s; }
-.sidebar.collapsed .nav-section-label { opacity: 0; }
+.sidebar.collapsed .nav-section-label { opacity: 0; width: 0; }
 
 .nav-chevron { width: 12px; height: 12px; stroke: rgba(247,249,250,0.3); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; transition: transform 0.2s, opacity 0.2s; flex-shrink: 0; }
-.sidebar.collapsed .nav-chevron { opacity: 0; }
+.sidebar.collapsed .nav-chevron { opacity: 0; width: 0; }
 .nav-section.open .nav-chevron { transform: rotate(180deg); }
 
 .nav-items { overflow: hidden; max-height: 0; transition: max-height 0.25s ease; }
 .nav-section.open .nav-items { max-height: 300px; }
 
 .nav-link {
-  display: flex; align-items: center; gap: 10px;
-  padding: 9px 18px 9px 42px;
+  display: flex; align-items: center; gap: 11px;
+  padding: 10px 18px 10px 40px;
   text-decoration: none; transition: background 0.15s;
   white-space: nowrap; overflow: hidden;
   border-left: 3px solid transparent;
@@ -184,7 +184,7 @@ body.fixed-layout  { height: 100vh; display: flex; overflow: hidden; }
 .nav-link.active { background: rgba(77,166,167,0.15); border-left-color: var(--teal); }
 .sidebar.collapsed .nav-link { padding-left: 18px; justify-content: center; }
 
-.nav-link-icon { width: 15px; height: 15px; stroke: rgba(247,249,250,0.45); fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }
+.nav-link-icon { width: 17px; height: 17px; stroke: rgba(247,249,250,0.6); fill: none; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }
 .nav-link.active .nav-link-icon { stroke: var(--teal); }
 
 .nav-link-label { font-size: 13px; color: rgba(247,249,250,0.6); font-weight: 400; transition: opacity 0.2s; }
@@ -204,7 +204,7 @@ body.fixed-layout  { height: 100vh; display: flex; overflow: hidden; }
 
 .sb-signout { display: flex; align-items: center; gap: 8px; font-size: 11px; color: rgba(247,249,250,0.35); cursor: pointer; padding: 4px 0; transition: color 0.15s; white-space: nowrap; }
 .sb-signout:hover { color: rgba(247,249,250,0.7); }
-.sb-signout svg { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 1.5; stroke-linecap: round; flex-shrink: 0; }
+.sb-signout svg { width: 15px; height: 15px; stroke: currentColor; fill: none; stroke-width: 1.6; stroke-linecap: round; flex-shrink: 0; }
 .sb-signout-label { transition: opacity 0.2s; }
 .sidebar.collapsed .sb-signout-label { opacity: 0; width: 0; }
 
