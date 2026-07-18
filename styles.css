@@ -13,6 +13,7 @@
   --teal-light:    rgba(77,166,167,0.08);
   --gold:          #FFC107;
   --gold-light:    rgba(255,193,7,0.12);
+  --gold-deep:     #8A6900; /* gold como TEXTO em fundo claro (contraste AA) */
   --sage:          #8FAE9D;
   --sage-light:    rgba(143,174,157,0.12);
   --slate:         #607D8B;
@@ -268,7 +269,7 @@ body.fixed-layout  { height: 100vh; display: flex; overflow: hidden; }
   border-width: 1px; border-style: solid;
 }
 .view-badge.teal { color: var(--teal); background: var(--teal-light); border-color: rgba(77,166,167,0.2); }
-.view-badge.gold { color: var(--gold); background: var(--gold-light); border-color: rgba(255,193,7,0.25); }
+.view-badge.gold { color: var(--gold-deep); background: var(--gold-light); border-color: rgba(255,193,7,0.25); }
 .view-badge-dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
 
 /* nav links in topbar */
@@ -323,7 +324,7 @@ body.fixed-layout  { height: 100vh; display: flex; overflow: hidden; }
 
 .card-role { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; font-weight: 600; }
 .portal-card--teal .card-role { color: var(--teal); }
-.portal-card--gold .card-role { color: var(--gold); }
+.portal-card--gold .card-role { color: var(--gold-deep); }
 .portal-card--slate .card-role { color: var(--slate); }
 .portal-card--sage .card-role  { color: var(--sage); }
 
@@ -331,7 +332,7 @@ body.fixed-layout  { height: 100vh; display: flex; overflow: hidden; }
 .card-desc { font-size: 12px; font-weight: 400; color: var(--text-muted); line-height: 1.6; }
 .card-arrow { display: flex; align-items: center; gap: 5px; font-size: 11px; font-weight: 500; letter-spacing: 0.5px; margin-top: 4px; }
 .portal-card--teal .card-arrow { color: var(--teal); }
-.portal-card--gold .card-arrow { color: var(--gold); }
+.portal-card--gold .card-arrow { color: var(--gold-deep); }
 .portal-card--slate .card-arrow { color: var(--slate); }
 .portal-card--sage .card-arrow  { color: var(--sage); }
 .card-arrow svg { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; transition: transform 0.15s; }
@@ -432,7 +433,7 @@ tbody td { padding: 13px 16px; color: var(--text-main); vertical-align: middle; 
 .status-pill.accepted  { background: var(--gold-light); color: #8A6900; }
 .status-pill.greenlit  { background: rgba(143,174,157,0.15); color: #46655A; }
 .status-pill.inreview  { background: rgba(255,193,7,0.1); color: #8A6900; }
-.status-pill.rejected  { background: var(--teal-light); color: var(--teal); }
+.status-pill.rejected  { background: var(--rust-light); color: var(--rust); }
 .status-dot { width: 5px; height: 5px; border-radius: 50%; background: currentColor; flex-shrink: 0; }
 
 .status-badge { display: inline-flex; align-items: center; font-size: 10px; font-weight: 700; border-radius: 4px; padding: 2px 7px; text-transform: uppercase; letter-spacing: 0.5px; }
@@ -554,7 +555,7 @@ tbody td { padding: 13px 16px; color: var(--text-main); vertical-align: middle; 
 .file-info-row.last { margin-bottom: 0; }
 .file-info-key { font-size: 11px; font-weight: 400; color: var(--text-muted); }
 .file-info-val { font-size: 12px; font-weight: 500; color: var(--ink); }
-.file-info-val.gold { color: var(--gold); }
+.file-info-val.gold { color: var(--gold-deep); }
 .file-info-val.teal { color: var(--teal); }
 
 /* PROGRESS STEPS */
@@ -581,7 +582,7 @@ tbody td { padding: 13px 16px; color: var(--text-main); vertical-align: middle; 
 
 /* NEXT STEP BOX */
 .next-step-box { background: var(--gold-light); border: 1px solid rgba(255,193,7,0.25); border-radius: 8px; padding: 14px 16px; }
-.next-step-label { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); font-weight: 600; margin-bottom: 6px; }
+.next-step-label { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--gold-deep); font-weight: 600; margin-bottom: 6px; }
 .next-step-text { font-size: 12px; font-weight: 400; color: var(--ink); line-height: 1.5; }
 
 /* RESEARCHER */
@@ -607,7 +608,7 @@ tbody td { padding: 13px 16px; color: var(--text-main); vertical-align: middle; 
 .stat-key { font-size: 12px; font-weight: 400; color: var(--text-muted); }
 .stat-val { font-size: 14px; font-weight: 600; color: var(--ink); font-variant-numeric: lining-nums tabular-nums; }
 .stat-val.teal { color: var(--teal); }
-.stat-val.gold { color: var(--gold); }
+.stat-val.gold { color: var(--gold-deep); }
 
 /* DOMAIN SELECT */
 .domain-select-wrap { position: relative; }
