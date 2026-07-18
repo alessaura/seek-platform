@@ -514,6 +514,8 @@ tbody td { padding: 13px 16px; color: var(--text-main); vertical-align: middle; 
 .panel-hero.xs { padding: 24px 16px 20px; gap: 8px; }
 
 .avatar {
+  /* base já dimensionada — a classe pura era usada sem variante e colapsava */
+  width: 56px; height: 56px; font-size: 20px; flex-shrink: 0;
   border-radius: 50%; display: flex; align-items: center; justify-content: center;
   font-weight: 600; color: var(--paper);
   background: linear-gradient(135deg, var(--gold) 0%, var(--teal) 100%);
@@ -526,17 +528,18 @@ tbody td { padding: 13px 16px; color: var(--text-main); vertical-align: middle; 
 .panel-role {
   font-size: 9px; letter-spacing: 2px; text-transform: uppercase; font-weight: 500;
   border-radius: 4px; padding: 3px 10px; border-width: 1px; border-style: solid;
+  color: rgba(247,249,250,0.75); background: rgba(247,249,250,0.08); border-color: rgba(247,249,250,0.18);
 }
 .panel-role.gold { color: var(--gold); background: rgba(255,193,7,0.12); border-color: rgba(255,193,7,0.2); }
 .panel-role.gold-ex { color: var(--gold); font-weight: 600; background: rgba(255,193,7,0.12); border-color: rgba(255,193,7,0.22); }
 .panel-role.teal { color: var(--teal); background: rgba(77,166,167,0.14); border-color: rgba(77,166,167,0.22); }
 
-.panel-name { font-family: 'Cormorant Garamond', serif; font-weight: 500; color: var(--paper); text-align: center; line-height: 1.2; }
+.panel-name { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 500; color: var(--paper); text-align: center; line-height: 1.2; }
 .panel-name.lg { font-size: 24px; }
 .panel-name.md { font-size: 22px; }
 .panel-name.sm { font-size: 19px; }
 
-.panel-email { font-weight: 400; text-align: center; }
+.panel-email { font-size: 11px; font-weight: 400; color: rgba(247,249,250,0.55); text-align: center; }
 .panel-email.lg { font-size: 11px; color: rgba(247,249,250,0.45); }
 .panel-email.sm { font-size: 10px; color: rgba(247,249,250,0.38); }
 
