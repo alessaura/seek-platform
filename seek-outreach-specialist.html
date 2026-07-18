@@ -29,7 +29,7 @@
   <a class="sidebar-logo" href="index.html">
     <div class="logo-mark">
       <span class="logo-s">S</span>
-      <svg width="16" height="9" viewBox="0 0 18 10" fill="none"><polygon points="0,0 10,0 6,5 10,10 0,10 4,5" fill="#B55A35"/></svg>
+      <svg width="16" height="9" viewBox="0 0 18 10" fill="none"><polygon points="0,0 10,0 6,5 10,10 0,10 4,5" fill="#4DA6A7"/></svg>
     </div>
     <div class="logo-text">
       <span class="logo-name">Seek</span>
@@ -116,7 +116,7 @@
     <div>
       <div class="topbar-eyebrow">Outreach Portal</div>
       <div class="topbar-title">Outreach Specialist <em>Files</em></div>
-      <div class="view-badge rust"><span class="view-badge-dot"></span>Specialist View</div>
+      <div class="view-badge teal"><span class="view-badge-dot"></span>Specialist View</div>
     </div>
   </div>
 
@@ -629,7 +629,7 @@ function openDetail(d) {
   pill.textContent = pillLabel[d.status] || d.status;
   pill.style.background =
     d.status === 'VERBAL'   ? 'var(--gold)'        :
-    d.status === 'OUTREACH' ? 'var(--rust)'        : '#F59E0B';
+    d.status === 'OUTREACH' ? 'var(--teal)'        : '#FF9D00';
   pill.style.color = d.status === 'VERBAL' ? 'var(--ink)' : '#fff';
 
   set('f-title',        d.title);
