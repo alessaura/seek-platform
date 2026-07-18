@@ -34,6 +34,13 @@ body {
 
 ::selection { background: rgba(77,166,167,0.25); }
 
+/* Scrollbars discretas — os split views têm duas áreas de rolagem lado a lado */
+* { scrollbar-width: thin; scrollbar-color: rgba(96,125,139,0.4) transparent; }
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(96,125,139,0.35); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(96,125,139,0.55); }
+
 /* Foco visível para navegação por teclado — anel teal suave */
 input:focus-visible, select:focus-visible, textarea:focus-visible,
 button:focus-visible, a:focus-visible, [contenteditable]:focus-visible {
@@ -689,7 +696,12 @@ tbody td { padding: 13px 16px; color: var(--text-main); vertical-align: middle; 
   background-attachment: local, local, scroll, scroll;
 }
 
-thead th.sticky { position: sticky; top: 0; z-index: 1; }
+thead th.sticky {
+  position: sticky; top: 0; z-index: 2;
+  /* fundo sólido: sem ele as linhas atravessam o cabeçalho ao rolar */
+  background: var(--white);
+  box-shadow: 0 1px 0 var(--paper-dark), 0 4px 8px -4px rgba(38,50,56,0.18);
+}
 tbody tr.selected td:first-child { padding-left: 11px; }
 
 .detail-side { width: 300px; flex-shrink: 0; overflow-y: auto; background: var(--white); display: flex; flex-direction: column; }
@@ -701,7 +713,7 @@ tbody tr.selected td:first-child { padding-left: 11px; }
 
 .detail-content { display: none; flex-direction: column; }
 .detail-content.visible { display: flex; }
-.detail-header { padding: 16px 18px 12px; border-bottom: 1px solid var(--paper-mid); background: var(--paper); position: relative; }
+.detail-header { padding: 16px 18px 12px; border-bottom: 1px solid var(--paper-mid); background: var(--paper); position: sticky; top: 0; z-index: 2; }
 .detail-id { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--teal); font-weight: 500; margin-bottom: 3px; }
 .detail-title { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.35; padding-right: 18px; }
 .unsaved-dot { position: absolute; top: 14px; right: 16px; width: 8px; height: 8px; border-radius: 50%; background: var(--teal); display: none; }
