@@ -5,10 +5,10 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --ink:           #1F1F1F;
-  --paper:         #F7F9FA;
-  --paper-mid:     #F2F2F2;
-  --paper-dark:    #E6E6E6;
+  --ink:           #263238; /* dark slate — sidebar, headings, dark surfaces */
+  --paper:         #EAEFF2; /* light slate — table headers, filter bars, hovers */
+  --paper-mid:     #DCE4E9; /* page background — clearly darker than cards */
+  --paper-dark:    #C3D0D8; /* borders */
   --teal:          #4DA6A7;
   --teal-light:    rgba(77,166,167,0.08);
   --gold:          #FFC107;
@@ -17,9 +17,9 @@
   --sage-light:    rgba(143,174,157,0.12);
   --slate:         #607D8B;
   --slate-light:   rgba(96,125,139,0.08);
-  --text-main:     #333333;
-  --text-muted:    #6B6B6B;
-  --white:         #FFFFFF;
+  --text-main:     #37474F; /* blue-gray, not near-black */
+  --text-muted:    #546E7A;
+  --white:         #FBFCFD; /* card surface — off-white, not pure white */
   --sidebar-w:     220px;
 }
 
@@ -93,7 +93,7 @@ body.fixed-layout  { height: 100vh; display: flex; overflow: hidden; }
   display: none;
   position: fixed;
   inset: 0;
-  background: rgba(31,31,31,0.5);
+  background: rgba(38,50,56,0.5);
   z-index: 25;
 }
 
@@ -300,7 +300,7 @@ body.fixed-layout  { height: 100vh; display: flex; overflow: hidden; }
   content: ''; position: absolute; top: 0; left: 0; width: 3px; height: 100%;
   border-radius: 3px 0 0 3px;
 }
-.portal-card:hover { box-shadow: 0 4px 24px rgba(31,31,31,0.08); transform: translateY(-2px); }
+.portal-card:hover { box-shadow: 0 4px 24px rgba(38,50,56,0.10); transform: translateY(-2px); }
 
 .portal-card--teal::before { background: var(--teal); }
 .portal-card--gold::before { background: var(--gold); }
@@ -413,7 +413,7 @@ thead th.compact { padding: 12px 16px; background: var(--paper); }
 
 tbody tr { border-bottom: 1px solid var(--paper-mid); transition: background 0.15s; cursor: pointer; }
 tbody tr:last-child { border-bottom: none; }
-tbody tr:hover { background: rgba(247,249,250,0.4); }
+tbody tr:hover { background: rgba(96,125,139,0.07); }
 tbody tr.selected { background: var(--teal-light); border-left: 3px solid var(--teal); }
 
 tbody td { padding: 13px 16px; color: var(--text-main); vertical-align: middle; }
@@ -665,7 +665,7 @@ tbody td { padding: 13px 16px; color: var(--text-main); vertical-align: middle; 
 .filter-select:focus { border-color: var(--teal); }
 .filter-count { font-size: 11px; color: var(--text-muted); margin-left: auto; font-weight: 400; }
 .create-btn { font-family: 'Outfit', sans-serif; font-size: 11px; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; background: var(--ink); color: var(--paper); border: none; border-radius: 7px; padding: 7px 14px; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; transition: background 0.2s; white-space: nowrap; }
-.create-btn:hover { background: #333333; }
+.create-btn:hover { background: #37474F; }
 .create-btn svg { width: 12px; height: 12px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; }
 
 .split { display: flex; flex: 1; overflow: hidden; }
@@ -707,7 +707,7 @@ tbody tr.selected td:first-child { padding-left: 11px; }
 .save-btn { font-family: 'Outfit', sans-serif; font-size: 11px; font-weight: 500; letter-spacing: 1.5px; text-transform: uppercase; background: var(--teal); color: var(--paper); border: none; border-radius: 7px; padding: 10px; cursor: pointer; width: 100%; transition: background 0.2s; }
 .save-btn:hover { background: #3E8788; }
 .save-btn.secondary { background: var(--ink); font-size: 9.5px; padding: 9px; }
-.save-btn.secondary:hover { background: #333333; }
+.save-btn.secondary:hover { background: #37474F; }
 
 [data-tip] { position: relative; }
 [data-tip]:hover::after { content: attr(data-tip); position: absolute; bottom: calc(100% + 6px); left: 50%; transform: translateX(-50%); background: var(--ink); color: var(--paper); font-size: 10px; font-weight: 400; letter-spacing: 0.3px; white-space: nowrap; padding: 4px 9px; border-radius: 5px; pointer-events: none; z-index: 100; font-family: 'Outfit', sans-serif; }
@@ -755,7 +755,7 @@ tbody tr.selected td:first-child { padding-left: 11px; }
 .btn-discard:hover { border-color: var(--teal); color: var(--teal); }
 .btn-save { font-family: 'Outfit', sans-serif; font-size: 11px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; background: var(--ink); color: var(--paper); border: none; border-radius: 8px; padding: 9px 22px; cursor: pointer; transition: background 0.2s; opacity: 0.35; pointer-events: none; }
 .btn-save.active { opacity: 1; pointer-events: auto; }
-.btn-save.active:hover { background: #333333; }
+.btn-save.active:hover { background: #37474F; }
 
 .detail-layout { display: grid; grid-template-columns: 220px 1fr; flex: 1; min-height: 0; }
 .accordion-nav { background: var(--paper); border-right: 1px solid var(--paper-dark); padding: 24px 0; display: flex; flex-direction: column; gap: 2px; position: sticky; top: 57px; height: calc(100vh - 57px); overflow-y: auto; }
@@ -861,7 +861,7 @@ tbody tr.selected td:first-child { padding-left: 11px; }
 .unsaved-ind svg { width: 12px; height: 12px; stroke: var(--teal); fill: none; stroke-width: 2; stroke-linecap: round; }
 .btn-discard.on { display: block; }
 .btn-save.on { opacity: 1; pointer-events: auto; }
-.btn-save.on:hover { background: #333333; }
+.btn-save.on:hover { background: #37474F; }
 
 .new-pill { font-size: 10px; font-weight: 700; background: #FF9D00; color: #fff; border-radius: 4px; padding: 2px 8px; text-transform: uppercase; }
 
@@ -1141,7 +1141,7 @@ tbody tr.selected td:first-child { padding-left: 11px; }
 /* ── CONFIRM MODAL ── */
 .confirm-overlay {
   position: fixed; inset: 0;
-  background: rgba(31,31,31,0.55); z-index: 9990;
+  background: rgba(38,50,56,0.55); z-index: 9990;
   display: flex; align-items: center; justify-content: center;
   opacity: 0; transition: opacity 0.18s ease;
 }
@@ -1264,7 +1264,7 @@ tbody tr.selected td:first-child { padding-left: 11px; }
 .panel-fab:hover { transform: scale(1.06); }
 .panel-drawer-overlay {
   position: fixed; inset: 0;
-  background: rgba(31,31,31,0.45); z-index: 901;
+  background: rgba(38,50,56,0.45); z-index: 901;
   opacity: 0; pointer-events: none; transition: opacity 0.25s ease;
 }
 .panel-drawer-overlay.show { opacity: 1; pointer-events: all; }
