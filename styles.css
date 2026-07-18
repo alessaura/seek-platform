@@ -1056,31 +1056,6 @@ tbody tr.selected td:first-child { padding-left: 11px; }
 .portal-card::before { transition: width 0.2s; }
 .portal-card:hover::before { width: 5px; }
 
-/* ── MISSION BAND (echoes the brand proposal) ── */
-.home-mission {
-  position: relative; overflow: hidden;
-  background: var(--rust); border-radius: 14px;
-  margin-top: 60px; padding: 66px 48px; text-align: center;
-}
-.home-mission-grain {
-  position: absolute; inset: 0; opacity: 0.05;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  background-size: 200px;
-}
-.home-mission-inner { position: relative; z-index: 1; }
-.home-mission-quote {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(30px, 4.5vw, 46px); font-weight: 300; line-height: 1.1;
-  color: #F4EEE3;
-}
-.home-mission-quote em { font-style: italic; color: rgba(244,238,227,0.72); }
-.home-mission-line { width: 40px; height: 1px; background: rgba(244,238,227,0.4); margin: 26px auto; }
-.home-mission-tag { font-size: 12px; letter-spacing: 1px; color: rgba(244,238,227,0.72); font-weight: 400; }
-
-@media (max-width: 768px) {
-  .home-mission { padding: 48px 24px; }
-}
-
 /* ═══════════════════════════════════
    SEEK UI ENHANCEMENTS
 ═══════════════════════════════════ */
