@@ -1013,6 +1013,9 @@ tbody tr.selected td:first-child { padding-left: 11px; }
    HOME PAGE
 ═══════════════════════════════════ */
 
+/* topbar da home: só os links à direita, sem título */
+.home-topbar { margin-bottom: 28px; }
+
 /* ── HERO ── */
 .home-hero { max-width: 720px; margin-bottom: 8px; }
 .home-hero-eyebrow {
