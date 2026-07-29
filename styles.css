@@ -137,24 +137,18 @@ body.fixed-layout  { height: 100vh; display: flex; overflow: hidden; }
   text-decoration: none;
 }
 
-/* ── BRAND LOCKUP: SEE‹ / RESEARCH ── */
-.brand-lockup { display: flex; flex-direction: column; overflow: hidden; white-space: nowrap; transition: opacity 0.2s; }
-.brand-word {
-  font-family: 'Outfit', sans-serif; font-size: 25px; font-weight: 800;
-  letter-spacing: 0.5px; color: var(--paper); line-height: 1;
-  display: inline-flex; align-items: center;
+/* ── BRAND ──
+   Arte oficial da marca (seek-logo.png / seek-mark.png), recortada justa a
+   partir do arquivo White-SeekResearch-Stacked-Logo. Nada de wordmark em
+   texto: o K é parte do logotipo — haste branca mais os braços em chevron. */
+.brand-logo {
+  display: block; height: 46px; width: auto;
+  transition: opacity 0.2s;
 }
-.brand-word .brand-chev { width: 26px; height: 26px; margin-left: 1px; flex-shrink: 0; }
-.brand-sub {
-  font-family: 'Outfit', sans-serif; font-size: 9.5px; font-weight: 500;
-  letter-spacing: 4.6px; text-transform: uppercase;
-  color: rgba(247,249,250,0.55); margin-top: 4px;
-}
-.brand-chev-solo { display: none; width: 24px; height: 24px; flex-shrink: 0; }
-.sidebar.collapsed .brand-lockup { display: none; }
-.sidebar.collapsed .brand-chev-solo { display: block; margin: 0 auto; }
-.mobile-logo .brand-word.sm { font-size: 18px; }
-.mobile-logo .brand-chev { width: 19px; height: 19px; margin-left: 1px; }
+.brand-logo.sm { height: 30px; }
+.brand-mark { display: none; height: 30px; width: auto; }
+.sidebar.collapsed .brand-logo { display: none; }
+.sidebar.collapsed .brand-mark { display: block; margin: 0 auto; }
 
 /* Toggle vive DENTRO da sidebar — antes ficava em right:-12px e o
    overflow:hidden cortava o círculo pela metade. Agora é um botão rotulado. */
