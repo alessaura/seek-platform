@@ -474,9 +474,10 @@ tbody td { padding: 13px 16px; color: var(--text-main); vertical-align: middle; 
 .status-pill.rejected  { background: var(--rust-light); color: var(--rust); }
 .status-dot { width: 5px; height: 5px; border-radius: 1px; background: currentColor; flex-shrink: 0; }
 
-/* Mesmo vocabulário de estágio dos pills — mesmo farol, versão sólida */
+/* Estágios seguem o farol dos pills; "New" fica laranja — é aviso de novidade,
+   não de progresso. */
 .status-badge { display: inline-flex; align-items: center; font-size: 10px; font-weight: 700; border-radius: 4px; padding: 2px 7px; text-transform: uppercase; letter-spacing: 0.5px; }
-.status-badge.new      { background: var(--farol-red); color: #fff; }
+.status-badge.new      { background: #FF9D00; color: #fff; }
 .status-badge.outreach { background: var(--gold); color: var(--ink); }
 .status-badge.verbal   { background: var(--farol-green); color: #fff; }
 
