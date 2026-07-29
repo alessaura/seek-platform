@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Seek Research — Specialist File Detail</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="icon" type="image/svg+xml" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120"><polygon fill="%234DA6A7" points="62,0 100,0 40,60 100,120 62,120 2,60"/><polygon fill="%234DA6A7" points="108,26 116,26 82,60 116,94 108,94 74,60"/></svg>'>
-<link rel="stylesheet" href="styles.css?v=6">
+<link rel="icon" type="image/svg+xml" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120"><polygon fill="%234DA6A7" points="62,0 100,0 40,60 100,120 62,120 2,60"/><polygon fill="%234DA6A7" points="96,12 114,12 66,60 114,108 96,108 48,60"/></svg>'>
+<link rel="stylesheet" href="styles.css?v=7">
 </head>
 <body class="scroll-layout">
 
@@ -16,22 +16,24 @@
     <span></span><span></span><span></span>
   </button>
   <a class="mobile-logo" href="index.html" aria-label="Seek Research">
-    <span class="brand-word sm">SEE<svg class="brand-chev" viewBox="0 0 120 120" aria-hidden="true"><polygon fill="#4DA6A7" points="62,0 100,0 40,60 100,120 62,120 2,60"/><polygon fill="#4DA6A7" points="108,26 116,26 82,60 116,94 108,94 74,60"/></svg></span>
+    <span class="brand-word sm">SEE<svg class="brand-chev" viewBox="0 0 120 120" aria-hidden="true"><polygon fill="#4DA6A7" points="62,0 100,0 40,60 100,120 62,120 2,60"/><polygon fill="#4DA6A7" points="96,12 114,12 66,60 114,108 96,108 48,60"/></svg></span>
   </a>
 </div>
 <div class="sidebar-overlay" id="sidebar-overlay"></div>
 
 <aside class="sidebar" id="sidebar">
-  <div class="sidebar-toggle" onclick="toggleSidebar()">
-    <svg viewBox="0 0 10 10"><polyline points="6 2 2 5 6 8"/></svg>
-  </div>
   <a class="sidebar-logo" href="index.html" aria-label="Seek Research">
     <div class="brand-lockup">
-      <div class="brand-word">SEE<svg class="brand-chev" viewBox="0 0 120 120" aria-hidden="true"><polygon fill="#4DA6A7" points="62,0 100,0 40,60 100,120 62,120 2,60"/><polygon fill="#4DA6A7" points="108,26 116,26 82,60 116,94 108,94 74,60"/></svg></div>
+      <div class="brand-word">SEE<svg class="brand-chev" viewBox="0 0 120 120" aria-hidden="true"><polygon fill="#4DA6A7" points="62,0 100,0 40,60 100,120 62,120 2,60"/><polygon fill="#4DA6A7" points="96,12 114,12 66,60 114,108 96,108 48,60"/></svg></div>
       <div class="brand-sub">Research</div>
     </div>
-    <svg class="brand-chev-solo" viewBox="0 0 120 120" aria-hidden="true"><polygon fill="#4DA6A7" points="62,0 100,0 40,60 100,120 62,120 2,60"/><polygon fill="#4DA6A7" points="108,26 116,26 82,60 116,94 108,94 74,60"/></svg>
+    <svg class="brand-chev-solo" viewBox="0 0 120 120" aria-hidden="true"><polygon fill="#4DA6A7" points="62,0 100,0 40,60 100,120 62,120 2,60"/><polygon fill="#4DA6A7" points="96,12 114,12 66,60 114,108 96,108 48,60"/></svg>
   </a>
+  <button class="sidebar-toggle" type="button" onclick="toggleSidebar()"
+          aria-controls="sidebar" aria-expanded="true" title="Hide menu">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="11 17 6 12 11 7"/><polyline points="18 17 13 12 18 7"/></svg>
+    <span class="sidebar-toggle-label">Hide menu</span>
+  </button>
   <nav class="sidebar-nav">
     <div class="nav-section open" id="sec-portals">
       <div class="nav-section-header" onclick="toggleSection('sec-portals')">
@@ -84,7 +86,7 @@
         </a>
         <a class="nav-link active" href="seek-coordinator.html">
           <svg class="nav-link-icon" viewBox="0 0 24 24"><path d="M9 17H7a4 4 0 01-4-4V7a4 4 0 014-4h10a4 4 0 014 4v6a4 4 0 01-4 4h-2l-4 4-2-4z"/></svg>
-          <span class="nav-link-label">Coordinator</span>
+          <span class="nav-link-label">Client Coordinator</span>
         </a>
       </div>
     </div>
@@ -213,76 +215,20 @@
       <!-- MILESTONES -->
       <div class="acc-panel" id="panel-milestones">
         <div class="panel-title">Case <em>Milestones</em></div>
-        <div class="milestone-row">
-          <span class="milestone-label">Send Title Documents</span>
-          <input class="field-input milestone-ctrl" id="ms-title-docs" type="text" value="Sent" oninput="markDirty('milestones')"/>
+
+        <div class="ms-summary">
+          <div class="ms-summary-main">
+            <div class="ms-summary-count"><strong id="ms-count-done">0</strong> of <span id="ms-count-total">12</span> complete</div>
+            <div class="ms-summary-track"><div class="ms-summary-fill" id="ms-summary-fill"></div></div>
+          </div>
+          <div class="ms-summary-tally">
+            <span class="ms-tally is-done"><i></i><b id="ms-tally-done">0</b> Complete</span>
+            <span class="ms-tally is-active"><i></i><b id="ms-tally-active">0</b> In progress</span>
+            <span class="ms-tally is-todo"><i></i><b id="ms-tally-todo">0</b> Waiting</span>
+          </div>
         </div>
-        <div class="milestone-row">
-          <span class="milestone-label">Contract Signed</span>
-          <select class="field-select milestone-ctrl" id="ms-contract" onchange="markDirty('milestones')">
-            <option>Waiting Action</option><option>In Progress</option><option>Complete</option><option>N/A</option>
-          </select>
-        </div>
-        <div class="milestone-row">
-          <span class="milestone-label">Renunciations Complete</span>
-          <select class="field-select milestone-ctrl" id="ms-renun" onchange="markDirty('milestones')">
-            <option>Waiting Action</option><option>In Progress</option><option>Complete</option><option>N/A</option>
-          </select>
-        </div>
-        <div class="milestone-row">
-          <span class="milestone-label">Full Package Sent to Attorney</span>
-          <select class="field-select milestone-ctrl" id="ms-package" onchange="markDirty('milestones')">
-            <option>Waiting Action</option><option>In Progress</option><option>Complete</option><option>N/A</option>
-          </select>
-        </div>
-        <div class="milestone-row">
-          <span class="milestone-label">Petition Signed by Family</span>
-          <select class="field-select milestone-ctrl" id="ms-petition-fam" onchange="markDirty('milestones')">
-            <option>Waiting Action</option><option>In Progress</option><option>Complete</option><option>N/A</option>
-          </select>
-        </div>
-        <div class="milestone-row">
-          <span class="milestone-label">Petition Granted</span>
-          <select class="field-select milestone-ctrl" id="ms-petition-grant" onchange="markDirty('milestones')">
-            <option>Waiting Action</option><option>In Progress</option><option>Complete</option><option>N/A</option>
-          </select>
-        </div>
-        <div class="milestone-row">
-          <span class="milestone-label">Hearing Set</span>
-          <select class="field-select milestone-ctrl" id="ms-hearing" onchange="markDirty('milestones')">
-            <option>Waiting Action</option><option>In Progress</option><option>Complete</option><option>N/A</option>
-          </select>
-        </div>
-        <div class="milestone-row">
-          <span class="milestone-label">Inheritance Tax Form Filed by Attorney</span>
-          <select class="field-select milestone-ctrl" id="ms-tax" onchange="markDirty('milestones')">
-            <option>Waiting Action</option><option>In Progress</option><option>Complete</option><option>N/A</option>
-          </select>
-        </div>
-        <div class="milestone-row">
-          <span class="milestone-label">Certified Letters Sent to Register of Wills</span>
-          <select class="field-select milestone-ctrl" id="ms-letters" onchange="markDirty('milestones')">
-            <option>Waiting Action</option><option>In Progress</option><option>Complete</option><option>N/A</option>
-          </select>
-        </div>
-        <div class="milestone-row">
-          <span class="milestone-label">Estate Opened — Can Proceed with Closing</span>
-          <select class="field-select milestone-ctrl" id="ms-estate" onchange="markDirty('milestones')">
-            <option>Waiting Action</option><option>In Progress</option><option>Complete</option><option>N/A</option>
-          </select>
-        </div>
-        <div class="milestone-row">
-          <span class="milestone-label">Closing with Title Company</span>
-          <select class="field-select milestone-ctrl" id="ms-closing" onchange="markDirty('milestones')">
-            <option>Waiting Action</option><option>In Progress</option><option>Complete</option><option>N/A</option>
-          </select>
-        </div>
-        <div class="milestone-row">
-          <span class="milestone-label">Complete</span>
-          <select class="field-select milestone-ctrl" id="ms-complete" onchange="markDirty('milestones')">
-            <option>No</option><option>Yes</option>
-          </select>
-        </div>
+
+        <ol class="ms-list" id="ms-list"></ol>
       </div>
 
       <!-- FILE ATTACHMENTS -->
@@ -353,28 +299,6 @@
   </div>
 </main>
 
-<aside class="panel">
-  <div class="panel-hero">
-    <div class="avatar">A</div>
-    <div class="panel-role">Coordinator</div>
-    <div class="panel-name">Alessandra Sanches</div>
-    <div class="panel-email">als.s.sanches@gmail.com</div>
-  </div>
-  <div class="panel-section">
-    <div class="panel-section-label">Case</div>
-    <div class="stat-row"><span class="stat-key">Title</span><span class="stat-val" id="panel-title">3964 Wallace St</span></div>
-    <div class="stat-row"><span class="stat-key">Status</span><span class="stat-val teal" id="panel-status">Active</span></div>
-    <div class="stat-row"><span class="stat-key">Court Date</span><span class="stat-val" id="panel-court">TBD</span></div>
-  </div>
-  <div class="panel-section">
-    <div class="panel-section-label">Milestones</div>
-    <div class="stat-row"><span class="stat-key">Completed</span><span class="stat-val">0 / 12</span></div>
-    <div class="stat-row"><span class="stat-key">Pending</span><span class="stat-val teal">12</span></div>
-  </div>
-  <div class="panel-footer">
-    <p>Coordinating cases with precision and care.</p>
-  </div>
-</aside>
 
 <script>
 // ── Data store (demo: record #1 = 3964 Wallace St) ──
@@ -478,6 +402,91 @@ function clearAllDirty() {
   document.getElementById('btn-save').classList.remove('active');
 }
 
+// ── Milestones ──
+// Cada etapa guarda seu próprio conjunto de estados; o id original é preservado
+// num input hidden para que o contrato de dados continue o mesmo.
+const MS_STATES = ['Waiting Action', 'In Progress', 'Complete', 'N/A'];
+
+const milestones = [
+  { id: 'ms-title-docs',     name: 'Send Title Documents',                        states: ['Waiting Action', 'In Progress', 'Sent'], value: 'Sent' },
+  { id: 'ms-contract',       name: 'Contract Signed',                             states: MS_STATES, value: 'Waiting Action' },
+  { id: 'ms-renun',          name: 'Renunciations Complete',                      states: MS_STATES, value: 'Waiting Action' },
+  { id: 'ms-package',        name: 'Full Package Sent to Attorney',               states: MS_STATES, value: 'Waiting Action' },
+  { id: 'ms-petition-fam',   name: 'Petition Signed by Family',                   states: MS_STATES, value: 'Waiting Action' },
+  { id: 'ms-petition-grant', name: 'Petition Granted',                            states: MS_STATES, value: 'Waiting Action' },
+  { id: 'ms-hearing',        name: 'Hearing Set',                                 states: MS_STATES, value: 'Waiting Action' },
+  { id: 'ms-tax',            name: 'Inheritance Tax Form Filed by Attorney',      states: MS_STATES, value: 'Waiting Action' },
+  { id: 'ms-letters',        name: 'Certified Letters Sent to Register of Wills',  states: MS_STATES, value: 'Waiting Action' },
+  { id: 'ms-estate',         name: 'Estate Opened — Can Proceed with Closing',     states: MS_STATES, value: 'Waiting Action' },
+  { id: 'ms-closing',        name: 'Closing with Title Company',                  states: MS_STATES, value: 'Waiting Action' },
+  { id: 'ms-complete',       name: 'Complete',                                    states: ['No', 'Yes'], value: 'No' },
+];
+
+// Farol: concluído = verde, em andamento = âmbar, aguardando = vermelho, N/A = neutro
+const MS_DONE   = ['Complete', 'Sent', 'Yes'];
+const MS_ACTIVE = ['In Progress'];
+
+function msTone(value) {
+  if (MS_DONE.includes(value))   return 'done';
+  if (MS_ACTIVE.includes(value)) return 'active';
+  if (value === 'N/A')           return 'na';
+  return 'todo';
+}
+
+const MS_SHORT = { 'Waiting Action': 'Waiting', 'In Progress': 'In progress' };
+
+const MS_MARKERS = {
+  done:   '<svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>',
+  active: '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 010 18z" fill="currentColor" stroke="none"/></svg>',
+  na:     '<svg viewBox="0 0 24 24"><line x1="6" y1="12" x2="18" y2="12"/></svg>',
+};
+
+function renderMilestones() {
+  document.getElementById('ms-list').innerHTML = milestones.map((m, i) => {
+    const tone = msTone(m.value);
+    const marker = MS_MARKERS[tone] || String(i + 1).padStart(2, '0');
+    const seg = m.states.map(st =>
+      '<button type="button" class="ms-seg-btn' + (st === m.value ? ' is-on' : '') +
+      '" data-tone="' + msTone(st) + '" onclick="setMilestone(\'' + m.id + '\', \'' + st + '\')"' +
+      ' aria-pressed="' + (st === m.value) + '">' + (MS_SHORT[st] || st) + '</button>'
+    ).join('');
+    return (
+      '<li class="ms-item is-' + tone + '" data-id="' + m.id + '">' +
+        '<span class="ms-marker">' + marker + '</span>' +
+        '<div class="ms-body">' +
+          '<span class="ms-name">' + m.name + '</span>' +
+          '<span class="ms-state">' + (MS_SHORT[m.value] || m.value) + '</span>' +
+        '</div>' +
+        '<div class="ms-seg" role="group" aria-label="' + m.name + ' status">' + seg + '</div>' +
+        '<input type="hidden" id="' + m.id + '" value="' + m.value + '"/>' +
+      '</li>'
+    );
+  }).join('');
+  updateMilestoneSummary();
+}
+
+function setMilestone(id, value) {
+  const m = milestones.find(x => x.id === id);
+  if (!m || m.value === value) return;
+  m.value = value;
+  renderMilestones();
+  markDirty('milestones');
+}
+
+function updateMilestoneSummary() {
+  const tally = { done: 0, active: 0, todo: 0, na: 0 };
+  milestones.forEach(m => tally[msTone(m.value)]++);
+  const relevant = milestones.length - tally.na;
+  const pct = relevant ? Math.round((tally.done / relevant) * 100) : 0;
+
+  document.getElementById('ms-count-done').textContent  = tally.done;
+  document.getElementById('ms-count-total').textContent = relevant;
+  document.getElementById('ms-summary-fill').style.width = pct + '%';
+  document.getElementById('ms-tally-done').textContent   = tally.done;
+  document.getElementById('ms-tally-active').textContent = tally.active;
+  document.getElementById('ms-tally-todo').textContent   = tally.todo;
+}
+
 // ── File handling ──
 const fileMap = new Map();
 
@@ -553,9 +562,6 @@ function saveChanges() {
   if (noteText) addNote();
   clearAllDirty();
   showToast('Changes saved successfully', 'success');
-  document.getElementById('panel-title').textContent  = document.getElementById('ci-title').value;
-  document.getElementById('panel-status').textContent = document.getElementById('ci-status').value;
-  document.getElementById('panel-court').textContent  = document.getElementById('ci-courtdate').value;
   document.getElementById('detail-heading').textContent = document.getElementById('ci-title').value;
 }
 
@@ -567,6 +573,7 @@ function confirmDiscard() {
 // ── Init ──
 document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('fam-editor').innerHTML = famOverviewHTML;
+  renderMilestones();
   renderNotes();
 
   // Wire up rich text buttons

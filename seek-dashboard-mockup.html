@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Seek Research — Client Portal</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="icon" type="image/svg+xml" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120"><polygon fill="%234DA6A7" points="62,0 100,0 40,60 100,120 62,120 2,60"/><polygon fill="%234DA6A7" points="108,26 116,26 82,60 116,94 108,94 74,60"/></svg>'>
-<link rel="stylesheet" href="styles.css?v=6">
+<link rel="icon" type="image/svg+xml" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120"><polygon fill="%234DA6A7" points="62,0 100,0 40,60 100,120 62,120 2,60"/><polygon fill="%234DA6A7" points="96,12 114,12 66,60 114,108 96,108 48,60"/></svg>'>
+<link rel="stylesheet" href="styles.css?v=7">
 </head>
 <body class="fixed-layout">
 
@@ -16,23 +16,25 @@
     <span></span><span></span><span></span>
   </button>
   <a class="mobile-logo" href="index.html" aria-label="Seek Research">
-    <span class="brand-word sm">SEE<svg class="brand-chev" viewBox="0 0 120 120" aria-hidden="true"><polygon fill="#4DA6A7" points="62,0 100,0 40,60 100,120 62,120 2,60"/><polygon fill="#4DA6A7" points="108,26 116,26 82,60 116,94 108,94 74,60"/></svg></span>
+    <span class="brand-word sm">SEE<svg class="brand-chev" viewBox="0 0 120 120" aria-hidden="true"><polygon fill="#4DA6A7" points="62,0 100,0 40,60 100,120 62,120 2,60"/><polygon fill="#4DA6A7" points="96,12 114,12 66,60 114,108 96,108 48,60"/></svg></span>
   </a>
 </div>
 <div class="sidebar-overlay" id="sidebar-overlay"></div>
 
 <!-- SIDEBAR -->
 <aside class="sidebar" id="sidebar">
-  <div class="sidebar-toggle" onclick="toggleSidebar()">
-    <svg viewBox="0 0 10 10"><polyline points="6 2 2 5 6 8"/></svg>
-  </div>
   <a class="sidebar-logo" href="index.html" aria-label="Seek Research">
     <div class="brand-lockup">
-      <div class="brand-word">SEE<svg class="brand-chev" viewBox="0 0 120 120" aria-hidden="true"><polygon fill="#4DA6A7" points="62,0 100,0 40,60 100,120 62,120 2,60"/><polygon fill="#4DA6A7" points="108,26 116,26 82,60 116,94 108,94 74,60"/></svg></div>
+      <div class="brand-word">SEE<svg class="brand-chev" viewBox="0 0 120 120" aria-hidden="true"><polygon fill="#4DA6A7" points="62,0 100,0 40,60 100,120 62,120 2,60"/><polygon fill="#4DA6A7" points="96,12 114,12 66,60 114,108 96,108 48,60"/></svg></div>
       <div class="brand-sub">Research</div>
     </div>
-    <svg class="brand-chev-solo" viewBox="0 0 120 120" aria-hidden="true"><polygon fill="#4DA6A7" points="62,0 100,0 40,60 100,120 62,120 2,60"/><polygon fill="#4DA6A7" points="108,26 116,26 82,60 116,94 108,94 74,60"/></svg>
+    <svg class="brand-chev-solo" viewBox="0 0 120 120" aria-hidden="true"><polygon fill="#4DA6A7" points="62,0 100,0 40,60 100,120 62,120 2,60"/><polygon fill="#4DA6A7" points="96,12 114,12 66,60 114,108 96,108 48,60"/></svg>
   </a>
+  <button class="sidebar-toggle" type="button" onclick="toggleSidebar()"
+          aria-controls="sidebar" aria-expanded="true" title="Hide menu">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="11 17 6 12 11 7"/><polyline points="18 17 13 12 18 7"/></svg>
+    <span class="sidebar-toggle-label">Hide menu</span>
+  </button>
   <nav class="sidebar-nav">
     <div class="nav-section open" id="sec-portals">
       <div class="nav-section-header" onclick="toggleSection('sec-portals')">
@@ -85,7 +87,7 @@
         </a>
         <a class="nav-link " href="seek-coordinator.html">
           <svg class="nav-link-icon" viewBox="0 0 24 24"><path d="M9 17H7a4 4 0 01-4-4V7a4 4 0 014-4h10a4 4 0 014 4v6a4 4 0 01-4 4h-2l-4 4-2-4z"/></svg>
-          <span class="nav-link-label">Coordinator</span>
+          <span class="nav-link-label">Client Coordinator</span>
         </a>
       </div>
     </div>
@@ -278,127 +280,15 @@
 
 </main>
 
-<!-- RIGHT PANEL -->
-<aside class="panel">
-
-  <!-- PROFILE -->
-  <div class="panel-hero">
-    <div class="avatar">L</div>
-    <div class="panel-role">Client</div>
-    <div class="panel-name">Lucas V. Ferreira</div>
-    <div class="panel-email">lucasvfr@outlook.com</div>
-  </div>
-
-  <!-- FILE INFO -->
-  <div class="panel-section">
-    <div class="panel-section-label">Case File</div>
-    <div class="stat-row">
-      <span class="stat-key">File Number</span>
-      <span class="stat-val gold">— Pending</span>
-    </div>
-    <div class="stat-row">
-      <span class="stat-key">Opened</span>
-      <span class="stat-val">—</span>
-    </div>
-    <div class="stat-row">
-      <span class="stat-key">Last Update</span>
-      <span class="stat-val">—</span>
-    </div>
-    <div class="stat-row">
-      <span class="stat-key">Stage</span>
-      <span class="stat-val teal">Not started</span>
-    </div>
-  </div>
-
-  <!-- PROGRESS STEPS -->
-  <div class="panel-section">
-    <div class="panel-section-label">Journey Steps</div>
-    <div class="steps">
-      <div class="step">
-        <div class="step-dot pending">
-          <svg viewBox="0 0 12 12"><circle cx="6" cy="6" r="2" fill="currentColor" stroke="none"/></svg>
-        </div>
-        <div class="step-body">
-          <div class="step-name muted">Initial Research</div>
-          <div class="step-date">Awaiting file opening</div>
-        </div>
-      </div>
-      <div class="step">
-        <div class="step-dot pending">
-          <svg viewBox="0 0 12 12"><circle cx="6" cy="6" r="2" fill="currentColor" stroke="none"/></svg>
-        </div>
-        <div class="step-body">
-          <div class="step-name muted">Document Review</div>
-          <div class="step-date">—</div>
-        </div>
-      </div>
-      <div class="step">
-        <div class="step-dot pending">
-          <svg viewBox="0 0 12 12"><circle cx="6" cy="6" r="2" fill="currentColor" stroke="none"/></svg>
-        </div>
-        <div class="step-body">
-          <div class="step-name muted">Title Resolution</div>
-          <div class="step-date">—</div>
-        </div>
-      </div>
-      <div class="step">
-        <div class="step-dot pending">
-          <svg viewBox="0 0 12 12"><circle cx="6" cy="6" r="2" fill="currentColor" stroke="none"/></svg>
-        </div>
-        <div class="step-body last">
-          <div class="step-name muted">Final Signature</div>
-          <div class="step-date">—</div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ACTIVE TAB -->
-  <div class="panel-section">
-    <div class="panel-section-label">Active Tab</div>
-    <div class="stat-row">
-      <span class="stat-key" id="active-tab-label">Research Status</span>
-      <span class="stat-val teal" id="active-tab-count">0</span>
-    </div>
-  </div>
-
-  <!-- RESEARCHER -->
-  <div class="panel-section">
-    <div class="panel-section-label">Your Researcher</div>
-    <div class="researcher">
-      <div class="researcher-avatar">SR</div>
-      <div class="researcher-info">
-        <div class="researcher-name">Seek Research Team</div>
-        <div class="researcher-role">Assigned upon file opening</div>
-      </div>
-    </div>
-    <button class="contact-btn">
-      <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
-      Send a Message
-    </button>
-  </div>
-
-  <!-- FOOTER -->
-  <div class="panel-footer">
-    <p>Impact-Driven. Rooted in Research.<br>Results That Matter.</p>
-  </div>
-
-</aside>
 
 <script>
-const tabMap = {
-  status:    { label: 'Research Status',  count: '0' },
-  documents: { label: 'Seller Documents', count: '0' },
-};
+const tabOrder = ['status', 'documents'];
 
 function switchTab(id) {
   document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
   document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
-  const keys = Object.keys(tabMap);
-  document.querySelectorAll('.tab')[keys.indexOf(id)].classList.add('active');
+  document.querySelectorAll('.tab')[tabOrder.indexOf(id)].classList.add('active');
   document.getElementById('panel-' + id).classList.add('active');
-  document.getElementById('active-tab-label').textContent = tabMap[id].label;
-  document.getElementById('active-tab-count').textContent = tabMap[id].count;
 }
 
 function filterTable(tbodyId, search, selectId) {

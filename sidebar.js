@@ -2,12 +2,20 @@
   const sidebar = document.getElementById('sidebar');
   const overlay = document.getElementById('sidebar-overlay');
 
-  // Desktop toggle
+  // Desktop toggle — o botão diz o que faz: "Hide menu" / "Show menu"
   window.toggleSidebar = function () {
     const collapsed = sidebar.classList.toggle('collapsed');
     document.querySelectorAll('.main-wrapper, .main, .content').forEach(m =>
       m.classList.toggle('sidebar-collapsed', collapsed)
     );
+    const btn = sidebar.querySelector('.sidebar-toggle');
+    if (btn) {
+      const label = collapsed ? 'Show menu' : 'Hide menu';
+      btn.querySelector('.sidebar-toggle-label').textContent = label;
+      btn.title = label;
+      btn.setAttribute('aria-label', label);
+      btn.setAttribute('aria-expanded', String(!collapsed));
+    }
   };
 
   window.toggleSection = function (id) {

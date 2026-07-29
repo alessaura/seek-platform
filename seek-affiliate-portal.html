@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Seek Research — Affiliate Portal</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="icon" type="image/svg+xml" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120"><polygon fill="%234DA6A7" points="62,0 100,0 40,60 100,120 62,120 2,60"/><polygon fill="%234DA6A7" points="108,26 116,26 82,60 116,94 108,94 74,60"/></svg>'>
-<link rel="stylesheet" href="styles.css?v=6">
+<link rel="icon" type="image/svg+xml" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120"><polygon fill="%234DA6A7" points="62,0 100,0 40,60 100,120 62,120 2,60"/><polygon fill="%234DA6A7" points="96,12 114,12 66,60 114,108 96,108 48,60"/></svg>'>
+<link rel="stylesheet" href="styles.css?v=7">
 </head>
 <body class="fixed-layout">
 
@@ -16,23 +16,25 @@
     <span></span><span></span><span></span>
   </button>
   <a class="mobile-logo" href="index.html" aria-label="Seek Research">
-    <span class="brand-word sm">SEE<svg class="brand-chev" viewBox="0 0 120 120" aria-hidden="true"><polygon fill="#4DA6A7" points="62,0 100,0 40,60 100,120 62,120 2,60"/><polygon fill="#4DA6A7" points="108,26 116,26 82,60 116,94 108,94 74,60"/></svg></span>
+    <span class="brand-word sm">SEE<svg class="brand-chev" viewBox="0 0 120 120" aria-hidden="true"><polygon fill="#4DA6A7" points="62,0 100,0 40,60 100,120 62,120 2,60"/><polygon fill="#4DA6A7" points="96,12 114,12 66,60 114,108 96,108 48,60"/></svg></span>
   </a>
 </div>
 <div class="sidebar-overlay" id="sidebar-overlay"></div>
 
 <!-- SIDEBAR -->
 <aside class="sidebar" id="sidebar">
-  <div class="sidebar-toggle" onclick="toggleSidebar()">
-    <svg viewBox="0 0 10 10"><polyline points="6 2 2 5 6 8"/></svg>
-  </div>
   <a class="sidebar-logo" href="index.html" aria-label="Seek Research">
     <div class="brand-lockup">
-      <div class="brand-word">SEE<svg class="brand-chev" viewBox="0 0 120 120" aria-hidden="true"><polygon fill="#4DA6A7" points="62,0 100,0 40,60 100,120 62,120 2,60"/><polygon fill="#4DA6A7" points="108,26 116,26 82,60 116,94 108,94 74,60"/></svg></div>
+      <div class="brand-word">SEE<svg class="brand-chev" viewBox="0 0 120 120" aria-hidden="true"><polygon fill="#4DA6A7" points="62,0 100,0 40,60 100,120 62,120 2,60"/><polygon fill="#4DA6A7" points="96,12 114,12 66,60 114,108 96,108 48,60"/></svg></div>
       <div class="brand-sub">Research</div>
     </div>
-    <svg class="brand-chev-solo" viewBox="0 0 120 120" aria-hidden="true"><polygon fill="#4DA6A7" points="62,0 100,0 40,60 100,120 62,120 2,60"/><polygon fill="#4DA6A7" points="108,26 116,26 82,60 116,94 108,94 74,60"/></svg>
+    <svg class="brand-chev-solo" viewBox="0 0 120 120" aria-hidden="true"><polygon fill="#4DA6A7" points="62,0 100,0 40,60 100,120 62,120 2,60"/><polygon fill="#4DA6A7" points="96,12 114,12 66,60 114,108 96,108 48,60"/></svg>
   </a>
+  <button class="sidebar-toggle" type="button" onclick="toggleSidebar()"
+          aria-controls="sidebar" aria-expanded="true" title="Hide menu">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="11 17 6 12 11 7"/><polyline points="18 17 13 12 18 7"/></svg>
+    <span class="sidebar-toggle-label">Hide menu</span>
+  </button>
   <nav class="sidebar-nav">
     <div class="nav-section open" id="sec-portals">
       <div class="nav-section-header" onclick="toggleSection('sec-portals')">
@@ -85,7 +87,7 @@
         </a>
         <a class="nav-link " href="seek-coordinator.html">
           <svg class="nav-link-icon" viewBox="0 0 24 24"><path d="M9 17H7a4 4 0 01-4-4V7a4 4 0 014-4h10a4 4 0 014 4v6a4 4 0 01-4 4h-2l-4 4-2-4z"/></svg>
-          <span class="nav-link-label">Coordinator</span>
+          <span class="nav-link-label">Client Coordinator</span>
         </a>
       </div>
     </div>
@@ -216,7 +218,7 @@
                     data-modified="6/10/2026"
                     data-stage="Outreach Started"
                     data-pct="22"
-                    data-fill=""
+                    data-fill="farol-amber"
                     data-status="Outreach Started"
                     data-notes="">
                   <td class="td-main">2417 W Montgomery Ave, 19121</td>
@@ -224,7 +226,7 @@
                   <td class="td-muted">6/10/2026</td>
                   <td>
                     <div class="progress-wrap">
-                      <div class="progress-bar"><div class="progress-fill" style="width:22%"></div></div>
+                      <div class="progress-bar"><div class="progress-fill farol-amber" style="width:22%"></div></div>
                       <span class="progress-pct">22%</span>
                     </div>
                   </td>
@@ -237,7 +239,7 @@
                     data-modified="6/9/2026"
                     data-stage="Outreach Started"
                     data-pct="22"
-                    data-fill=""
+                    data-fill="farol-amber"
                     data-status="Outreach Started"
                     data-notes="">
                   <td class="td-main">2421-23 W Montgomery Ave, 19121</td>
@@ -245,7 +247,7 @@
                   <td class="td-muted">6/9/2026</td>
                   <td>
                     <div class="progress-wrap">
-                      <div class="progress-bar"><div class="progress-fill" style="width:22%"></div></div>
+                      <div class="progress-bar"><div class="progress-fill farol-amber" style="width:22%"></div></div>
                       <span class="progress-pct">22%</span>
                     </div>
                   </td>
@@ -258,7 +260,7 @@
                     data-modified="6/9/2026"
                     data-stage="Verbal Agreement"
                     data-pct="28"
-                    data-fill="gold"
+                    data-fill="farol-green"
                     data-status="Verbal Agreement"
                     data-notes="">
                   <td class="td-main">147 W Huntingdon St, 19133</td>
@@ -266,7 +268,7 @@
                   <td class="td-muted">6/9/2026</td>
                   <td>
                     <div class="progress-wrap">
-                      <div class="progress-bar"><div class="progress-fill gold" style="width:28%"></div></div>
+                      <div class="progress-bar"><div class="progress-fill farol-green" style="width:28%"></div></div>
                       <span class="progress-pct">28%</span>
                     </div>
                   </td>
@@ -279,7 +281,7 @@
                     data-modified="6/10/2026"
                     data-stage="Verbal Agreement"
                     data-pct="28"
-                    data-fill="gold"
+                    data-fill="farol-green"
                     data-status="Verbal Agreement"
                     data-notes="">
                   <td class="td-main">2129 N 9th St, 19122</td>
@@ -287,7 +289,7 @@
                   <td class="td-muted">6/10/2026</td>
                   <td>
                     <div class="progress-wrap">
-                      <div class="progress-bar"><div class="progress-fill gold" style="width:28%"></div></div>
+                      <div class="progress-bar"><div class="progress-fill farol-green" style="width:28%"></div></div>
                       <span class="progress-pct">28%</span>
                     </div>
                   </td>
@@ -300,7 +302,7 @@
                     data-modified="6/9/2026"
                     data-stage="Verbal Agreement"
                     data-pct="28"
-                    data-fill="gold"
+                    data-fill="farol-green"
                     data-status="Verbal Agreement"
                     data-notes="">
                   <td class="td-main">1957 N Orianna St, 19122</td>
@@ -308,7 +310,7 @@
                   <td class="td-muted">6/9/2026</td>
                   <td>
                     <div class="progress-wrap">
-                      <div class="progress-bar"><div class="progress-fill gold" style="width:28%"></div></div>
+                      <div class="progress-bar"><div class="progress-fill farol-green" style="width:28%"></div></div>
                       <span class="progress-pct">28%</span>
                     </div>
                   </td>
@@ -321,7 +323,7 @@
                     data-modified="6/10/2026"
                     data-stage="Outreach Started"
                     data-pct="22"
-                    data-fill=""
+                    data-fill="farol-amber"
                     data-status="Outreach Started"
                     data-notes="">
                   <td class="td-main">2134 N Marshall St, 19122</td>
@@ -329,7 +331,7 @@
                   <td class="td-muted">6/10/2026</td>
                   <td>
                     <div class="progress-wrap">
-                      <div class="progress-bar"><div class="progress-fill" style="width:22%"></div></div>
+                      <div class="progress-bar"><div class="progress-fill farol-amber" style="width:22%"></div></div>
                       <span class="progress-pct">22%</span>
                     </div>
                   </td>
@@ -342,7 +344,7 @@
                     data-modified="6/9/2026"
                     data-stage="Verbal Agreement"
                     data-pct="28"
-                    data-fill="gold"
+                    data-fill="farol-green"
                     data-status="Verbal Agreement"
                     data-notes="">
                   <td class="td-main">2138 N Marshall St, 19122</td>
@@ -350,7 +352,7 @@
                   <td class="td-muted">6/9/2026</td>
                   <td>
                     <div class="progress-wrap">
-                      <div class="progress-bar"><div class="progress-fill gold" style="width:28%"></div></div>
+                      <div class="progress-bar"><div class="progress-fill farol-green" style="width:28%"></div></div>
                       <span class="progress-pct">28%</span>
                     </div>
                   </td>
@@ -363,7 +365,7 @@
                     data-modified="6/9/2026"
                     data-stage="Verbal Agreement"
                     data-pct="28"
-                    data-fill="gold"
+                    data-fill="farol-green"
                     data-status="Verbal Agreement"
                     data-notes="">
                   <td class="td-main">2150 N Marshall St, 19122</td>
@@ -371,7 +373,7 @@
                   <td class="td-muted">6/9/2026</td>
                   <td>
                     <div class="progress-wrap">
-                      <div class="progress-bar"><div class="progress-fill gold" style="width:28%"></div></div>
+                      <div class="progress-bar"><div class="progress-fill farol-green" style="width:28%"></div></div>
                       <span class="progress-pct">28%</span>
                     </div>
                   </td>
@@ -384,7 +386,7 @@
                     data-modified="3/26/2026"
                     data-stage="Request Received"
                     data-pct="0"
-                    data-fill="sage"
+                    data-fill="farol-red"
                     data-status="Request"
                     data-notes="">
                   <td class="td-main">1038 W Dauphin St, 19133</td>
@@ -392,7 +394,7 @@
                   <td class="td-muted">3/26/2026</td>
                   <td>
                     <div class="progress-wrap">
-                      <div class="progress-bar"><div class="progress-fill sage" style="width:0%"></div></div>
+                      <div class="progress-bar"><div class="progress-fill farol-red" style="width:0%"></div></div>
                       <span class="progress-pct">0%</span>
                     </div>
                   </td>
@@ -405,7 +407,7 @@
                     data-modified="3/26/2026"
                     data-stage="Request Received"
                     data-pct="0"
-                    data-fill="sage"
+                    data-fill="farol-red"
                     data-status="Request"
                     data-notes="">
                   <td class="td-main">2415 Palethorp St, 19133</td>
@@ -413,7 +415,7 @@
                   <td class="td-muted">3/26/2026</td>
                   <td>
                     <div class="progress-wrap">
-                      <div class="progress-bar"><div class="progress-fill sage" style="width:0%"></div></div>
+                      <div class="progress-bar"><div class="progress-fill farol-red" style="width:0%"></div></div>
                       <span class="progress-pct">0%</span>
                     </div>
                   </td>
@@ -426,7 +428,7 @@
                     data-modified="3/26/2026"
                     data-stage="Request Received"
                     data-pct="0"
-                    data-fill="sage"
+                    data-fill="farol-red"
                     data-status="Request"
                     data-notes="">
                   <td class="td-main">2228 N Reese St, 19133</td>
@@ -434,7 +436,7 @@
                   <td class="td-muted">3/26/2026</td>
                   <td>
                     <div class="progress-wrap">
-                      <div class="progress-bar"><div class="progress-fill sage" style="width:0%"></div></div>
+                      <div class="progress-bar"><div class="progress-fill farol-red" style="width:0%"></div></div>
                       <span class="progress-pct">0%</span>
                     </div>
                   </td>
@@ -616,99 +618,15 @@
 
 </main>
 
-<!-- RIGHT PANEL -->
-<aside class="panel">
-
-  <!-- PROFILE -->
-  <div class="panel-hero">
-    <div class="avatar">B</div>
-    <div class="panel-role gold">Affiliate</div>
-    <div class="panel-name">Byron<br>scrivnr.com</div>
-    <div class="panel-email">byron@scrivnr.com</div>
-  </div>
-
-  <!-- DOMAIN -->
-  <div class="panel-section">
-    <div class="panel-section-label">Viewing Domain</div>
-    <div class="domain-select-wrap">
-      <select class="domain-select">
-        <option>scrivnr.com</option>
-        <option>philadelphia-domain.com</option>
-      </select>
-      <div class="domain-select-arrow">
-        <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
-      </div>
-    </div>
-  </div>
-
-  <!-- PIPELINE STATS -->
-  <div class="panel-section">
-    <div class="panel-section-label">Pipeline Overview</div>
-    <div class="stat-row">
-      <span class="stat-key">Outreach Started</span>
-      <span class="stat-val teal">3</span>
-    </div>
-    <div class="stat-row">
-      <span class="stat-key">Verbal Agreements</span>
-      <span class="stat-val gold">5</span>
-    </div>
-    <div class="stat-row">
-      <span class="stat-key">Requests</span>
-      <span class="stat-val">3</span>
-    </div>
-    <div class="stat-row">
-      <span class="stat-key">Submissions Pending</span>
-      <span class="stat-val">2</span>
-    </div>
-  </div>
-
-  <!-- ACTIVE TAB -->
-  <div class="panel-section">
-    <div class="panel-section-label">Active Tab</div>
-    <div class="stat-row">
-      <span class="stat-key" id="active-tab-label">Research Status</span>
-      <span class="stat-val teal" id="active-tab-count">11</span>
-    </div>
-  </div>
-
-  <!-- QUICK ACTIONS -->
-  <div class="panel-section">
-    <div class="panel-section-label">Quick Actions</div>
-    <a class="quick-link" href="#">
-      <div class="quick-link-icon teal">
-        <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-      </div>
-      <span class="quick-link-text">New Submission</span>
-    </a>
-    <a class="quick-link" href="#">
-      <div class="quick-link-icon gold">
-        <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
-      </div>
-      <span class="quick-link-text">Contact Research Team</span>
-    </a>
-  </div>
-
-  <!-- FOOTER -->
-  <div class="panel-footer">
-    <p>Impact-Driven. Rooted in Research.<br>Results That Matter.</p>
-  </div>
-
-</aside>
 
 <script>
-const tabMap = {
-  status:      { label: 'Research Status',      count: '11' },
-  submissions: { label: 'Research Submissions', count: '2' },
-};
+const tabOrder = ['status', 'submissions'];
 
 function switchTab(id) {
   document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
   document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
-  const keys = Object.keys(tabMap);
-  document.querySelectorAll('.tab')[keys.indexOf(id)].classList.add('active');
+  document.querySelectorAll('.tab')[tabOrder.indexOf(id)].classList.add('active');
   document.getElementById('panel-' + id).classList.add('active');
-  document.getElementById('active-tab-label').textContent = tabMap[id].label;
-  document.getElementById('active-tab-count').textContent = tabMap[id].count;
 }
 
 function filterTable(tbodyId, search, selectId) {
