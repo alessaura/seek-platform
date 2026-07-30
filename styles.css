@@ -836,11 +836,16 @@ tbody tr.selected td:first-child { padding-left: 11px; }
   .mobile-header { display: flex; }
   .sidebar-toggle { display: none; }
 
-  /* Sidebar becomes off-canvas drawer */
+  /* Sidebar becomes off-canvas drawer.
+     O header mobile é fixo (56px, z-index 40) e cobre o topo da gaveta: a logo
+     interna ficava atrás dele e só a metade de baixo aparecia, duplicando a
+     marca. A marca já está no header, então some daqui e o nav começa abaixo. */
   .sidebar {
     transform: translateX(-100%);
     width: var(--sidebar-w) !important;
+    padding-top: 68px;
   }
+  .sidebar-logo { display: none; }
   .sidebar.mobile-open { transform: translateX(0); }
   .sidebar.collapsed { width: var(--sidebar-w) !important; transform: translateX(-100%); }
   .sidebar.collapsed.mobile-open { transform: translateX(0); }
