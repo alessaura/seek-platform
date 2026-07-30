@@ -6,7 +6,7 @@
 <title>Seek Research — Affiliate Portal</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="icon" type="image/png" href="seek-favicon.png">
-<link rel="stylesheet" href="styles.css?v=9">
+<link rel="stylesheet" href="styles.css?v=10">
 </head>
 <body class="fixed-layout">
 
@@ -60,7 +60,7 @@
         </a>
         <a class="nav-link " href="seek-executive-portal.html">
           <svg class="nav-link-icon" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-          <span class="nav-link-label">Executive Portal</span>
+          <span class="nav-link-label">Account Executive Portal</span>
         </a>
       </div>
     </div>
@@ -76,7 +76,7 @@
       <div class="nav-items">
         <a class="nav-link " href="seek-research-forms.html">
           <svg class="nav-link-icon" viewBox="0 0 24 24"><path d="M9 12h6M9 8h6M5 4h14a1 1 0 011 1v14a1 1 0 01-1 1H5a1 1 0 01-1-1V5a1 1 0 011-1z"/></svg>
-          <span class="nav-link-label">Research Forms</span>
+          <span class="nav-link-label">Research</span>
         </a>
         <a class="nav-link " href="seek-outreach-specialist.html">
           <svg class="nav-link-icon" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
@@ -124,12 +124,12 @@
   </div>
 
   <!-- SUMMARY ROW -->
-  <div class="summary-row cols-4">
+  <div class="summary-row cols-3">
     <div class="summary-card">
       <div class="summary-icon sm teal">
         <svg viewBox="0 0 24 24"><path d="M9 12h6M9 8h6M5 4h14a1 1 0 011 1v14a1 1 0 01-1 1H5a1 1 0 01-1-1V5a1 1 0 011-1z"/></svg>
       </div>
-      <div class="summary-label">Active Cases</div>
+      <div class="summary-label">Active Files</div>
       <div class="summary-value lg">11</div>
       <div class="summary-sub sm">Research in progress</div>
     </div>
@@ -139,7 +139,7 @@
       </div>
       <div class="summary-label">Avg. Progress</div>
       <div class="summary-value lg">25%</div>
-      <div class="summary-sub sm">Across all cases</div>
+      <div class="summary-sub sm">Across all files</div>
     </div>
     <div class="summary-card">
       <div class="summary-icon sm sage">
@@ -148,14 +148,6 @@
       <div class="summary-label">Submissions</div>
       <div class="summary-value lg">2</div>
       <div class="summary-sub sm">Pending review</div>
-    </div>
-    <div class="summary-card dark">
-      <div class="summary-icon sm ink">
-        <svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-      </div>
-      <div class="summary-label">Verbal Agreements</div>
-      <div class="summary-value lg">5</div>
-      <div class="summary-sub sm">Send contract</div>
     </div>
   </div>
 
@@ -191,7 +183,7 @@
             <option value="">All statuses</option>
             <option>Outreach Started</option>
             <option>Verbal Agreement</option>
-            <option>Request</option>
+            <option>Research Request</option>
           </select>
           <span class="filter-count" id="rs-count">11 records</span>
         </div>
@@ -383,19 +375,19 @@
                     data-modified="3/26/2026"
                     data-stage="Request Received"
                     data-pct="0"
-                    data-fill="farol-red"
-                    data-status="Request"
+                    data-fill="farol-blue"
+                    data-status="Research Request"
                     data-notes="">
                   <td class="td-main">1038 W Dauphin St, 19133</td>
                   <td class="td-muted">3/16/2026</td>
                   <td class="td-muted">3/26/2026</td>
                   <td>
                     <div class="progress-wrap">
-                      <div class="progress-bar"><div class="progress-fill farol-red" style="width:0%"></div></div>
+                      <div class="progress-bar"><div class="progress-fill farol-blue" style="width:0%"></div></div>
                       <span class="progress-pct">0%</span>
                     </div>
                   </td>
-                  <td><span class="status-pill request"><span class="status-dot"></span>Request</span></td>
+                  <td><span class="status-pill request"><span class="status-dot"></span>Research Request</span></td>
                 </tr>
                 <tr onclick="selectResearch(this)"
                     data-id="10"
@@ -404,19 +396,19 @@
                     data-modified="3/26/2026"
                     data-stage="Request Received"
                     data-pct="0"
-                    data-fill="farol-red"
-                    data-status="Request"
+                    data-fill="farol-blue"
+                    data-status="Research Request"
                     data-notes="">
                   <td class="td-main">2415 Palethorp St, 19133</td>
                   <td class="td-muted">3/16/2026</td>
                   <td class="td-muted">3/26/2026</td>
                   <td>
                     <div class="progress-wrap">
-                      <div class="progress-bar"><div class="progress-fill farol-red" style="width:0%"></div></div>
+                      <div class="progress-bar"><div class="progress-fill farol-blue" style="width:0%"></div></div>
                       <span class="progress-pct">0%</span>
                     </div>
                   </td>
-                  <td><span class="status-pill request"><span class="status-dot"></span>Request</span></td>
+                  <td><span class="status-pill request"><span class="status-dot"></span>Research Request</span></td>
                 </tr>
                 <tr onclick="selectResearch(this)"
                     data-id="11"
@@ -425,19 +417,19 @@
                     data-modified="3/26/2026"
                     data-stage="Request Received"
                     data-pct="0"
-                    data-fill="farol-red"
-                    data-status="Request"
+                    data-fill="farol-blue"
+                    data-status="Research Request"
                     data-notes="">
                   <td class="td-main">2228 N Reese St, 19133</td>
                   <td class="td-muted">3/16/2026</td>
                   <td class="td-muted">3/26/2026</td>
                   <td>
                     <div class="progress-wrap">
-                      <div class="progress-bar"><div class="progress-fill farol-red" style="width:0%"></div></div>
+                      <div class="progress-bar"><div class="progress-fill farol-blue" style="width:0%"></div></div>
                       <span class="progress-pct">0%</span>
                     </div>
                   </td>
-                  <td><span class="status-pill request"><span class="status-dot"></span>Request</span></td>
+                  <td><span class="status-pill request"><span class="status-dot"></span>Research Request</span></td>
                 </tr>
               </tbody>
             </table>
@@ -673,7 +665,7 @@ function selectResearch(row) {
   const statusPillMap = {
     'Outreach Started': 'outreach',
     'Verbal Agreement': 'verbal',
-    'Request':          'request',
+    'Research Request': 'request',
   };
   const pillClass = statusPillMap[d.status] || 'request';
   document.getElementById('rs-status-val').innerHTML =

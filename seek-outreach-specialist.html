@@ -6,7 +6,7 @@
 <title>Seek Research — Outreach Specialist Files</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="icon" type="image/png" href="seek-favicon.png">
-<link rel="stylesheet" href="styles.css?v=9">
+<link rel="stylesheet" href="styles.css?v=10">
 </head>
 <body class="scroll-layout">
 
@@ -60,7 +60,7 @@
         </a>
         <a class="nav-link " href="seek-executive-portal.html">
           <svg class="nav-link-icon" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-          <span class="nav-link-label">Executive Portal</span>
+          <span class="nav-link-label">Account Executive Portal</span>
         </a>
       </div>
     </div>
@@ -76,7 +76,7 @@
       <div class="nav-items">
         <a class="nav-link " href="seek-research-forms.html">
           <svg class="nav-link-icon" viewBox="0 0 24 24"><path d="M9 12h6M9 8h6M5 4h14a1 1 0 011 1v14a1 1 0 01-1 1H5a1 1 0 01-1-1V5a1 1 0 011-1z"/></svg>
-          <span class="nav-link-label">Research Forms</span>
+          <span class="nav-link-label">Research</span>
         </a>
         <a class="nav-link active" href="seek-outreach-specialist.html">
           <svg class="nav-link-icon" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
@@ -151,8 +151,8 @@
           </div>
           <select class="filter-select" id="status-un" onchange="filterPanel('un', document.getElementById('search-un').value)">
             <option value="">All statuses</option>
-            <option>Created</option>
-            <option>Verbal Agreement Obtained</option>
+            <option>Research Request</option>
+            <option>Verbal Agreement</option>
           </select>
         </div>
       </div>
@@ -172,19 +172,19 @@
           </thead>
           <tbody id="tbody-un">
             <tr onclick="openDetail({title:'3916 Brown St',status:'NEW',owner:'David P. Smith',marital:'Unknown',deed:'Other',year:'1972',address:'3916 Brown St',zip:'19104',zoning:'RSAS',sqft:'1422',liens:'$0.00',taxes:'$16,232.37',totaldebt:'$1,632.37',contracttype:'Assignment of Interest (30%)',estmin:'$40,000',estmax:'$60,000',cashoffer:'',sysstatus:'Verbal Agreement Obtained',assignedto:'morgan.taylor@seekresearchgroup.com',hasfamily:true})">
-              <td><span class="status-pill new"><span class="status-dot"></span>New</span></td>
+              <td><span class="status-pill request"><span class="status-dot"></span>Research Request</span></td>
               <td class="td-main">David P. Smith</td><td class="td-muted">Unknown</td><td class="td-muted">Other</td>
               <td class="td-muted">1972</td><td class="td-muted">3916 Brown St</td>
               <td class="td-muted">RSAS</td><td class="td-muted">1422</td><td class="td-muted">$1,632.37</td>
             </tr>
             <tr onclick="openDetail({title:'2048 N Orkney St',status:'NEW',owner:'John &amp; Rose Bachowski',marital:'Married',deed:'Tenants by the Ent.',year:'1946',address:'2048 N Orkney St',zip:'19122',zoning:'RM1',sqft:'411',liens:'$475.38',taxes:'$12,186.00',totaldebt:'$12,661.38',contracttype:'',estmin:'',estmax:'',cashoffer:'',sysstatus:'Created',assignedto:'',hasfamily:false})">
-              <td><span class="status-pill new"><span class="status-dot"></span>New</span></td>
+              <td><span class="status-pill request"><span class="status-dot"></span>Research Request</span></td>
               <td class="td-main">John &amp; Rose Bachowski</td><td class="td-muted">Married</td><td class="td-muted">Tenants by the Ent.</td>
               <td class="td-muted">1946</td><td class="td-muted">2048 N Orkney St</td>
               <td class="td-muted">RM1</td><td class="td-muted">411</td><td class="td-muted">$12,661.38</td>
             </tr>
             <tr onclick="openDetail({title:'3817 Aspen St',status:'NEW',owner:'Elaine &amp; Joseph B.',marital:'Married',deed:'Tenants by the Ent.',year:'1947',address:'3817 Aspen St',zip:'19140',zoning:'RSAS',sqft:'1200',liens:'$0.00',taxes:'$11,482.00',totaldebt:'$11,482.00',contracttype:'',estmin:'',estmax:'',cashoffer:'',sysstatus:'Created',assignedto:'',hasfamily:false})">
-              <td><span class="status-pill new"><span class="status-dot"></span>New</span></td>
+              <td><span class="status-pill request"><span class="status-dot"></span>Research Request</span></td>
               <td class="td-main">Elaine &amp; Joseph B.</td><td class="td-muted">Married</td><td class="td-muted">Tenants by the Ent.</td>
               <td class="td-muted">1947</td><td class="td-muted">3817 Aspen St</td>
               <td class="td-muted">RSAS</td><td class="td-muted">1200</td><td class="td-muted">$11,482.00</td>
@@ -206,7 +206,7 @@
           <select class="filter-select" id="status-out" onchange="filterPanel('out', document.getElementById('search-out').value)">
             <option value="">All statuses</option>
             <option>Outreach Started</option>
-            <option>Verbal Agreement Obtained</option>
+            <option>Verbal Agreement</option>
           </select>
         </div>
       </div>
@@ -226,25 +226,25 @@
           </thead>
           <tbody id="tbody-out">
             <tr onclick="openDetail({title:'2325 N. 6th St.',status:'OUTREACH',owner:'Sidney Johnson',marital:'Single',deed:'Other',year:'1960',address:'2325 N. 6th St.',zip:'19133',zoning:'RM1',sqft:'1287',liens:'$0.00',taxes:'$12,817.00',totaldebt:'$12,817.00',contracttype:'',estmin:'',estmax:'',cashoffer:'',sysstatus:'Outreach Started',assignedto:'',hasfamily:false})">
-              <td><span class="status-pill outreach"><span class="status-dot"></span>Outreach</span></td>
+              <td><span class="status-pill outreach"><span class="status-dot"></span>Outreach Started</span></td>
               <td class="td-main">Sidney Johnson</td><td class="td-muted">Single</td><td class="td-muted">Other</td>
               <td class="td-muted">1960</td><td class="td-muted">2325 N. 6th St.</td>
               <td class="td-muted">RM1</td><td class="td-muted">1287</td><td class="td-muted">$12,817</td>
             </tr>
             <tr onclick="openDetail({title:'2417 W Montgomery Ave',status:'OUTREACH',owner:'Lawrence Madison',marital:'Widowed &amp; Divorced',deed:'—',year:'1985',address:'2417 W Montgomery Ave',zip:'19121',zoning:'RSA5',sqft:'1169',liens:'$0.00',taxes:'$3,368.00',totaldebt:'$3,368.00',contracttype:'',estmin:'',estmax:'',cashoffer:'',sysstatus:'Outreach Started',assignedto:'',hasfamily:false})">
-              <td><span class="status-pill outreach"><span class="status-dot"></span>Outreach</span></td>
+              <td><span class="status-pill outreach"><span class="status-dot"></span>Outreach Started</span></td>
               <td class="td-main">Lawrence Madison</td><td class="td-muted">Widowed &amp; Divorced</td><td class="td-muted">—</td>
               <td class="td-muted">1985</td><td class="td-muted">2417 W Montgomery Ave</td>
               <td class="td-muted">RSA5</td><td class="td-muted">1169</td><td class="td-muted">$3,368</td>
             </tr>
             <tr onclick="openDetail({title:'2041 N 5th St',status:'OUTREACH',owner:'Jack Michael Gussman',marital:'Widowed',deed:'Other',year:'1955',address:'2041 N 5th St',zip:'19122',zoning:'RM1',sqft:'1075',liens:'$1,932.15',taxes:'$21,727.00',totaldebt:'$23,659.15',contracttype:'',estmin:'',estmax:'',cashoffer:'',sysstatus:'Outreach Started',assignedto:'',hasfamily:false})">
-              <td><span class="status-pill outreach"><span class="status-dot"></span>Outreach</span></td>
+              <td><span class="status-pill outreach"><span class="status-dot"></span>Outreach Started</span></td>
               <td class="td-main">Jack Michael Gussman</td><td class="td-muted">Widowed</td><td class="td-muted">Other</td>
               <td class="td-muted">1955</td><td class="td-muted">2041 N 5th St</td>
               <td class="td-muted">RM1</td><td class="td-muted">1075</td><td class="td-muted">$23,659</td>
             </tr>
             <tr onclick="openDetail({title:'1953 N Orianna St',status:'VERBAL',owner:'Ramon DeJesus',marital:'Married',deed:'Other',year:'1989',address:'1953 N Orianna St',zip:'19122',zoning:'RM1',sqft:'528',liens:'$0.00',taxes:'$14,778.00',totaldebt:'$14,778.00',contracttype:'Assignment of Interest (30%)',estmin:'$35,000',estmax:'$55,000',cashoffer:'',sysstatus:'Verbal Agreement Obtained',assignedto:'morgan.taylor@seekresearchgroup.com',hasfamily:false})">
-              <td><span class="status-pill verbal"><span class="status-dot"></span>Verbal</span></td>
+              <td><span class="status-pill verbal"><span class="status-dot"></span>Verbal Agreement</span></td>
               <td class="td-main">Ramon DeJesus</td><td class="td-muted">Married</td><td class="td-muted">Other</td>
               <td class="td-muted">1989</td><td class="td-muted">1953 N Orianna St</td>
               <td class="td-muted">RM1</td><td class="td-muted">528</td><td class="td-muted">$14,778</td>
@@ -326,7 +326,7 @@
       <div class="acc-nav-item" onclick="showPanel('notes', this)">
         <div class="acc-nav-left">
           <svg class="acc-nav-icon" viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
-          <span class="acc-nav-label">Case Notes</span>
+          <span class="acc-nav-label">File Notes</span>
         </div>
         <div class="dirty-badge" id="dirty-notes"></div>
       </div>
@@ -351,7 +351,13 @@
 
       <!-- PROPERTY INFO -->
       <div class="acc-panel active" id="panel-property">
-        <div class="panel-title">Property <em>Information</em></div>
+        <div class="panel-head">
+          <span class="panel-head-icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></span>
+          <div>
+            <div class="panel-title">Property <em>Information</em></div>
+            <div class="panel-note">Address, zoning, and who holds the deed.</div>
+          </div>
+        </div>
         <div class="form-grid">
           <div class="form-field">
             <label class="field-label">Title</label>
@@ -394,7 +400,13 @@
 
       <!-- FINANCIAL DETAILS -->
       <div class="acc-panel" id="panel-financial">
-        <div class="panel-title">Financial <em>Details</em></div>
+        <div class="panel-head">
+          <span class="panel-head-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></span>
+          <div>
+            <div class="panel-title">Financial <em>Details</em></div>
+            <div class="panel-note">Liens, tax debt, and the numbers that shape an offer.</div>
+          </div>
+        </div>
         <div class="form-grid">
           <div class="form-field">
             <label class="field-label">Liens (L&amp;I)</label>
@@ -413,7 +425,13 @@
 
       <!-- CONTACT INFO -->
       <div class="acc-panel" id="panel-contact">
-        <div class="panel-title">Contact <em>Information</em></div>
+        <div class="panel-head">
+          <span class="panel-head-icon"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8 19.79 19.79 0 010 1.17 2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.91a16 16 0 006.72 6.72l1.28-1.28a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg></span>
+          <div>
+            <div class="panel-title">Contact <em>Information</em></div>
+            <div class="panel-note">How we reach the family, and who to ask for.</div>
+          </div>
+        </div>
         <div class="form-grid">
           <div class="form-field">
             <label class="field-label">Contact Email</label>
@@ -448,7 +466,13 @@
 
       <!-- CONTRACT & DEAL -->
       <div class="acc-panel" id="panel-contract">
-        <div class="panel-title">Contract <em>&amp; Deal Structure</em></div>
+        <div class="panel-head">
+          <span class="panel-head-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6z"/><path d="M14 2v6h6"/></svg></span>
+          <div>
+            <div class="panel-title">Contract <em>&amp; Deal Structure</em></div>
+            <div class="panel-note">Terms agreed with the seller.</div>
+          </div>
+        </div>
         <div class="form-grid">
           <div class="form-field">
             <label class="field-label">Contract Type</label>
@@ -477,7 +501,13 @@
 
       <!-- FAMILY OVERVIEW -->
       <div class="acc-panel" id="panel-family">
-        <div class="panel-title">Shared Family <em>Overview</em></div>
+        <div class="panel-head">
+          <span class="panel-head-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg></span>
+          <div>
+            <div class="panel-title">Shared Family <em>Overview</em></div>
+            <div class="panel-note">The research narrative — shared with the whole team.</div>
+          </div>
+        </div>
         <div class="form-field form-field-mb">
           <label class="field-label field-label-mb">Family Overview (shared)</label>
           <div class="rich-wrap">
@@ -491,11 +521,17 @@
         </div>
       </div>
 
-      <!-- CASE NOTES -->
+      <!-- FILE NOTES -->
       <div class="acc-panel" id="panel-notes">
-        <div class="panel-title">Case <em>Notes</em></div>
+        <div class="panel-head">
+          <span class="panel-head-icon"><svg viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></span>
+          <div>
+            <div class="panel-title">File <em>Notes</em></div>
+            <div class="panel-note">Every call, message, and decision, in order.</div>
+          </div>
+        </div>
         <div class="form-field form-field-mb">
-          <div class="notes-feed" id="notes-feed">No case notes yet. Add the first note below.</div>
+          <div class="notes-feed" id="notes-feed">No file notes yet. Add the first note below.</div>
         </div>
         <div class="form-field form-field-mb">
           <label class="field-label field-label-mb">Add Note</label>
@@ -509,14 +545,20 @@
 
       <!-- SYSTEM INFO -->
       <div class="acc-panel" id="panel-system">
-        <div class="panel-title">System <em>Information</em></div>
+        <div class="panel-head">
+          <span class="panel-head-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 11-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 11-2.83-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 112.83-2.83l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 112.83 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg></span>
+          <div>
+            <div class="panel-title">System <em>Information</em></div>
+            <div class="panel-note">Record metadata, kept for audit.</div>
+          </div>
+        </div>
         <div class="form-grid">
           <div class="form-field">
             <label class="field-label">Status</label>
             <select class="field-select" id="f-sysstatus" onchange="markDirty('system')">
-              <option>Created</option>
+              <option>Research Request</option>
               <option>Outreach Started</option>
-              <option>Verbal Agreement Obtained</option>
+              <option>Verbal Agreement</option>
               <option>Contract Sent</option>
               <option>Closed</option>
             </select>
@@ -530,7 +572,13 @@
 
       <!-- FILE ATTACHMENTS -->
       <div class="acc-panel" id="panel-files">
-        <div class="panel-title">File <em>Attachments</em></div>
+        <div class="panel-head">
+          <span class="panel-head-icon"><svg viewBox="0 0 24 24"><path d="M21.44 11.05l-9.19 9.19a6 6 0 01-8.49-8.49l9.19-9.19a4 4 0 015.66 5.66l-9.2 9.19a2 2 0 01-2.83-2.83l8.49-8.48"/></svg></span>
+          <div>
+            <div class="panel-title">File <em>Attachments</em></div>
+            <div class="panel-note">Deeds, titles, and anything else on record.</div>
+          </div>
+        </div>
         <label class="field-label field-label-block-mb">Attach Files</label>
         <div class="dropzone" id="dz-outreach" onclick="document.getElementById('file-input').click()">
           <div class="dropzone-icon">
@@ -656,7 +704,7 @@ function openDetail(d) {
   Array.from(ssEl.options).forEach(o => { o.selected = o.value === d.sysstatus; });
 
   document.getElementById('rich-family').innerHTML = d.hasfamily ? FAMILY_TEMPLATE : '';
-  document.getElementById('notes-feed').innerHTML  = 'No case notes yet. Add the first note below.';
+  document.getElementById('notes-feed').innerHTML  = 'No file notes yet. Add the first note below.';
   document.getElementById('note-input').value      = '';
   document.getElementById('fl-outreach').innerHTML = '';
   document.getElementById('att-empty-outreach').style.display = '';
@@ -716,13 +764,13 @@ function confirmDiscard() {
   showConfirm('Discard all unsaved changes?', discardChanges, { danger: true, okLabel: 'Discard' });
 }
 
-// ── CASE NOTES ──
+// ── FILE NOTES ──
 function addNote() {
   const input = document.getElementById('note-input');
   const text  = input.value.trim();
   if (!text) return;
   const feed  = document.getElementById('notes-feed');
-  if (feed.textContent.includes('No case notes')) feed.innerHTML = '';
+  if (feed.textContent.includes('No file notes')) feed.innerHTML = '';
   const now   = new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
   const entry = document.createElement('div');
   entry.className = 'note-entry';

@@ -20,7 +20,11 @@
   --slate-light:   rgba(96,125,139,0.08);
   --rust:          #B55A35; /* error / destructive / rejected */
   --rust-light:    rgba(181,90,53,0.10);
-  /* Farol de progresso — vermelho/âmbar/verde com contraste AA em fundo claro */
+  /* Farol de progresso — contraste AA em fundo claro.
+     O estágio inicial é AZUL, não vermelho: vermelho lê como erro/parada, e o
+     cliente vê este portal. Vermelho fica reservado a rejeição de verdade. */
+  --farol-blue:          #2B6CB0;
+  --farol-blue-light:    rgba(43,108,176,0.10);
   --farol-red:           #B0442C;
   --farol-red-light:     rgba(176,68,44,0.10);
   --farol-amber:         #8A6900;
@@ -454,11 +458,13 @@ tbody td { padding: 13px 16px; color: var(--text-main); vertical-align: middle; 
 
 /* Farol: quanto mais avançado o estágio, mais verde. Antes estava invertido —
    "Request" (0%) lia como concluído e "Verbal Agreement" (28%) como pendente. */
+.status-pill.farol-blue  { background: var(--farol-blue-light);  color: var(--farol-blue); }
 .status-pill.farol-red   { background: var(--farol-red-light);   color: var(--farol-red); }
 .status-pill.farol-amber { background: var(--farol-amber-light); color: var(--farol-amber); }
 .status-pill.farol-green { background: var(--farol-green-light); color: var(--farol-green); }
 
-.status-pill.request   { background: var(--farol-red-light);   color: var(--farol-red); }
+.status-pill.request   { background: var(--farol-blue-light);  color: var(--farol-blue); }
+.status-pill.new       { background: var(--farol-blue-light);  color: var(--farol-blue); }
 .status-pill.outreach  { background: var(--farol-amber-light); color: var(--farol-amber); }
 .status-pill.verbal    { background: var(--farol-green-light); color: var(--farol-green); }
 .status-pill.submitted { background: rgba(143,174,157,0.12); color: var(--sage); }
@@ -482,6 +488,7 @@ tbody td { padding: 13px 16px; color: var(--text-main); vertical-align: middle; 
 .progress-fill.gold { background: var(--gold); }
 .progress-fill.sage { background: var(--sage); }
 /* mesma leitura de farol dos status pills */
+.progress-fill.farol-blue  { background: var(--farol-blue); }
 .progress-fill.farol-red   { background: var(--farol-red); }
 .progress-fill.farol-amber { background: var(--gold); }
 .progress-fill.farol-green { background: var(--farol-green); }
@@ -684,7 +691,35 @@ tbody tr.selected td:first-child { padding-left: 11px; }
 .dirty-badge.visible { display: block; }
 .accordion-panels { overflow-y: auto; padding: 32px; }
 .acc-panel { display: none; }
-.acc-panel.active { display: block; }
+/* Antes os campos flutuavam soltos sobre o fundo da página, sem nada que os
+   contivesse — daí a sensação de "plano". Agora cada seção é um card. */
+.acc-panel.active {
+  display: block;
+  max-width: 940px;
+  background: var(--white);
+  border: 1px solid var(--paper-dark);
+  border-radius: 4px;
+  padding: 22px 24px 26px;
+}
+
+.panel-head {
+  display: flex; align-items: flex-start; gap: 12px;
+  margin-bottom: 22px; padding-bottom: 16px;
+  border-bottom: 1px solid var(--paper-mid);
+}
+.panel-head-icon {
+  width: 34px; height: 34px; flex-shrink: 0; border-radius: 4px;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--teal-light); border: 1px solid rgba(77,166,167,0.18);
+}
+.panel-head-icon svg {
+  width: 16px; height: 16px;
+  stroke: var(--teal); fill: none; stroke-width: 1.7;
+  stroke-linecap: round; stroke-linejoin: round;
+}
+.panel-head .panel-title { margin-bottom: 2px; padding-bottom: 0; border-bottom: none; }
+.panel-note { font-size: 12px; font-weight: 400; color: var(--text-muted); line-height: 1.5; }
+
 .panel-title { font-size: 17px; font-weight: 600; color: var(--ink); margin-bottom: 24px; padding-bottom: 14px; border-bottom: 1px solid var(--paper-dark); }
 .panel-title em { font-style: italic; color: var(--teal); }
 

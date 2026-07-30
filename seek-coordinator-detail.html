@@ -6,7 +6,7 @@
 <title>Seek Research — Specialist File Detail</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="icon" type="image/png" href="seek-favicon.png">
-<link rel="stylesheet" href="styles.css?v=9">
+<link rel="stylesheet" href="styles.css?v=10">
 </head>
 <body class="scroll-layout">
 
@@ -59,7 +59,7 @@
         </a>
         <a class="nav-link" href="seek-executive-portal.html">
           <svg class="nav-link-icon" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-          <span class="nav-link-label">Executive Portal</span>
+          <span class="nav-link-label">Account Executive Portal</span>
         </a>
       </div>
     </div>
@@ -75,7 +75,7 @@
       <div class="nav-items">
         <a class="nav-link" href="seek-research-forms.html">
           <svg class="nav-link-icon" viewBox="0 0 24 24"><path d="M9 12h6M9 8h6M5 4h14a1 1 0 011 1v14a1 1 0 01-1 1H5a1 1 0 01-1-1V5a1 1 0 011-1z"/></svg>
-          <span class="nav-link-label">Research Forms</span>
+          <span class="nav-link-label">Research</span>
         </a>
         <a class="nav-link" href="seek-outreach-specialist.html">
           <svg class="nav-link-icon" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
@@ -134,7 +134,7 @@
       <div class="acc-nav-item active" onclick="showPanel('case', this)">
         <div class="acc-nav-left">
           <svg class="acc-nav-icon" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6z"/><polyline points="14 2 14 8 20 8"/></svg>
-          <span class="acc-nav-label">Case Information</span>
+          <span class="acc-nav-label">File Information</span>
         </div>
         <div class="dirty-badge" id="dirty-case"></div>
       </div>
@@ -176,7 +176,7 @@
       <div class="acc-nav-item" onclick="showPanel('notes', this)">
         <div class="acc-nav-left">
           <svg class="acc-nav-icon" viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
-          <span class="acc-nav-label">Case Notes</span>
+          <span class="acc-nav-label">File Notes</span>
         </div>
         <div class="dirty-badge" id="dirty-notes"></div>
       </div>
@@ -185,9 +185,9 @@
     <!-- RIGHT: PANELS -->
     <div class="accordion-panels">
 
-      <!-- CASE INFORMATION -->
+      <!-- FILE INFORMATION -->
       <div class="acc-panel active" id="panel-case">
-        <div class="panel-title">Case <em>Information</em></div>
+        <div class="panel-title">File <em>Information</em></div>
         <div class="form-grid">
           <div class="form-field">
             <label class="field-label">Title</label>
@@ -211,7 +211,7 @@
 
       <!-- MILESTONES -->
       <div class="acc-panel" id="panel-milestones">
-        <div class="panel-title">Case <em>Milestones</em></div>
+        <div class="panel-title">File <em>Milestones</em></div>
 
         <div class="ms-summary">
           <div class="ms-summary-main">
@@ -241,7 +241,7 @@
 
       <!-- ASSIGNMENT -->
       <div class="acc-panel" id="panel-assign">
-        <div class="panel-title">Case <em>Assignment</em></div>
+        <div class="panel-title">File <em>Assignment</em></div>
         <div class="form-grid single">
           <div class="form-field">
             <label class="field-label">Assigned To</label>
@@ -280,9 +280,9 @@
         </div>
       </div>
 
-      <!-- CASE NOTES -->
+      <!-- FILE NOTES -->
       <div class="acc-panel" id="panel-notes">
-        <div class="panel-title">Case <em>Notes</em> <span style="font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--text-muted);font-weight:500;margin-left:8px">Shared</span></div>
+        <div class="panel-title">File <em>Notes</em> <span style="font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--text-muted);font-weight:500;margin-left:8px">Shared</span></div>
         <div class="case-notes-display" id="notes-display"></div>
         <div class="form-grid single">
           <div class="form-field">
@@ -521,11 +521,11 @@ function renderFileList() {
 function removeFile(name) { fileMap.delete(name); renderFileList(); }
 function clearFiles() { fileMap.clear(); renderFileList(); }
 
-// ── Case notes ──
+// ── File notes ──
 function renderNotes() {
   const display = document.getElementById('notes-display');
   if (caseNotes.length === 0) {
-    display.innerHTML = '<div class="case-notes-empty">No case notes yet.</div>';
+    display.innerHTML = '<div class="case-notes-empty">No file notes yet.</div>';
     return;
   }
   display.innerHTML = caseNotes.map(n =>

@@ -6,7 +6,7 @@
 <title>Seek Research — Client Portal</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="icon" type="image/png" href="seek-favicon.png">
-<link rel="stylesheet" href="styles.css?v=9">
+<link rel="stylesheet" href="styles.css?v=10">
 </head>
 <body class="fixed-layout">
 
@@ -60,7 +60,7 @@
         </a>
         <a class="nav-link " href="seek-executive-portal.html">
           <svg class="nav-link-icon" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-          <span class="nav-link-label">Executive Portal</span>
+          <span class="nav-link-label">Account Executive Portal</span>
         </a>
       </div>
     </div>
@@ -76,7 +76,7 @@
       <div class="nav-items">
         <a class="nav-link " href="seek-research-forms.html">
           <svg class="nav-link-icon" viewBox="0 0 24 24"><path d="M9 12h6M9 8h6M5 4h14a1 1 0 011 1v14a1 1 0 01-1 1H5a1 1 0 01-1-1V5a1 1 0 011-1z"/></svg>
-          <span class="nav-link-label">Research Forms</span>
+          <span class="nav-link-label">Research</span>
         </a>
         <a class="nav-link " href="seek-outreach-specialist.html">
           <svg class="nav-link-icon" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
@@ -129,7 +129,7 @@
       <div class="summary-icon sm teal">
         <svg viewBox="0 0 24 24"><path d="M9 12h6M9 8h6M5 4h14a1 1 0 011 1v14a1 1 0 01-1 1H5a1 1 0 01-1-1V5a1 1 0 011-1z"/></svg>
       </div>
-      <div class="summary-label">Active Cases</div>
+      <div class="summary-label">Active Files</div>
       <div class="summary-value lg">0</div>
       <div class="summary-sub sm">No open files yet</div>
     </div>
@@ -153,14 +153,14 @@
     <div class="tabs-header">
       <div class="tab active" onclick="switchTab('status')">
         <div class="tab-inner">
-          <span class="tab-label">Research Status</span>
+          <span class="tab-label">Estate of Chuning</span>
           <span class="tab-count-badge" id="badge-status">0</span>
         </div>
         <div class="tab-indicator"></div>
       </div>
       <div class="tab" onclick="switchTab('documents')">
         <div class="tab-inner">
-          <span class="tab-label">Seller Documents</span>
+          <span class="tab-label">Documents</span>
           <span class="tab-count-badge" id="badge-documents">0</span>
         </div>
         <div class="tab-indicator"></div>
@@ -169,12 +169,12 @@
 
     <div class="tabs-body">
 
-      <!-- ── RESEARCH STATUS ── -->
+      <!-- ── ESTATE ── -->
       <div class="tab-panel active" id="panel-status">
         <div class="filter-bar">
           <div class="filter-search-wrap">
             <div class="filter-search-icon"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
-            <input class="filter-search" placeholder="Search title or address..." id="rs-search" oninput="filterTable('rs-tbody', this.value, 'rs-filter')"/>
+            <input class="filter-search" placeholder="Search address..." id="rs-search" oninput="filterTable('rs-tbody', this.value, 'rs-filter')"/>
           </div>
           <select class="filter-select" id="rs-filter" onchange="filterTable('rs-tbody', document.getElementById('rs-search').value, 'rs-filter')">
             <option value="">All statuses</option>
@@ -189,10 +189,7 @@
             <table>
               <thead>
                 <tr>
-                  <th class="sticky">Title</th>
-                  <th class="sticky">Contact</th>
-                  <th class="sticky">Created</th>
-                  <th class="sticky">Modified</th>
+                  <th class="sticky">Property Address</th>
                   <th class="sticky">Progress</th>
                   <th class="sticky">Status</th>
                 </tr>
@@ -203,8 +200,8 @@
               <div class="tab-empty-ornament">
                 <svg viewBox="0 0 24 24"><path d="M21 21l-4.35-4.35M17 11A6 6 0 115 11a6 6 0 0112 0z"/></svg>
               </div>
-              <div class="tab-empty-headline">No research files yet.</div>
-              <div class="tab-empty-body">Once a property match is identified for your domain, your research file will appear here — updated at every stage.</div>
+              <div class="tab-empty-headline">Your estate file is being prepared.</div>
+              <div class="tab-empty-body">Our research team is working through the records for your family's property. As soon as there is something to share, it will appear here — and we will keep it current at every step.</div>
             </div>
           </div>
           <div class="detail-side">
@@ -213,13 +210,13 @@
                 <svg viewBox="0 0 24 24"><path d="M9 12h6M9 8h6M5 4h14a1 1 0 011 1v14a1 1 0 01-1 1H5a1 1 0 01-1-1V5a1 1 0 011-1z"/></svg>
               </div>
               <div class="detail-empty-text">Select a record</div>
-              <div class="detail-empty-sub">Click any row to view details</div>
+              <div class="detail-empty-sub">Click any row to follow its progress</div>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- ── SELLER DOCUMENTS ── -->
+      <!-- ── DOCUMENTS ── -->
       <div class="tab-panel" id="panel-documents">
         <div class="filter-bar">
           <div class="filter-search-wrap">
@@ -257,7 +254,7 @@
                 <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6z"/><path d="M14 2v6h6"/></svg>
               </div>
               <div class="tab-empty-headline">No documents uploaded.</div>
-              <div class="tab-empty-body">Share deeds, titles, or any files related to your case. Your research team will have instant access.</div>
+              <div class="tab-empty-body">Share deeds, titles, or any paperwork you have found. Your research team sees it right away — no need to email anything separately.</div>
             </div>
           </div>
           <div class="detail-side">
