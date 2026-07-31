@@ -285,21 +285,27 @@ body.fixed-layout  { height: 100vh; display: flex; overflow: hidden; }
   justify-content: space-between; gap: 16px;
 }
 .topbar-eyebrow { font-size: 11px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--text-muted); font-weight: 400; margin-bottom: 4px; }
-.topbar-title { font-family: 'Cormorant Garamond', serif; font-size: 30px; font-weight: 400; color: var(--ink); line-height: 1.1; }
-.topbar-title em { font-style: italic; color: var(--teal); }
-.topbar-title.msg { font-size: 25px; line-height: 1.25; max-width: 560px; }
+.topbar-title { font-family: 'Cormorant Garamond', serif; font-size: 32px; font-weight: 400; color: var(--ink); line-height: 1.1; }
+/* teal sem itálico: os dois juntos pesavam demais na mesma frase */
+.topbar-title em { font-style: normal; color: var(--teal); }
+.topbar-title.msg { font-size: 29px; line-height: 1.3; max-width: 720px; }
+/* a segunda metade da mensagem é uma unidade — quebra antes dela, nunca no meio */
+.topbar-title.msg em { white-space: nowrap; }
 .topbar-right { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
 
 /* view badge */
 .view-badge {
-  display: inline-flex; align-items: center; gap: 6px;
-  font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; font-weight: 500;
-  border-radius: 4px; padding: 6px 14px; margin-top: 6px;
-  border-width: 1px; border-style: solid;
+  display: inline-flex; flex-direction: column; gap: 3px;
+  border-radius: 4px; padding: 8px 14px; margin-top: 10px;
+  border: 1px solid rgba(77,166,167,0.2);
+  background: var(--teal-light);
 }
-.view-badge.teal { color: var(--teal); background: var(--teal-light); border-color: rgba(77,166,167,0.2); }
-.view-badge.gold { color: var(--gold-deep); background: var(--gold-light); border-color: rgba(255,193,7,0.25); }
-.view-badge-dot { width: 6px; height: 6px; border-radius: 1px; background: currentColor; }
+.view-badge-role {
+  font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase;
+  font-weight: 500; color: var(--teal);
+}
+.view-badge-user { font-size: 11.5px; font-weight: 400; color: var(--text-muted); }
+.view-badge-user strong { font-weight: 500; color: var(--text-main); }
 
 /* nav links in topbar */
 .nav-links { display: flex; gap: 4px; }
@@ -948,7 +954,7 @@ tbody tr.selected td:first-child { padding-left: 11px; }
   font-size: clamp(40px, 5.2vw, 62px); font-weight: 400;
   line-height: 1.04; letter-spacing: -0.5px; color: var(--ink);
 }
-.home-hero-title em { font-style: italic; color: var(--teal); }
+.home-hero-title em { font-style: normal; color: var(--teal); }
 .home-hero-tagline {
   margin-top: 14px;
   font-size: 13px; font-weight: 500; letter-spacing: 2.4px; text-transform: uppercase;

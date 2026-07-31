@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Seek Research — Specialist File Detail</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="icon" type="image/png" href="seek-favicon.png">
-<link rel="stylesheet" href="styles.css?v=13">
+<link rel="icon" type="image/png" href="seek-favicon.png?v=2">
+<link rel="stylesheet" href="styles.css?v=14">
 </head>
 <body class="scroll-layout">
 
@@ -447,7 +447,6 @@ function clearAllDirty() {
 const MS_STATES = ['Waiting Action', 'In Progress', 'Complete', 'N/A'];
 
 const milestones = [
-  { id: 'ms-title-docs',     name: 'Send Title Documents',                        states: ['Waiting Action', 'In Progress', 'Sent'], value: 'Sent' },
   { id: 'ms-contract',       name: 'Contract Signed',                             states: MS_STATES, value: 'Waiting Action' },
   { id: 'ms-renun',          name: 'Renunciations Complete',                      states: MS_STATES, value: 'Waiting Action' },
   { id: 'ms-package',        name: 'Full Package Sent to Attorney',               states: MS_STATES, value: 'Waiting Action' },
