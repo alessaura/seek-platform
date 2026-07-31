@@ -884,8 +884,11 @@ tbody tr.selected td:first-child { padding-left: 11px; }
   .nav-links { flex-wrap: wrap; }
 
   /* Main content full width */
-  .main { padding: 16px 16px 32px; }
-  .content { padding: 16px; gap: 16px; }
+  /* 72px = 56px do header fixo + 16px de respiro. Estas regras usavam o
+     shorthand `padding` e zeravam o padding-top declarado acima, deixando o
+     topo do conteúdo escondido atrás do header. */
+  .main { padding: 72px 16px 32px; }
+  .content { padding: 72px 16px 16px; gap: 16px; }
 
   /* Table horizontal scroll */
   .table-wrap { overflow-x: auto; }
